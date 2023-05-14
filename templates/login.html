@@ -1,0 +1,43 @@
+{% extends 'publi_temp.html' %}
+
+
+{% block title %}
+IQRA EDUCATION SYSTEM | Log In
+{% endblock title %}
+
+{% block mainbody %}
+<div class=" container big-font" >
+    <form action="{{ url_for('login') }}" method="post">
+        <br>
+        <h1 style="text-align: center;">Kindly Log In</h1>
+        <br>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input name="email_login" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input name="password_login" type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        
+        <div>
+            <select name="login-val" id="usertypes"class="form-select"  aria-label="Default select example">
+                <option selected> Select you User Type </option>
+                <option value='student'  name="login-val">Student</option>
+                <option value='teacher'  name="login-val">Teacher</option>
+                <option value='shool_admin'  name="login-val">School Admin</option>
+                <option value='principal'  name="login-val">Principal</option>
+                <option value='teacher_admin'  name="login-val">teacher-Admin</option>
+                <option value=6  name="login-val">Staff</option>
+            </select>
+        </div>
+        <br>
+        <input type="submit" class="btn btn-primary"></input>
+
+        <br>
+    </form>
+    </div>
+    <br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock mainbody %}
