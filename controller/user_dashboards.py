@@ -1,7 +1,7 @@
 from app import app
 from functools import wraps
 from flask import session
-from flask import redirect , url_for
+from flask import redirect , url_for , render_template
 
 
 
@@ -20,30 +20,30 @@ def login_required(role):
 @login_required('student')
 def student_dashboard():
     # Functionality for student dashboard
-    return 'Welcome, student!'
+    return render_template("student_URLs/student_dashboard.html")
 
 @app.route('/teacher/dashboard')
 @login_required('teacher')
 def teacher_dashboard():
     # Functionality for teacher dashboard
-    return 'Welcome, teacher!'
+    return render_template("teacher_URLs/teacher_dashboard.html")
 
 @app.route('/principal/dashboard')
 @login_required('principal')
 def principal_dashboard():
     # Functionality for teacher dashboard
-    return 'Welcome, principal!'
+    return render_template('principal_URLs/principal_dashboard.html')
 
 @app.route('/teacher_admin/dashboard')
 @login_required('teacher_admin')
 def teacher_admin_dashboard():
     # Functionality for admin dashboard
-    return 'Welcome, teacher-admin!'
+    return render_template('/teacher_admin_URLs/teacher_admin_dashboard.html')
 
 @app.route('/school_admin/student')
-@login_required('shool_admin')
+@login_required('school_admin')
 def school_admin_dashboard():
-    return 'welcom , school admin'
+    return render_template("school_admin_URLs/school_admin_dashboard.html")
 
 
 @app.route('/staff/student')

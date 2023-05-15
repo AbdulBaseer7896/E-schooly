@@ -19,9 +19,6 @@ app.secret_key = "your_secret_key_here"
 # create a LoginManager object
 login_manager = LoginManager(app)
 
-# This is most important function. 
-# This function allow the user. And see which user login in web
-
 
 # define a User class with required methods for Flask-Login
 class User:
@@ -39,7 +36,9 @@ class User:
         return str(self.id)
 
 
-# This is login 
+# This is most important function. 
+# This function allow the user. And see which user login in web
+ 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
@@ -84,24 +83,20 @@ def load_user(user_id):
     return User(int(user_id))
 
 
-
-
-
-
-# @app.route('/logout')
-# def logout():
-#     # Remove the user's role from the session variable
-#     session.pop('role', None)
-
-#     # Redirect to the login page
-#     return redirect(url_for('login'))
-
-
-
-@app.route("/logout")
+@app.route('/logout')
 def logout():
-    session.clear()
-    return redirect(url_for("login"))
+    # Remove the user's role from the session variable
+    session.pop('role', None)
+
+    # Redirect to the login page
+    return redirect(url_for('login'))
+
+
+
+# @app.route("/logout")
+# def logout():
+#     session.clear()
+#     return redirect(url_for("login"))
 
 
 
