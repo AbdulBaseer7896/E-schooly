@@ -73,9 +73,28 @@ def login():
                 return redirect(url_for('staff_dashboard'))
         else:
             print("NO match")
-            return render_template("index.html")
+            return render_template("login.html")
     return render_template('login.html')
 
+
+@app.route("/forget_password", methods=["GET", "POST"])
+def forget_password():
+        if request.method == "GET":
+        # if the request is a GET request, render the login form
+        # flash("Welcome to the website!", "success")
+            return render_template("Forget_password.html")
+        elif request.method == 'POST':
+            username = request.form['email_login']
+            password = request.form['password_login']
+            user_type = request.form['login-val']
+            data = request.form.to_dict()
+            
+            if obj.forget_password(data):
+                return render_template('login.html')
+            else:
+                print("You email or user type is wrong")
+                return render_template('forget_password.html')        
+        return render_template('login.html')
 
 # # create a dashboard route and view function for student
 @login_manager.user_loader

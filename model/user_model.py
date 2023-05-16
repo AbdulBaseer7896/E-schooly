@@ -33,3 +33,20 @@ class user_model():
         else:
             print(data['login-val'])
             return False
+        
+    def forget_password(self , data):
+        with self.engine.connect() as conn:
+            query = text(f"SELECT * FROM user_login_table WHERE user_name = '{data['email_login']}'  AND user_type = '{data['login-val']}';")
+            user = conn.execute(query).fetchall()
+            
+            query1 = text(f"UPDATE user_login_table SET password = '{data['password_login']}' WHERE user_name ='{data['email_login']}'  AND user_type = '{data['login-val']}';")
+            user = conn.execute(query1)
+        if user:
+            print(data['login-val'])
+            return True
+        else:
+            print(data['login-val'])
+            return False
+        
+
+        
