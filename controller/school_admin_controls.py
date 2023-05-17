@@ -2,9 +2,9 @@ from app import app
 from functools import wraps
 from flask import session
 from flask import redirect , url_for , render_template , request
-from model.school_admin_model import user_model
+from model.school_admin_model import school_admin_models
 
-obj = user_model()
+obj = school_admin_models()
 
 def login_required(role):
     def decorator(func):
@@ -21,15 +21,30 @@ def login_required(role):
 @app.route('/school_admin/student admission' , methods=["GET", "POST"])
 @login_required('school_admin')
 def student_admission():
-    # Functionality for student dashboard
+    data = [('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')]
     if request.method == "GET":
-        # if the request is a GET request, render the login form
         # flash("Welcome to the website!", "success")
-        return render_template("school_admin_URLs/student_admission.html")
+
+
+        return render_template("school_admin_URLs/student_admission.html" ,  data = data )
     
     elif request.method == 'POST':
-        print("Data is = ")
+        dataa = request.form.to_dict()
+        obj.student_admission_data(dataa)
+    return render_template("school_admin_URLs/student_admission.html" ,  data = data)
+
+
+@app.route('/school_admin/update_admission_data' , methods=["GET", "POST"])
+def update_admission_data():
+    if request.method == "GET":
+        # flash("Welcome to the website!", "success")
+        return render_template("school_admin_URLs/update_admission_data.html")
+    
+    elif request.method == 'POST':
         data = request.form.to_dict()
-        print(data)
-        obj.student_admission_data(data)
-    return render_template("school_admin_URLs/student_admission.html")
+        result = obj.search_student_admission_data(data)
+        print("This is resut = " , result)
+        return render_template("school_admin_URLs/student_admission.html" , data = result)
+        
+    return render_template("school_admin_URLs/update_admission_data.html")
+    
