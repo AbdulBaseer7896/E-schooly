@@ -1,7 +1,7 @@
 from app import app
 from functools import wraps
 from flask import session
-from flask import redirect , url_for , render_template
+from flask import redirect , url_for , render_template , request
 
 
 
@@ -16,11 +16,12 @@ def login_required(role):
     return decorator
 
 
-@app.route('/student/dashboard')
+@app.route('/student/dashboard' , methods=["GET", "POST"])
 @login_required('student')
 def student_dashboard():
+    data = request.args.get('data')
     # Functionality for student dashboard
-    return render_template("student_URLs/student_dashboard.html")
+    return render_template("student_URLs/student_dashboard.html", data=data)
 
 @app.route('/teacher/dashboard')
 @login_required('teacher')
