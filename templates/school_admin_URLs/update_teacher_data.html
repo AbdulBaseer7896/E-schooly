@@ -1,0 +1,45 @@
+{% extends 'school_admin_URLs/school_admin_temp.html' %}
+
+
+{% block title %}
+School Admin | Updata Teacher Data
+{% endblock title %}
+
+{% block mainbody %}
+<div class=" container big-font" >
+    <form action="{{ url_for('update_teacher_data') }}" method="post">
+        <br>
+        <h1 style="text-align: center;">Search The Teacher By</h1>
+        <br>
+        <div class="mb-3">
+            <label for="email_search" class="form-label">Email address</label>
+            <input name="email_search" type="email" class="form-control" id="email_search" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="cnic_search" class="form-label">CNIC-Number</label>
+            <!-- <input name="cnic_search" type="text" class="form-control" id="cnic_search"> -->
+            <input name="cnic_search" type="text" class="form-control" id="cnic_search"
+            aria-describedby="cnic_search" maxlength="13" data-inputmask="'mask': '99999-9999999-9'"
+            placeholder="XXXXX-XXXXXXX-X" >
+        </div>
+
+        <div class="mb-3">
+            <label for="father_cnic_search" class="form-label">Father CNIC Number</label>
+            <!-- <input name="Father CNIC Number" type="text" class="form-control" id="Father CNIC Number"> -->
+            <input name="father_cnic_search" type="text" class="form-control" id="father_cnic_search"
+            aria-describedby="father_cnic_search" maxlength="13" data-inputmask="'mask': '99999-9999999-9'"
+            placeholder="XXXXX-XXXXXXX-X" >
+
+        </div>
+        <br>
+        <input type="submit" class="btn btn-primary"></input>
+
+        <br>
+        <br><br>
+        <!-- <a href="{{ url_for('forget_password') }}">Forget Password</a> -->
+    </form>
+    </div>
+    <br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock mainbody %}

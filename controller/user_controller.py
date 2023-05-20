@@ -60,10 +60,10 @@ def login():
             session['role'] = user_type
                         # Redirect to the appropriate dashboard based on the user's role
             if session['role'] == 'student':
-                print(data)
                 return redirect(url_for('student_dashboard' , data = data))
             elif session['role'] == 'teacher':
-                return redirect(url_for('teacher_dashboard'))
+                print(data)
+                return redirect(url_for('teacher_dashboard' , data = data))
             elif session['role'] == 'teacher_admin':
                 return redirect(url_for('teacher_admin_dashboard'))
             elif session['role'] == "principal":

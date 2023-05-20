@@ -1,0 +1,263 @@
+{% extends 'school_admin_URLs/school_admin_temp.html' %}
+
+
+{% block title %}
+school Admin | Teacher Joning
+{% endblock title %}
+
+{% block mainbody %}
+
+<div class=" container big-font">
+    <form action="{{ url_for('teacher_joining_information') }}" method="post">
+        <br>
+        <h1 style="text-align: center;">Enter Teacher Information</h1>
+        <br>
+
+
+        <!-- Name of teacher -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="teacher_name" class="form-label">Enter Teacher Name (As per CNIC)</label>
+                    <input name="teacher_name" value="{{data[0][0]}}" type="text" class="form-control" id="teacher_name"
+                        aria-describedby="teacher_name" >
+                </div>
+            </div>
+            <div class="col-md-6">
+
+
+                <!-- Form B number of teacher -->
+                <div class="mb-3">
+                    <label for="cnin_number" class="form-label">Enter Teacher B-Form Number</label>
+                    <input name="cnin_number" value="{{data[0][1]}}" class="form-control" id="cnin_number" aria-describedby="cnin_number"
+                        type="text" maxlength="13" data-inputmask="'mask': '99999-9999999-9'"
+                        placeholder="XXXXX-XXXXXXX-X" >
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Father name of teacher -->
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="father_name" class="form-label">Enter the Father name</label>
+                    <input name="father_name" value="{{data[0][2]}}" type="text" class="form-control" id="father_name"
+                        aria-describedby="father_name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- CNIC numebr of father -->
+                <div class="mb-3">
+                    <label for="father_cinc" class="form-label">Enter the Father CNIC Number (As per Student
+                        B-Form)</label>
+                    <input name="father_cinc" value="{{data[0][3]}}" type="text" class="form-control" id="father_cinc"
+                        aria-describedby="father_cinc" maxlength="13" data-inputmask="'mask': '99999-9999999-9'"
+                        placeholder="XXXXX-XXXXXXX-X" >
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Religion of teacher -->
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label for="teacher_religion" class="form-label">Select Religion of Teacher</label>
+                    <!-- <input name="teacher_religion" type="email" class="form-control" id="teacher_religion" aria-describedby="teacher_religion"> -->
+                    <div>
+                        <select name="teacher_religion" value="{{data[0][4]}}" id="usertypes" class="form-select"
+                            aria-label="Default select example">
+                            <option selected> Select your Religion Type </option>
+                            <option value='Muslim' name="teacher_religion">Muslim</option>
+                            <option value='Christian' name="">Christian</option>
+                            <option value='Other' name="">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+
+                <!-- Sex / Gender of teacher -->
+                <div class="mb-3">
+                    <label for="teacher_gender" class="form-label">Selcet SEX/Gender of Teacher</label>
+                    <!-- <input name="teacher_gender" type="email" class="form-control" id="teacher_gender" aria-describedby="teacher_gender"> -->
+                    <div>
+                        <select name="teacher_gender" value="{{data[0][5]}}" id="usertypes" class="form-select"
+                            aria-label="Default select example">
+                            <option selected> Select your Gender Type </option>
+                            <option value='Male' name="teacher_gender">Male</option>
+                            <option value='Female' name="teacher_gender">Female</option>
+                            <option value='Other' name="teacher_gender">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-3">
+
+
+
+                <!-- CLass Of student -->
+                <div class="mb-3">
+                    <label for="teaching_class" class="form-label">Select Teacher Class Leavel</label>
+                    <!-- <input name="teaching_class" type="email" class="form-control" id="teaching_class" aria-describedby="teaching_class"> -->
+                    <select name="teaching_class" value="{{data[0][6]}}" id="teaching_class" class="form-select"
+                        aria-label="Default select example">
+                        <option selected> Select your class Leavel </option>
+                        <option value='pg' name="teaching_class">Play Group</option>
+                        <option value='perp' name="teaching_class">Class Prep</option>
+                        <option value='kg' name="teaching_class">Class KG</option>
+                        <option value='1' name="teaching_class">Class 1</option>
+                        <option value='2' name="teaching_class">Class 2</option>
+                        <option value='3' name="teaching_class">Class 3</option>
+                        <option value='4' name="teaching_class">Class 4</option>
+                        <option value='5' name="teaching_class">Class 5</option>
+                        <option value='6' name="teaching_class">Class 6</option>
+                        <option value='7' name="teaching_class">Class 7</option>
+                        <option value='8' name="teaching_class">Class 8</option>
+                        <option value='9' name="teaching_class">Class 9</option>
+                        <option value='10' name="teaching_class">Class 10</option>
+                        <option value='11' name="teaching_class">Class 11</option>
+                        <option value='12' name="teaching_class">Class 12</option>
+                    </select>
+                </div>
+
+
+            </div>
+            <div class="col-md-3">
+
+                <!-- Date of Birth of teacher -->
+                <div class="mb-3">
+                    <label for="teacher_dob" class="form-label">Enter the Teacher Date of Birth</label>
+                    <input name="teacher_dob" value="{{data[0][7]}}" type="date" class="form-control" id="teacher_dob"
+                        aria-describedby="teacher_dob">
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+        <!-- teacher Picture -->
+        <div class="row">            
+        <div class="col-md-3">
+            <div class="mb-3">
+                <label for="teacher_image" class="form-label">Teacher Image</label>
+                <input name="teacher_image" value="{{data[0][8]}}" type="file" class="form-control" id="teacher_image"
+                    aria-describedby="teacher_image">
+            </div>
+        </div>
+
+        <!-- WhatsApp number of teacher -->
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label for="whatsApp_number" class="form-label">Enter WhatsApp Number</label>
+                    <input name="whatsApp_number" value="{{data[0][9]}}" class="form-control" id="whatsApp_number"
+                        aria-describedby="whatsApp_number" type="text" maxlength="11"
+                        data-inputmask="'mask': '0300-000000-0'" placeholder="03XX-XXXXXX-X" required>
+                </div>
+
+            </div>
+            <!-- <div class="col-md-3"> -->
+
+                <!-- class in which lasts studying -->
+                <!-- <div class="mb-3"> -->
+                    <!-- <label for="last_school_class" class="form-label">Enter the Class in which lasts studying</label> -->
+                    <!-- <input name="last_school_class" type="email" class="form-control" id="last_school_class" aria-describedby="last_school_class"> -->
+                    <!-- <select name="last_school_class" value="{{data[0][10]}}" id="last_school_class" class="form-select"
+                        aria-label="Default select example">
+                        <option selected> Select your class Type </option>
+                        <option value='pg' name="last_school_class">Play Group</option>
+                        <option value='perp' name="last_school_class">Class Prep</option>
+                        <option value='kg' name="last_school_class">Class KG</option>
+                        <option value='1' name="last_school_class">Class 1</option>
+                        <option value='2' name="last_school_class">Class 2</option>
+                        <option value='3' name="last_school_class">Class 3</option>
+                        <option value='4' name="last_school_class">Class 4</option>
+                        <option value='5' name="last_school_class">Class 5</option>
+                        <option value='6' name="last_school_class">Class 6</option>
+                        <option value='7' name="last_school_class">Class 7</option>
+                        <option value='8' name="last_school_class">Class 8</option>
+                        <option value='9' name="last_school_class">Class 9</option>
+                        <option value='10' name="last_school_class">Class 10</option>
+                        <option value='11' name="last_school_class">Class 11</option>
+                        <option value='12' name="last_school_class">Class 12</option>
+                    </select>
+                </div> -->
+
+
+                <!--    class in which now seeks admission
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input name="email_login" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div> -->
+
+            <!-- </div> -->
+            <!-- <div class="col-md-3"> -->
+
+                <!-- Blood Group -->
+                <div class="mb-3">
+                    <label for="teacher_blood" class="form-label">Select Blood Group of Teacher</label>
+                    <!-- <input name="teacher_blood" type="email" class="form-control" id="teacher_blood" aria-describedby="teacher_blood"> -->
+
+                    <select name="teacher_blood" value="{{data[0][11]}}" id="teacher_blood" class="form-select"
+                        aria-label="Default select example">
+                        <option selected> Select your Blood Group Type </option>
+                        <option value='A+' name="teacher_blood">A RhD positive (A+)</option>
+                        <option value='A-' name="teacher_blood">A RhD negative (A-)</option>
+                        <option value='B+' name="teacher_blood">B RhD positive (B+)</option>
+                        <option value='B-' name="teacher_blood">B RhD negative (B-)</option>
+                        <option value='O+' name="teacher_blood">O RhD positive (O+)</option>
+                        <option value='O-' name="teacher_blood">O RhD negative (O-)</option>
+                        <option value='AB+' name="teacher_blood">AB RhD positive (AB+)</option>
+                        <option value='AB-' name="teacher_blood">AB RhD negative (AB-)</option>
+                        <option value='None' name="teacher_blood">Not conformed</option>
+                    </select>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- specilized subjects -->
+        <div class="mb-3">
+            <label for="specilized_subject" class="form-label">Enter the Specilized Subjects of Teacher</label>
+            <input name="specilized_subject" value="{{data[0][12]}}" type="text" class="form-control" id="specilized_subject"
+                aria-describedby="specilized_subject">
+        </div>
+
+        <!-- Address of teacher  -->
+        <div class="mb-3">
+            <label for="teacher_address"  class="form-label">Enter Teacher Home address</label>
+            <input name="teacher_address" value="{{data[0][11]}}" type="text" class="form-control" id="teacher_address"
+                aria-describedby="teacher_address">
+        </div>
+
+        <!-- Last school attended -->
+        <div class="mb-3">
+            <label for="last_school" class="form-label">Enter the last school Serverd by Teacher</label>
+            <input name="last_school"value="{{data[0][13]}}" type="text" class="form-control" id="last_school" aria-describedby="last_school">
+        </div>
+        
+
+
+
+        <br>
+        <input type="submit" class="btn btn-primary"></input>
+
+        <br>
+        <br><br>
+        <!-- <a href="{{ url_for('forget_password') }}">Forget Password</a> -->
+    </form>
+</div>
+<br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock mainbody %}

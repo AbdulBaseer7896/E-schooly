@@ -26,8 +26,9 @@ def student_dashboard():
 @app.route('/teacher/dashboard')
 @login_required('teacher')
 def teacher_dashboard():
+    data = request.args.get('data')
     # Functionality for teacher dashboard
-    return render_template("teacher_URLs/teacher_dashboard.html")
+    return render_template("teacher_URLs/teacher_dashboard.html" , data= data)
 
 @app.route('/principal/dashboard')
 @login_required('principal')
