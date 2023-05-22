@@ -26,7 +26,7 @@
                         <a class="nav-link active" aria-current="page" href="{{ url_for('hello_world') }}">Home</a>
                         <a class="nav-link" href="{{ url_for('teacher_profile') }}?data={{ data }}">Profile</a>
                         <a class="nav-link" href="#">Mark Attendance</a>
-                        <a class="nav-link" href="{{ url_for('upload_dairy')}}">Upload Dairy</a>
+                        <a class="nav-link" href="{{ url_for('upload_dairy')}}?data={{ data }}">Upload Dairy</a>
                         <a class="nav-link" href="#">Upload Result</a>
                         <a class="nav-link" href="{{ url_for('logout') }}">Log out</a>
                     </div>

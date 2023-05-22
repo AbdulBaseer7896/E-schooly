@@ -1,0 +1,116 @@
+{% extends 'teacher_URLs/teacher_temp.html' %}
+
+
+{% block title %}
+Teacher | Write Dairy
+{% endblock title %}
+
+{% block mainbody %}
+<div class=" container big-font">
+    <form action="{{ url_for('upload_dairy_form') }}" method="post">
+        <br>
+        <h1 style="text-align: center;">Write a Dairy for {{data['teacher_class']}} subject {{data['teacher_period']}}</h1>
+        <br>
+
+
+        <!-- Bood name -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="book_name" class="form-label">Enter the Book Name</label>
+                    <input name="book_name" type="text" class="form-control" id="book_name"
+                        aria-describedby="book_name">
+                </div>
+            </div>
+
+            <!-- chapter name -->
+             <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="chapter_name" class="form-label">Enter the Chapter Name</label>
+                    <input name="chapter_name" type="text" class="form-control" id="chapter_name"
+                        aria-describedby="chapter_name">
+                </div>
+            </div>
+
+            <!-- Book page no -->
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="book_page" class="form-label">Enter the Book Page NO</label>
+                    <input name="book_page" type="text" class="form-control" id="book_page"
+                        aria-describedby="book_page">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+
+            <!-- Dairy Date -->
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="dairy_date" class="form-label">Enter the dairy date</label>
+                    <input name="dairy_date" type="date" class="form-control" id="dairy_date"
+                        aria-describedby="dairy_date">
+                </div>
+            </div>
+
+            <!-- Video link -->
+
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="video_link" class="form-label">Enter Video link</label>
+                    <input name="video_link" type="text" class="form-control" id="video_link"
+                        aria-describedby="video_link">
+                </div>
+            </div>
+
+            <!-- Helping Notes -->
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="helping_notes" class="form-label">Helping Notes</label>
+                    <input name="helping_notes" type="file" class="form-control" id="helping_notes"
+                        aria-describedby="helping_notes">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+
+            <!-- Dairy details -->
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <label for="dairy_details" class="form-label">Enter the dairy details</label>
+                    <!-- <input name="book_name"  type="text" class="form-control" id="book_name"
+                        aria-describedby="book_name" > -->
+                    <textarea name="dairy_details" type="text" class="form-control" id="dairy_details"
+                        aria-describedby="dairy_details" rows="4" cols="50">Type some thing</textarea>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <input type="submit" class="btn btn-primary"></input>
+
+        <br>
+        <br><br>
+<!-- this is for class and period maching Its could not display in html page -->
+        <input style="display: none;" name="period_name" value="{{data['teacher_period']}}" type="text" class="form-control" id="period_name"
+        aria-describedby="period_name">
+
+        <input style="display: none;" name="class_name" value="{{data['teacher_class']}}" type="text" class="form-control" id="class_name"
+        aria-describedby="class_name">
+
+        <input style="display: none;" name="teacher_mail" value="{{data['teacher_mail']}}" type="text" class="form-control" id="teacher_mail"
+        aria-describedby="teacher_mail">
+
+
+    </form>
+</div>
+
+
+<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati
+    velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
+{% endblock mainbody %}

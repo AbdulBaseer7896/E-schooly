@@ -3,6 +3,7 @@ from functools import wraps
 from flask import session
 from flask import redirect , url_for , render_template , request
 from model.teacher_model import teacher_model
+import json
 # from model.school_admin_model import school_admin_models
 import datetime
 
@@ -35,7 +36,37 @@ def teacher_profile():
 
 
 
-@app.route('/teacher/upload_dairy')
+@app.route('/teacher/upload_dairy' , methods=["GET", "POST"] )
 @login_required('teacher')
 def upload_dairy():
-    return render_template('teacher_URLs/upload_dairy.html')
+    if request.method == "GET":
+        data = request.args.get('data')
+        result = str(data) 
+        result_dict = eval(result)
+        result = obj.take_teacher_class_and_period_data(result_dict)
+        return render_template("teacher_URLs/upload_dairy.html" , data = result)
+    elif request.method == 'POST':
+        data = request.form.to_dict()
+        print("This is data of upload dairy = " , data)
+        result = obj.cross_cheed_class_period(data)
+        if result:
+            print(data)
+            return render_template("teacher_URLs/upload_dairy_form.html" , data = data)
+        else:
+            return render_template('teacher_URLs/teacher_dashboard.html')
+        
+
+
+
+@app.route('/teacher/write_dairy' , methods=["GET", "POST"] )
+@login_required('teacher')
+def upload_dairy_form():
+    if request.method == "GET":
+        return render_template('teacher_URLs/upload_dairy_form.html')
+    elif  request.method == 'POST':
+        data = request.form.to_dict()
+        print("This is dairy " , data)
+        obj.send_dairy(data)
+        return render_template("teacher_URLs/teacher_dashboard.html")
+        # else:
+        #     return render_template('teacher_URLs/teacher_dashboard.html')

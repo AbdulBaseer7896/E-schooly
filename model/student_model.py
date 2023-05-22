@@ -35,4 +35,22 @@ class student_model():
                 return result
             else:
                 return render_template('login.html')
+            
+    def take_student_dairy_data(self , data):
+        with self.engine.connect() as conn:
+            try:
+                query1 = text(f"SELECT class FROM  student_information WHERE name = '{data['email_login']}';")
+                result = conn.execute(query1).fetchall()
+            except:
+                query1 = text(f"SELECT class FROM  student_information WHERE name = '{data[0][0]}';")
+                result = conn.execute(query1).fetchall()              
+            if result:
+                query2 = text(f"SELECT * FROM  teacher_class_period WHERE class_name = '{result[0][0]}';")
+                dairy = conn.execute(query2).fetchall() 
+                print("This is the dairy of the student = " ,dairy)
+                return dairy
+            else:
+                print("The dairy is not found")
+                return render_template('login.html')
+              
     
