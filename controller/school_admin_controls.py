@@ -30,6 +30,7 @@ def student_admission():
     
     elif request.method == 'POST':
         dataa = request.form.to_dict()
+        # print("The student name = " , dataa['student_name'])
         obj.student_admission_data(dataa)
     return render_template("school_admin_URLs/student_admission.html" ,  data = data)
 

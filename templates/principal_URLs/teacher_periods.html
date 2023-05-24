@@ -1,0 +1,544 @@
+{% extends 'principal_URLs/principal_temp.html' %}
+
+
+{% block title %}
+Principal | Teacher-Periods
+{% endblock title %}
+
+{% block mainbody %}
+
+
+
+<div class=" container big-font">
+    <form action="{{ url_for('teacher_periods') }}" method="post">
+        <br>
+        <h1 style="text-align: center;">Select the Teacher and Its Periods</h1>
+        <br>
+
+
+        {{data}}
+
+        <!-- Name of student -->
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="teacher_name" class="form-label">Select Teacher Name</label>
+                    <!-- <input name="teacher_name" value="" type="text" class="form-control" id="teacher_name" -->
+                        <!-- aria-describedby="teacher_name"> -->
+
+                        <select name="teacher_name" value="" id="teacher_name" class="form-select"
+                        aria-label="Default select example">
+                        <option value='' name="teacher_name" > Select your class Type </option>
+                        {% for i in data %}
+                        <option value='{{i[0]}}' name="teacher_name">{{i[0]}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <!--  Class -->
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label for="class1" class="form-label">Select Class Name</label>
+                    <!-- <input name="class1" value="" type="text" class="form-control" id="class1" aria-describedby="class1"> -->
+                    <select name="class1" value="" id="class1" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="class1" > Select your class Type </option>
+                    <option value='pg' name="class1">Play Group</option>
+                    <option value='perp' name="class1">Class Prep</option>
+                    <option value='kg' name="class1">Class KG</option>
+                    <option value='Class 1' name="class1">Class 1</option>
+                    <option value='Class 2' name="class1">Class 2</option>
+                    <option value='Class 3' name="class1">Class 3</option>
+                    <option value='Class 4' name="class1">Class 4</option>
+                    <option value='Class 5' name="class1">Class 5</option>
+                    <option value='Class 6' name="class1">Class 6</option>
+                    <option value='Class 7' name="class1">Class 7</option>
+                    <option value='Class 8' name="class1">Class 8</option>
+                    <option value='Class 9' name="class1">Class 9</option>
+                    <option value='Class 10' name="class1">Class 10</option>
+                    <option value='Class 11' name="class1">Class 11</option>
+                    <option value='Class 12' name="class1">Class 12</option>
+                </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <!-- CNIC numebr of fatber -->
+                <div class="mb-3">
+                    <label for="period1" class="form-label">Select Period 1</label>
+                    <!-- <input name="period1" value="" type="text" class="form-control" id="period1"> -->
+                    <select name="period1" value="" id="period1" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="period1" > Select your Period Type </option>
+                    <option value='Islamiat' name="period1">Islamiat</option>
+                    <option value='Nazara' name="period1">Nazara</option>
+                    <option value='Pak Study' name="period1">Pak Study</option>
+                    <option value='Math' name="period1">Math</option>
+                    <option value='Physicas' name="period1">Physicas</option>
+                    <option value='Chemistry' name="period1">Chemistry</option>
+                    <option value='Computer Science' name="period1">Computer Science</option>
+                    <option value='Biology' name="period1">Biology</option>
+                    <option value='English Book' name="period1">English Book</option>
+                    <option value='English Grammar' name="period1">English Grammar</option>
+                    <option value='Urdu Book' name="period1">Urdu Book</option>
+                    <option value='Urdu Grammar' name="period1">Urdu Grammar</option>
+                    <option value='General Knowledge' name="period1">General Knowledge</option>
+                    <option value='Computer Lab' name="period1">Computer Lab</option>
+                    <option value='Physicas Lab' name="period1">Physicas Lab</option>
+                    <option value='Chemistry Lab' name="period1">Chemistry Lab</option>
+                    <option value='Biology Lab' name="period1">Biology Lab</option>
+                    <option value='Libray' name="period1">Libray</option>
+                    <option value='Helper' name="period1">Helper</option>
+                </select>
+                </div>
+            </div>
+            <!-- <hr> -->
+            <!-- </div>
+                
+        <div class="row"> -->
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label for="class2" class="form-label">Select Class Name</label>
+                    <!-- <input name="class2" value="" type="text" class="form-control" id="class2"
+                        aria-describedby="class1"> -->
+                                            <select name="class2" value="" id="class2" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="class2" > Select your class Type </option>
+                    <option value='pg' name="class2">Play Group</option>
+                    <option value='perp' name="class2">Class Prep</option>
+                    <option value='kg' name="class2">Class KG</option>
+                    <option value='Class 1' name="class2">Class 1</option>
+                    <option value='Class 2' name="class2">Class 2</option>
+                    <option value='Class 3' name="class2">Class 3</option>
+                    <option value='Class 4' name="class2">Class 4</option>
+                    <option value='Class 5' name="class2">Class 5</option>
+                    <option value='Class 6' name="class2">Class 6</option>
+                    <option value='Class 7' name="class2">Class 7</option>
+                    <option value='Class 8' name="class2">Class 8</option>
+                    <option value='Class 9' name="class2">Class 9</option>
+                    <option value='Class 10' name="class2">Class 10</option>
+                    <option value='Class 11' name="class2">Class 11</option>
+                    <option value='Class 12' name="class2">Class 12</option>
+                </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <!-- CNIC numebr of fatber -->
+                <div class="mb-3">
+                    <label for="period2" class="form-label">Select Period 2</label>
+                    <!-- <input name="period2" value="" type="text" class="form-control" id="period2"> -->
+
+                    <select name="period2" value="" id="period2" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="period2" > Select your Period Type </option>
+                    <option value='Islamiat' name="period2">Islamiat</option>
+                    <option value='Nazara' name="period2">Nazara</option>
+                    <option value='Pak Study' name="period2">Pak Study</option>
+                    <option value='Math' name="period2">Math</option>
+                    <option value='Physicas' name="period2">Physicas</option>
+                    <option value='Chemistry' name="period2">Chemistry</option>
+                    <option value='Computer Science' name="period2">Computer Science</option>
+                    <option value='Biology' name="period2">Biology</option>
+                    <option value='English Book' name="period2">English Book</option>
+                    <option value='English Grammar' name="period2">English Grammar</option>
+                    <option value='Urdu Book' name="period2">Urdu Book</option>
+                    <option value='Urdu Grammar' name="period2">Urdu Grammar</option>
+                    <option value='General Knowledge' name="period2">General Knowledge</option>
+                    <option value='Computer Lab' name="period2">Computer Lab</option>
+                    <option value='Physicas Lab' name="period2">Physicas Lab</option>
+                    <option value='Chemistry Lab' name="period2">Chemistry Lab</option>
+                    <option value='Biology Lab' name="period2">Biology Lab</option>
+                    <option value='Libray' name="period2">Libray</option>
+                    <option value='Helper' name="period2">Helper</option>
+                </select>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label for="class3" class="form-label">Select Class Name</label>
+                    <!-- <input name="class1" value="" type="text" class="form-control" id="class1"
+                        aria-describedby="class1"> -->
+                                            <select name="class3" value="" id="class3" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="class3" > Select your class Type </option>
+                    <option value='pg' name="class3">Play Group</option>
+                    <option value='perp' name="class3">Class Prep</option>
+                    <option value='kg' name="class3">Class KG</option>
+                    <option value='Class 1' name="class3">Class 1</option>
+                    <option value='Class 2' name="class3">Class 2</option>
+                    <option value='Class 3' name="class3">Class 3</option>
+                    <option value='Class 4' name="class3">Class 4</option>
+                    <option value='Class 5' name="class3">Class 5</option>
+                    <option value='Class 6' name="class3">Class 6</option>
+                    <option value='Class 7' name="class3">Class 7</option>
+                    <option value='Class 8' name="class3">Class 8</option>
+                    <option value='Class 9' name="class3">Class 9</option>
+                    <option value='Class 10' name="class3">Class 10</option>
+                    <option value='Class 11' name="class3">Class 11</option>
+                    <option value='Class 12' name="class3">Class 12</option>
+                </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <!-- CNIC numebr of fatber -->
+                <div class="mb-3">
+                    <label for="period3" class="form-label">Select Period 3</label>
+                    <!-- <input name="period3" value="" type="text" class="form-control" id="period3"> -->
+
+                    <select name="period3" value="" id="period3" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="period3" > Select your Period Type </option>
+                    <option value='Islamiat' name="period3">Islamiat</option>
+                    <option value='Nazara' name="period3">Nazara</option>
+                    <option value='Pak Study' name="period3">Pak Study</option>
+                    <option value='Math' name="period3">Math</option>
+                    <option value='Physicas' name="period3">Physicas</option>
+                    <option value='Chemistry' name="period3">Chemistry</option>
+                    <option value='Computer Science' name="period3">Computer Science</option>
+                    <option value='Biology' name="period3">Biology</option>
+                    <option value='English Book' name="period3">English Book</option>
+                    <option value='English Grammar' name="period3">English Grammar</option>
+                    <option value='Urdu Book' name="period3">Urdu Book</option>
+                    <option value='Urdu Grammar' name="period3">Urdu Grammar</option>
+                    <option value='General Knowledge' name="period3">General Knowledge</option>
+                    <option value='Computer Lab' name="period3">Computer Lab</option>
+                    <option value='Physicas Lab' name="period3">Physicas Lab</option>
+                    <option value='Chemistry Lab' name="period3">Chemistry Lab</option>
+                    <option value='Biology Lab' name="period3">Biology Lab</option>
+                    <option value='Libray' name="period3">Libray</option>
+                    <option value='Helper' name="period3">Helper</option>
+                </select>
+                </div>
+            </div>
+            <!-- </div> -->
+
+
+            <!-- <div class="row"> -->
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label for="class4" class="form-label">Select Class Name</label>
+                    <!-- <input name="clas41" value="" type="text" class="form-control" id="class4"
+                        aria-describedby="class4"> -->
+                                            <select name="class4" value="" id="class4" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="class4" > Select your class Type </option>
+                    <option value='pg' name="class4">Play Group</option>
+                    <option value='perp' name="class4">Class Prep</option>
+                    <option value='kg' name="class4">Class KG</option>
+                    <option value='Class 1' name="class4">Class 1</option>
+                    <option value='Class 2' name="class4">Class 2</option>
+                    <option value='Class 3' name="class4">Class 3</option>
+                    <option value='Class 4' name="class4">Class 4</option>
+                    <option value='Class 5' name="class4">Class 5</option>
+                    <option value='Class 6' name="class4">Class 6</option>
+                    <option value='Class 7' name="class4">Class 7</option>
+                    <option value='Class 8' name="class4">Class 8</option>
+                    <option value='Class 9' name="class4">Class 9</option>
+                    <option value='Class 10' name="class4">Class 10</option>
+                    <option value='Class 11' name="class4">Class 11</option>
+                    <option value='Class 12' name="class4">Class 12</option>
+                </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <!-- CNIC numebr of fatber -->
+                <div class="mb-3">
+                    <label for="period4" class="form-label">Select Period 4</label>
+                    <!-- <input name="period4" value="" type="text" class="form-control" id="period4"> -->
+
+                    <select name="period4" value="" id="period4" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="period4" > Select your Period Type </option>
+                    <option value='Islamiat' name="period4">Islamiat</option>
+                    <option value='Nazara' name="period4">Nazara</option>
+                    <option value='Pak Study' name="period4">Pak Study</option>
+                    <option value='Math' name="period4">Math</option>
+                    <option value='Physicas' name="period4">Physicas</option>
+                    <option value='Chemistry' name="period4">Chemistry</option>
+                    <option value='Computer Science' name="period4">Computer Science</option>
+                    <option value='Biology' name="period4">Biology</option>
+                    <option value='English Book' name="period4">English Book</option>
+                    <option value='English Grammar' name="period4">English Grammar</option>
+                    <option value='Urdu Book' name="period4">Urdu Book</option>
+                    <option value='Urdu Grammar' name="period4">Urdu Grammar</option>
+                    <option value='General Knowledge' name="period4">General Knowledge</option>
+                    <option value='Computer Lab' name="period4">Computer Lab</option>
+                    <option value='Physicas Lab' name="period4">Physicas Lab</option>
+                    <option value='Chemistry Lab' name="period4">Chemistry Lab</option>
+                    <option value='Biology Lab' name="period4">Biology Lab</option>
+                    <option value='Libray' name="period4">Libray</option>
+                    <option value='Helper' name="period4">Helper</option>
+                </select>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label for="class5" class="form-label">Select Class Name</label>
+                    <!-- <input name="class5" value="" type="text" class="form-control" id="class5"
+                        aria-describedby="class5"> -->
+                    <select name="class5" value="" id="class5" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="class5" > Select your class Type </option>
+                    <option value='pg' name="class5">Play Group</option>
+                    <option value='perp' name="class5">Class Prep</option>
+                    <option value='kg' name="class5">Class KG</option>
+                    <option value='Class 1' name="class5">Class 1</option>
+                    <option value='Class 2' name="class5">Class 2</option>
+                    <option value='Class 3' name="class5">Class 3</option>
+                    <option value='Class 4' name="class5">Class 4</option>
+                    <option value='Class 5' name="class5">Class 5</option>
+                    <option value='Class 6' name="class5">Class 6</option>
+                    <option value='Class 7' name="class5">Class 7</option>
+                    <option value='Class 8' name="class5">Class 8</option>
+                    <option value='Class 9' name="class5">Class 9</option>
+                    <option value='Class 10' name="class5">Class 10</option>
+                    <option value='Class 11' name="class5">Class 11</option>
+                    <option value='Class 12' name="class5">Class 12</option>
+                </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <!-- CNIC numebr of fatber -->
+                <div class="mb-3">
+                    <label for="period5" class="form-label">Select Period 5</label>
+                    <!-- <input name="period5" value="" type="text" class="form-control" id="period5"> -->
+                    <select name="period5" value="" id="period5" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="period5" > Select your Period Type </option>
+                    <option value='Islamiat' name="period5">Islamiat</option>
+                    <option value='Nazara' name="period5">Nazara</option>
+                    <option value='Pak Study' name="period5">Pak Study</option>
+                    <option value='Math' name="period5">Math</option>
+                    <option value='Physicas' name="period5">Physicas</option>
+                    <option value='Chemistry' name="period5">Chemistry</option>
+                    <option value='Computer Science' name="period5">Computer Science</option>
+                    <option value='Biology' name="period5">Biology</option>
+                    <option value='English Book' name="period5">English Book</option>
+                    <option value='English Grammar' name="period5">English Grammar</option>
+                    <option value='Urdu Book' name="period5">Urdu Book</option>
+                    <option value='Urdu Grammar' name="period5">Urdu Grammar</option>
+                    <option value='General Knowledge' name="period5">General Knowledge</option>
+                    <option value='Computer Lab' name="period5">Computer Lab</option>
+                    <option value='Physicas Lab' name="period5">Physicas Lab</option>
+                    <option value='Chemistry Lab' name="period5">Chemistry Lab</option>
+                    <option value='Biology Lab' name="period5">Biology Lab</option>
+                    <option value='Libray' name="period5">Libray</option>
+                    <option value='Helper' name="period5">Helper</option>
+                </select>
+                </div>
+            </div>
+            <!-- </div> -->
+
+
+
+            <!-- <div class="row"> -->
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label for="class6" class="form-label">Select Class Name</label>
+                    <!-- <input name="class6" value="" type="text" class="form-control" id="class6"
+                        aria-describedby="class6"> -->
+                    <select name="class6" value="" id="class6" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="class6" > Select your class Type </option>
+                    <option value='pg' name="class6">Play Group</option>
+                    <option value='perp' name="class6">Class Prep</option>
+                    <option value='kg' name="class6">Class KG</option>
+                    <option value='Class 1' name="class6">Class 1</option>
+                    <option value='Class 2' name="class6">Class 2</option>
+                    <option value='Class 3' name="class6">Class 3</option>
+                    <option value='Class 4' name="class6">Class 4</option>
+                    <option value='Class 5' name="class6">Class 5</option>
+                    <option value='Class 6' name="class6">Class 6</option>
+                    <option value='Class 7' name="class6">Class 7</option>
+                    <option value='Class 8' name="class6">Class 8</option>
+                    <option value='Class 9' name="class6">Class 9</option>
+                    <option value='Class 10' name="class6">Class 10</option>
+                    <option value='Class 11' name="class6">Class 11</option>
+                    <option value='Class 12' name="class6">Class 12</option>
+                </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <!-- CNIC numebr of fatber -->
+                <div class="mb-3">
+                    <label for="period6" class="form-label">Select Period 6</label>
+                    <!-- <input name="period6" value="" type="text" class="form-control" id="period6"> -->
+                    <select name="period6" value="" id="period6" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="period6" > Select your Period Type </option>
+                    <option value='Islamiat' name="period6">Islamiat</option>
+                    <option value='Nazara' name="period6">Nazara</option>
+                    <option value='Pak Study' name="period6">Pak Study</option>
+                    <option value='Math' name="period6">Math</option>
+                    <option value='Physicas' name="period6">Physicas</option>
+                    <option value='Chemistry' name="period6">Chemistry</option>
+                    <option value='Computer Science' name="period6">Computer Science</option>
+                    <option value='Biology' name="period6">Biology</option>
+                    <option value='English Book' name="period6">English Book</option>
+                    <option value='English Grammar' name="period6">English Grammar</option>
+                    <option value='Urdu Book' name="period6">Urdu Book</option>
+                    <option value='Urdu Grammar' name="period6">Urdu Grammar</option>
+                    <option value='General Knowledge' name="period6">General Knowledge</option>
+                    <option value='Computer Lab' name="period6">Computer Lab</option>
+                    <option value='Physicas Lab' name="period6">Physicas Lab</option>
+                    <option value='Chemistry Lab' name="period6">Chemistry Lab</option>
+                    <option value='Biology Lab' name="period6">Biology Lab</option>
+                    <option value='Libray' name="period6">Libray</option>
+                    <option value='Helper' name="period6">Helper</option>
+                </select>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label for="class7" class="form-label">Select Class Name</label>
+                    <!-- <input name="class7" value="" type="text" class="form-control" id="class7"
+                        aria-describedby="class7"> -->
+                <select name="class7" value="" id="class7" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="class7" > Select your class Type </option>
+                    <option value='pg' name="class7">Play Group</option>
+                    <option value='perp' name="class7">Class Prep</option>
+                    <option value='kg' name="class7">Class KG</option>
+                    <option value='Class 1' name="class7">Class 1</option>
+                    <option value='Class 2' name="class7">Class 2</option>
+                    <option value='Class 3' name="class7">Class 3</option>
+                    <option value='Class 4' name="class7">Class 4</option>
+                    <option value='Class 5' name="class7">Class 5</option>
+                    <option value='Class 6' name="class7">Class 6</option>
+                    <option value='Class 7' name="class7">Class 7</option>
+                    <option value='Class 8' name="class7">Class 8</option>
+                    <option value='Class 9' name="class7">Class 9</option>
+                    <option value='Class 10' name="class7">Class 10</option>
+                    <option value='Class 11' name="class7">Class 11</option>
+                    <option value='Class 12' name="class7">Class 12</option>
+                </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <!-- CNIC numebr of fatber -->
+                <div class="mb-3">
+                    <label for="period7" class="form-label">Select Period 7</label>
+                    <!-- <input name="period7" value="" type="text" class="form-control" id="period7"> -->
+                    <select name="period7" value="" id="period7" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="period7" > Select your Period Type </option>
+                    <option value='Islamiat' name="period7">Islamiat</option>
+                    <option value='Nazara' name="period7">Nazara</option>
+                    <option value='Pak Study' name="period7">Pak Study</option>
+                    <option value='Math' name="period7">Math</option>
+                    <option value='Physicas' name="period7">Physicas</option>
+                    <option value='Chemistry' name="period7">Chemistry</option>
+                    <option value='Computer Science' name="period7">Computer Science</option>
+                    <option value='Biology' name="period7">Biology</option>
+                    <option value='English Book' name="period7">English Book</option>
+                    <option value='English Grammar' name="period7">English Grammar</option>
+                    <option value='Urdu Book' name="period7">Urdu Book</option>
+                    <option value='Urdu Grammar' name="period7">Urdu Grammar</option>
+                    <option value='General Knowledge' name="period7">General Knowledge</option>
+                    <option value='Computer Lab' name="period7">Computer Lab</option>
+                    <option value='Physicas Lab' name="period7">Physicas Lab</option>
+                    <option value='Chemistry Lab' name="period7">Chemistry Lab</option>
+                    <option value='Biology Lab' name="period7">Biology Lab</option>
+                    <option value='Libray' name="period7">Libray</option>
+                    <option value='Helper' name="period7">Helper</option>
+                </select>
+                </div>
+            </div>
+            <!-- </div> -->
+
+
+
+            <!-- <div class="row"> -->
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label for="class8" class="form-label">Select Class Name</label>
+                    <!-- <input name="class8" value="" type="text" class="form-control" id="class8"
+                        aria-describedby="class8"> -->
+                                            <select name="class8" value="" id="class8" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="class8" > Select your class Type </option>
+                    <option value='pg' name="class8">Play Group</option>
+                    <option value='perp' name="class8">Class Prep</option>
+                    <option value='kg' name="class8">Class KG</option>
+                    <option value='Class 1' name="class8">Class 1</option>
+                    <option value='Class 2' name="class8">Class 2</option>
+                    <option value='Class 3' name="class8">Class 3</option>
+                    <option value='Class 4' name="class8">Class 4</option>
+                    <option value='Class 5' name="class8">Class 5</option>
+                    <option value='Class 6' name="class8">Class 6</option>
+                    <option value='Class 7' name="class8">Class 7</option>
+                    <option value='Class 8' name="class8">Class 8</option>
+                    <option value='Class 9' name="class8">Class 9</option>
+                    <option value='Class 10' name="class8">Class 10</option>
+                    <option value='Class 11' name="class8">Class 11</option>
+                    <option value='Class 12' name="class8">Class 12</option>
+                </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <!-- CNIC numebr of fatber -->
+                <div class="mb-3">
+                    <label for="period8" class="form-label">Select Period 8</label>
+                    <!-- <input name="period8" value="" type="text" class="form-control" id="period8"> -->
+                    <select name="period8" value="" id="period8" class="form-select"
+                    aria-label="Default select example">
+                    <option value='free' name="period8" > Select your Period Type </option>
+                    <option value='Islamiat' name="period8">Islamiat</option>
+                    <option value='Nazara' name="period8">Nazara</option>
+                    <option value='Pak Study' name="period8">Pak Study</option>
+                    <option value='Math' name="period8">Math</option>
+                    <option value='Physicas' name="period8">Physicas</option>
+                    <option value='Chemistry' name="period8">Chemistry</option>
+                    <option value='Computer Science' name="period8">Computer Science</option>
+                    <option value='Biology' name="period8">Biology</option>
+                    <option value='English Book' name="period8">English Book</option>
+                    <option value='English Grammar' name="period8">English Grammar</option>
+                    <option value='Urdu Book' name="period8">Urdu Book</option>
+                    <option value='Urdu Grammar' name="period8">Urdu Grammar</option>
+                    <option value='General Knowledge' name="period8">General Knowledge</option>
+                    <option value='Computer Lab' name="period8">Computer Lab</option>
+                    <option value='Physicas Lab' name="period8">Physicas Lab</option>
+                    <option value='Chemistry Lab' name="period8">Chemistry Lab</option>
+                    <option value='Biology Lab' name="period8">Biology Lab</option>
+                    <option value='Libray' name="period8">Libray</option>
+                    <option value='Helper' name="period8">Helper</option>
+                </select>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <br>
+        <input type="submit" class="btn btn-primary"></input>
+
+        <br>
+        <br><br>
+        <!-- <a href="{{ url_for('forget_password') }}">Forget Password</a> -->
+    </form>
+</div>
+
+
+
+
+<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati
+    velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
+{% endblock mainbody %}

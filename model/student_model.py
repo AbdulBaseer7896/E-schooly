@@ -28,13 +28,16 @@ class student_model():
             try:
                 query1 = text(f"SELECT * FROM  student_information WHERE name = '{data['email_login']}';")
                 result = conn.execute(query1).fetchall()
+                print("its also work")
             except:
                 query1 = text(f"SELECT * FROM  student_information WHERE name = '{data[0][0]}';")
-                result = conn.execute(query1).fetchall()               
+                result = conn.execute(query1).fetchall()
+                print("its work")          
             if result:
+                print("This is result of take student " , result)
                 return result
-            else:
-                return render_template('login.html')
+            # else:
+                # return render_template('login.html')
             
     def take_student_dairy_data(self , data):
         with self.engine.connect() as conn:

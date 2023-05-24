@@ -20,26 +20,32 @@ def login_required(role):
 
 
 
-@app.route('/student/profile')
+@app.route('/student/profile' ,  methods=["GET", "POST"] )
 @login_required('student')
 def student_profile():
     # Functionality for teacher dashboard
+    print("This is student profile")
     data = request.args.get('data')
     result = str(data) 
+    print("This is data of student profile " , data)
     # Parse the string representation of the dictionary back to a dictionary object
     result_dict = eval(result)
     result = obj.take_student_profile_data(result_dict)
+    print("this is result " , result)
     return render_template('student_URLs/student_profile.html' , data = result )
 
 
 
-@app.route('/student/dairy')
+@app.route('/student/dairy' , methods=["GET", "POST"] )
 @login_required('student')
 def student_dairy():
+    print("This is student dairy")
     data = request.args.get('data')
+    print("This is data of student_dairy " , data)
     result = str(data) 
+    
     result_dict = eval(result)
     print("This is result dict ", result_dict)
     dairy = obj.take_student_dairy_data(result_dict)
     print("This is result as you see = " , dairy)
-    return render_template('student_URLs/student_dairy.html' , data = dairy)
+    return render_template('student_URLs/student_dairy.html' , dairy = dairy , data = data)

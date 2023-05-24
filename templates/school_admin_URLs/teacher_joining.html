@@ -20,7 +20,7 @@ school Admin | Teacher Joning
                 <div class="mb-3">
                     <label for="teacher_name" class="form-label">Enter Teacher Name (As per CNIC)</label>
                     <input name="teacher_name" value="{{data[0][0]}}" type="text" class="form-control" id="teacher_name"
-                        aria-describedby="teacher_name" >
+                        aria-describedby="teacher_name">
                 </div>
             </div>
             <div class="col-md-6">
@@ -28,10 +28,10 @@ school Admin | Teacher Joning
 
                 <!-- Form B number of teacher -->
                 <div class="mb-3">
-                    <label for="cnin_number" class="form-label">Enter Teacher B-Form Number</label>
-                    <input name="cnin_number" value="{{data[0][1]}}" class="form-control" id="cnin_number" aria-describedby="cnin_number"
-                        type="text" maxlength="13" data-inputmask="'mask': '99999-9999999-9'"
-                        placeholder="XXXXX-XXXXXXX-X" >
+                    <label for="cnic_number" class="form-label">Enter Teacher CNIC Number</label>
+                    <input name="cnic_number" value="{{data[0][1]}}" class="form-control" id="cnic_number"
+                        aria-describedby="cnic_number" type="text" maxlength="13"
+                        data-inputmask="'mask': '99999-9999999-9'" placeholder="XXXXX-XXXXXXX-X">
                 </div>
 
             </div>
@@ -55,7 +55,7 @@ school Admin | Teacher Joning
                         B-Form)</label>
                     <input name="father_cinc" value="{{data[0][3]}}" type="text" class="form-control" id="father_cinc"
                         aria-describedby="father_cinc" maxlength="13" data-inputmask="'mask': '99999-9999999-9'"
-                        placeholder="XXXXX-XXXXXXX-X" >
+                        placeholder="XXXXX-XXXXXXX-X">
                 </div>
 
             </div>
@@ -147,16 +147,16 @@ school Admin | Teacher Joning
 
 
         <!-- teacher Picture -->
-        <div class="row">            
-        <div class="col-md-3">
-            <div class="mb-3">
-                <label for="teacher_image" class="form-label">Teacher Image</label>
-                <input name="teacher_image" value="{{data[0][8]}}" type="file" class="form-control" id="teacher_image"
-                    aria-describedby="teacher_image">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label for="teacher_image" class="form-label">Teacher Image</label>
+                    <input name="teacher_image" value="{{data[0][8]}}" type="file" class="form-control"
+                        id="teacher_image" aria-describedby="teacher_image">
+                </div>
             </div>
-        </div>
 
-        <!-- WhatsApp number of teacher -->
+            <!-- WhatsApp number of teacher -->
             <div class="col-md-3">
                 <div class="mb-3">
                     <label for="whatsApp_number" class="form-label">Enter WhatsApp Number</label>
@@ -164,47 +164,11 @@ school Admin | Teacher Joning
                         aria-describedby="whatsApp_number" type="text" maxlength="11"
                         data-inputmask="'mask': '0300-000000-0'" placeholder="03XX-XXXXXX-X" required>
                 </div>
-
             </div>
-            <!-- <div class="col-md-3"> -->
 
-                <!-- class in which lasts studying -->
-                <!-- <div class="mb-3"> -->
-                    <!-- <label for="last_school_class" class="form-label">Enter the Class in which lasts studying</label> -->
-                    <!-- <input name="last_school_class" type="email" class="form-control" id="last_school_class" aria-describedby="last_school_class"> -->
-                    <!-- <select name="last_school_class" value="{{data[0][10]}}" id="last_school_class" class="form-select"
-                        aria-label="Default select example">
-                        <option selected> Select your class Type </option>
-                        <option value='pg' name="last_school_class">Play Group</option>
-                        <option value='perp' name="last_school_class">Class Prep</option>
-                        <option value='kg' name="last_school_class">Class KG</option>
-                        <option value='1' name="last_school_class">Class 1</option>
-                        <option value='2' name="last_school_class">Class 2</option>
-                        <option value='3' name="last_school_class">Class 3</option>
-                        <option value='4' name="last_school_class">Class 4</option>
-                        <option value='5' name="last_school_class">Class 5</option>
-                        <option value='6' name="last_school_class">Class 6</option>
-                        <option value='7' name="last_school_class">Class 7</option>
-                        <option value='8' name="last_school_class">Class 8</option>
-                        <option value='9' name="last_school_class">Class 9</option>
-                        <option value='10' name="last_school_class">Class 10</option>
-                        <option value='11' name="last_school_class">Class 11</option>
-                        <option value='12' name="last_school_class">Class 12</option>
-                    </select>
-                </div> -->
-
-
-                <!--    class in which now seeks admission
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input name="email_login" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div> -->
-
-            <!-- </div> -->
-            <!-- <div class="col-md-3"> -->
-
-                <!-- Blood Group -->
-                <div class="mb-3">
+            <!-- Blood Group -->
+            <div class="col-md-3">
+                <div class="md-3">
                     <label for="teacher_blood" class="form-label">Select Blood Group of Teacher</label>
                     <!-- <input name="teacher_blood" type="email" class="form-control" id="teacher_blood" aria-describedby="teacher_blood"> -->
 
@@ -221,22 +185,23 @@ school Admin | Teacher Joning
                         <option value='AB-' name="teacher_blood">AB RhD negative (AB-)</option>
                         <option value='None' name="teacher_blood">Not conformed</option>
                     </select>
-
                 </div>
-
             </div>
-        </div>
 
-        <!-- specilized subjects -->
-        <div class="mb-3">
-            <label for="specilized_subject" class="form-label">Enter the Specilized Subjects of Teacher</label>
-            <input name="specilized_subject" value="{{data[0][12]}}" type="text" class="form-control" id="specilized_subject"
-                aria-describedby="specilized_subject">
-        </div>
 
+            <!-- specilized subjects -->
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label for="specilized_subject" class="form-label">Enter the Specilized Subjects of Teacher</label>
+                    <input name="specilized_subject" value="{{data[0][12]}}" type="text" class="form-control"
+                        id="specilized_subject" aria-describedby="specilized_subject">
+                </div>
+            </div>
+
+        </div>
         <!-- Address of teacher  -->
         <div class="mb-3">
-            <label for="teacher_address"  class="form-label">Enter Teacher Home address</label>
+            <label for="teacher_address" class="form-label">Enter Teacher Home address</label>
             <input name="teacher_address" value="{{data[0][11]}}" type="text" class="form-control" id="teacher_address"
                 aria-describedby="teacher_address">
         </div>
@@ -244,19 +209,21 @@ school Admin | Teacher Joning
         <!-- Last school attended -->
         <div class="mb-3">
             <label for="last_school" class="form-label">Enter the last school Serverd by Teacher</label>
-            <input name="last_school"value="{{data[0][13]}}" type="text" class="form-control" id="last_school" aria-describedby="last_school">
+            <input name="last_school" value="{{data[0][13]}}" type="text" class="form-control" id="last_school"
+                aria-describedby="last_school">
         </div>
+
+
         
-
-
-
+        
         <br>
         <input type="submit" class="btn btn-primary"></input>
-
-        <br>
-        <br><br>
-        <!-- <a href="{{ url_for('forget_password') }}">Forget Password</a> -->
-    </form>
+        
+    </div>
+<br>
+<br><br>
+<!-- <a href="{{ url_for('forget_password') }}">Forget Password</a> -->
+</form>
 </div>
 <br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

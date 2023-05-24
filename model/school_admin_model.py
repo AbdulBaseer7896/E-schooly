@@ -25,16 +25,28 @@ class school_admin_models():
 
     def student_admission_data(self, data):
         with self.engine.connect() as conn:
-                B_form_number = data['B_form_number']
-                query1 = text(f"SELECT * FROM  student_information WHERE form_b = '{data['B_form_number']}';")
-                cheek = conn.execute(query1).fetchall()
-                if cheek:
-                    print("The user is alread exist = ")
-                    query2 = text(f"UPDATE student_information SET name = '{data['student_name']}', form_b = '{data['B_form_number']}' ,  father_name = '{data['father_name']}', father_cnic = '{data['father_cinc']}', religion = '{data['student_religion']}', gender = '{data['student_gender']}', class = '{data['student_class']}', dob = '{data['student_dob']}', pic = '{data['student_image']}', whatapp_number = '{data['whatsApp_number']}', last_class = '{data['last_school_class']}', Blood = '{data['student_blood']}', elective_subject = '{data['Elective_subject']}', address = '{data['student_address']}', last_school = '{data['last_school']}', focacl_name = '{data['focacl_person']}', focacl_number = '{data['focacl_person_number']}' WHERE form_b = {B_form_number};")
-                    user = conn.execute(query2)
-                else:
-                    query3 = text(f"INSERT INTO student_information VALUES ('{data['student_name']}', '{data['B_form_number']}', '{data['father_name']}', '{data['father_cinc']}', '{data['student_religion']}', '{data['student_gender']}', '{data['student_class']}', '{data['student_dob']}', '{data['student_image']}', '{data['whatsApp_number']}', '{data['last_school_class']}', '{data['student_blood']}', '{data['Elective_subject']}', '{data['student_address']}', '{data['last_school']}', '{data['focacl_person']}', '{data['focacl_person_number']}');")
-                    user = conn.execute(query3)
+                query1 = text(f"SELECT COUNT(*)  From student_information WHERE class = '{data['student_class']}';")
+                count1 = conn.execute(query1).fetchall()
+
+                query2 = text(f"SELECT COUNT(*)  From student_information;")
+                count2 = conn.execute(query2).fetchall()
+                
+                email = f"{data['student_name']}-{count1[0][0]+1}-{count2[0][0]+1}-{data['student_class']}@iqra.edu"
+                modified_email = email.replace("Class ", "").replace(" ", "").lower()
+                print("The email = " , modified_email)
+
+                
+                print("The user is alread exist = ")
+                query3 = text(f"DELETE FROM student_information WHERE name = '{data['student_name']}' or form_b = '{data['B_form_number']}';")
+                verify = conn.execute(query3)
+                print("The row is deleate")
+                query4 = text(f"INSERT INTO student_information VALUES ('{modified_email}', '{data['B_form_number']}', '{data['father_name']}', '{data['father_cinc']}', '{data['student_religion']}', '{data['student_gender']}', '{data['student_class']}', '{data['student_dob']}', '{data['student_image']}', '{data['whatsApp_number']}', '{data['last_school_class']}', '{data['student_blood']}', '{data['Elective_subject']}', '{data['student_address']}', '{data['last_school']}', '{data['focacl_person']}', '{data['focacl_person_number']}' , '{count1[0][0]+1}' , '{data['student_name']}' , '{count2[0][0]+1}')")
+                verify = conn.execute(query4)
+                print("The row is update")
+                if verify:
+                    print("username and password is insert in login table")
+                    query5 = text(f"INSERT INTO user_login_table VALUES ('{modified_email}', '123', 'student');")
+                    conn.execute(query5)
                 # flash("you new student data is add successfully")
         return render_template('school_admin_URLs/school_admin_dashboard.html')
 
@@ -44,7 +56,7 @@ class school_admin_models():
     def search_student_admission_data(self, data):
         print("The is search student admission data")
         with self.engine.connect() as conn:
-            query = text(f"SELECT * FROM student_information WHERE name = '{data['email_search']}' OR form_b = '{data['b_from_search']}' OR father_cnic = '{data['father_cnic_search']}';")
+            query = text(f"SELECT * FROM student_information WHERE name = '{data['email_search']}' OR form_b = '{data['b_from_search']}' OR student_registration_number = '{data['student_registration_number']}';")
             user = conn.execute(query).fetchall()
             if user:
                 print("the data in user is = ")
@@ -57,20 +69,28 @@ class school_admin_models():
                 
     def teacher_joining_information(self , data):
         with self.engine.connect() as conn:
-            cnin_number = data['cnin_number']
-            query1 = text(f"SELECT * FROM  teacher_information WHERE cnic_number = '{data['cnin_number']}';")
-            cheek = conn.execute(query1).fetchall()
-            if cheek:
-                print("The user is alread exist = ")
-                query2 = text(f"UPDATE teacher_information SET name = '{data['teacher_name']}', cnic_number = '{data['cnic_number']}' ,  father_name = '{data['father_name']}', father_cnic = '{data['father_cinc']}', religion = '{data['teacher_religion']}', gender = '{data['teacher_gender']}', class = '{data['teaching_class']}', dob = '{data['teacher_dob']}', pic = '{data['teacher_image']}', whatapp_number = '{data['whatsApp_number']}',  Blood = '{data['teacher_blood']}' , address = '{data['teacher_address']}' ,  '{data['last_school']}' WHERE cnic_number  = {'cnin_number'};")
-                user = conn.execute(query2)
-            else:
-                # query3 = text(f"INSERT INTO teacher_information VALUES ('{data['teacher_name']}', '{data['cnin_number']}', '{data['father_name']}', '{data['father_cinc']}', '{data['teacher_religion']}', '{data['teacher_gender']}', '{data['teaching_class']}', '{data['teacher_dob']}', '{data['teacher_image']}', '{data['whatsApp_number']}', '{data['teacher_blood']}, '{data['teacher_address']}', '{data['specilized_subject']}' , '{data['last_school']}' );")
-                query3 = text(f"INSERT INTO teacher_information VALUES ('{data['teacher_name']}', '{data['cnin_number']}', '{data['father_name']}', '{data['father_cinc']}', '{data['teacher_religion']}', '{data['teacher_gender']}', '{data['teaching_class']}', '{data['teacher_dob']}', '{data['teacher_image']}', '{data['whatsApp_number']}', '{data['teacher_blood']}', '{data['teacher_address']}', '{data['specilized_subject']}', '{data['last_school']}');")
+            print("the data = " , data)
+            query1 = text(f"SELECT COUNT(*)  From teacher_information")
+            count1 = conn.execute(query1).fetchall()
+            
+            email = f"{data['teacher_name']}-{count1[0][0]+1}-teacher@iqra.edu"
+            modified_email = email.replace("Class ", "").replace(" ", "").lower()
+            print("The email = " , modified_email)
+            print("The user is alread exist = ")
+            query3 = text(f"DELETE FROM teacher_information WHERE name = '{data['teacher_name']}' or cnic_number = '{data['cnic_number']}';")
+            verify = conn.execute(query3)
+            print("The row is deleate")
+            query4 = text(f"INSERT INTO teacher_information VALUES ('{modified_email}', '{data['cnic_number']}', '{data['father_name']}', '{data['father_cinc']}', '{data['teacher_religion']}', '{data['teacher_gender']}', '{data['teaching_class']}', '{data['teacher_dob']}', '{data['teacher_image']}', '{data['whatsApp_number']}', '{data['teacher_blood']}', '{data['teacher_address']}', '{data['specilized_subject']}', '{data['last_school']}' , '{data['teacher_name']}' , '{count1[0][0]+1}' );")
+            verify = conn.execute(query4)
+            print("The row is update")
+            if verify:
+                    print("username and password is insert in login table")
+                    query5 = text(f"INSERT INTO user_login_table VALUES ('{modified_email}', '123', 'teacher');")
+                    conn.execute(query5)
+                    return True
 
-                user = conn.execute(query3)
-            # flash("you new student data is add successfully")
-        return render_template('school_admin_URLs/school_admin_dashboard.html')
+            flash("you new student data is add successfully")
+            return render_template('school_admin_URLs/school_admin_dashboard.html')
             
             
         
