@@ -129,6 +129,17 @@ class teacher_model():
         
         print("The perstange is not found is not found")
         return render_template('login.html')
+    
+    def take_notification_details(self):
+        with self.engine.connect() as conn:
+            query1 = text(f"SELECT * FROM  teacher_notification;")
+            total = conn.execute(query1).fetchall() 
+        
+        if total:
+            return total
+        else:
+            print("NO notification is found")
+            return "no notification is found"
         
         
             

@@ -99,3 +99,15 @@ def student_attendance():
         print("this is the final result = " , result)
         print(result[1][0])
         return render_template("teacher_URLs/teacher_dashboard.html" , data = result_dict)
+    
+    
+    
+@app.route('/teacher/notification_for_teacher' , methods=["GET", "POST"] )
+@login_required('teacher')
+def notification_for_teacher():
+    if request.method == "GET":
+        notification = obj.take_notification_details()
+        print(notification)
+        return render_template("teacher_URLs/notification.html" , data = notification )
+    
+    return render_template('teacher_URLs/notification.html')

@@ -23,7 +23,7 @@ def login_required(role):
 
 
 @app.route('/teacher_admin/teacher_attandance' ,  methods=["GET", "POST"])
-@login_required('teacher_admin' , )
+@login_required('teacher_admin')
 def teacher_attandance():
     print("This is the teacher attandace funciton")
     data = request.args.get('data')
@@ -35,7 +35,7 @@ def teacher_attandance():
         print("The is teacher name = " , teacher_name)
         return render_template("teacher_admin_URLs/teacher_attandance.html" , data = result_dict  , info = teacher_name)
     
-    if request.method == "POST":
+    elif request.method == "POST":
         data = request.form.to_dict()
         print("This is attandance " , data)
         result = []
@@ -50,3 +50,15 @@ def teacher_attandance():
         print("this is the final result = " , result)
         print(result[1][0])
     return render_template("teacher_admin_URLs/teacher_admin_dashboard.html" , data = result_dict )
+
+
+
+@app.route('/teacher_admin/teacher_notification' ,  methods=["GET", "POST"])
+@login_required('teacher_admin'  )
+def teacher_notification():
+    if request.method == "GET":
+        return render_template('teacher_admin_URLs/teacher_notification.html')
+    elif request.method == "POST":
+        data = request.form.to_dict()
+        obj.send_notification_of_db(data)
+        return render_template('teacher_admin_URLs/teacher_notification.html')

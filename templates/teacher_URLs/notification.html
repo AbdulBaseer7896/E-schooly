@@ -1,0 +1,58 @@
+{% extends 'teacher_URLs/teacher_temp.html' %}
+
+
+{% block title %}
+Teacher | Notification
+{% endblock title %}
+
+{% block mainbody %}
+
+<h1> This is Teacher Notification page</h1>
+
+
+
+<div class="container">
+    <div class="main-body">
+        <div class="row gutters-sm">
+
+            <div class="col-md-12">
+                <div class="card mb-3">
+                    {% for item in data %}
+                    <div class="card-body">
+
+                            
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <h6 class="mb-0">Title</h6>
+                            </div>
+                            <div class="col-sm-4 text-secondary">
+                                {{item[0]}}
+                            </div>
+                            <!-- </div>
+                            <hr>
+                            <div class="row"> -->
+                            <div class="col-sm-2">
+                                <h6 class="mb-0">Date </h6>
+                            </div>
+                            <div class="col-sm-4 text-secondary">
+                                {{item[1]}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <h6 class="mb-0">Details</h6>
+                            </div>
+                            <div class="col-sm-4 text-secondary">
+                                {{item[2]}}
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <hr>
+                        <br>
+                    </div>
+                    {% endfor %}
+</div>
+<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
+{% endblock mainbody %}
