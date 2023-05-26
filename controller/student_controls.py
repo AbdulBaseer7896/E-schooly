@@ -32,7 +32,8 @@ def student_profile():
     result_dict = eval(result)
     result = obj.take_student_profile_data(result_dict)
     print("this is result " , result)
-    return render_template('student_URLs/student_profile.html' , data = result )
+    attandance = obj.attandance(result)
+    return render_template('student_URLs/student_profile.html' , data = result  , attandance = attandance )
 
 
 

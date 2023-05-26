@@ -75,6 +75,46 @@ class teacher_model():
             # return flash("you dairy is send successfullu")
             
             
+            
+    def class_student_name_for_attendance(self  , data):
+        with self.engine.connect() as conn:
+            query1 = text(f"SELECT class FROM teacher_information where name = '{data['email_login']}';")
+            class_name = conn.execute(query1).fetchall()
+            
+            
+            query2 = text(f"SELECT b_form_name , name , student_roll_number , class FROM student_information WHERE class = 'Class {class_name[0][0]}'")
+            student_name = conn.execute(query2).fetchall()
+            if student_name:
+                print('These are student name ,' , student_name)
+                return student_name
+            else:
+                print("There are no student")
+                return "No class student found in this class"
+            
+    def mark_student_attandance(self , data):
+        with self.engine.connect() as conn:
+            for i in range(0 , len(data) ):
+                if data[i][3] == '1':
+                    query1 = text(f"UPDATE student_information SET student_attendance = student_attendance + '1'  where name = '{data[i][0]}';")
+                    conn.execute(query1)
+                    
+            query2 = text(f"SELECT * from total_student_attandance where class = '{data[0][1]}'; ")
+            check = conn.execute(query2).fetchall()
+            print("The class = " , data[0][1])
+            print("This is cheek = " , check)
+                    
+            if check:
+                query3 = text(f"UPDATE total_student_attandance SET total_attendance = total_attendance + '1'  where class = '{data[i][1]}';")
+                conn.execute(query3)
+                print("Its run")
+            else:
+                query4 =  text(f"INSERT INTO total_student_attandance(class, total_attendance) VALUES ('{data[i][1]}' , '{data[i][3]}');")
+                conn.execute(query4)
+                print("This is except is run")
+        
+        print("the student attandace mark")
+                    
+            
         
         
             

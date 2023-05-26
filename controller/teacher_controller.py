@@ -39,8 +39,8 @@ def teacher_profile():
 @app.route('/teacher/upload_dairy' , methods=["GET", "POST"] )
 @login_required('teacher')
 def upload_dairy():
+    data = request.args.get('data')
     if request.method == "GET":
-        data = request.args.get('data')
         result = str(data) 
         result_dict = eval(result)
         result = obj.take_teacher_class_and_period_data(result_dict)
@@ -70,3 +70,31 @@ def upload_dairy_form():
         return render_template("teacher_URLs/teacher_dashboard.html")
         # else:
         #     return render_template('teacher_URLs/teacher_dashboard.html')
+        
+        
+@app.route('/teacher/student_attendance' , methods=["GET", "POST"] )
+@login_required('teacher')
+def student_attendance():
+    data = request.args.get('data')
+    result = str(data) 
+    result_dict = eval(result)
+    print("The data is == " , result_dict)
+    # print("The teacher name  = " , result_dict['email_login'])
+    if request.method == "GET":
+        student_name = obj.class_student_name_for_attendance(result_dict)
+        return render_template("teacher_URLs/student_attendance.html" , data = result_dict  , info = student_name)
+    
+    if request.method == "POST":
+        data = request.form.to_dict()
+        print("This is attandance " , data)
+        result = []
+        for i in range(1, (len(data) // 3) + 1):
+            tuple_data = []
+            for j in range(1, 5):
+                key = f'student_email{i}' if j == 1 else f'student_class{i}' if j == 2 else f'student_roll_number{i}' if j == 3 else f'cheek{i}' 
+                tuple_data.append(data.get(key))
+            result.append(tuple_data)
+        obj.mark_student_attandance(result)
+        print("this is the final result = " , result)
+        print(result[1][0])
+        return render_template("teacher_URLs/teacher_dashboard.html" , data = result_dict)

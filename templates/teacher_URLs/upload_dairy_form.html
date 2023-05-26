@@ -6,6 +6,7 @@ Teacher | Write Dairy
 {% endblock title %}
 
 {% block mainbody %}
+
 <div class=" container big-font">
     <form action="{{ url_for('upload_dairy_form') }}" method="post">
         <br>
@@ -92,21 +93,21 @@ Teacher | Write Dairy
         </div>
         <br>
 
-        <input type="submit" class="btn btn-primary"></input>
-
-        <br>
-        <br><br>
-<!-- this is for class and period maching Its could not display in html page -->
+        <!-- this is for class and period maching Its could not display in html page -->
         <input style="display: none;" name="period_name" value="{{data['teacher_period']}}" type="text" class="form-control" id="period_name"
         aria-describedby="period_name">
-
+        
         <input style="display: none;" name="class_name" value="{{data['teacher_class']}}" type="text" class="form-control" id="class_name"
         aria-describedby="class_name">
 
         <input style="display: none;" name="teacher_mail" value="{{data['teacher_mail']}}" type="text" class="form-control" id="teacher_mail"
         aria-describedby="teacher_mail">
+        
+        <input type="submit" class="btn btn-primary"></input>
 
-
+        <br>
+        <br><br>
+        
     </form>
 </div>
 

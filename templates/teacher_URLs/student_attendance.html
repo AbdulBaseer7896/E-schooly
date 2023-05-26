@@ -1,0 +1,103 @@
+{% extends 'teacher_URLs/teacher_temp.html' %}
+
+
+{% block title %}
+Teacher | Take Attandance
+{% endblock title %}
+
+{% block mainbody %}
+
+<h1>Kindly Take the Attandance</h1>
+
+<div class="container">
+    <div class="main-body">
+        <div class="col-md-12 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-column align-items-center text-center">
+                        <h4 class="text-secondary mb-1">Teacher Profile</h4>
+                        <br><br>
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle"
+                            width="150">
+                        <div class="mt-3">
+                            <h4>hi</h4>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row gutters-sm">
+
+            <div class="col-md-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        {% for item in info %}
+                            
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <h6 class="mb-0">Student Name</h6>
+                            </div>
+                            <div class="col-sm-2 text-secondary">
+                                {{item[0]}}
+                            </div>
+
+                            <div class="col-sm-1">
+                                <h6 class="mb-0">Roll #</h6>
+                            </div>
+                            <div class="col-sm-1 text-secondary">
+                                {{item[2]}}
+                            </div>
+                            
+                            <div class="col-sm-1">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-3 text-secondary">
+                                {{item[1]}}
+                                <!-- abdulbaseerqazi-23-1234-9@iqra.edu -->
+                            </div>
+
+                            <div class="col-sm-3 text-secondary">
+                                <form action="{{ url_for('student_attendance') }}" method="post">
+                                    <label for="checkbox{{item[2]}}">He is Absent &nbsp; &nbsp;</label>
+                                    <input value='1' name="cheek{{item[2]}}" type="checkbox" id="checkbox{{item[2]}}" style="transform: scale(1.5);" onclick="updateValue(this)">
+
+                                    <!-- not display but we used email and roll number and class to stored the attandace in database -->
+
+                                    <input name="student_email{{item[2]}}" value="{{item[1]}}" style="display: none;" type="text" class="form-control" id="student_email"
+                                    aria-describedby="student_email{{item[2]}}">
+                                    <input name="student_roll_number{{item[2]}}" value="{{item[2]}}" style="display: none;" type="text" class="form-control" id="student_roll_number"
+                                    aria-describedby="student_roll_number{{item[2]}}">
+                                    <input name="student_class{{item[2]}}" value="{{item[3]}}" style="display: none;" type="text" class="form-control" id="student_class"
+                                    aria-describedby="student_class{{item[2]}}">
+                                </div>
+                            </div>
+                                    <br>
+                                    <hr>
+                                    {% endfor %}
+                                        <input type="submit" class="btn btn-primary" value="Submit"></input>
+                                        <br>
+                                        <br>
+                                        <br><br>
+
+                                  </form>
+                                <!-- abdulbaseerqazi-23-1234-9@iqra.edu -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateValue(checkbox) {
+      var value = checkbox.checked ? 1 : 0;
+      console.log(value);
+    }
+</script>
+
+<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati
+    velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
+{% endblock mainbody %}

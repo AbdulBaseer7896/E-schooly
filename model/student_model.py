@@ -46,7 +46,7 @@ class student_model():
                 result = conn.execute(query1).fetchall()
             except:
                 query1 = text(f"SELECT class FROM  student_information WHERE name = '{data[0][0]}';")
-                result = conn.execute(query1).fetchall()              
+                result = conn.execute(query1).fetchall()      
             if result:
                 query2 = text(f"SELECT * FROM  teacher_class_period WHERE class_name = '{result[0][0]}';")
                 dairy = conn.execute(query2).fetchall() 
@@ -55,5 +55,28 @@ class student_model():
             else:
                 print("The dairy is not found")
                 return render_template('login.html')
+            
+    def attandance(self , data):
+        with self.engine.connect() as conn:
+            try:
+                query1 = text(f"SELECT class FROM  student_information WHERE name = '{data['email_login']}';")
+                result = conn.execute(query1).fetchall()
+            except:
+                query1 = text(f"SELECT class FROM  student_information WHERE name = '{data[0][0]}';")
+                result = conn.execute(query1).fetchall()      
+            if result:
+                query2 = text(f"SELECT total_student_attendance FROM  total_attandance WHERE class = '{result[0][0]}';")
+                total = conn.execute(query2).fetchall() 
+                
+                # total_present =  
+                expression = f"((({total[0][0]} - {data[0][19]})  / {total[0][0]})  * 100)"
+                perstange = round(eval(expression) , 2)
+                
+                print("This is the dairy of the student = " , perstange)
+                return perstange
+            else:
+                print("The perstange is not found is not found")
+                return render_template('login.html')
+        
               
     
