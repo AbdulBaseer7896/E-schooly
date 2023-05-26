@@ -65,7 +65,7 @@ def login():
                 print(data)
                 return redirect(url_for('teacher_dashboard' , data = data))
             elif session['role'] == 'teacher_admin':
-                return redirect(url_for('teacher_admin_dashboard'))
+                return redirect(url_for('teacher_admin_dashboard' , data = data))
             elif session['role'] == "principal":
                 return redirect(url_for('principal_dashboard'))
             elif session['role'] == 'school_admin':

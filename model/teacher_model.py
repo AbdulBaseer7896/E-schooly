@@ -114,7 +114,21 @@ class teacher_model():
         
         print("the student attandace mark")
                     
-            
+                    
+    def teacher_attandance(self , data):
+        with self.engine.connect() as conn:
+            query2 = text(f"SELECT total_teacher_attendance FROM  total_attendance WHERE teacher = 'teacher';")
+            total = conn.execute(query2).fetchall() 
+                
+                # total_present =  
+            expression = f"((({total[0][0]} - {data[0][16]})  / {total[0][0]})  * 100)"
+            perstange = round(eval(expression) , 2)
+                
+            print("This is the attandane  of the teacher = " , perstange)
+            return perstange
+        
+        print("The perstange is not found is not found")
+        return render_template('login.html')
         
         
             

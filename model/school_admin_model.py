@@ -40,7 +40,7 @@ class school_admin_models():
                 query3 = text(f"DELETE FROM student_information WHERE name = '{data['student_name']}' or form_b = '{data['B_form_number']}';")
                 verify = conn.execute(query3)
                 print("The row is deleate")
-                query4 = text(f"INSERT INTO student_information VALUES ('{modified_email}', '{data['B_form_number']}', '{data['father_name']}', '{data['father_cinc']}', '{data['student_religion']}', '{data['student_gender']}', '{data['student_class']}', '{data['student_dob']}', '{data['student_image']}', '{data['whatsApp_number']}', '{data['last_school_class']}', '{data['student_blood']}', '{data['Elective_subject']}', '{data['student_address']}', '{data['last_school']}', '{data['focacl_person']}', '{data['focacl_person_number']}' , '{count1[0][0]+1}' , '{data['student_name']}' , '{count2[0][0]+1}')")
+                query4 = text(f"INSERT INTO student_information VALUES ('{modified_email}', '{data['B_form_number']}', '{data['father_name']}', '{data['father_cinc']}', '{data['student_religion']}', '{data['student_gender']}', '{data['student_class']}', '{data['student_dob']}', '{data['student_image']}', '{data['whatsApp_number']}', '{data['last_school_class']}', '{data['student_blood']}', '{data['Elective_subject']}', '{data['student_address']}', '{data['last_school']}', '{data['focacl_person']}', '{data['focacl_person_number']}' , '{count1[0][0]+1}' , '{data['student_name']}' , '{count2[0][0]+1}' , '0')")
                 verify = conn.execute(query4)
                 print("The row is update")
                 if verify:
@@ -80,7 +80,7 @@ class school_admin_models():
             query3 = text(f"DELETE FROM teacher_information WHERE name = '{data['teacher_name']}' or cnic_number = '{data['cnic_number']}';")
             verify = conn.execute(query3)
             print("The row is deleate")
-            query4 = text(f"INSERT INTO teacher_information VALUES ('{modified_email}', '{data['cnic_number']}', '{data['father_name']}', '{data['father_cinc']}', '{data['teacher_religion']}', '{data['teacher_gender']}', '{data['teaching_class']}', '{data['teacher_dob']}', '{data['teacher_image']}', '{data['whatsApp_number']}', '{data['teacher_blood']}', '{data['teacher_address']}', '{data['specilized_subject']}', '{data['last_school']}' , '{data['teacher_name']}' , '{count1[0][0]+1}' );")
+            query4 = text(f"INSERT INTO teacher_information VALUES ('{modified_email}', '{data['cnic_number']}', '{data['father_name']}', '{data['father_cinc']}', '{data['teacher_religion']}', '{data['teacher_gender']}', '{data['teaching_class']}', '{data['teacher_dob']}', '{data['teacher_image']}', '{data['whatsApp_number']}', '{data['teacher_blood']}', '{data['teacher_address']}', '{data['specilized_subject']}', '{data['last_school']}' , '{data['teacher_name']}' , '{count1[0][0]+1}' , '0' );")
             verify = conn.execute(query4)
             print("The row is update")
             if verify:

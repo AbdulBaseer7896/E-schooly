@@ -33,6 +33,7 @@ def teacher_dashboard():
 @app.route('/principal/dashboard')
 @login_required('principal')
 def principal_dashboard():
+    
     # Functionality for teacher dashboard
     return render_template('principal_URLs/principal_dashboard.html')
 
@@ -40,7 +41,8 @@ def principal_dashboard():
 @login_required('teacher_admin')
 def teacher_admin_dashboard():
     # Functionality for admin dashboard
-    return render_template('/teacher_admin_URLs/teacher_admin_dashboard.html')
+    data = request.args.get('data')
+    return render_template('/teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)
 
 @app.route('/school_admin/student')
 @login_required('school_admin')

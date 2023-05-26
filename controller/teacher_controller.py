@@ -31,7 +31,8 @@ def teacher_profile():
     result_dict = eval(result)
     # Parse the string representation of the dictionary back to a dictionary object
     result = obj.take_teacher_profile_data(result_dict)
-    return render_template('teacher_URLs/teacher_profile.html' , data = result )
+    attandance = obj.teacher_attandance(result)
+    return render_template('teacher_URLs/teacher_profile.html' , data = result , attandance = attandance)
 
 
 
