@@ -50,3 +50,20 @@ def student_dairy():
     dairy = obj.take_student_dairy_data(result_dict)
     print("This is result as you see = " , dairy)
     return render_template('student_URLs/student_dairy.html' , dairy = dairy , data = data)
+
+
+
+
+@app.route('/student/student_notification' , methods=["GET", "POST"] )
+@login_required('student')
+def student_notification():
+    print("This is student dairy")
+    data = request.args.get('data')
+    print("This is data of student_dairy " , data)
+    result = str(data) 
+    
+    result_dict = eval(result)
+    print("This is result dict ", result_dict)
+    notification = obj.take_student_notification_data(result_dict)
+    print("This is result as you see = " , notification)
+    return render_template('student_URLs/student_notification.html' , data = notification)

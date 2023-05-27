@@ -111,3 +111,25 @@ def notification_for_teacher():
         return render_template("teacher_URLs/notification.html" , data = notification )
     
     return render_template('teacher_URLs/notification.html')
+
+
+
+
+
+@app.route('/teacher/send_notification_to_student' , methods=["GET", "POST"] )
+@login_required('teacher')
+def send_notification_to_student():
+    data = request.args.get('data')
+    result = str(data) 
+    result_dict = eval(result)
+    print("The data is == " , result_dict)
+    # print("This is teacher class = " , teacher_class[0][0])
+    if request.method == "GET":
+        teacher_class = obj.take_teacher_class_form_db(result_dict)
+        return render_template("teacher_URLs/send_notification_to_student.html" , data = result_dict , teacher_class = teacher_class)
+    elif request.method == "POST":
+        data = request.form.to_dict()
+        print("The data is = " , data)
+        obj.send_student_notification_to_db(data)
+        return render_template('teacher_URLs/teacher_dashboard.html')
+    # return render_template('teacher_URLs/send_notification_to_student.html')

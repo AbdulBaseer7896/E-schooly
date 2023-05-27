@@ -65,7 +65,7 @@ class student_model():
                 query1 = text(f"SELECT class FROM  student_information WHERE name = '{data[0][0]}';")
                 result = conn.execute(query1).fetchall()      
             if result:
-                query2 = text(f"SELECT total_student_attendance FROM  total_attandance WHERE class = '{result[0][0]}';")
+                query2 = text(f"SELECT total_student_attendance FROM  total_attendance WHERE class = '{result[0][0]}';")
                 total = conn.execute(query2).fetchall() 
                 
                 # total_present =  
@@ -78,5 +78,23 @@ class student_model():
                 print("The perstange is not found is not found")
                 return render_template('login.html')
         
+        
+    def take_student_notification_data(self , data):
+        with self.engine.connect() as conn:
+            try:
+                query1 = text(f"SELECT class FROM  student_information WHERE name = '{data['email_login']}';")
+                result = conn.execute(query1).fetchall()
+            except:
+                query1 = text(f"SELECT class FROM  student_information WHERE name = '{data[0][0]}';")
+                result = conn.execute(query1).fetchall()      
+            if result:
+                print("This is class name =  = " , result[0][0] )
+                query2 = text(f"SELECT * FROM  student_notification WHERE class_name = '{result[0][0]}';")
+                notification = conn.execute(query2).fetchall() 
+                print("This is the dairy of the student = " ,notification)
+                return notification
+            else:
+                print("The notificaton is not found")
+                return render_template('login.html')
               
     

@@ -142,6 +142,33 @@ class teacher_model():
             return "no notification is found"
         
         
+        
+        
+        
+            
+    def take_teacher_class_form_db(self , data):
+        with self.engine.connect() as conn:
+            try:
+                query1 = text(f"SELECT class FROM  teacher_information WHERE name = '{data[0][0]}';")
+                result = conn.execute(query1).fetchall() 
+                return result
+
+            except:
+                query2 = text(f"SELECT class FROM  teacher_information WHERE name = '{data['email_login']}';")
+                result = conn.execute(query2).fetchall()
+            
+            return result
+        
+        return   print('The teacher has no class')
+        
+        
+        
+    def send_student_notification_to_db(self , data):
+        with self.engine.connect() as conn:
+            print("The data is = " ,data['titles'])
+            query1 = text(f"INSERT INTO student_notification VALUES ('{data['titles']}' , '{data['date']}' , 'Class {data['teacher_class']}' , '{data['details']}' );")
+            conn.execute(query1)
+            print("The notification is send now")
             
             
             
