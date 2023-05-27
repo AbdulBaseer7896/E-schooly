@@ -1,10 +1,11 @@
 from app import app
 from functools import wraps
 from flask import session
-from flask import redirect , url_for , render_template , request
+from flask import redirect , url_for , render_template , request , flash
 from model.student_model import student_model
 from model.school_admin_model import school_admin_models
 import datetime
+
 
 obj = student_model()
 
@@ -68,4 +69,5 @@ def student_notification():
     print("This is result as you see = " , notification)
     
     if request.method == "GET":
+
         return render_template('student_URLs/student_notification.html' , notification = notification , data = data)

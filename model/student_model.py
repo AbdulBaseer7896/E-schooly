@@ -71,7 +71,7 @@ class student_model():
                 # total_present =  
                 if total != []:
                     print("The total = " , total)
-                    expression = f"((({total[0][0]} - {data[0][18]})  / {total[0][0]})  * 100)"
+                    expression = f"((({total[0][0]} - {data[0][19]})  / {total[0][0]})  * 100)"
                     perstange = round(eval(expression) , 2)
                 
                     print("This is the dairy of the student = " , perstange)

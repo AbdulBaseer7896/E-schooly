@@ -42,8 +42,7 @@ class User:
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
-        # if the request is a GET request, render the login form
-        # flash("Welcome to the website!", "success")
+        flash(('This login page is just for School Student and School Staff. IF you are outsider then Kindly do not try to login !!!!', 'warning'))
         return render_template("login.html")
     
     elif request.method == 'POST':
@@ -65,6 +64,7 @@ def login():
                 print(data)
                 return redirect(url_for('teacher_dashboard' , data = data))
             elif session['role'] == 'teacher_admin':
+            
                 return redirect(url_for('teacher_admin_dashboard' , data = data))
             elif session['role'] == "principal":
                 return redirect(url_for('principal_dashboard'))
@@ -74,6 +74,7 @@ def login():
                 return redirect(url_for('staff_dashboard'))
         else:
             print("NO match")
+            flash(('Wrong email or password. Please try again.', 'danger'))
             return render_template("login.html")
     return render_template('login.html')
 
