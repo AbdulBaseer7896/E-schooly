@@ -100,7 +100,7 @@ class school_admin_models():
     def search_teacher_data(self, data):
         print("The is search  teacher data")
         with self.engine.connect() as conn:
-            query = text(f"SELECT * FROM teacher_information WHERE name = '{data['email_search']}' OR cnic_number = '{data['cnic_search']}' OR father_cnic = '{data['father_cnic_search']}';")
+            query = text(f"SELECT * FROM teacher_information WHERE name = '{data['email_search']}' OR cnic_number = '{data['cnic_search']}' OR teacher_id = '{data['teacher_ID']}';")
             user = conn.execute(query).fetchall()
             if user:
                 print("the data in user is = ")

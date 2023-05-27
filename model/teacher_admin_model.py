@@ -51,6 +51,9 @@ class teacher_admin_model():
     def send_notification_of_db(self , data):
         with self.engine.connect() as conn:
             print("The data is = " ,data['titles'])
-            query1 = text(f"INSERT INTO teacher_notification VALUES ('{data['titles']}' , '{data['date']}' , '{data['details']}');")
-            conn.execute(query1)
+            if data['titles'] != "":
+                query1 = text(f"INSERT INTO teacher_notification VALUES ('{data['titles']}' , '{data['date']}' , '{data['details']}');")
+                conn.execute(query1)
+                return True
+            return False
         

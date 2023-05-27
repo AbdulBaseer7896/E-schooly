@@ -15,9 +15,6 @@ Principal | Teacher-Periods
         <h1 style="text-align: center;">Select the Teacher and Its Periods</h1>
         <br>
 
-
-        {{data}}
-
         <!-- Name of student -->
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -30,7 +27,7 @@ Principal | Teacher-Periods
                         aria-label="Default select example">
                         <option value='' name="teacher_name" > Select your class Type </option>
                         {% for i in data %}
-                        <option value='{{i[0]}}' name="teacher_name">{{i[0]}}</option>
+                        <option value='{{i[0]}}' name="teacher_name">{{i[1]}}&nbsp; &nbsp; &nbsp;ID: {{i[2]}}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -522,8 +519,7 @@ Principal | Teacher-Periods
                 </div>
             </div>
         </div>
-
-
+<hr>
 
 
 

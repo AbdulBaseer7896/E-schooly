@@ -47,7 +47,7 @@ class principal_models():
             
     def teacher_names(self):
         with self.engine.connect() as conn:
-            query1 = text(f"SELECT name from teacher_information;")
+            query1 = text(f"SELECT name , cnic_name , teacher_id from teacher_information;")
             cheek = conn.execute(query1).fetchall()
             print("This is teacher names = " , cheek)
             return cheek

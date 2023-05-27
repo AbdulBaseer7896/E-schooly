@@ -69,14 +69,17 @@ class student_model():
                 total = conn.execute(query2).fetchall() 
                 
                 # total_present =  
-                expression = f"((({total[0][0]} - {data[0][19]})  / {total[0][0]})  * 100)"
-                perstange = round(eval(expression) , 2)
+                if total != []:
+                    print("The total = " , total)
+                    expression = f"((({total[0][0]} - {data[0][18]})  / {total[0][0]})  * 100)"
+                    perstange = round(eval(expression) , 2)
                 
-                print("This is the dairy of the student = " , perstange)
-                return perstange
-            else:
-                print("The perstange is not found is not found")
-                return render_template('login.html')
+                    print("This is the dairy of the student = " , perstange)
+                    return perstange
+                else:
+                    print("The perstange is not found is not found")
+                    perstange = 0
+                    return perstange
         
         
     def take_student_notification_data(self , data):

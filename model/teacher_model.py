@@ -78,8 +78,12 @@ class teacher_model():
             
     def class_student_name_for_attendance(self  , data):
         with self.engine.connect() as conn:
-            query1 = text(f"SELECT class FROM teacher_information where name = '{data['email_login']}';")
-            class_name = conn.execute(query1).fetchall()
+            try:
+                query1 = text(f"SELECT class FROM teacher_information where name = '{data['email_login']}';")
+                class_name = conn.execute(query1).fetchall()
+            except:
+                query1 = text(f"SELECT class FROM teacher_information where name = '{data[0][0]}';")
+                class_name = conn.execute(query1).fetchall()              
             
             
             query2 = text(f"SELECT b_form_name , name , student_roll_number , class FROM student_information WHERE class = 'Class {class_name[0][0]}'")
@@ -98,17 +102,17 @@ class teacher_model():
                     query1 = text(f"UPDATE student_information SET student_attendance = student_attendance + '1'  where name = '{data[i][0]}';")
                     conn.execute(query1)
                     
-            query2 = text(f"SELECT * from total_student_attandance where class = '{data[0][1]}'; ")
+            query2 = text(f"SELECT * from total_attendance where class = '{data[0][1]}'; ")
             check = conn.execute(query2).fetchall()
             print("The class = " , data[0][1])
             print("This is cheek = " , check)
                     
             if check:
-                query3 = text(f"UPDATE total_student_attandance SET total_attendance = total_attendance + '1'  where class = '{data[i][1]}';")
+                query3 = text(f"UPDATE total_attendance SET total_student_attendance = total_student_attendance + '1'  where class = '{data[i][1]}';")
                 conn.execute(query3)
                 print("Its run")
             else:
-                query4 =  text(f"INSERT INTO total_student_attandance(class, total_attendance) VALUES ('{data[i][1]}' , '{data[i][3]}');")
+                query4 =  text(f"INSERT INTO total_attendance(class, total_student_attendance) VALUES ('{data[i][1]}' , '{data[i][3]}');")
                 conn.execute(query4)
                 print("This is except is run")
         
@@ -151,12 +155,11 @@ class teacher_model():
             try:
                 query1 = text(f"SELECT class FROM  teacher_information WHERE name = '{data[0][0]}';")
                 result = conn.execute(query1).fetchall() 
-                return result
 
             except:
                 query2 = text(f"SELECT class FROM  teacher_information WHERE name = '{data['email_login']}';")
                 result = conn.execute(query2).fetchall()
-            
+            print("This is alos result = " , result)
             return result
         
         return   print('The teacher has no class')

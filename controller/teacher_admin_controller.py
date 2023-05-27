@@ -54,11 +54,15 @@ def teacher_attandance():
 
 
 @app.route('/teacher_admin/teacher_notification' ,  methods=["GET", "POST"])
-@login_required('teacher_admin'  )
+@login_required('teacher_admin')
 def teacher_notification():
+    data = request.args.get('data')
+    result = str(data) 
+    print("this is restul = " , data)
+    result_dict = eval(result)
     if request.method == "GET":
-        return render_template('teacher_admin_URLs/teacher_notification.html')
+        return render_template('teacher_admin_URLs/teacher_notification.html' , data = data)
     elif request.method == "POST":
-        data = request.form.to_dict()
-        obj.send_notification_of_db(data)
-        return render_template('teacher_admin_URLs/teacher_notification.html')
+        notification = request.form.to_dict()
+        obj.send_notification_of_db(notification)
+        return render_template('teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)
