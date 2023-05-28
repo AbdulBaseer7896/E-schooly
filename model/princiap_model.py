@@ -51,3 +51,33 @@ class principal_models():
             cheek = conn.execute(query1).fetchall()
             print("This is teacher names = " , cheek)
             return cheek
+        
+        
+    def make_class_teacher(self , data):
+        with self.engine.connect() as conn:
+            query1 = text(f"UPDATE teacher_information SET class = '{data['teacher_class']}' WHERE name = '{data['teacher_name']}' ")
+            conn.execute(query1)
+            print("The teacher class is updated")
+        
+    def send_principal_notification_of_db(self , data):
+        with self.engine.connect() as conn:
+            print("The data is = " ,data['titles'])
+            
+            if data['titles'] != "" and data['target_audience'] == 'teacher':
+                query1 = text(f"INSERT INTO teacher_notification VALUES ('{data['titles']}' , '{data['date']}' , '{data['details']}');")
+                conn.execute(query1)
+                return True
+            elif  data['titles'] != "" and data['target_audience'] == 'student':
+                query2 = text(f"INSERT INTO student_notification VALUES ('{data['titles']}' , '{data['date']}'  , 'school' , '{data['details']}');")
+                conn.execute(query2)
+                return True
+            elif  data['titles'] != "" and data['target_audience'] == 'both':         
+                query3 = text(f"INSERT INTO teacher_notification VALUES ('{data['titles']}' , '{data['date']}' , '{data['details']}' );")
+                conn.execute(query3)
+                
+                query4 = text(f"INSERT INTO student_notification VALUES ('{data['titles']}' , '{data['date']}'  , 'school' , '{data['details']}');")
+                conn.execute(query4)
+                return True
+            
+            return False
+        

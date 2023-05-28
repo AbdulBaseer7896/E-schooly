@@ -29,14 +29,14 @@ def student_dashboard():
 def teacher_dashboard():
     data = request.args.get('data')
     # Functionality for teacher dashboard
-    flash(('Dear Teacher Welcome to Iqra-E-School !!! You Successfull Login !!!' , 'success'))
+    flash(('Dear Teacher Welcome to Iqra-E-School !!! You Successfull Login !!!' , 'teacher_login'))
     return render_template("teacher_URLs/teacher_dashboard.html" , data= data)
 
 @app.route('/principal/dashboard')
 @login_required('principal')
 def principal_dashboard():
     # Functionality for teacher dashboard
-    flash(('Dear Principal Welcome to Iqra-E-School !!! You Successfull Login !!!' , 'success'))
+    flash(('Dear Principal Welcome to Iqra-E-School !!! You Successfull Login !!!' , 'principal_login'))
     return render_template('principal_URLs/principal_dashboard.html')
 
 @app.route('/teacher_admin/dashboard')
@@ -45,13 +45,13 @@ def teacher_admin_dashboard():
     # Functionality for admin dashboard
     data = request.args.get('data')
     print("This is data = " , data)
-    flash(('Dear Teacher Admin Welcome to Iqra-E-School !!! You Successfull Login !!!' , 'success'))
+    flash(('Dear Teacher Admin Welcome to Iqra-E-School !!! You Successfull Login !!!' , 'teacher_admin_login'))
     return render_template('/teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)
 
 @app.route('/school_admin/student')
 @login_required('school_admin')
 def school_admin_dashboard():
-    flash(('Dear School Admin Welcome to Iqra-E-School !!! You Successfull Login !!!' , 'success'))
+    flash(('Dear School Admin Welcome to Iqra-E-School !!! You Successfull Login !!!' , 'school_admin_login'))
     return render_template("school_admin_URLs/school_admin_dashboard.html")
 
 

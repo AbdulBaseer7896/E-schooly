@@ -28,12 +28,13 @@
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" href="{{ url_for('hello_world') }}">Home</a>
                         <a class="nav-link" href="{{ url_for('teacher_periods') }}">Teachers Periods</a>
+                        <a class="nav-link" href="{{ url_for('send_principal_notification') }}">Send Notification</a>
                         <a class="nav-link" href="#">School Result</a>
                         <a class="nav-link" href="#">School Attendance</a>
                         <a class="nav-link" href="{{ url_for('logout') }}">Log out</a>
                     </div>
                 </div>
-            </div>
+            </div>d
         </nav>
         <br><br><br>
     {% block mainbody %}

@@ -66,8 +66,7 @@ def student_notification():
     result_dict = eval(result)
     print("This is result dict ", result_dict)
     notification = obj.take_student_notification_data(result_dict)
+    notification.reverse() 
     print("This is result as you see = " , notification)
-    
     if request.method == "GET":
-
         return render_template('student_URLs/student_notification.html' , notification = notification , data = data)

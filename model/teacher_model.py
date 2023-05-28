@@ -93,7 +93,7 @@ class teacher_model():
                 return student_name
             else:
                 print("There are no student")
-                return "No class student found in this class"
+                return False
             
     def mark_student_attandance(self , data):
         with self.engine.connect() as conn:

@@ -23,13 +23,34 @@ Principal | Teacher-Periods
                     <!-- <input name="teacher_name" value="" type="text" class="form-control" id="teacher_name" -->
                         <!-- aria-describedby="teacher_name"> -->
 
-                        <select name="teacher_name" value="" id="teacher_name" class="form-select"
+                    <select name="teacher_name" value="" id="teacher_name" class="form-select"
                         aria-label="Default select example">
                         <option value='' name="teacher_name" > Select your class Type </option>
                         {% for i in data %}
                         <option value='{{i[0]}}' name="teacher_name">{{i[1]}}&nbsp; &nbsp; &nbsp;ID: {{i[2]}}</option>
                         {% endfor %}
                     </select>
+                    <hr>
+                    <select name="teacher_class" value="" id="teacher_class" class="form-select"
+                        aria-label="Default select example">
+                        <option value='Helper' name="teacher_class" > Select your class Type </option>
+                        <option value='pg' name="class1">Play Group</option>
+                        <option value='perp' name="class1">Class Prep</option>
+                        <option value='kg' name="class1">Class KG</option>
+                        <option value='Class 1' name="class1">Class 1</option>
+                        <option value='Class 2' name="class1">Class 2</option>
+                        <option value='Class 3' name="class1">Class 3</option>
+                        <option value='Class 4' name="class1">Class 4</option>
+                        <option value='Class 5' name="class1">Class 5</option>
+                        <option value='Class 6' name="class1">Class 6</option>
+                        <option value='Class 7' name="class1">Class 7</option>
+                        <option value='Class 8' name="class1">Class 8</option>
+                        <option value='Class 9' name="class1">Class 9</option>
+                        <option value='Class 10' name="class1">Class 10</option>
+                        <option value='Class 11' name="class1">Class 11</option>
+                        <option value='Class 12' name="class1">Class 12</option>
+                    </select>
+
                 </div>
             </div>
         </div>

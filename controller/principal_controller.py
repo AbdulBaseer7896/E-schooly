@@ -1,7 +1,7 @@
 from app import app
 from functools import wraps
 from flask import session
-from flask import redirect , url_for , render_template , request
+from flask import redirect , url_for , render_template , request , flash
 from model.princiap_model import principal_models
 
 obj = principal_models()
@@ -29,4 +29,25 @@ def teacher_periods():
         print("This is teacher name = " , dataa['teacher_name'])
         print("The data is equal to " , dataa)
         obj.stored_teacher_period_data(dataa)
-        return render_template('principal_URLs/principal_dashboard.html')
+        obj.make_class_teacher(dataa)
+        flash(('Periods are Assigned to Teacher  Successfully !!!' , 'principal_periods'))
+        return render_template('principal_URLs/principal_dashboard.html' , data = name)
+    
+    
+
+# The name and teacher_names function was taken for teacher_periods function. To verifiy it cheek it
+@app.route('/Principal/send_principal_notification' , methods=["GET", "POST"])
+@login_required('principal')
+def send_principal_notification():
+    name = obj.teacher_names()
+    if request.method == 'GET':
+        return render_template('principal_URLs/send_notification.html')
+    elif request.method == 'POST':
+        info = request.form.to_dict()
+        obj.send_principal_notification_of_db(info)
+        flash(('Notification send Successfully !!!' , 'principal_notification'))
+        return render_template('principal_URLs/principal_dashboard.html' , data = name)
+        
+    
+    
+    

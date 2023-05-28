@@ -7,6 +7,22 @@ school Admin | Teacher Joning
 
 {% block mainbody %}
 
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message, category in messages %}
+            {% if category == 'teacher_information_upload' %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">{{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h4>
+                </div>
+            {% endif %} 
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
 <div class=" container big-font">
     <form action="{{ url_for('teacher_joining_information') }}" method="post">
         <br>
@@ -107,7 +123,7 @@ school Admin | Teacher Joning
                 <div class="mb-3">
                     <label for="teaching_class" class="form-label">Select Teacher Class Leavel</label>
                     <!-- <input name="teaching_class" type="email" class="form-control" id="teaching_class" aria-describedby="teaching_class"> -->
-                    <select name="teaching_class" value="{{data[0][6]}}" id="teaching_class" class="form-select"
+                    <select name="teaching_class" value="" id="teaching_class" class="form-select"
                         aria-label="Default select example">
                         <option selected> Select your class Leavel </option>
                         <option value='pg' name="teaching_class">Play Group</option>

@@ -1,7 +1,7 @@
 from app import app
 from functools import wraps
 from flask import session
-from flask import redirect , url_for , render_template , request
+from flask import redirect , url_for , render_template , request ,flash
 from model.school_admin_model import school_admin_models
 
 obj = school_admin_models()
@@ -32,7 +32,8 @@ def student_admission():
         dataa = request.form.to_dict()
         # print("The student name = " , dataa['student_name'])
         obj.student_admission_data(dataa)
-    return render_template("school_admin_URLs/student_admission.html" ,  data = data)
+        flash(('New Student Information Upload Successfully !!!' , 'student_admission_done'))
+        return render_template("school_admin_URLs/student_admission.html" ,  data = data)
 
 
 @app.route('/school_admin/update_admission_data' , methods=["GET", "POST"])
@@ -64,7 +65,8 @@ def teacher_joining_information():
     elif request.method == 'POST':
         dataa = request.form.to_dict()
         obj.teacher_joining_information(dataa)
-    return render_template("school_admin_URLs/teacher_joining.html" ,  data = data)
+        flash(('New Teacher Information Upload Successfully !!!' , 'teacher_information_upload'))
+        return render_template("school_admin_URLs/teacher_joining.html" ,  data = data)
 
 
 

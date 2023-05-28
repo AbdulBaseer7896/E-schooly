@@ -92,7 +92,7 @@ class student_model():
                 result = conn.execute(query1).fetchall()      
             if result:
                 print("This is class name =  = " , result[0][0] )
-                query2 = text(f"SELECT * FROM  student_notification WHERE class_name = '{result[0][0]}';")
+                query2 = text(f"SELECT * FROM  student_notification WHERE class_name = '{result[0][0]}' or class_name = 'school';")
                 notification = conn.execute(query2).fetchall() 
                 print("This is the dairy of the student = " ,notification)
                 return notification

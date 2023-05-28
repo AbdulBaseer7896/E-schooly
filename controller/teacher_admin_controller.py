@@ -1,7 +1,7 @@
 from app import app
 from functools import wraps
 from flask import session
-from flask import redirect , url_for , render_template , request
+from flask import redirect , url_for , render_template , request , flash
 # from model.teacher_model import teacher_model
 import json
 from model.teacher_admin_model import teacher_admin_model
@@ -33,6 +33,7 @@ def teacher_attandance():
     if request.method == "GET":
         teacher_name = obj.teacher_name_for_attendance(result_dict)
         print("The is teacher name = " , teacher_name)
+
         return render_template("teacher_admin_URLs/teacher_attandance.html" , data = result_dict  , info = teacher_name)
     
     elif request.method == "POST":
@@ -49,7 +50,8 @@ def teacher_attandance():
         obj.mark_teacher_attandance(result)
         print("this is the final result = " , result)
         print(result[1][0])
-    return render_template("teacher_admin_URLs/teacher_admin_dashboard.html" , data = result_dict )
+        flash(('Teacher Attendance Upload Successfully !!!' , 'teacher_attandance'))
+        return render_template("teacher_admin_URLs/teacher_admin_dashboard.html" , data = result_dict )
 
 
 
@@ -65,4 +67,5 @@ def teacher_notification():
     elif request.method == "POST":
         notification = request.form.to_dict()
         obj.send_notification_of_db(notification)
-        return render_template('teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)
+    flash(('The Notification is Send to ALl Teacher Successfully !!! ' , 'teacher_notification'))
+    return render_template('teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)

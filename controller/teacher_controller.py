@@ -1,7 +1,7 @@
 from app import app
 from functools import wraps
 from flask import session
-from flask import redirect , url_for , render_template , request
+from flask import redirect , url_for , render_template , request , flash
 from model.teacher_model import teacher_model
 import json
 from flask import flash
@@ -73,6 +73,7 @@ def upload_dairy_form():
         data = request.form.to_dict()
         print("This is dairy " , data)
         obj.send_dairy(data)
+        flash(('Class Attandance will Upload Successfully !!!' , 'student_dairy_done'))
         return render_template("teacher_URLs/teacher_dashboard.html")
         # else:
         #     return render_template('teacher_URLs/teacher_dashboard.html')
@@ -88,8 +89,13 @@ def student_attendance():
     # print("The teacher name  = " , result_dict['email_login'])
     if request.method == "GET":
         student_name = obj.class_student_name_for_attendance(result_dict)
-        flash(('Just Tick those Students Who are Absend in Class !!!' , 'warning'))
-        return render_template("teacher_URLs/student_attendance.html" , data = data  , info = student_name)
+        if student_name != False:
+            flash(('Just Tick those Students Who are Absend in Class !!!' , 'student_attendance_warning'))
+            return render_template("teacher_URLs/student_attendance.html" , data = data  , info = student_name)
+        else:
+            print("There is not student in you class")
+            # flash(("There is not student in you class" , 'warning'))
+            return render_template("teacher_URLs/teacher_dashboard.html" , data = data )
     
     elif request.method == "POST":
         data = request.args.get('data')
@@ -106,7 +112,7 @@ def student_attendance():
         print("this is the final result = " , result)
         print(result[1][0])
         print("This is data - " , data)
-        flash(('The Attandance is Upload Successfully !!!' , 'success'))
+        flash(('The Attandance is Upload Successfully !!!' , 'sudent_attandance_done'))
         return render_template("teacher_URLs/teacher_dashboard.html" , data = data)
     
     
@@ -117,6 +123,7 @@ def notification_for_teacher():
     data = request.args.get('data')
     if request.method == "GET":
         notification = obj.take_notification_details()
+        notification.reverse() 
         print(notification)
         return render_template("teacher_URLs/notification.html" , notification = notification , data = data )
     
@@ -133,7 +140,7 @@ def send_notification_to_student():
     result = str(data) 
     result_dict = eval(result)
     print("The data is == " , result_dict)
-    # print("This is teacher class = " , teacher_class[0][0])
+
     if request.method == "GET":
         teacher_class = obj.take_teacher_class_form_db(result_dict)
         print("The teacher class os = " , teacher_class)
@@ -143,6 +150,6 @@ def send_notification_to_student():
         data = request.form.to_dict()
         print("The data is = " , data)
         obj.send_student_notification_to_db(data)
-
+        flash(('The Notification is send to All Student successfully !!!' ,'class_student_notification_done'))
         return render_template('teacher_URLs/teacher_dashboard.html' ,data = result_dict)
     # return render_template('teacher_URLs/send_notification_to_student.html')
