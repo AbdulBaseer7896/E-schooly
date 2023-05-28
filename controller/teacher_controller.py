@@ -56,7 +56,7 @@ def upload_dairy():
         print("This is data of upload dairy = " , data)
         result = obj.cross_cheed_class_period(data)
         if result:
-            print(data)
+            print("this is 00 " , data)
             return render_template("teacher_URLs/upload_dairy_form.html" , data = data)
         else:
             return render_template('teacher_URLs/teacher_dashboard.html')
@@ -88,9 +88,11 @@ def student_attendance():
     # print("The teacher name  = " , result_dict['email_login'])
     if request.method == "GET":
         student_name = obj.class_student_name_for_attendance(result_dict)
+        flash(('Just Tick those Students Who are Absend in Class !!!' , 'warning'))
         return render_template("teacher_URLs/student_attendance.html" , data = data  , info = student_name)
     
-    if request.method == "POST":
+    elif request.method == "POST":
+        data = request.args.get('data')
         attandance = request.form.to_dict()
         print("This is attandance " , attandance)
         result = []
@@ -104,6 +106,7 @@ def student_attendance():
         print("this is the final result = " , result)
         print(result[1][0])
         print("This is data - " , data)
+        flash(('The Attandance is Upload Successfully !!!' , 'success'))
         return render_template("teacher_URLs/teacher_dashboard.html" , data = data)
     
     
@@ -134,10 +137,12 @@ def send_notification_to_student():
     if request.method == "GET":
         teacher_class = obj.take_teacher_class_form_db(result_dict)
         print("The teacher class os = " , teacher_class)
+
         return render_template("teacher_URLs/send_notification_to_student.html" , data = result_dict , teacher_class = teacher_class)
     elif request.method == "POST":
         data = request.form.to_dict()
         print("The data is = " , data)
         obj.send_student_notification_to_db(data)
+
         return render_template('teacher_URLs/teacher_dashboard.html' ,data = result_dict)
     # return render_template('teacher_URLs/send_notification_to_student.html')

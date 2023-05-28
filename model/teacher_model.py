@@ -79,15 +79,15 @@ class teacher_model():
     def class_student_name_for_attendance(self  , data):
         with self.engine.connect() as conn:
             try:
+                query2 = text(f"SELECT class FROM teacher_information where name = '{data[0][0]}';")
+                class_name = conn.execute(query2).fetchall() 
+            except:
                 query1 = text(f"SELECT class FROM teacher_information where name = '{data['email_login']}';")
                 class_name = conn.execute(query1).fetchall()
-            except:
-                query1 = text(f"SELECT class FROM teacher_information where name = '{data[0][0]}';")
-                class_name = conn.execute(query1).fetchall()              
+                             
             
-            
-            query2 = text(f"SELECT b_form_name , name , student_roll_number , class FROM student_information WHERE class = 'Class {class_name[0][0]}'")
-            student_name = conn.execute(query2).fetchall()
+            query3 = text(f"SELECT b_form_name , name , student_roll_number , class FROM student_information WHERE class = 'Class {class_name[0][0]}'")
+            student_name = conn.execute(query3).fetchall()
             if student_name:
                 print('These are student name ,' , student_name)
                 return student_name
