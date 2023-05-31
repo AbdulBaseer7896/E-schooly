@@ -144,8 +144,8 @@ def send_notification_to_student():
     if request.method == "GET":
         teacher_class = obj.take_teacher_class_form_db(result_dict)
         print("The teacher class os = " , teacher_class)
-
         return render_template("teacher_URLs/send_notification_to_student.html" , data = result_dict , teacher_class = teacher_class)
+
     elif request.method == "POST":
         data = request.form.to_dict()
         print("The data is = " , data)
@@ -153,3 +153,42 @@ def send_notification_to_student():
         flash(('The Notification is send to All Student successfully !!!' ,'class_student_notification_done'))
         return render_template('teacher_URLs/teacher_dashboard.html' ,data = result_dict)
     # return render_template('teacher_URLs/send_notification_to_student.html')
+    
+    
+    
+@app.route('/teacher/upload_result' , methods=["GET", "POST"] )
+@login_required('teacher')
+def upload_result():
+    data = request.args.get('data')
+    result = str(data) 
+    result_dict = eval(result)
+    print("The data is == " , result_dict)
+    if request.method == "GET":
+        teacher_class = obj.take_teacher_class_form_db(result_dict)
+        student_info = obj.take_class_student_id_form_db(teacher_class)
+        class_subject = obj.take_class_subject_from_db(teacher_class)
+        return render_template('teacher_URLs/upload_result.html' , data = data ,class_subject= class_subject ,  teacher_class = teacher_class , student_info = student_info)
+    elif request.method == "POST":
+        student_restult = request.form.to_dict()
+        result_type_data = (student_restult['restul_type'] , student_restult['date'], student_restult['subject_total_marks'])
+        print("The type of result is = " , result_type_data)
+        print("The data is = " , student_restult)
+        student_marks = []
+        for i in range(1, (len(student_restult) // 5) + 1):
+            tuple_attandance = []
+            for j in range(1, 7):
+                key = f'student_email{i}' if j == 1 else f'student_roll_number{i}' if j == 2 else f'marks_of_{i}' if j == 3 else f'b_form_name{i}' if j == 4 else f'student_class' if j == 5 else f'subject'
+                tuple_attandance.append(student_restult.get(key))
+            student_marks.append(tuple_attandance)
+        
+        print("The resutlls sis sd = " ,student_marks)
+
+        cheek = obj.send_student_marks_of_db(student_marks , result_type_data)
+        if cheek:
+            flash((f"The result of {student_restult['subject']} will Upload Successfully !!!! " , 'result_uploaded'))
+            return render_template('teacher_URLs/teacher_dashboard.html' , data = data )
+        
+        flash((f"The result of {student_restult['subject']} will Not Upload  !!!! " , 'result_will_not_uploaded'))
+        return render_template('teacher_URLs/teacher_dashboard.html' , data = data )
+        
+

@@ -70,3 +70,67 @@ def student_notification():
     print("This is result as you see = " , notification)
     if request.method == "GET":
         return render_template('student_URLs/student_notification.html' , notification = notification , data = data)
+    
+    
+    
+
+@app.route('/student/student_result' , methods=["GET", "POST"] )
+@login_required('student')
+def student_result():
+    print("This is student dairy")
+    data = request.args.get('data')
+    print("This is data of student_dairy " , data)
+    result = str(data) 
+    
+    result_dict = eval(result)
+    print("This is result dict ", result_dict)
+    result_data = obj.take_student_result_data(result_dict)
+    if result_data:
+        print("This is 99999999999999999999999999")
+
+        grouped_data = {}  # Dictionary to group data by exam type and date
+
+        for item in result_data:
+            exam_type = item[3]
+            exam_date = item[7]
+
+            key = (exam_type, exam_date)
+
+            if key not in grouped_data:
+                grouped_data[key] = []
+
+            grouped_data[key].append(item)
+
+        # Access and print specific rows
+    number_of_results =  len(list(grouped_data.keys()))
+    specific_rows = list(grouped_data.keys())
+    len(specific_rows)
+    print("hello")
+    for i in range(0 , number_of_results):
+        specific_row = grouped_data[specific_rows[i]]
+
+
+    # # Access a specific element from the row
+        for j in range(0 , len(specific_row)):
+            specific_element = specific_row[j][4]
+            print(specific_row[j][3])
+            print(specific_element)
+    
+    print("its work")
+
+    if request.method == "GET":
+        updated_grouped_data = {}  # Dictionary to store updated data
+
+        for key, rows in grouped_data.items():
+            total_marks = 0
+            obtain_marks = 0
+            for row in rows:
+                total_marks += row[6]
+                obtain_marks += row[5]
+
+            updated_key = (*key, total_marks, obtain_marks)  # Create a new tuple with updated values
+            updated_grouped_data[updated_key] = rows  # Add the updated key to the dictionary
+
+        return render_template('student_URLs/student_result.html', result_data=result_data, data=data, specific_rows=specific_rows, grouped_data=updated_grouped_data)
+    
+    

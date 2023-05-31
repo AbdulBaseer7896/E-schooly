@@ -1,0 +1,78 @@
+{% extends 'student_URLs/student_temp.html' %}
+
+{% block title %}
+Student | Result
+{% endblock title %}
+
+{% block mainbody %}
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: lightgray;
+    }
+
+    .total-row {
+        font-weight: bold;
+    }
+</style>
+
+<div class="container">
+    {% set total_marks = 0 %}
+    {% set obtain_marks = 0 %}
+    
+    {% for key, rows in grouped_data.items() %}
+        <h2>Exam Type: {{ key[0] }}</h2>
+        <h3>Exam Date: {{ key[1] }}</h3>
+        
+        <table>
+            <tr>
+                <th>Subject</th>
+                <th>Total Marks</th>
+                <th>Obtain Marks</th>
+            </tr>
+            
+            {% set exam_total_marks = 0 %}
+            {% set exam_obtain_marks = 0 %}
+            
+            {% for row in rows %}
+                <tr>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[6] }}</td>
+                    <td>{{ row[5] }}</td>
+                </tr>
+                
+                {% set exam_total_marks = exam_total_marks + row[6] %}
+                {% set exam_obtain_marks = exam_obtain_marks + row[5] %}
+            {% endfor %}
+            
+            <tr class="total-row">
+                <td>Total</td>
+                <td>{{ exam_total_marks }}</td>
+                <td>{{ exam_obtain_marks }}</td>
+            </tr>
+            
+            {% set total_marks = total_marks + 10 %}
+            {% set obtain_marks = obtain_marks + 10 %}
+        </table>
+    {% endfor %}
+    
+    <table>
+        <tr class="total-row">
+            <td>Grand Total</td>
+            <td>{{ total_marks }}</td>
+            <td>{{ obtain_marks }}</td>
+        </tr>
+    </table>
+</div>
+
+{% endblock mainbody %}

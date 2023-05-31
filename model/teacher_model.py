@@ -23,26 +23,26 @@ class teacher_model():
         except:
             print("not work")
     
-    def take_teacher_profile_data(self , data):
+    def take_teacher_profile_data(self , student_marks):
         with self.engine.connect() as conn:
             try:
-                query1 = text(f"SELECT * FROM  teacher_information WHERE name = '{data['email_login']}';")
+                query1 = text(f"SELECT * FROM  teacher_information WHERE name = '{student_marks['email_login']}';")
                 result = conn.execute(query1).fetchall()
             except:
-                query1 = text(f"SELECT * FROM  teacher_information WHERE name = '{data[0][0]}';")
+                query1 = text(f"SELECT * FROM  teacher_information WHERE name = '{student_marks[0][0]}';")
                 result = conn.execute(query1).fetchall()               
             if result:
                 return result
             else:
                 return render_template('login.html')
             
-    def take_teacher_class_and_period_data(self , data):
+    def take_teacher_class_and_period_data(self , student_marks):
         with self.engine.connect() as conn:
             try:
-                query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{data['email_login']}';")
+                query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{student_marks['email_login']}';")
                 result = conn.execute(query1).fetchall()
             except:
-                query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{data[0][0]}';")
+                query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{student_marks[0][0]}';")
                 result = conn.execute(query1).fetchall()  
                 print("This is the result of teacher class period = " ,result)             
             if result:
@@ -51,13 +51,13 @@ class teacher_model():
                 return render_template('login.html')
             
             
-    def cross_cheed_class_period(self , data ):
+    def cross_cheed_class_period(self , student_marks ):
         with self.engine.connect() as conn:
             try:
-                query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{data['teacher_mail']}' ANd class_name = '{data['teacher_class']}' AND period_name = '{data['teacher_period']}' ;")
+                query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{student_marks['teacher_mail']}' ANd class_name = '{student_marks['teacher_class']}' AND period_name = '{student_marks['teacher_period']}' ;")
                 result = conn.execute(query1).fetchall()
             except:
-                query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = {data[0][0]} and  class_name = {data[0][1]} and period_name = {data[0][2]};")
+                query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = {student_marks[0][0]} and  class_name = {student_marks[0][1]} and period_name = {student_marks[0][2]};")
                 result = conn.execute(query1).fetchall()   
                 print("This is the result of teacher class period = " ,result)             
             if result:
@@ -68,25 +68,25 @@ class teacher_model():
                 return False
             
             
-    def send_dairy(self , data):
+    def send_dairy(self , student_marks):
         with self.engine.connect() as conn:
-            query1 = text(f"UPDATE teacher_class_period SET bookname = '{data['book_name']}', chapter_name = '{data['chapter_name']}', book_page_number = '{data['book_page']}', dairy_date = '{data['dairy_date']}', video_link = '{data['video_link']}', helping_notes = '{data['helping_notes']}', dairy_details = '{data['dairy_details']}' WHERE (teacher_name = '{data['teacher_mail']}' AND period_name = '{data['period_name']}' AND  class_name = '{data['class_name']}' );")
+            query1 = text(f"UPDATE teacher_class_period SET bookname = '{student_marks['book_name']}', chapter_name = '{student_marks['chapter_name']}', book_page_number = '{student_marks['book_page']}', dairy_date = '{student_marks['dairy_date']}', video_link = '{student_marks['video_link']}', helping_notes = '{student_marks['helping_notes']}', dairy_details = '{student_marks['dairy_details']}' WHERE (teacher_name = '{student_marks['teacher_mail']}' AND period_name = '{student_marks['period_name']}' AND  class_name = '{student_marks['class_name']}' );")
             conn.execute(query1)
             # return flash("you dairy is send successfullu")
             
             
             
-    def class_student_name_for_attendance(self  , data):
+    def class_student_name_for_attendance(self  , student_marks):
         with self.engine.connect() as conn:
             try:
-                query2 = text(f"SELECT class FROM teacher_information where name = '{data[0][0]}';")
+                query2 = text(f"SELECT class FROM teacher_information where name = '{student_marks[0][0]}';")
                 class_name = conn.execute(query2).fetchall() 
             except:
-                query1 = text(f"SELECT class FROM teacher_information where name = '{data['email_login']}';")
+                query1 = text(f"SELECT class FROM teacher_information where name = '{student_marks['email_login']}';")
                 class_name = conn.execute(query1).fetchall()
                              
             
-            query3 = text(f"SELECT b_form_name , name , student_roll_number , class FROM student_information WHERE class = 'Class {class_name[0][0]}'")
+            query3 = text(f"SELECT b_form_name , name , student_roll_number , class FROM student_information WHERE class = '{class_name[0][0]}'")
             student_name = conn.execute(query3).fetchall()
             if student_name:
                 print('These are student name ,' , student_name)
@@ -95,37 +95,37 @@ class teacher_model():
                 print("There are no student")
                 return False
             
-    def mark_student_attandance(self , data):
+    def mark_student_attandance(self , student_marks):
         with self.engine.connect() as conn:
-            for i in range(0 , len(data) ):
-                if data[i][3] == '1':
-                    query1 = text(f"UPDATE student_information SET student_attendance = student_attendance + '1'  where name = '{data[i][0]}';")
+            for i in range(0 , len(student_marks) ):
+                if student_marks[i][3] == '1':
+                    query1 = text(f"UPDATE student_information SET student_attendance = student_attendance + '1'  where name = '{student_marks[i][0]}';")
                     conn.execute(query1)
                     
-            query2 = text(f"SELECT * from total_attendance where class = '{data[0][1]}'; ")
+            query2 = text(f"SELECT * from total_attendance where class = '{student_marks[0][1]}'; ")
             check = conn.execute(query2).fetchall()
-            print("The class = " , data[0][1])
+            print("The class = " , student_marks[0][1])
             print("This is cheek = " , check)
                     
             if check:
-                query3 = text(f"UPDATE total_attendance SET total_student_attendance = total_student_attendance + '1'  where class = '{data[i][1]}';")
+                query3 = text(f"UPDATE total_attendance SET total_student_attendance = total_student_attendance + '1'  where class = '{student_marks[i][1]}';")
                 conn.execute(query3)
                 print("Its run")
             else:
-                query4 =  text(f"INSERT INTO total_attendance(class, total_student_attendance) VALUES ('{data[i][1]}' , '{data[i][3]}');")
+                query4 =  text(f"INSERT INTO total_attendance(class, total_student_attendance) VALUES ('{student_marks[i][1]}' , '{student_marks[i][3]}');")
                 conn.execute(query4)
                 print("This is except is run")
         
         print("the student attandace mark")
                     
                     
-    def teacher_attandance(self , data):
+    def teacher_attandance(self , student_marks):
         with self.engine.connect() as conn:
             query2 = text(f"SELECT total_teacher_attendance FROM  total_attendance WHERE teacher = 'teacher';")
             total = conn.execute(query2).fetchall() 
                 
                 # total_present =  
-            expression = f"((({total[0][0]} - {data[0][16]})  / {total[0][0]})  * 100)"
+            expression = f"((({total[0][0]} - {student_marks[0][16]})  / {total[0][0]})  * 100)"
             perstange = round(eval(expression) , 2)
                 
             print("This is the attandane  of the teacher = " , perstange)
@@ -145,35 +145,92 @@ class teacher_model():
             print("NO notification is found")
             return "no notification is found"
         
-        
-        
+    
         
         
             
-    def take_teacher_class_form_db(self , data):
+    def take_teacher_class_form_db(self , student_marks):
         with self.engine.connect() as conn:
             try:
-                query1 = text(f"SELECT class FROM  teacher_information WHERE name = '{data[0][0]}';")
+                query1 = text(f"SELECT class FROM  teacher_information WHERE name = '{student_marks[0][0]}';")
                 result = conn.execute(query1).fetchall() 
+                if result:
+                    return result
 
             except:
-                query2 = text(f"SELECT class FROM  teacher_information WHERE name = '{data['email_login']}';")
+                query2 = text(f"SELECT class FROM  teacher_information WHERE name = '{student_marks['email_login']}';")
                 result = conn.execute(query2).fetchall()
-            print("This is alos result = " , result)
-            return result
+                print("This is alos result = " , result)
+                if result:
+                    return result
         
         return   print('The teacher has no class')
         
         
         
-    def send_student_notification_to_db(self , data):
+    def send_student_notification_to_db(self , student_marks):
         with self.engine.connect() as conn:
-            print("The data is = " ,data['titles'])
-            query1 = text(f"INSERT INTO student_notification VALUES ('{data['titles']}' , '{data['date']}' , 'Class {data['teacher_class']}' , '{data['details']}' );")
+            print("The student_marks is = " ,student_marks['titles'])
+            query1 = text(f"INSERT INTO student_notification VALUES ('{student_marks['titles']}' , '{student_marks['date']}' , 'Class {student_marks['teacher_class']}' , '{student_marks['details']}' );")
             conn.execute(query1)
             print("The notification is send now")
             
             
+    def take_class_student_id_form_db(self , student_marks):
+        with self.engine.connect() as conn:
+            print("This is = " , student_marks[0][0])
+            try:
+                query1 = text(f"SELECT name , b_form_name , student_roll_number FROM  student_information WHERE class = '{student_marks[0][0]}';")
+                result = conn.execute(query1).fetchall() 
+                if result:
+                    return result
+
+            except:
+                query2 = text(f"SELECT name , b_form_name , student_roll_number FROM  student_information class = '{student_marks['teacher_class']}';")
+                result = conn.execute(query2).fetchall()
+                print("This is alos result = " , result)
+                if result:
+                    return result
+        
+        return   print('The teacher has no class')
+    
+    
+    def take_class_subject_from_db(self , student_marks):
+        with self.engine.connect() as conn:
+            print("This is = " , student_marks[0][0])
+            try:
+                query1 = text(f"SELECT DISTINCT period_name FROM  teacher_class_period WHERE class_name = '{student_marks[0][0]}';")
+                result = conn.execute(query1).fetchall() 
+                if result:
+                    return result
+
+            except:
+                query2 = text(f"SELECT DISTINCT period_name FROM  teacher_class_period class_name = '{student_marks['teacher_class']}';")
+                result = conn.execute(query2).fetchall()
+                print("This is alos result = " , result)
+                if result:
+                    return result
+        
+        return   print('The teacher subject')
+            
+            
             
         
-    
+
+
+    def send_student_marks_of_db(self , student_marks , result_type_data):
+        print("This is marks of student = " , student_marks)
+        print("This is result type data = = " , result_type_data)
+        with self.engine.connect() as conn:
+            try:
+                if {result_type_data[0]} == "" and {result_type_data[2]} == "" and {result_type_data[1]} == "" and {student_marks[i][5]} == "":
+                    print("You will not fill the result_type or subject or date or total marks")
+                else:
+                    for i in range(0 , len(student_marks)):
+                            query1 = text(f"INSERT INTO result_student_subject_marks (b_form_name, student_email, roll_number, markes, subject, class , result_type ,total_marks ,result_date) VALUES ('{student_marks[i][3]}', '{student_marks[i][0]}', '{student_marks[i][1]}', {student_marks[i][2]} , '{student_marks[i][5]}' , '{student_marks[i][4]}' , '{result_type_data[0]}' , '{result_type_data[2]}' ,'{result_type_data[1]}');")
+                            conn.execute(query1)
+                    print("Result and subject student_marks insert in student_marksbase")
+                    return True
+            except:
+                print("The student_marks is not send in student_marksbase")
+                return False

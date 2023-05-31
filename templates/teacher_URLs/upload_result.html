@@ -1,0 +1,145 @@
+{% extends 'teacher_URLs/teacher_temp.html' %}
+
+
+{% block title %}
+Teacher | Upload Result
+{% endblock title %}
+
+{% block mainbody %}
+
+<h2>Upload the result of {{teacher_class[0][0]}}</h2>
+
+<br><br><br>
+
+
+<form action="{{ url_for('upload_result') }}" method="post">
+<div class="container">
+    <div class="main-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="mb-3">
+                <label for="restul_type" class="form-label">Enter the type of result</label>
+                <!-- <input name="restul_type" value="" type="text" class="form-control" id="restul_type" aria-describedby="restul_type"> -->
+            <select name="restul_type" value="{{data[0][6]}}" id="restul_type" class="form-select"
+                aria-label="Default select example">
+                <option selected> Select your class Type </option>
+                <option value='Final Exam' name="restul_type">Final Exam</option>
+                <option value='Mid Exam' name="restul_type">Mid Exam</option>
+                <option value='First Term' name="restul_type">First Term</option>
+                <option value='Second Term' name="restul_type">Second Term</option>
+                <option value='Third Term' name="restul_type">Third Term</option>
+                <option value='Pre-Board' name="restul_type">Pre-Board</option>
+                <option value='Monthly Tests' name="restul_type">Monthly Tests</option>
+            </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="mb-3">
+                <label for="subject" class="form-label">Select The Subject</label>
+                <!-- <input name="subject" value="" class="form-control" id="subject" aria-describedby="subject" type="text"> -->
+                <select name="subject" value="" id="subject" class="form-select"
+                aria-label="Default select example">
+                <option selected> Select your class Type </option>
+                {% for item in class_subject %}
+                <option value='{{item[0]}}' name="subject">{{item[0]}}</option>
+                {% endfor %}
+            </select>
+            </div>
+        </div>
+<!-- This is just to take the class name to store the data in data base -->
+<!-- ##################################################################### -->
+        <div class="col-md-3" style="display: none;">
+            <div class="mb-3">
+                <label for="student_class" class="form-label">Select The Class</label>
+                <input name="student_class" value="{{teacher_class[0][0]}}" class="form-control" id="student_class" aria-describedby="student_class" type="text">
+
+            </select>
+            </div>
+        </div>
+    <!-- ##################################################################### -->
+
+        <div class="col-md-3">
+            <div class="mb-3">
+                <label for="date" class="form-label">Date</label>
+                <input name="date" value="" class="form-control" id="date" aria-describedby="date" type="date">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="mb-3">
+                <label for="subject_total_marks" class="form-label">Enter the Total Marks of Subject</label>
+                <input name="subject_total_marks" value="" class="form-control" id="subject_total_marks" aria-describedby="subject_total_marks" type="number">
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row gutters-sm">
+        <div class="card mb-3">
+                <div class="col-md-12">
+                    <div class="card-body">
+                        {% for item in student_info %}
+
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <h6 class="mb-0">Student Name</h6>
+                            </div>
+                            <div class="col-sm-2 text-secondary">
+                                {{item[1]}}
+                            </div>
+
+                            <div class="col-sm-1">
+                                <h6 class="mb-0">Roll #</h6>
+                            </div>
+                            <div class="col-sm-1 text-secondary">
+                                {{item[2]}}
+                            </div>
+
+                            <div class="col-sm-1">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-3 text-secondary">
+                                {{item[0]}}
+                                <!-- abdulbaseerqazi-23-1234-9@iqra.edu -->
+                            </div>
+
+                            <div class="col-sm-3 text-secondary">
+                                    <label for="marks_of_{{item[2]}}">Enter Marks of Student</label>
+                                    <input name="marks_of_{{item[2]}}" type="number" class="form-control"
+                                        id="marks_of_{{item[2]}}" aria-describedby="marks_of_{{item[2]}}">
+                                    <!-- not display but we used email and roll number and class to stored the attandace in database -->
+
+                                    <input name="student_email{{item[2]}}" value="{{item[0]}}" style="display: none;"
+                                        type="text" class="form-control" id="student_email"
+                                        aria-describedby="student_email{{item[2]}}">
+                                    <input name="student_roll_number{{item[2]}}" value="{{item[2]}}"
+                                        style="display: none;" type="text" class="form-control" id="student_roll_number"
+                                        aria-describedby="student_roll_number{{item[2]}}">
+                                    <input name="b_form_name{{item[2]}}" value="{{item[1]}}" style="display: none;"
+                                        type="text" class="form-control" id="b_form_name"
+                                        aria-describedby="b_form_name{{item[2]}}">
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        {% endfor %}
+                        <input type="submit" class="btn btn-primary" value="Submit"></input>
+                        <br>
+                        <br>
+                        <br><br>
+
+                        </form>
+                        <!-- abdulbaseerqazi-23-1234-9@iqra.edu -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati
+    velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
+{% endblock mainbody %}
