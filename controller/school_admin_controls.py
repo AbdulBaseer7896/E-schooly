@@ -24,16 +24,20 @@ def student_admission():
     data = [('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')]
     if request.method == "GET":
         # flash("Welcome to the website!", "success")
-
-
         return render_template("school_admin_URLs/student_admission.html" ,  data = data )
     
     elif request.method == 'POST':
         dataa = request.form.to_dict()
-        # print("The student name = " , dataa['student_name'])
-        obj.student_admission_data(dataa)
-        flash(('New Student Information Upload Successfully !!!' , 'student_admission_done'))
-        return render_template("school_admin_URLs/student_admission.html" ,  data = data)
+        # image_name = dataa['student_image']
+        image_file = request.files['student_image']
+        folder_name = 'admission_student_images'
+        image_path = obj.stored_image_in_file_and_send_path_in_db(image_file , folder_name)
+        if image_path:
+            # print("The student name = " , dataa['])
+            print("THis is image path as you see = " , image_path)
+            obj.student_admission_data(dataa , image_path )
+            flash(('New Student Information Upload Successfully !!!' , 'student_admission_done'))
+            return render_template("school_admin_URLs/student_admission.html" ,  data = data )
 
 
 @app.route('/school_admin/update_admission_data' , methods=["GET", "POST"])
@@ -64,7 +68,14 @@ def teacher_joining_information():
     
     elif request.method == 'POST':
         dataa = request.form.to_dict()
-        obj.teacher_joining_information(dataa)
+        
+        image_file = request.files['teacher_image']
+        folder_name = 'jonning_teacher_images'
+        image_path = obj.stored_image_in_file_and_send_path_in_db(image_file , folder_name)
+        if image_path:
+            # print("The student name = " , dataa['])
+            print("THis is image path as you see = " , image_path)
+            obj.teacher_joining_information(dataa ,image_path)
         flash(('New Teacher Information Upload Successfully !!!' , 'teacher_information_upload'))
         return render_template("school_admin_URLs/teacher_joining.html" ,  data = data)
 

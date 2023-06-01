@@ -49,6 +49,7 @@ def student_dairy():
     result_dict = eval(result)
     print("This is result dict ", result_dict)
     dairy = obj.take_student_dairy_data(result_dict)
+    dairy.reverse()
     print("This is result as you see = " , dairy)
     return render_template('student_URLs/student_dairy.html' , dairy = dairy , data = data)
 

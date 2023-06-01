@@ -71,10 +71,16 @@ def upload_dairy_form():
         return render_template('teacher_URLs/upload_dairy_form.html')
     elif  request.method == 'POST':
         data = request.form.to_dict()
-        print("This is dairy " , data)
-        obj.send_dairy(data)
-        flash(('Class Attandance will Upload Successfully !!!' , 'student_dairy_done'))
-        return render_template("teacher_URLs/teacher_dashboard.html")
+        image_file = request.files['helping_notes_file']
+        folder_name = 'student_dairy_files'
+        image_path = obj.stored_dariy_in_file_and_send_path_in_db(image_file , folder_name)
+        if image_path:
+            # print("The student name = " , dataa['])
+            print("THis is image path as you see = " , image_path)
+            obj.send_dairy(data , image_path )
+
+            flash(('Class Attandance will Upload Successfully !!!' , 'student_dairy_done'))
+            return render_template("teacher_URLs/teacher_dashboard.html")
         # else:
         #     return render_template('teacher_URLs/teacher_dashboard.html')
         
@@ -148,10 +154,15 @@ def send_notification_to_student():
 
     elif request.method == "POST":
         data = request.form.to_dict()
-        print("The data is = " , data)
-        obj.send_student_notification_to_db(data)
-        flash(('The Notification is send to All Student successfully !!!' ,'class_student_notification_done'))
-        return render_template('teacher_URLs/teacher_dashboard.html' ,data = result_dict)
+        notification_file = request.files['notification_document']
+        folder_name = 'Notifications'
+        file_path = obj.stored_dariy_in_file_and_send_path_in_db(notification_file , folder_name)
+        if file_path:
+            # print("The student name = " , dataa['])
+            print("THis is image path as you see = " , file_path)
+            obj.send_student_notification_to_db(data , file_path)
+            flash(('The Notification is send to All Student successfully !!!' ,'class_student_notification_done'))
+            return render_template('teacher_URLs/teacher_dashboard.html' ,data = result_dict)
     # return render_template('teacher_URLs/send_notification_to_student.html')
     
     

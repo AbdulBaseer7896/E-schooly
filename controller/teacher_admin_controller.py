@@ -66,6 +66,12 @@ def teacher_notification():
         return render_template('teacher_admin_URLs/teacher_notification.html' , data = data)
     elif request.method == "POST":
         notification = request.form.to_dict()
-        obj.send_notification_of_db(notification)
-    flash(('The Notification is Send to ALl Teacher Successfully !!! ' , 'teacher_notification'))
-    return render_template('teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)
+        notification_file = request.files['notification_document']
+        folder_name = 'Notifications'
+        file_path = obj.stored_notification_in_file_and_send_path_in_db(notification_file , folder_name)
+        if file_path:
+            # print("The student name = " , dataa['])
+            print("THis is image path as you see = " , file_path)
+            obj.send_notification_of_db(notification , file_path)
+            flash(('The Notification is Send to ALl Teacher Successfully !!! ' , 'teacher_notification'))
+            return render_template('teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)

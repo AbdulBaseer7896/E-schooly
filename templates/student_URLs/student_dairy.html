@@ -93,7 +93,12 @@ Student | Dairy
                                         <h6 class="mb-0">Notes</h6>
                                     </div>
                                     <div class="col-sm-2 text-secondary">
-                                        {{item[8]}}
+                                        {% if item[8] == None %}
+                                        <a href="#" > No Download File Attached</a>
+                                        {% endif  %}
+                                        {% if item[8] != None %}
+                                        <a href="/static/{{item[8]}}" download>Download File</a>
+                                        {% endif  %}
                                     </div>
                                 </div>
                         <hr>

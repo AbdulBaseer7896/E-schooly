@@ -24,7 +24,7 @@ school Admin | Teacher Joning
 {% endwith %}
 
 <div class=" container big-font">
-    <form action="{{ url_for('teacher_joining_information') }}" method="post">
+    <form action="{{ url_for('teacher_joining_information') }}" method="POST"  enctype="multipart/form-data">
         <br>
         <h1 style="text-align: center;">Enter Teacher Information</h1>
         <br>
@@ -166,9 +166,8 @@ school Admin | Teacher Joning
         <div class="row">
             <div class="col-md-3">
                 <div class="mb-3">
-                    <label for="teacher_image" class="form-label">Teacher Image</label>
-                    <input name="teacher_image" value="{{data[0][8]}}" type="file" class="form-control"
-                        id="teacher_image" aria-describedby="teacher_image">
+                    <label class="form-label">Teacher Image</label>
+                    <input name="teacher_image" value="{{data[0][8]}}" type="file" class="form-control">
                 </div>
             </div>
 

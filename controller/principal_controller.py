@@ -44,9 +44,15 @@ def send_principal_notification():
         return render_template('principal_URLs/send_notification.html')
     elif request.method == 'POST':
         info = request.form.to_dict()
-        obj.send_principal_notification_of_db(info)
-        flash(('Notification send Successfully !!!' , 'principal_notification'))
-        return render_template('principal_URLs/principal_dashboard.html' , data = name)
+        notification_file = request.files['notification_document']
+        folder_name = 'Notifications'
+        file_path = obj.stored_notification_and_send_path_in_db(notification_file , folder_name)
+        if file_path:
+            # print("The student name = " , dataa['])
+            print("THis is image path as you see = " , file_path)       
+            obj.send_principal_notification_of_db(info , file_path)
+            flash(('Notification send Successfully !!!' , 'principal_notification'))
+            return render_template('principal_URLs/principal_dashboard.html' , data = name)
         
     
     

@@ -5,6 +5,7 @@ from flask import make_response, render_template
 from sqlalchemy import create_engine, text
 import os
 import mysql.connector
+from datetime import datetime
 
 
 class teacher_model():
@@ -68,9 +69,9 @@ class teacher_model():
                 return False
             
             
-    def send_dairy(self , student_marks):
+    def send_dairy(self , student_marks , image_path):
         with self.engine.connect() as conn:
-            query1 = text(f"UPDATE teacher_class_period SET bookname = '{student_marks['book_name']}', chapter_name = '{student_marks['chapter_name']}', book_page_number = '{student_marks['book_page']}', dairy_date = '{student_marks['dairy_date']}', video_link = '{student_marks['video_link']}', helping_notes = '{student_marks['helping_notes']}', dairy_details = '{student_marks['dairy_details']}' WHERE (teacher_name = '{student_marks['teacher_mail']}' AND period_name = '{student_marks['period_name']}' AND  class_name = '{student_marks['class_name']}' );")
+            query1 = text(f"UPDATE teacher_class_period SET bookname = '{student_marks['book_name']}', chapter_name = '{student_marks['chapter_name']}', book_page_number = '{student_marks['book_page']}', dairy_date = '{student_marks['dairy_date']}', video_link = '{student_marks['video_link']}', helping_notes = '{image_path}', dairy_details = '{student_marks['dairy_details']}' WHERE (teacher_name = '{student_marks['teacher_mail']}' AND period_name = '{student_marks['period_name']}' AND  class_name = '{student_marks['class_name']}' );")
             conn.execute(query1)
             # return flash("you dairy is send successfullu")
             
@@ -168,10 +169,10 @@ class teacher_model():
         
         
         
-    def send_student_notification_to_db(self , student_marks):
+    def send_student_notification_to_db(self , data , file_path):
         with self.engine.connect() as conn:
-            print("The student_marks is = " ,student_marks['titles'])
-            query1 = text(f"INSERT INTO student_notification VALUES ('{student_marks['titles']}' , '{student_marks['date']}' , 'Class {student_marks['teacher_class']}' , '{student_marks['details']}' );")
+            print("The student_marks is = " ,data['titles'])
+            query1 = text(f"INSERT INTO student_notification VALUES ('{data['titles']}' , '{data['date']}' , '{data['teacher_class']}' , '{data['details']}' , '{file_path}');")
             conn.execute(query1)
             print("The notification is send now")
             
@@ -234,3 +235,20 @@ class teacher_model():
             except:
                 print("The student_marks is not send in student_marksbase")
                 return False
+            
+            
+            
+    def stored_dariy_in_file_and_send_path_in_db(self , file , folder_name):
+        if file is not None:
+            new_filename = str(datetime.now().timestamp()).replace(".", "")  # Generating unique name for the file
+            # Spliting ORIGINAL filename to seperate extenstion
+            split_filename = file.filename.split(".")
+            # Canlculating last index of the list got by splitting the filname
+            ext_pos = len(split_filename)-1
+            # Using last index to get the file extension
+            ext = split_filename[ext_pos]
+            img_db_path = str(f"documents/{folder_name}/{new_filename}.{ext}")
+            print("The type of path  = ", type(img_db_path))
+            file.save(f"static/documents/{folder_name}/{new_filename}.{ext}")
+            print("File uploaded successfully")
+            return img_db_path

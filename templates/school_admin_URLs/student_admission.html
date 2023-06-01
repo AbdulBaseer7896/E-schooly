@@ -25,7 +25,7 @@ school Admin | Student Admission
 
 
 <div class=" container big-font">
-    <form action="{{ url_for('student_admission') }}" method="post">
+    <form action="{{ url_for('student_admission') }}" method="POST" enctype="multipart/form-data">
         <br>
         <h1 style="text-align: center;">Enter Student Information</h1>
         <br>
@@ -168,9 +168,8 @@ school Admin | Student Admission
         <div class="row">            
         <div class="col-md-3">
             <div class="mb-3">
-                <label for="student_image" class="form-label">Student Image</label>
-                <input name="student_image" value="{{data[0][8]}}" type="file" class="form-control" id="student_image"
-                    aria-describedby="student_image">
+                <label  class="form-label">Student Image</label>
+                <input name="student_image"  type="file" class="form-control" >
             </div>
         </div>
 

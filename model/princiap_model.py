@@ -5,6 +5,7 @@ from flask import make_response, render_template
 from sqlalchemy import create_engine, text
 import os
 import mysql.connector
+from datetime import datetime
 
 
 class principal_models():
@@ -59,25 +60,40 @@ class principal_models():
             conn.execute(query1)
             print("The teacher class is updated")
         
-    def send_principal_notification_of_db(self , data):
+    def send_principal_notification_of_db(self , data , file_path):
         with self.engine.connect() as conn:
             print("The data is = " ,data['titles'])
             
             if data['titles'] != "" and data['target_audience'] == 'teacher':
-                query1 = text(f"INSERT INTO teacher_notification VALUES ('{data['titles']}' , '{data['date']}' , '{data['details']}');")
+                query1 = text(f"INSERT INTO teacher_notification VALUES ('{data['titles']}' , '{data['date']}' , '{data['details']}' , '{file_path}');")
                 conn.execute(query1)
                 return True
             elif  data['titles'] != "" and data['target_audience'] == 'student':
-                query2 = text(f"INSERT INTO student_notification VALUES ('{data['titles']}' , '{data['date']}'  , 'school' , '{data['details']}');")
+                query2 = text(f"INSERT INTO student_notification VALUES ('{data['titles']}' , '{data['date']}'  , 'school' , '{data['details']}' , {file_path}' );")
                 conn.execute(query2)
                 return True
             elif  data['titles'] != "" and data['target_audience'] == 'both':         
-                query3 = text(f"INSERT INTO teacher_notification VALUES ('{data['titles']}' , '{data['date']}' , '{data['details']}' );")
+                query3 = text(f"INSERT INTO teacher_notification VALUES ('{data['titles']}' , '{data['date']}' , '{data['details']}' , '{file_path}' );")
                 conn.execute(query3)
                 
-                query4 = text(f"INSERT INTO student_notification VALUES ('{data['titles']}' , '{data['date']}'  , 'school' , '{data['details']}');")
+                query4 = text(f"INSERT INTO student_notification VALUES ('{data['titles']}' , '{data['date']}'  , 'school' , '{data['details']}' , '{file_path}');")
                 conn.execute(query4)
                 return True
             
             return False
         
+        
+    def stored_notification_and_send_path_in_db(self , file , folder_name):
+        if file is not None:
+            new_filename = str(datetime.now().timestamp()).replace(".", "")  # Generating unique name for the file
+            # Spliting ORIGINAL filename to seperate extenstion
+            split_filename = file.filename.split(".")
+            # Canlculating last index of the list got by splitting the filname
+            ext_pos = len(split_filename)-1
+            # Using last index to get the file extension
+            ext = split_filename[ext_pos]
+            img_db_path = str(f"documents/{folder_name}/{new_filename}.{ext}")
+            print("The type of path  = ", type(img_db_path))
+            file.save(f"static/documents/{folder_name}/{new_filename}.{ext}")
+            print("File uploaded successfully")
+            return img_db_path

@@ -22,19 +22,29 @@ Teacher | Notification
 
                             
                         <div class="row">
-                            <div class="col-sm-2">
+                            <div class="col-sm-1">
                                 <h6 class="mb-0">Title</h6>
                             </div>
-                            <div class="col-sm-4 text-secondary">
+                            <div class="col-sm-2 text-secondary">
                                 {{item[0]}}
                             </div>
-                            <!-- </div>
-                            <hr>
-                            <div class="row"> -->
+
+                            <div class="col-sm-2">
+                                <h6 class="mb-0">Notification Documber </h6>
+                            </div>
+                            <div class="col-sm-2 text-secondary">
+                                {% if item[3] == None %}
+                                <a href="#" > No Download File Attached</a>
+                                {% endif  %}
+                                {% if item[3] != None %}
+                                <a href="/static/{{item[3]}} " download>Download File</a>
+                                {% endif  %}
+                            </div>
+
                             <div class="col-sm-2">
                                 <h6 class="mb-0">Date </h6>
                             </div>
-                            <div class="col-sm-4 text-secondary">
+                            <div class="col-sm-2 text-secondary">
                                 {{item[1]}}
                             </div>
                         </div>

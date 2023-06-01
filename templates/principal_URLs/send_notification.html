@@ -10,7 +10,7 @@ Principal | Send Notification
 
 
 <div class=" container big-font">
-    <form action="{{ url_for('send_principal_notification') }}" method="post">
+    <form action="{{ url_for('send_principal_notification') }}" method="post"  enctype="multipart/form-data">
         <br>
         <h1 style="text-align: center;">Send Notifications to teachers</h1>
         <br>
@@ -18,7 +18,7 @@ Principal | Send Notification
 
         <!-- titles -->
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="mb-3">
                     <label for="titles" class="form-label">Title of Notification</label>
                     <input name="titles"  value="" type="text" class="form-control" id="titles"
@@ -26,7 +26,7 @@ Principal | Send Notification
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="mb-3">
                     <label for="target_audience" class="form-label">Select Target Audience</label>
                     <select name="target_audience" value="" id="target_audience" class="form-select"
@@ -38,7 +38,15 @@ Principal | Send Notification
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label  class="form-label">Notification Document</label>
+                    <input name="notification_document" type="file" class="form-control" >
+
+                </div>
+            </div>
+
+            <div class="col-md-3">
                 <!-- Date -->
                 <div class="mb-3">
                     <label for="date" class="form-label">Date</label>

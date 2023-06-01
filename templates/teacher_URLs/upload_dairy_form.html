@@ -8,7 +8,7 @@ Teacher | Write Dairy
 {% block mainbody %}
 
 <div class=" container big-font">
-    <form action="{{ url_for('upload_dairy_form') }}" method="post">
+    <form action="{{ url_for('upload_dairy_form') }}" method="post"  enctype="multipart/form-data">
         <br>
         <h1 style="text-align: center;">Write a Dairy for {{data['teacher_class']}} subject {{data['teacher_period']}}</h1>
         <br>
@@ -69,9 +69,8 @@ Teacher | Write Dairy
             <!-- Helping Notes -->
             <div class="col-md-4">
                 <div class="mb-3">
-                    <label for="helping_notes" class="form-label">Helping Notes</label>
-                    <input name="helping_notes" type="file" class="form-control" id="helping_notes"
-                        aria-describedby="helping_notes">
+                    <label  class="form-label">Helping Notes</label>
+                    <input name="helping_notes_file" type="file" class="form-control" >
                 </div>
             </div>
         </div>

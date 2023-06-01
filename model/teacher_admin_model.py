@@ -5,6 +5,7 @@ from flask import make_response, render_template
 from sqlalchemy import create_engine, text
 import os
 import mysql.connector
+from datetime import datetime
 
 
 class teacher_admin_model():
@@ -48,12 +49,27 @@ class teacher_admin_model():
         print("the student attandace mark")
         
         
-    def send_notification_of_db(self , data):
+    def send_notification_of_db(self , data , file_path):
         with self.engine.connect() as conn:
             print("The data is = " ,data['titles'])
             if data['titles'] != "":
-                query1 = text(f"INSERT INTO teacher_notification VALUES ('{data['titles']}' , '{data['date']}' , '{data['details']}');")
+                query1 = text(f"INSERT INTO teacher_notification VALUES ('{data['titles']}' , '{data['date']}' , '{data['details']}' , '{file_path}' );")
                 conn.execute(query1)
                 return True
             return False
         
+        
+    def stored_notification_in_file_and_send_path_in_db(self , file , folder_name):
+        if file is not None:
+            new_filename = str(datetime.now().timestamp()).replace(".", "")  # Generating unique name for the file
+            # Spliting ORIGINAL filename to seperate extenstion
+            split_filename = file.filename.split(".")
+            # Canlculating last index of the list got by splitting the filname
+            ext_pos = len(split_filename)-1
+            # Using last index to get the file extension
+            ext = split_filename[ext_pos]
+            img_db_path = str(f"documents/{folder_name}/{new_filename}.{ext}")
+            print("The type of path  = ", type(img_db_path))
+            file.save(f"static/documents/{folder_name}/{new_filename}.{ext}")
+            print("File uploaded successfully")
+            return img_db_path

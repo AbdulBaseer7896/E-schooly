@@ -10,7 +10,7 @@ Teacher | Send Notification
 <h1> This is Teacher send Notification to class student</h1>
 
 <div class=" container big-font">
-    <form action="{{ url_for('send_notification_to_student') }}" method="post">
+    <form action="{{ url_for('send_notification_to_student') }}" method="post" enctype="multipart/form-data">
         <br>
         <h1 style="text-align: center;">Send Notifications to Class {{teacher_class[0][0]}}</h1>
         <br>
@@ -18,23 +18,27 @@ Teacher | Send Notification
 
         <!-- titles -->
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="mb-3">
                     <label for="titles" class="form-label">Title of Notification</label>
                     <input name="titles" value="" type="text" class="form-control" id="titles"
                         aria-describedby="titles">
                 </div>
             </div>
-            <div class="col-md-6">
 
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label  class="form-label">Notification Document</label>
+                    <input name="notification_document" class="form-control" type="file">
+                </div>
+            </div>
 
-                <!-- Form B number of teacher -->
+            <div class="col-md-4">
                 <div class="mb-3">
                     <label for="date" class="form-label">Date</label>
                     <input name="date" value="" class="form-control" id="date"
                         aria-describedby="date" type="date">
                 </div>
-
             </div>
         </div>
 
