@@ -54,6 +54,4 @@ def send_principal_notification():
             flash(('Notification send Successfully !!!' , 'principal_notification'))
             return render_template('principal_URLs/principal_dashboard.html' , data = name)
         
-    
-    
-    
+

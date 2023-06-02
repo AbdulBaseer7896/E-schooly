@@ -200,6 +200,36 @@ def upload_result():
             return render_template('teacher_URLs/teacher_dashboard.html' , data = data )
         
         flash((f"The result of {student_restult['subject']} will Not Upload  !!!! " , 'result_will_not_uploaded'))
+        
         return render_template('teacher_URLs/teacher_dashboard.html' , data = data )
+
+
+    
+@app.route('/teacher/delete_dairy' , methods=["GET", "POST" , "DELETE"] )
+@login_required('teacher')
+def delete_dairy():
+    data = request.args.get('data')
+    result = str(data) 
+    result_dict = eval(result)  # or use json.loads(result) for JSON parsing
+
+    if request.method == "GET":
+        dariy_data = obj.take_teacher_dariy_for_db_for_delete(result_dict)
+        return render_template('teacher_URLs/delete_dairy.html', dariy_data=dariy_data, data=result_dict)
+    if request.method == "POST":
+        result = request.form.get('delete_information')
+        result_dict = str(result) 
+        delete_dairy_information = eval(result_dict)
+        print("The data is == " , delete_dairy_information)
+        print("Thsi is working then good =  = = " , delete_dairy_information[1])
+        
+        obj.delete_dariy_for_db_which_teacher_select(delete_dairy_information)
+        
+        return render_template('teacher_URLs/teacher_dashboard.html',  data=delete_dairy_information)
         
 
+    
+
+
+        
+        
+        

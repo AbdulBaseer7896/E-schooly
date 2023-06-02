@@ -7,6 +7,7 @@ import os
 import mysql.connector
 
 
+
 class student_model():
     engine = None
 
@@ -48,7 +49,7 @@ class student_model():
                 query1 = text(f"SELECT class FROM  student_information WHERE name = '{data[0][0]}';")
                 result = conn.execute(query1).fetchall()      
             if result:
-                query2 = text(f"SELECT * FROM  teacher_class_period WHERE class_name = '{result[0][0]}';")
+                query2 = text(f"SELECT * FROM  teacher_class_period WHERE class_name = '{result[0][0]}' ORDER BY dairy_date DESC;")
                 dairy = conn.execute(query2).fetchall() 
                 print("This is the dairy of the student = " ,dairy)
                 return dairy

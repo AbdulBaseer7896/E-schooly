@@ -71,7 +71,8 @@ class teacher_model():
             
     def send_dairy(self , student_marks , image_path):
         with self.engine.connect() as conn:
-            query1 = text(f"UPDATE teacher_class_period SET bookname = '{student_marks['book_name']}', chapter_name = '{student_marks['chapter_name']}', book_page_number = '{student_marks['book_page']}', dairy_date = '{student_marks['dairy_date']}', video_link = '{student_marks['video_link']}', helping_notes = '{image_path}', dairy_details = '{student_marks['dairy_details']}' WHERE (teacher_name = '{student_marks['teacher_mail']}' AND period_name = '{student_marks['period_name']}' AND  class_name = '{student_marks['class_name']}' );")
+            # query1 = text(f"Insert Into teacher_class_period Values( '{student_marks['book_name']}', chapter_name = '{student_marks['chapter_name']}', book_page_number = '{student_marks['book_page']}', dairy_date = '{student_marks['dairy_date']}', video_link = '{student_marks['video_link']}', helping_notes = '{image_path}', dairy_details = '{student_marks['dairy_details']}' ) WHERE (teacher_name = '{student_marks['teacher_mail']}' AND period_name = '{student_marks['period_name']}' AND  class_name = '{student_marks['class_name']}' );")
+            query1 = text(f"INSERT INTO teacher_class_period ( teacher_name, class_name, period_name, bookname, chapter_name, book_page_number, dairy_date, video_link, helping_notes, dairy_details) VALUES ('{student_marks['teacher_mail']}', '{student_marks['class_name']}' , '{student_marks['period_name']}' , '{student_marks['book_name']}' , '{student_marks['chapter_name']}' , '{student_marks['book_page']}' , '{student_marks['dairy_date']}' , '{student_marks['video_link']}' , '{image_path}' , '{student_marks['dairy_details']}') ;")
             conn.execute(query1)
             # return flash("you dairy is send successfullu")
             
@@ -252,3 +253,41 @@ class teacher_model():
             file.save(f"static/documents/{folder_name}/{new_filename}.{ext}")
             print("File uploaded successfully")
             return img_db_path
+     
+     
+     
+     
+     
+    def take_teacher_dariy_for_db_for_delete(self , data):
+        with self.engine.connect() as conn:
+            print("The data is === " , data)
+            try:
+                query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{data['email_login']}' ORDER BY dairy_date DESC;")
+                dairy = conn.execute(query1).fetchall() 
+                print("This is the dairy of the student = " ,dairy)
+                return dairy
+            except:
+                query2 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{data[0]}' ORDER BY dairy_date DESC;")
+                dairy = conn.execute(query2).fetchall() 
+                print("This is the dairy of the student = " ,dairy)
+                print('Thisi sfjaisdjgi a= ' , data)
+                return dairy
+            #     print("No dairy found")
+            #     return False
+            
+    def delete_dariy_for_db_which_teacher_select(self , data):
+        with self.engine.connect() as conn:
+            print("The data is === " , data)
+            query1 = text(f"DELETE FROM teacher_class_period WHERE teacher_name = '{data[0]}' AND class_name = '{data[1]}' AND  period_name = '{data[2]}' AND bookname = '{data[3]}' And chapter_name = '{data[4]}' And book_page_number = '{data[5]}'  And video_link = '{data[7]}' And helping_notes = '{data[8]}' And dairy_details = '{data[9]}' ;")
+            cheek = conn.execute(query1)
+            print("The dariy is delete for file")
+            print(data[8])
+            if data[8] != None:
+                os.remove(f"static/{data[8]}")
+            print("The file is remove for files")
+            print("This is cheek" , cheek)
+            return cheek
+            
+            
+            
+            #  ('javadmalikkhan-5-teacher@iqra.edu', 'Class 9', 'Urdu Book', 'Urdu Book 9 - 2', 'Introduction to Urdu 2', '2311', datetime.date(2023, 6, 2), 'https://blog.hubspot.com/website/html-text-box', 'documents/student_dairy_files/1685640339026172.pdf', 'This is just a testing of urdu book 9 part 2')
