@@ -74,63 +74,49 @@ def student_notification():
     
     
 
-@app.route('/student/student_result' , methods=["GET", "POST"] )
+@app.route('/student/student_result', methods=["GET", "POST"])
 @login_required('student')
 def student_result():
-    print("This is student dairy")
     data = request.args.get('data')
-    print("This is data of student_dairy " , data)
-    result = str(data) 
-    
-    result_dict = eval(result)
-    print("This is result dict ", result_dict)
+    result_dict = eval(data)
     result_data = obj.take_student_result_data(result_dict)
-    if result_data:
-        print("This is 99999999999999999999999999")
+    print("THis is very improtant now see it = = = = "  , result_data)
 
-        grouped_data = {}  # Dictionary to group data by exam type and date
+    grouped_data = {}  # Dictionary to group data by exam type and date
 
-        for item in result_data:
-            exam_type = item[3]
-            exam_date = item[7]
+    for item in result_data:
+        exam_type = item[3]
+        exam_date = item[7]
 
-            key = (exam_type, exam_date)
+        key = (exam_type, exam_date)
 
-            if key not in grouped_data:
-                grouped_data[key] = []
+        if key not in grouped_data:
+            grouped_data[key] = []
 
-            grouped_data[key].append(item)
+        grouped_data[key].append(item)
 
-        # Access and print specific rows
-    number_of_results =  len(list(grouped_data.keys()))
-    specific_rows = list(grouped_data.keys())
-    len(specific_rows)
-    print("hello")
-    for i in range(0 , number_of_results):
-        specific_row = grouped_data[specific_rows[i]]
+    updated_grouped_data = {}  # Dictionary to store updated data
 
+    for key, rows in grouped_data.items():
+        total_marks = 0
+        obtain_marks = 0
+        for row in rows:
+            total_marks += row[6]
+            obtain_marks += row[5]
 
-    # # Access a specific element from the row
-        for j in range(0 , len(specific_row)):
-            specific_element = specific_row[j][4]
-            print(specific_row[j][3])
-            print(specific_element)
-    
-    print("its work")
+        updated_key = (*key, total_marks, obtain_marks)  # Create a new tuple with updated values
+        updated_grouped_data[updated_key] = rows  # Add the updated key to the dictionary
 
-    if request.method == "GET":
-        updated_grouped_data = {}  # Dictionary to store updated data
+    combined_data = {}
 
-        for key, rows in grouped_data.items():
-            total_marks = 0
-            obtain_marks = 0
-            for row in rows:
-                total_marks += row[6]
-                obtain_marks += row[5]
+    for key, value in grouped_data.items():
+        exam_type, exam_date = key
+        score = updated_grouped_data.get(key)
 
-            updated_key = (*key, total_marks, obtain_marks)  # Create a new tuple with updated values
-            updated_grouped_data[updated_key] = rows  # Add the updated key to the dictionary
+        combined_data[key] = {
+            'Total': score,
+            'students': value
+        }
 
-        return render_template('student_URLs/student_result.html', result_data=result_data, data=data, specific_rows=specific_rows, grouped_data=updated_grouped_data)
-    
-    
+    return render_template('student_URLs/student_result.html', result_data=result_data, data=data,
+                           grouped_data=updated_grouped_data, combined_data=combined_data)

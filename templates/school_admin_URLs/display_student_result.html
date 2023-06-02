@@ -1,7 +1,7 @@
-{% extends 'student_URLs/student_temp.html' %}
+{% extends 'school_admin_URLs/school_admin_temp.html' %}
 
 {% block title %}
-Student | Result
+School Admin | Result
 {% endblock title %}
 
 {% block mainbody %}
@@ -26,7 +26,9 @@ Student | Result
     }
 </style>
 
+<h1>This is hello hi and nice</h1>
 <div class="container">
+
     {% for key, rows in grouped_data.items() %}
         <h2>Exam Type: {{ key[0] }}</h2>
         <h3>Exam Date: {{ key[1] }}</h3>

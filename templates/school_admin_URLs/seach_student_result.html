@@ -1,0 +1,49 @@
+{% extends 'school_admin_URLs/school_admin_temp.html' %}
+
+
+{% block title %}
+school Admin | Result
+{% endblock title %}
+
+{% block mainbody %}
+
+
+<h1> This is School Admin Result cheeking page</h1>
+
+<div class=" container big-font" >
+    <form action="{{ url_for('seach_student_result') }}" method="post">
+        <br>
+        <h1 style="text-align: center;">Search The Student By</h1>
+        <br>
+        <div class="mb-3">
+            <label for="email_search" class="form-label">Email address</label>
+            <input name="email_search" type="email" class="form-control" id="email_search" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="b_from_search" class="form-label">B-Form-Number</label>
+            <!-- <input name="b_from_search" type="text" class="form-control" id="b_from_search"> -->
+            <input name="b_from_search" type="text" class="form-control" id="b_from_search"
+            aria-describedby="b_from_search" maxlength="13" data-inputmask="'mask': '99999-9999999-9'"
+            placeholder="XXXXX-XXXXXXX-X" >
+        </div>
+
+        <div class="mb-3">
+            <label for="student_registration_number" class="form-label">Student Registration Number</label>
+            <!-- <input name="Father CNIC Number" type="text" class="form-control" id="Father CNIC Number"> -->
+            <input name="student_registration_number" type="text" class="form-control" id="student_registration_number">
+
+        </div>
+        <br>
+        <input type="submit" class="btn btn-primary"></input>
+
+        <br>
+        <br><br>
+        <!-- <a href="{{ url_for('forget_password') }}">Forget Password</a> -->
+    </form>
+    </div>
+    <br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
+{% endblock mainbody %}

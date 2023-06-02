@@ -97,3 +97,64 @@ def update_teacher_data():
         
     return render_template("school_admin_URLs/update_teacher_data.html")
 
+
+
+
+@app.route('/school_admin/seach_student_result' , methods=["GET", "POST"])
+@app.route('/school_admin/display_student_result' , methods=["GET", "POST"])
+@login_required('school_admin')
+def seach_student_result():
+    if request.method == "GET":
+        return render_template('school_admin_URLs/seach_student_result.html')
+    if request.method =="POST":
+        data = request.form.to_dict()
+        print("This ijsa fi = " , data)
+        result = obj.search_student_admission_data(data)
+        print("This is isfoands g g )))))))))) = " , result)
+        student_name =  result[0][0]
+    
+        marks_result = obj.take_student_result_data(student_name)
+        print("this is resoijsf iaisgj  = =  + , ", marks_result)
+        
+        grouped_data = {}  # Dictionary to group data by exam type and date
+
+        for item in marks_result:
+            exam_type = item[3]
+            exam_date = item[7]
+
+            key = (exam_type, exam_date)
+
+            if key not in grouped_data:
+                grouped_data[key] = []
+
+            grouped_data[key].append(item)
+
+        updated_grouped_data = {}  # Dictionary to store updated data
+
+        for key, rows in grouped_data.items():
+            total_marks = 0
+            obtain_marks = 0
+            for row in rows:
+                total_marks += row[6]
+                obtain_marks += row[5]
+
+            updated_key = (*key, total_marks, obtain_marks)  # Create a new tuple with updated values
+            updated_grouped_data[updated_key] = rows  # Add the updated key to the dictionary
+
+        combined_data = {}
+
+        for key, value in grouped_data.items():
+            exam_type, exam_date = key
+            score = updated_grouped_data.get(key)
+
+            combined_data[key] = {
+                'Total': score,
+                'students': value
+            }
+
+        return render_template('school_admin_URLs/display_student_result.html', result_data=marks_result, data=data, grouped_data=updated_grouped_data, combined_data=combined_data)
+
+    
+    
+# [('daimraza-3-3-10@iqra.edu', '3710471513456', 'Abdula Khan', '3701471623456', 'Muslim', 'Male', 'Class 10', datetime.date(2023, 5, 24), '', '34567892345', 'Class 9', 'A-', 'Math , science , Data science , Data Base', 'Abc home pindi ghen, Attock ,pakistan', 'Iqra education school pindi ghed , Attock', 'Abdula Khan', '34567823456', '3', 'Daim Raza', '3', 0)]
+# [('M Hamza', '1', 'mhamza-1-4-9@iqra.edu', 'Final Exam', 'Math', 50, 100, datetime.date(2023, 5, 19)), ('M Hamza', '1', 'mhamza-1-4-9@iqra.edu', 'Final Exam', 'Urdu Book', 30, 100, datetime.date(2023, 5, 19)), ('M Hamza', '1', 'mhamza-1-4-9@iqra.edu', 'Mid Exam', 'English Book', 80, 100, datetime.date(2023, 5, 19))]

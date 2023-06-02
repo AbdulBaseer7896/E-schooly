@@ -71,8 +71,12 @@ class school_admin_models():
     def search_student_admission_data(self, data):
         print("The is search student admission data")
         with self.engine.connect() as conn:
-            query = text(f"SELECT * FROM student_information WHERE name = '{data['email_search']}' OR form_b = '{data['b_from_search']}' OR student_registration_number = '{data['student_registration_number']}';")
-            user = conn.execute(query).fetchall()
+            try:
+                query = text(f"SELECT * FROM student_information WHERE name = '{data['email_search']}' OR form_b = '{data['b_from_search']}' OR student_registration_number = '{data['student_registration_number']}';")
+                user = conn.execute(query).fetchall()
+            except:
+                query = text(f"SELECT * FROM student_information WHERE name = '{data[0]}' OR form_b = '{data[1]}' OR student_registration_number = '{data[2]}';")
+                user = conn.execute(query).fetchall()
             if user:
                 print("the data in user is = ")
                 print(user)
@@ -125,5 +129,38 @@ class school_admin_models():
                 return " "
                 # return render_template('school_admin_URLs/school_admin_dashboard.html' , data = user)
 
+
+
+
+    def take_student_result_data(self , data):
+        print("This is sj foiajsgoi jsogj aosjgo ja   = = = = " , data)
+        with self.engine.connect() as conn:
+            query1 = text(f"SELECT b_form_name, roll_number , student_email , result_type, subject, markes , total_marks , result_date  FROM result_student_subject_marks WHERE student_email = '{data}' ORDER BY result_type, result_date DESC;")
+            result = conn.execute(query1).fetchall()
+            return result
+
                 
+                
+    def calculate_student_result(self , data):
+        print("This is calculated data ==== " , data)
+        marks_sum = {}
+        for item in data:
+            exam_type = item[3]
+            exam_date = item[7]
+            marks = item[5]
+
+            # Create a unique key by combining exam type and date
+            key = (exam_type, exam_date)
+
+            # Check if the key already exists in the dictionary
+            if key in marks_sum:
+                marks_sum[key] += marks
+            else:
+                marks_sum[key] = marks
+                
+        # Print the sum of marks for each exam type and date
+        for key, sum_marks in marks_sum.items():
+            print(f"Exam Type: {key[0]}, Date: {key[1]} - Total Marks: {sum_marks}")
+            
+        return marks_sum
         
