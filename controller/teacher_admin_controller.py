@@ -75,3 +75,24 @@ def teacher_notification():
             obj.send_notification_of_db(notification , file_path)
             flash(('The Notification is Send to ALl Teacher Successfully !!! ' , 'teacher_notification'))
             return render_template('teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)
+        
+        
+        
+
+@app.route('/Principal/delete_notification_admin_teacher', methods=["GET", "POST"])
+@login_required('teacher_admin')
+def delete_notification_admin_teacher():
+    notification_data = obj.take_techer_admin_notification_for_db_for_delete()
+    
+    if notification_data:
+        print("This is notification_data =", notification_data)
+        if request.method == 'GET':
+            return render_template('teacher_admin_URLs/delete_notification_admin_teacher.html', notification_data=notification_data)
+        if request.method == 'POST':
+            result = request.form.get('delete_notification')
+            result_dict = str(result) 
+            delete_notification = eval(result_dict)
+            obj.delete_selected_notification_form_data(delete_notification)
+            print("Now its endsss")
+            flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_principal'))
+            return render_template('teacher_admin_URLs/teacher_admin_dashboard.html')

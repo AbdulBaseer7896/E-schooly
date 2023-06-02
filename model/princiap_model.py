@@ -97,3 +97,41 @@ class principal_models():
             file.save(f"static/documents/{folder_name}/{new_filename}.{ext}")
             print("File uploaded successfully")
             return img_db_path
+
+
+    def take_principal_notification_for_db_for_delete(self):
+        with self.engine.connect() as conn:
+            query1 = text(f"SELECT 'student_notification' AS source, title, notification_date, datails , document_path FROM student_notification UNION ALL SELECT 'teacher_notification' AS source, title, notification_date, details , document_path FROM teacher_notification ORDER BY notification_date DESC;")
+            notification = conn.execute(query1).fetchall() 
+            if notification:
+                formatted_notification = []
+                for entry in notification:
+                    source = entry[0]
+                    title = entry[1]
+                    notification_date = entry[2].strftime('%Y-%m-%d')
+                    details = entry[3]
+                    document_path = entry[4]
+                    formatted_entry = (source, title, notification_date, details, document_path)
+                    formatted_notification.append(formatted_entry)
+                print("This is the dairy of the student = ", notification)
+                return formatted_notification
+            else:
+                return False
+            
+            
+    def delete_selected_notification_form_data(self , data):
+        print("The data i s0485  = = ", data)
+        with self.engine.connect() as conn:
+            print("The data is === " , data)
+            query1 = text(f"DELETE FROM teacher_notification WHERE title = '{data[1]}' AND notification_date = '{data[2]}' AND  details = '{data[3]}' AND (document_path = '{data[4]}' OR document_path IS NULL);")
+            cheek = conn.execute(query1)
+
+            query2 = text(f"DELETE FROM student_notification WHERE title = '{data[1]}' AND notification_date = '{data[2]}' AND  datails = '{data[3]}' AND (document_path = '{data[4]}' OR document_path IS NULL);")
+            cheek = conn.execute(query2)
+            
+            print("The dariy is delete for file")
+            print(data[4])
+            if data[4] != None:
+                os.remove(f"static/{data[4]}")
+            return cheek
+

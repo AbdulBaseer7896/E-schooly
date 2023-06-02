@@ -36,8 +36,9 @@ def teacher_dashboard():
 @login_required('principal')
 def principal_dashboard():
     # Functionality for teacher dashboard
+    data = request.args.get('data')
     flash(('Dear Principal Welcome to Iqra-E-School !!! You Successfull Login !!!' , 'principal_login'))
-    return render_template('principal_URLs/principal_dashboard.html')
+    return render_template('principal_URLs/principal_dashboard.html' , data = data)
 
 @app.route('/teacher_admin/dashboard')
 @login_required('teacher_admin')

@@ -1,17 +1,14 @@
-{% extends 'principal_URLs/principal_temp.html' %}
+{% extends 'teacher_URLs/teacher_temp.html' %}
 
 
 {% block title %}
-Principal | Delete Notification
+Teacher | Delete Notification
 {% endblock title %}
 
 {% block mainbody %}
 
 
-
-
-<h1> This is principal delete notification page</h1>
-
+<h1> This is teacher delete notification page</h1>
 
 
 
@@ -22,19 +19,15 @@ Principal | Delete Notification
             <div class="col-md-12">
                 <div class="card mb-3">
                     {% for item in notification_data %}
+
+                    {{item}}
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Notification For</h6>
-                            </div>
-                            <div class="col-sm-3 text-secondary">
-                                {{item[0]}}
-                            </div>
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Title</h6>
                             </div>
                             <div class="col-sm-3 text-secondary">
-                                {{item[1]}}
+                                {{item[0]}}
                             </div>
 
 
@@ -46,7 +39,7 @@ Principal | Delete Notification
                                 <h6 class="mb-0">Date </h6>
                             </div>
                             <div class="col-sm-3 text-secondary">
-                                {{item[2]}}
+                                {{item[1]}}
                             </div>
 
 
@@ -72,7 +65,7 @@ Principal | Delete Notification
                             </div>
                         </div>
                         <br>
-                        <form action="{{ url_for('delete_nofitication_principal' ) }} " method="post">
+                        <form action="{{ url_for('delete_notification_teacher' ) }} " method="post">
                             <input type="hidden" name="delete_notification" value= "{{ item }}">
                             <button type="submit">Delete</button>
                         </form>

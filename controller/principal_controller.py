@@ -3,6 +3,8 @@ from functools import wraps
 from flask import session
 from flask import redirect , url_for , render_template , request , flash
 from model.princiap_model import principal_models
+import ast
+from datetime import datetime, date
 
 obj = principal_models()
 
@@ -55,3 +57,21 @@ def send_principal_notification():
             return render_template('principal_URLs/principal_dashboard.html' , data = name)
         
 
+
+@app.route('/Principal/delete_nofitication_principal', methods=["GET", "POST"])
+@login_required('principal')
+def delete_nofitication_principal():
+    notification_data = obj.take_principal_notification_for_db_for_delete()
+    
+    if notification_data:
+        print("This is notification_data =", notification_data)
+        if request.method == 'GET':
+            return render_template('principal_URLs/delete_nofitication_principal.html', notification_data=notification_data)
+        if request.method == 'POST':
+            result = request.form.get('delete_notification')
+            result_dict = str(result) 
+            delete_notification = eval(result_dict)
+            obj.delete_selected_notification_form_data(delete_notification)
+            print("Now its endsss")
+            flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_principal'))
+            return render_template('principal_URLs/principal_dashboard.html')

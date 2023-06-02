@@ -272,8 +272,7 @@ class teacher_model():
                 print("This is the dairy of the student = " ,dairy)
                 print('Thisi sfjaisdjgi a= ' , data)
                 return dairy
-            #     print("No dairy found")
-            #     return False
+
             
     def delete_dariy_for_db_which_teacher_select(self , data):
         with self.engine.connect() as conn:
@@ -289,5 +288,53 @@ class teacher_model():
             return cheek
             
             
+    def take_teacher_notification_of_class_for_db_for_delete(self , data):
+        print("Now the data is is is = " ,data)
+        with self.engine.connect() as conn:
+            try:
+                query1 = text(f"SELECT class FROM teacher_information where name = '{data['email_login']}';")
+                class_name = conn.execute(query1).fetchall()            
+                print("The class name = ," , class_name[0][0])
+            except:
+                query1 = text(f"SELECT class FROM teacher_information where name = '{data[0][0]}';")
+                class_name = conn.execute(query1).fetchall()            
+                print("The class name = ," , class_name[0][0])
+                
+            query1 = text(f"SELECT * FROM student_notification where class_name = '{class_name[0][0]}' ORDER BY notification_date DESC;")
+            notification = conn.execute(query1).fetchall() 
+            print("This is student notification of class = = " , notification)
+            if notification:
+                formatted_notification = []
+                for entry in notification:
+                    title = entry[0]
+                    notification_date = entry[1].strftime('%Y-%m-%d')
+                    class_name = entry[2]
+                    datails = entry[3]
+                    document_path = entry[4]
+                    formatted_entry = (title, notification_date, class_name , datails, document_path)
+                    formatted_notification.append(formatted_entry)
+                print("This is the dairy of the student = ", formatted_notification)
+                return formatted_notification
+            else:
+                return False
             
-            #  ('javadmalikkhan-5-teacher@iqra.edu', 'Class 9', 'Urdu Book', 'Urdu Book 9 - 2', 'Introduction to Urdu 2', '2311', datetime.date(2023, 6, 2), 'https://blog.hubspot.com/website/html-text-box', 'documents/student_dairy_files/1685640339026172.pdf', 'This is just a testing of urdu book 9 part 2')
+            
+            
+            
+            
+            
+            
+            
+    def delete_selected_notification_form_data(self , data):
+        print("The data i s0485  = = ", data)
+        with self.engine.connect() as conn:
+            print("The data is === " , data)
+
+            query2 = text(f"DELETE FROM student_notification WHERE title = '{data[0]}' AND notification_date = '{data[1]}' AND  datails = '{data[3]}' AND (document_path = '{data[4]}' OR document_path IS NULL) and class_name = '{data[2]}';")
+            cheek = conn.execute(query2)
+            
+            print("The dariy is delete for file")
+            print(data[4])
+            if data[4] != None:
+                os.remove(f"static/{data[4]}")
+            return cheek

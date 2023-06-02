@@ -73,3 +73,29 @@ class teacher_admin_model():
             file.save(f"static/documents/{folder_name}/{new_filename}.{ext}")
             print("File uploaded successfully")
             return img_db_path
+        
+        
+    def take_techer_admin_notification_for_db_for_delete(self):
+        with self.engine.connect() as conn:
+            query1 = text(f"SELECT * FROM teacher_notification ORDER BY notification_date DESC;")
+            notification = conn.execute(query1).fetchall() 
+            if notification:
+                print("This is the dairy of the student = ", notification)
+                return notification
+            else:
+                return False
+            
+            
+    def delete_selected_notification_form_data(self , data):
+        print("The data i s0485  = = ", data)
+        with self.engine.connect() as conn:
+            print("The data is === " , data)
+            query1 = text(f"DELETE FROM teacher_notification WHERE title = '{data[0]}' AND notification_date = '{data[1]}' AND  details = '{data[2]}' AND (document_path = '{data[3]}' OR document_path IS NULL);")
+            cheek = conn.execute(query1)
+            
+            print("The dariy is delete for file")
+            print(data[3])
+            if data[3] != None:
+                os.remove(f"static/{data[3]}")
+            return cheek
+

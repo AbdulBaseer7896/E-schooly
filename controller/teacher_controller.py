@@ -211,7 +211,6 @@ def delete_dairy():
     data = request.args.get('data')
     result = str(data) 
     result_dict = eval(result)  # or use json.loads(result) for JSON parsing
-
     if request.method == "GET":
         dariy_data = obj.take_teacher_dariy_for_db_for_delete(result_dict)
         return render_template('teacher_URLs/delete_dairy.html', dariy_data=dariy_data, data=result_dict)
@@ -230,6 +229,26 @@ def delete_dairy():
     
 
 
-        
+@app.route('/teacher/delete_notification_teacher', methods=["GET", "POST"])
+@login_required('teacher')
+def delete_notification_teacher():
+    data = request.args.get('data')
+    result = str(data) 
+    result_dict = eval(result)
+    # print("This is teacher name" , result_dict['email_login'])
+
+    if request.method == 'GET':
+        notification_data = obj.take_teacher_notification_of_class_for_db_for_delete(result_dict)
+        print("This is notification_data =", notification_data)
+        return render_template('teacher_URLs/delete_notification_teacher.html', notification_data=notification_data , data = result_dict)
+    if request.method == 'POST':
+        result = request.form.get('delete_notification')
+        result_dict = str(result) 
+        delete_notification = eval(result_dict)
+        print("Teh delete not sdf  = = = = =ee3=  = " , delete_notification)
+        obj.delete_selected_notification_form_data(delete_notification)
+        print("Now its endsss")
+        flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_principal'))
+        return render_template('teacher_URLs/teacher_dashboard.html' ,  data = result_dict)        
         
         

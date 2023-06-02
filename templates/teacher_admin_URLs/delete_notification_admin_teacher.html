@@ -10,7 +10,7 @@ Principal | Delete Notification
 
 
 
-<h1> This is principal delete notification page</h1>
+<h1> This is teacher admin delete notification</h1>
 
 
 
@@ -25,54 +25,48 @@ Principal | Delete Notification
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-3">
-                                <h6 class="mb-0">Notification For</h6>
-                            </div>
-                            <div class="col-sm-3 text-secondary">
-                                {{item[0]}}
-                            </div>
-                            <div class="col-sm-3">
                                 <h6 class="mb-0">Title</h6>
                             </div>
                             <div class="col-sm-3 text-secondary">
-                                {{item[1]}}
+                                {{item[0]}}
                             </div>
 
 
 
                             <hr>
-                        </div>
-                        <div class="row">
+                            
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Date </h6>
                             </div>
                             <div class="col-sm-3 text-secondary">
-                                {{item[2]}}
+                                {{item[1]}}
                             </div>
-
-
+                            
+                            
                             <div class="col-sm-3">
                                 <h6 class="mb-0">Notification Documber </h6>
                             </div>
                             <div class="col-sm-3 text-secondary">
-                                {% if item[4] == None %}
+                                {% if item[3] == None %}
                                 <a href="#"> No Download File Attached</a>
                                 {% endif %}
-                                {% if item[4] != None %}
-                                <a href="/static/{{item[4]}} " download>Download File</a>
+                                {% if item[3] != None %}
+                                <a href="/static/{{item[3]}} " download>Download File</a>
                                 {% endif %}
                             </div>
                         </div>
+
                         <hr>
                         <div class="row">
                             <div class="col-sm-2">
                                 <h6 class="mb-0">Details</h6>
                             </div>
                             <div class="col-sm-4 text-secondary">
-                                {{item[3]}}
+                                {{item[2]}}
                             </div>
                         </div>
                         <br>
-                        <form action="{{ url_for('delete_nofitication_principal' ) }} " method="post">
+                        <form action="{{ url_for('delete_notification_admin_teacher' ) }} " method="post">
                             <input type="hidden" name="delete_notification" value= "{{ item }}">
                             <button type="submit">Delete</button>
                         </form>
