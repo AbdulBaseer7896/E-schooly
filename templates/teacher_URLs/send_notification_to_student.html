@@ -11,6 +11,8 @@ Teacher | Send Notification
 
 <div class=" container big-font">
     <form action="{{ url_for('send_notification_to_student') }}" method="post" enctype="multipart/form-data">
+
+        
         <br>
         <h1 style="text-align: center;">Send Notifications to Class {{teacher_class[0][0]}}</h1>
         <br>
@@ -56,9 +58,13 @@ Teacher | Send Notification
                 </div>
             </div>
         </div>
+        
 <!-- Its will not display . Its just for storing data in database -->
-        <input name="teacher_class" style="display: none;" value="{{teacher_class[0][0]}}" class="form-control" id="teacher_class"
+        <input name="teacher_class" style="display: none;" value="Class {{teacher_class[0][0]}}" class="form-control" id="teacher_class"
         aria-describedby="teacher_class" type="text">
+
+        <input name="email_login" style="display: none;" value="{{data['email_login']}}" class="form-control" id="email_login"
+        aria-describedby="email_login" type="text">
         
         <br>
         <input type="submit" class="btn btn-primary"></input>

@@ -154,15 +154,19 @@ def send_notification_to_student():
 
     elif request.method == "POST":
         data = request.form.to_dict()
+        print("Tijsi ojiasd joifjas ijg isaj = " , data)
         notification_file = request.files['notification_document']
-        folder_name = 'Notifications'
-        file_path = obj.stored_dariy_in_file_and_send_path_in_db(notification_file , folder_name)
-        if file_path:
+        if  notification_file.filename != '':
+            print("THis i jdf iosdj j s     *88888****  = "  ,notification_file )
+            folder_name = 'Notifications'
+            file_path = obj.stored_dariy_in_file_and_send_path_in_db(notification_file , folder_name)
+        else:
+            file_path = ''
             # print("The student name = " , dataa['])
             print("THis is image path as you see = " , file_path)
             obj.send_student_notification_to_db(data , file_path)
-            flash(('The Notification is send to All Student successfully !!!' ,'class_student_notification_done'))
-            return render_template('teacher_URLs/teacher_dashboard.html' ,data = result_dict)
+        flash(('The Notification is send to All Student successfully !!!' ,'class_student_notification_done'))
+        return render_template('teacher_URLs/teacher_dashboard.html' ,data = data)
     # return render_template('teacher_URLs/send_notification_to_student.html')
     
     
@@ -178,7 +182,11 @@ def upload_result():
         teacher_class = obj.take_teacher_class_form_db(result_dict)
         student_info = obj.take_class_student_id_form_db(teacher_class)
         class_subject = obj.take_class_subject_from_db(teacher_class)
-        return render_template('teacher_URLs/upload_result.html' , data = data ,class_subject= class_subject ,  teacher_class = teacher_class , student_info = student_info)
+        if student_info == None or class_subject == None or teacher_class == None:
+            flash(("In you class not student exist OR you are not a class teacher of any class" , 'no_student_for_upload_result'))
+            return render_template('teacher_URLs/teacher_dashboard.html' , data = data )
+        else:
+            return render_template('teacher_URLs/upload_result.html' , data = data ,class_subject= class_subject ,  teacher_class = teacher_class , student_info = student_info)
     elif request.method == "POST":
         student_restult = request.form.to_dict()
         result_type_data = (student_restult['restul_type'] , student_restult['date'], student_restult['subject_total_marks'])
@@ -235,20 +243,26 @@ def delete_notification_teacher():
     data = request.args.get('data')
     result = str(data) 
     result_dict = eval(result)
-    # print("This is teacher name" , result_dict['email_login'])
+    print("This is teacher name" , result_dict)
+    
 
     if request.method == 'GET':
         notification_data = obj.take_teacher_notification_of_class_for_db_for_delete(result_dict)
         print("This is notification_data =", notification_data)
-        return render_template('teacher_URLs/delete_notification_teacher.html', notification_data=notification_data , data = result_dict)
+        if notification_data == False:
+            flash(("You will Not send any Notification To you class !!!" , 'no_notification_send_by_teacher_to_student'))
+            return render_template('teacher_URLs/teacher_dashboard.html' ,  data = result_dict)   
+        else:
+            return render_template('teacher_URLs/delete_notification_teacher.html', notification_data=notification_data , data = result_dict)
     if request.method == 'POST':
         result = request.form.get('delete_notification')
+        email = request.form.to_dict()
         result_dict = str(result) 
         delete_notification = eval(result_dict)
         print("Teh delete not sdf  = = = = =ee3=  = " , delete_notification)
         obj.delete_selected_notification_form_data(delete_notification)
         print("Now its endsss")
         flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_principal'))
-        return render_template('teacher_URLs/teacher_dashboard.html' ,  data = result_dict)        
+        return render_template('teacher_URLs/teacher_dashboard.html' ,  data = email)        
         
         

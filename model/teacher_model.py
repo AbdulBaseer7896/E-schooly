@@ -95,6 +95,7 @@ class teacher_model():
                 return student_name
             else:
                 print("There are no student")
+                flash(("There is no student in you class Kinldy contact with Admin !!!" , 'no_student_in_teacher_attandance'))
                 return False
             
     def mark_student_attandance(self , student_marks):
@@ -125,16 +126,15 @@ class teacher_model():
         with self.engine.connect() as conn:
             query2 = text(f"SELECT total_teacher_attendance FROM  total_attendance WHERE teacher = 'teacher';")
             total = conn.execute(query2).fetchall() 
-                
-                # total_present =  
-            expression = f"((({total[0][0]} - {student_marks[0][16]})  / {total[0][0]})  * 100)"
-            perstange = round(eval(expression) , 2)
+            try:
+                expression = f"((({total[0][0]} - {student_marks[0][16]})  / {total[0][0]})  * 100)"
+                perstange = round(eval(expression) , 2)
+            except:
+                perstange = 0
                 
             print("This is the attandane  of the teacher = " , perstange)
             return perstange
         
-        print("The perstange is not found is not found")
-        return render_template('login.html')
     
     def take_notification_details(self):
         with self.engine.connect() as conn:
@@ -152,6 +152,7 @@ class teacher_model():
         
             
     def take_teacher_class_form_db(self , student_marks):
+        print("rijfi jsiadjfisjd ifjsdio j     = " , student_marks)
         with self.engine.connect() as conn:
             try:
                 query1 = text(f"SELECT class FROM  teacher_information WHERE name = '{student_marks[0][0]}';")
@@ -171,10 +172,18 @@ class teacher_model():
         
         
     def send_student_notification_to_db(self , data , file_path):
+        print("data iaj si jioasj oasjo jf os" , data)
         with self.engine.connect() as conn:
+            query1 = text(f"SELECT COUNT(*) FROM student_notification where class_name = '{data['teacher_class']}';")
+            total_rows = conn.execute(query1).fetchall()
+            print("This is toajf ajsdifjas " , total_rows)
+            if total_rows[0][0] > 11:
+                query2 = text(f"DELETE FROM student_notification WHERE notification_date = ( SELECT MIN(notification_date)   FROM (SELECT notification_date   FROM student_notification   WHERE class_name = '{data['teacher_class']}'    ORDER BY notification_date     LIMIT 1   ) AS subquery ) AND class_name = '{data['teacher_class']}';")
+                total_rows = conn.execute(query2)
+                
             print("The student_marks is = " ,data['titles'])
-            query1 = text(f"INSERT INTO student_notification VALUES ('{data['titles']}' , '{data['date']}' , '{data['teacher_class']}' , '{data['details']}' , '{file_path}');")
-            conn.execute(query1)
+            query3 = text(f"INSERT INTO student_notification VALUES ('{data['titles']}' , '{data['date']}' , '{data['teacher_class']}' , '{data['details']}' , '{file_path}');")
+            conn.execute(query3)
             print("The notification is send now")
             
             
@@ -300,7 +309,7 @@ class teacher_model():
                 class_name = conn.execute(query1).fetchall()            
                 print("The class name = ," , class_name[0][0])
                 
-            query1 = text(f"SELECT * FROM student_notification where class_name = '{class_name[0][0]}' ORDER BY notification_date DESC;")
+            query1 = text(f"SELECT * FROM student_notification where class_name = 'Class {class_name[0][0]}' ORDER BY notification_date DESC;")
             notification = conn.execute(query1).fetchall() 
             print("This is student notification of class = = " , notification)
             if notification:

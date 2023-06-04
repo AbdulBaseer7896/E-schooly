@@ -23,32 +23,52 @@ class school_admin_models():
         except:
             print("not work")
 
-    def student_admission_data(self, data , image_path):
+    def student_admission_data(self, data , image_path , student_id):
+        print("This is data ", student_id)
         with self.engine.connect() as conn:
-                query1 = text(f"SELECT COUNT(*)  From student_information WHERE class = '{data['student_class']}';")
-                count1 = conn.execute(query1).fetchall()
-
-                query2 = text(f"SELECT COUNT(*)  From student_information;")
-                count2 = conn.execute(query2).fetchall()
+                query_delete_email = text(f"DELETE FROM user_login_table WHERE user_name = '{student_id}' And user_type = 'student';")
                 
-                email = f"{data['student_name']}-{count1[0][0]+1}-{count2[0][0]+1}-{data['student_class']}@iqra.edu"
-                modified_email = email.replace("Class ", "").replace(" ", "").lower()
-                print("The email = " , modified_email)
-
-                
-                print("The user is alread exist = ")
-                query3 = text(f"DELETE FROM student_information WHERE name = '{data['student_name']}' or form_b = '{data['B_form_number']}';")
+                query3 = text(f"DELETE FROM student_information WHERE name = '{data['student_name']}' AND form_b = '{data['B_form_number']}';")
                 verify = conn.execute(query3)
                 print("The row is deleate")
-                query4 = text(f"INSERT INTO student_information VALUES ('{modified_email}', '{data['B_form_number']}', '{data['father_name']}', '{data['father_cinc']}', '{data['student_religion']}', '{data['student_gender']}', '{data['student_class']}', '{data['student_dob']}', '{image_path}', '{data['whatsApp_number']}', '{data['last_school_class']}', '{data['student_blood']}', '{data['Elective_subject']}', '{data['student_address']}', '{data['last_school']}', '{data['focacl_person']}', '{data['focacl_person_number']}' , '{count1[0][0]+1}' , '{data['student_name']}' , '{count2[0][0]+1}' , '0')")
+                
+                query1 = text(f"SELECT  MAX(CAST(student_roll_number AS UNSIGNED))From student_information WHERE class = '{data['student_class']}';")
+                roll_number_max = conn.execute(query1).fetchall()
+                query1 = text(f"SELECT COALESCE(MIN(t1.student_roll_number) + 1, MAX(t1.student_roll_number) + 1, 1) AS missing_or_max_number FROM (SELECT DISTINCT student_roll_number   FROM student_information   WHERE class = '{data['student_class']}' ) AS t1 LEFT JOIN (   SELECT DISTINCT student_roll_number   FROM student_information   WHERE class = '{data['student_class']}' ) AS t2 ON t1.student_roll_number + 1 = t2.student_roll_number WHERE t2.student_roll_number IS NULL;")
+                roll_number_missing = conn.execute(query1).fetchall()
+
+                query2 = text(f"SELECT MAX(CAST(student_registration_number AS UNSIGNED)) FROM student_information;")
+                registration_number_max = conn.execute(query2).fetchall()
+                query2 = text(f"SELECT COALESCE(MIN(t1.student_registration_number + 1), MAX(t1.student_registration_number) + 1, 1) AS missing_or_max_number FROM (SELECT DISTINCT CAST(student_registration_number AS UNSIGNED) AS student_registration_number   FROM student_information ) AS t1 LEFT JOIN ( SELECT DISTINCT CAST(student_registration_number AS UNSIGNED) AS student_registration_number   FROM student_information ) AS t2 ON t1.student_registration_number + 1 = t2.student_registration_number WHERE t2.student_registration_number IS NULL;")
+                registration_number_missing = conn.execute(query2).fetchall()
+                
+                if roll_number_max == roll_number_missing:
+                    roll_number_final = roll_number_max[0][0]
+                else:
+                    roll_number_final = roll_number_missing[0][0] -1
+
+                if registration_number_max == registration_number_missing:
+                    registration_number_final = registration_number_max[0][0]
+                else:
+                    registration_number_final = registration_number_missing[0][0] -1
+                
+                email = f"{data['student_name']}-{int(roll_number_final) +1}-{int(registration_number_final) + 1}-{data['student_class']}@iqra.edu"
+                modified_email = email.replace("Class ", "").replace(" ", "").lower()
+                print("The email = " , modified_email)
+                
+
+                query4 = text(f"INSERT INTO student_information VALUES ('{modified_email}', '{data['B_form_number']}', '{data['father_name']}', '{data['father_cinc']}', '{data['student_religion']}', '{data['student_gender']}', '{data['student_class']}', '{data['student_dob']}', '{image_path}', '{data['whatsApp_number']}', '{data['last_school_class']}', '{data['student_blood']}', '{data['Elective_subject']}', '{data['student_address']}', '{data['last_school']}', '{data['focacl_person']}', '{data['focacl_person_number']}' , '{roll_number_final +1}' , '{data['student_name']}' , '{registration_number_final +1}' , '0')")
                 verify = conn.execute(query4)
+
                 print("The row is update")
                 if verify:
                     print("username and password is insert in login table")
                     query5 = text(f"INSERT INTO user_login_table VALUES ('{modified_email}', '123', 'student');")
-                    conn.execute(query5)
-                # flash("you new student data is add successfully")
-        return render_template('school_admin_URLs/school_admin_dashboard.html')
+                    check = conn.execute(query5)
+                if check:
+                    conn.execute(query_delete_email)
+                    # flash("you new student data is add successfully")
+                return render_template('school_admin_URLs/school_admin_dashboard.html')
 
 
     def stored_image_in_file_and_send_path_in_db(self , file , folder_name):
@@ -86,31 +106,42 @@ class school_admin_models():
                 # return render_template('school_admin_URLs/school_admin_dashboard.html' , data = user)
                 
                 
-    def teacher_joining_information(self , data , image_path):
+    def teacher_joining_information(self , data , image_path , teacher_id):
         with self.engine.connect() as conn:
-            print("the data = " , data)
-            query1 = text(f"SELECT COUNT(*)  From teacher_information")
-            count1 = conn.execute(query1).fetchall()
+            query_delete_email = text(f"DELETE FROM user_login_table WHERE user_name = '{teacher_id}' And user_type = 'teacher';")
             
-            email = f"{data['teacher_name']}-{count1[0][0]+1}-teacher@iqra.edu"
+            print("the data = " , data)
+            query2 = text(f"DELETE FROM teacher_information WHERE name = '{data['teacher_name']}' or cnic_number = '{data['cnic_number']}';")
+            verify = conn.execute(query2)
+            print("The row is deleate")
+            
+            
+            query1 = text(f"SELECT  MAX(CAST(teacher_id AS UNSIGNED)) From teacher_information")
+            teacher_new_id_max = conn.execute(query1).fetchall()
+            query1 = text(f"SELECT COALESCE(MIN(t1.teacher_id + 1), MAX(t1.teacher_id) + 1, 1) AS missing_or_max_number FROM (   SELECT DISTINCT CAST(teacher_id AS UNSIGNED) AS teacher_id   FROM teacher_information ) AS t1 LEFT JOIN (   SELECT DISTINCT CAST(teacher_id AS UNSIGNED) AS teacher_id   FROM teacher_information ) AS t2 ON t1.teacher_id + 1 = t2.teacher_id WHERE t2.teacher_id IS NULL;")
+            teacher_new_id_missing = conn.execute(query1).fetchall()
+            
+            if teacher_new_id_max == teacher_new_id_missing:
+                teacher_id_final = teacher_new_id_max[0][0]
+            else:
+                teacher_id_final = teacher_new_id_missing[0][0] -1
+            print("This is ighuoas h finsodhg o 989879  = " , teacher_id_final)
+            email = f"{data['teacher_name']}-{teacher_id_final +1}-teacher@iqra.edu"
             modified_email = email.replace("Class ", "").replace(" ", "").lower()
             print("The email = " , modified_email)
             print("The user is alread exist = ")
-            query3 = text(f"DELETE FROM teacher_information WHERE name = '{data['teacher_name']}' or cnic_number = '{data['cnic_number']}';")
+            query3 = text(f"INSERT INTO teacher_information VALUES ('{modified_email}', '{data['cnic_number']}', '{data['father_name']}', '{data['father_cinc']}', '{data['teacher_religion']}', '{data['teacher_gender']}', '{data['teaching_class']}', '{data['teacher_dob']}', '{image_path}', '{data['whatsApp_number']}', '{data['teacher_blood']}', '{data['teacher_address']}', '{data['specilized_subject']}', '{data['last_school']}' , '{data['teacher_name']}' , '{teacher_id_final + 1}' , '0' );")
             verify = conn.execute(query3)
-            print("The row is deleate")
-            query4 = text(f"INSERT INTO teacher_information VALUES ('{modified_email}', '{data['cnic_number']}', '{data['father_name']}', '{data['father_cinc']}', '{data['teacher_religion']}', '{data['teacher_gender']}', '{data['teaching_class']}', '{data['teacher_dob']}', '{image_path}', '{data['whatsApp_number']}', '{data['teacher_blood']}', '{data['teacher_address']}', '{data['specilized_subject']}', '{data['last_school']}' , '{data['teacher_name']}' , '{count1[0][0]+1}' , '0' );")
-            verify = conn.execute(query4)
-            print("The row is update")
+            print("The row is update . . . " , modified_email)
             if verify:
                     print("username and password is insert in login table")
-                    query5 = text(f"INSERT INTO user_login_table VALUES ('{modified_email}', '123', 'teacher');")
-                    conn.execute(query5)
-                    return True
-
-            flash("you new student data is add successfully")
+                    query4 = text(f"INSERT INTO user_login_table VALUES ('{modified_email}', '123', 'teacher');")
+                    cheek = conn.execute(query4)
+            if cheek:
+                conn.execute(query_delete_email)
+                return True
             return render_template('school_admin_URLs/school_admin_dashboard.html')
-            
+
             
         
         

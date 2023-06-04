@@ -24,10 +24,12 @@ def student_admission():
     data = [('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')]
     if request.method == "GET":
         # flash("Welcome to the website!", "success")
+        print("Thisj ofiasj ofjsdi oif  &&&&&&& = " ,data)
         return render_template("school_admin_URLs/student_admission.html" ,  data = data )
     
     elif request.method == 'POST':
         dataa = request.form.to_dict()
+        student_id_for_updatae = dataa['student_email']
         # image_name = dataa['student_image']
         image_file = request.files['student_image']
         folder_name = 'admission_student_images'
@@ -35,7 +37,7 @@ def student_admission():
         if image_path:
             # print("The student name = " , dataa['])
             print("THis is image path as you see = " , image_path)
-            obj.student_admission_data(dataa , image_path )
+            obj.student_admission_data(dataa , image_path , student_id_for_updatae )
             flash(('New Student Information Upload Successfully !!!' , 'student_admission_done'))
             return render_template("school_admin_URLs/student_admission.html" ,  data = data )
 
@@ -68,6 +70,7 @@ def teacher_joining_information():
     
     elif request.method == 'POST':
         dataa = request.form.to_dict()
+        teacher_id_for_update = dataa['teacher_id']
         
         image_file = request.files['teacher_image']
         folder_name = 'jonning_teacher_images'
@@ -75,7 +78,7 @@ def teacher_joining_information():
         if image_path:
             # print("The student name = " , dataa['])
             print("THis is image path as you see = " , image_path)
-            obj.teacher_joining_information(dataa ,image_path)
+            obj.teacher_joining_information(dataa ,image_path , teacher_id_for_update)
         flash(('New Teacher Information Upload Successfully !!!' , 'teacher_information_upload'))
         return render_template("school_admin_URLs/teacher_joining.html" ,  data = data)
 

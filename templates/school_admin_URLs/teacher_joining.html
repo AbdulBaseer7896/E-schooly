@@ -35,7 +35,7 @@ school Admin | Teacher Joning
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="teacher_name" class="form-label">Enter Teacher Name (As per CNIC)</label>
-                    <input name="teacher_name" value="{{data[0][0]}}" type="text" class="form-control" id="teacher_name"
+                    <input name="teacher_name" value="{{data[0][14]}}" type="text" class="form-control" id="teacher_name"
                         aria-describedby="teacher_name">
                 </div>
             </div>
@@ -228,7 +228,11 @@ school Admin | Teacher Joning
                 aria-describedby="last_school">
         </div>
 
-
+        <div style="display: none;">
+            <label for="teacher_id" class="form-label">This is student email</label>
+            <input name="teacher_id" value="{{data[0][0]}}" type="text" class="form-control" id="teacher_id"
+            aria-describedby="teacher_id">        
+        </div>
         
         
         <br>

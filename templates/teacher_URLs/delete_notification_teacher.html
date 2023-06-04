@@ -11,7 +11,6 @@ Teacher | Delete Notification
 <h1> This is teacher delete notification page</h1>
 
 
-
 <div class="container">
     <div class="main-body">
         <div class="row gutters-sm">
@@ -50,6 +49,9 @@ Teacher | Delete Notification
                                 {% if item[4] == None %}
                                 <a href="#"> No Download File Attached</a>
                                 {% endif %}
+                                {% if item[4] == '' %}
+                                <a href="#"> No Download File Attached</a>
+                                {% endif %}
                                 {% if item[4] != None %}
                                 <a href="/static/{{item[4]}} " download>Download File</a>
                                 {% endif %}
@@ -67,6 +69,9 @@ Teacher | Delete Notification
                         <br>
                         <form action="{{ url_for('delete_notification_teacher' ) }} " method="post">
                             <input type="hidden" name="delete_notification" value= "{{ item }}">
+
+                            <input name="email_login" style="display: none;" value="{{data['email_login']}}" class="form-control" id="email_login"
+                            aria-describedby="email_login" type="text">
                             <button type="submit">Delete</button>
                         </form>
                         <br>

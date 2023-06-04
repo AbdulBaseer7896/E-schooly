@@ -9,11 +9,16 @@ Teacher | Delete Dairy
 
 
 
-<h1> This is Teacher delete dariy page</h1>
+<h1> This is Teacher delete dariy pagesss</h1>
 
+
+{% if dariy_data == [] %}
+    <h1>You will not upload any dairy... Kindly send the dariy !!!</h1>
+{% endif %}
 
 
 <div class="container">
+    
     {% for item in dariy_data %}  
 
     <div class="main-body">

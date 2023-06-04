@@ -1,58 +1,51 @@
 {% extends 'teacher_URLs/teacher_temp.html' %}
 
-
 {% block title %}
 Teacher | Upload Dairy
 {% endblock title %}
 
 {% block mainbody %}
-
-<div class=" container big-font" >
+<div class="container big-font">
     <form action="{{ url_for('upload_dairy') }}" method="post">
         <br>
         <h1 style="text-align: center;">Kindly Select the Class and Period</h1>
         <br>
         <div>
-            <label for="teacher_class" class="form-label">Select You Class</label>
-            <!-- <input name="teacher_class" type="email" class="form-control" id="teacher_class" aria-describedby="teacher_class"> -->
+            <label for="teacher_class" class="form-label">Select Your Class</label>
             <select name="teacher_class" id="teacher_class" class="form-select" aria-label="Default select example">
                 <option selected disabled>Select your class type</option>
                 {% for item in data %}
                     <option value="{{ item[1] }}">{{ item[1] }}</option>
                 {% endfor %}
             </select>
-
-
         </div>
 
         <br><br>
 
         <div>
-            <label for="teacher_period" class="form-label">Select You Period</label>
-            <!-- <input name="student_class" type="email" class="form-control" id="student_class" aria-describedby="student_class"> -->
+            <label for="teacher_period" class="form-label">Select Your Period</label>
             <select name="teacher_period" id="teacher_period" class="form-select" aria-label="Default select example">
                 <option selected disabled>Select your period</option>
                 {% for item in data %}
                     <option value='{{ item[2] }}'>{{ item[2] }}</option>
                 {% endfor %}
             </select>
-
         </div>
 
         <div style="display: none;">
             {% for item in data %}
-        <input name='teacher_mail' value="{{ item[0] }}" type="text" class="form-control" id="teacher_mail" aria-describedby="student_class">
-        {% endfor %}
+                <input name='teacher_mail' value="{{ item[0] }}" type="text" class="form-control" id="teacher_mail" aria-describedby="student_class">
+            {% endfor %}
         </div>
 
         <br>
         <input type="submit" class="btn btn-primary"></input>
-
-        <br>
     </form>
-    </div>
     <br>
-
-
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
+</div>
 {% endblock mainbody %}
+
+{% block extra_scripts %}
+<!-- Additional scripts specific to teacher_dairy.html can be added here -->
+{% endblock %}

@@ -66,6 +66,38 @@ Teacher | HOME
                     </button>
                 </h4>
             </div>
+            {% elif category == 'no_student_in_teacher_attandance' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading">{{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> 
+                </h4>
+            </div>
+            {% elif category == 'no_notification_send_by_teacher_to_student' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading">{{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> 
+                </h4>
+            </div>
+            {% elif category == 'no_student_for_upload_result' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading">{{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> 
+                </h4>
+            </div>
+            {% elif category == 'delete_notification_principal' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading">{{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> 
+                </h4>
+            </div>
         {% endif %}
         {% endfor %}
     {% endif %}
