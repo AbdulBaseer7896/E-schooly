@@ -134,4 +134,13 @@ class principal_models():
             if data[4] != None:
                 os.remove(f"static/{data[4]}")
             return cheek
+        
+        
 
+    def take_teacher_period_data_for_db(self):
+        print("The data   = = infoaosig hoa")
+        with self.engine.connect() as conn:
+            query1 = text(f"SELECT class_name ,  teacher_name , period_name FROM  teacher_class_period order by class_name desc;")
+            period_data = conn.execute(query1).fetchall() 
+            print("This is very important data  = = = =  = " , period_data)
+            return period_data

@@ -5,6 +5,7 @@ from flask import redirect , url_for , render_template , request , flash
 from model.princiap_model import principal_models
 import ast
 from datetime import datetime, date
+from collections import defaultdict
 
 obj = principal_models()
 
@@ -75,3 +76,21 @@ def delete_nofitication_principal():
             print("Now its endsss")
             flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_principal'))
             return render_template('principal_URLs/principal_dashboard.html')
+        
+        
+@app.route('/Principal/teacher_period_data', methods=["GET", "POST"])
+@login_required('principal')
+def teacher_period_data():
+    teacher_period_data = obj.take_teacher_period_data_for_db()
+    
+    if teacher_period_data:
+        print("This is notification_data =", teacher_period_data)
+        
+        grouped_data = defaultdict(list)
+        for class_data in teacher_period_data:
+            class_name = class_data[0]
+            grouped_data[class_name].append(class_data)
+
+        teacher_period_data_grouped = list(grouped_data.values())
+    if request.method == 'GET':
+            return render_template('principal_URLs/teacher_period_data.html' , teacher_period_data_grouped = teacher_period_data_grouped)

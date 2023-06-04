@@ -1,0 +1,34 @@
+{% extends 'principal_URLs/principal_temp.html' %}
+
+{% block title %}
+Principal | Teacher Periods
+{% endblock title %}
+
+{% block mainbody %}
+
+<h1>This is the principal teacher periods page</h1>
+{% for class_data in teacher_period_data_grouped %}
+  <table class="table table-bordered container">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" colspan="3" style="text-align: center;">{{ class_data[0][0] }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th style="width: 50%;">Subject</th>
+        <th colspan="2" style="width: 50%;">Teacher Name</th>
+      </tr>
+      {% for period in class_data %}
+        <tr>
+          <td style="width: 50%;">{{ period[2] }}</td>
+          <td colspan="2" style="width: 50%;">{{ period[1] }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endfor %}
+
+
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
+{% endblock mainbody %}
