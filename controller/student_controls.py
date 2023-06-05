@@ -117,6 +117,6 @@ def student_result():
             'Total': score,
             'students': value
         }
-
+        # its 
     return render_template('student_URLs/student_result.html', result_data=result_data, data=data,
                            grouped_data=updated_grouped_data, combined_data=combined_data)
