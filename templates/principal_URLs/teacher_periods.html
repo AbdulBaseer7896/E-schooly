@@ -24,8 +24,8 @@ Principal | Teacher-Periods
                         <!-- aria-describedby="teacher_name"> -->
 
                     <select name="teacher_name" value="" id="teacher_name" class="form-select"
-                        aria-label="Default select example">
-                        <option value='' name="teacher_name" > Select your class Type </option>
+                        aria-label="Default select example" required>
+                        <option value='' disabled selected hidden > Select your class Type </option>
                         {% for i in data %}
                         <option value='{{i[0]}}' name="teacher_name">{{i[1]}}&nbsp; &nbsp; &nbsp;ID: {{i[2]}}</option>
                         {% endfor %}

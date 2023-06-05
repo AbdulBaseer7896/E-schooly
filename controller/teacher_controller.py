@@ -154,10 +154,8 @@ def send_notification_to_student():
 
     elif request.method == "POST":
         data = request.form.to_dict()
-        print("Tijsi ojiasd joifjas ijg isaj = " , data)
         notification_file = request.files['notification_document']
         if  notification_file.filename != '':
-            print("THis i jdf iosdj j s     *88888****  = "  ,notification_file )
             folder_name = 'Notifications'
             file_path = obj.stored_dariy_in_file_and_send_path_in_db(notification_file , folder_name)
         else:

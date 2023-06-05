@@ -1,8 +1,8 @@
-{% extends 'principal_URLs/principal_temp.html' %}
+{% extends 'teacher_admin_URLs/teacher_admin_temp.html' %}
 
 
 {% block title %}
-Principal | Delete Notification
+Teacher Admin | Delete Notification
 {% endblock title %}
 
 {% block mainbody %}
@@ -47,10 +47,10 @@ Principal | Delete Notification
                                 <h6 class="mb-0">Notification Documber </h6>
                             </div>
                             <div class="col-sm-3 text-secondary">
-                                {% if item[3] == None %}
+                                {% if item[3] == None or item[3] == "" %}
                                 <a href="#"> No Download File Attached</a>
                                 {% endif %}
-                                {% if item[3] != None %}
+                                {% if item[3] != None and item[3] != "" %}
                                 <a href="/static/{{item[3]}} " download>Download File</a>
                                 {% endif %}
                             </div>

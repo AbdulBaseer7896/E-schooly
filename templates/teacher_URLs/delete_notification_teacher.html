@@ -46,13 +46,11 @@ Teacher | Delete Notification
                                 <h6 class="mb-0">Notification Documber </h6>
                             </div>
                             <div class="col-sm-3 text-secondary">
-                                {% if item[4] == None %}
+                                {% if item[4] == None or item[4] == "" %}
                                 <a href="#"> No Download File Attached</a>
                                 {% endif %}
-                                {% if item[4] == '' %}
-                                <a href="#"> No Download File Attached</a>
-                                {% endif %}
-                                {% if item[4] != None %}
+                                
+                                {% if item[4] != None and item[4] != "" %}
                                 <a href="/static/{{item[4]}} " download>Download File</a>
                                 {% endif %}
                             </div>

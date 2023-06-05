@@ -21,8 +21,8 @@ Principal | Send Notification
             <div class="col-md-3">
                 <div class="mb-3">
                     <label for="titles" class="form-label">Title of Notification</label>
-                    <input name="titles"  value="" type="text" class="form-control" id="titles"
-                        aria-describedby="titles" >
+                    <input name="titles" placeholder="Tomorrow school will be closed"  type="text" class="form-control" id="titles"
+                        aria-describedby="titles" maxlength="70" minlength="5" required>
                 </div>
             </div>
 
@@ -30,7 +30,8 @@ Principal | Send Notification
                 <div class="mb-3">
                     <label for="target_audience" class="form-label">Select Target Audience</label>
                     <select name="target_audience" value="" id="target_audience" class="form-select"
-                        aria-label="Default select example">
+                        aria-label="Default select example" required>
+                        <option value='' disabled selected hidden >Select the Audience</option>
                         <option value='both' name="both" > Teacher/Student Both </option>
                         <option value='teacher' name="teacher">Teacher</option>
                         <option value='student' name="student">Students</option>
@@ -51,7 +52,7 @@ Principal | Send Notification
                 <div class="mb-3">
                     <label for="date" class="form-label">Date</label>
                     <input name="date" value="" class="form-control" id="date"
-                        aria-describedby="date" type="date">
+                        aria-describedby="date" type="date" required>
                 </div>
 
             </div>
@@ -66,8 +67,8 @@ Principal | Send Notification
                     <label for="details" class="form-label">Write the details of Notification</label>
                     <!-- <input name="details"  type="text" class="form-control" id="details"
                         aria-describedby="details" > -->
-                    <textarea name="details" type="text" class="form-control" id="details"
-                        aria-describedby="details" rows="4" cols="50">Type some thing</textarea>
+                    <textarea name="details" type="text"  placeholder="Type some details thing about Notification" class="form-control" id="details"
+                        aria-describedby="details" rows="4" cols="50" required></textarea>
                 </div>
             </div>
         </div>

@@ -8,19 +8,19 @@ school Admin | Student Admission
 {% block mainbody %}
 
 {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for message, category in messages %}
-            {% if category == 'student_admission_done' %}
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">{{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </h4>
-                </div>
-            {% endif %} 
-        {% endfor %}
-    {% endif %}
+{% if messages %}
+{% for message, category in messages %}
+{% if category == 'student_admission_done' %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <h4 class="alert-heading">{{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </h4>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
 {% endwith %}
 
 
@@ -36,20 +36,20 @@ school Admin | Student Admission
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="student_name" class="form-label">Enter Student Name (As per B-Form)</label>
-                    <input name="student_name" value="{{data[0][18]}}" type="text" class="form-control" id="student_name"
-                        aria-describedby="student_name" >
+                    <input name="student_name" placeholder="Abdul Baseer" value="{{data[0][18]}}" type="text"
+                        class="form-control" id="student_name" aria-describedby="student_name" maxlength="35" minlength="3" required>
                 </div>
             </div>
             <div class="col-md-6">
 
 
-                <!-- Form B number of student -->
-                <div class="mb-3">
-                    <label for="B_form_number" class="form-label">Enter Student B-Form Number</label>
-                    <input name="B_form_number" value="{{data[0][1]}}" class="form-control" id="B_form_number" aria-describedby="B_form_number"
-                        type="text" maxlength="13" data-inputmask="'mask': '99999-9999999-9'"
-                        placeholder="XXXXX-XXXXXXX-X" >
-                </div>
+<!-- Form B number of student -->
+<div class="mb-3">
+    <label for="B_form_number" class="form-label">Enter Student B-Form Number</label>
+    <input name="B_form_number" value="{{data[0][1]}}" class="form-control" id="B_form_number"
+        aria-describedby="B_form_number" type="number" maxlength="13" minlength="13" placeholder="XXXXX-XXXXXXX-X" required>
+</div>
+
 
             </div>
         </div>
@@ -61,8 +61,8 @@ school Admin | Student Admission
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="father_name" class="form-label">Enter the Father name</label>
-                    <input name="father_name" value="{{data[0][2]}}" type="text" class="form-control" id="father_name"
-                        aria-describedby="father_name">
+                    <input name="father_name" value="{{data[0][2]}}" type="text" maxlength="35" minlength="3" class="form-control" id="father_name"
+                        aria-describedby="father_name"  required>
                 </div>
             </div>
             <div class="col-md-6">
@@ -70,9 +70,9 @@ school Admin | Student Admission
                 <div class="mb-3">
                     <label for="father_cinc" class="form-label">Enter the Father CNIC Number (As per Student
                         B-Form)</label>
-                    <input name="father_cinc" value="{{data[0][3]}}" type="text" class="form-control" id="father_cinc"
-                        aria-describedby="father_cinc" maxlength="13" data-inputmask="'mask': '99999-9999999-9'"
-                        placeholder="XXXXX-XXXXXXX-X" >
+                    <input name="father_cinc" value="{{data[0][3]}}" type="number" class="form-control" id="father_cinc"
+                        aria-describedby="father_cinc" maxlength="13" minlength="13" data-inputmask="'mask': '99999-9999999-9'"
+                        placeholder="XXXXX-XXXXXXX-X" required>
                 </div>
 
             </div>
@@ -87,8 +87,8 @@ school Admin | Student Admission
                     <!-- <input name="student_religion" type="email" class="form-control" id="student_religion" aria-describedby="student_religion"> -->
                     <div>
                         <select name="student_religion" value="{{data[0][4]}}" id="usertypes" class="form-select"
-                            aria-label="Default select example">
-                            <option selected> Select your Religion Type </option>
+                            aria-label="Default select example" required>
+                            <option value="" disabled selected hidden> Select your Religion Type </option>
                             <option value='Muslim' name="student_religion">Muslim</option>
                             <option value='Christian' name="">Christian</option>
                             <option value='Other' name="">Other</option>
@@ -105,8 +105,8 @@ school Admin | Student Admission
                     <!-- <input name="student_gender" type="email" class="form-control" id="student_gender" aria-describedby="student_gender"> -->
                     <div>
                         <select name="student_gender" value="{{data[0][5]}}" id="usertypes" class="form-select"
-                            aria-label="Default select example">
-                            <option selected> Select your Gender Type </option>
+                            aria-label="Default select example" required>
+                            <option value=""  disabled selected hidden> Select your Gender Type </option>
                             <option value='Male' name="student_gender">Male</option>
                             <option value='Female' name="student_gender">Female</option>
                             <option value='Other' name="student_gender">Other</option>
@@ -125,8 +125,8 @@ school Admin | Student Admission
                     <label for="student_class" class="form-label">Select Studet Class</label>
                     <!-- <input name="student_class" type="email" class="form-control" id="student_class" aria-describedby="student_class"> -->
                     <select name="student_class" value="{{data[0][6]}}" id="student_class" class="form-select"
-                        aria-label="Default select example">
-                        <option selected> Select your class Type </option>
+                        aria-label="Default select example" required>
+                        <option value=""  disabled selected hidden> Select your class Type </option>
                         <option value='pg' name="student_class">Play Group</option>
                         <option value='perp' name="student_class">Class Prep</option>
                         <option value='kg' name="student_class">Class KG</option>
@@ -154,7 +154,7 @@ school Admin | Student Admission
                 <div class="mb-3">
                     <label for="student_dob" class="form-label">Enter the Student Date of Birth</label>
                     <input name="student_dob" value="{{data[0][7]}}" type="date" class="form-control" id="student_dob"
-                        aria-describedby="student_dob">
+                        aria-describedby="student_dob" required>
                 </div>
 
 
@@ -165,20 +165,20 @@ school Admin | Student Admission
 
 
         <!-- Student Picture -->
-        <div class="row">            
-        <div class="col-md-3">
-            <div class="mb-3">
-                <label  class="form-label">Student Image</label>
-                <input name="student_image"  type="file" class="form-control" >
+        <div class="row">
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label class="form-label">Student Image</label>
+                    <input name="student_image" type="file" class="form-control">
+                </div>
             </div>
-        </div>
 
-        <!-- WhatsApp number of student -->
+            <!-- WhatsApp number of student -->
             <div class="col-md-3">
                 <div class="mb-3">
                     <label for="whatsApp_number" class="form-label">Enter WhatsApp Number</label>
                     <input name="whatsApp_number" value="{{data[0][9]}}" class="form-control" id="whatsApp_number"
-                        aria-describedby="whatsApp_number" type="text" maxlength="11"
+                        aria-describedby="whatsApp_number" type="number" maxlength="11" minlength="10"
                         data-inputmask="'mask': '0300-000000-0'" placeholder="03XX-XXXXXX-X" required>
                 </div>
 
@@ -190,8 +190,8 @@ school Admin | Student Admission
                     <label for="last_school_class" class="form-label">Enter the Class in which lasts studying</label>
                     <!-- <input name="last_school_class" type="email" class="form-control" id="last_school_class" aria-describedby="last_school_class"> -->
                     <select name="last_school_class" value="{{data[0][10]}}" id="last_school_class" class="form-select"
-                        aria-label="Default select example">
-                        <option selected> Select your class Type </option>
+                        aria-label="Default select example" required>
+                        <option value=""  disabled selected hidden> Select your class Type </option>
                         <option value='pg' name="last_school_class">Play Group</option>
                         <option value='perp' name="last_school_class">Class Prep</option>
                         <option value='kg' name="last_school_class">Class KG</option>
@@ -211,11 +211,6 @@ school Admin | Student Admission
                 </div>
 
 
-                <!--    class in which now seeks admission
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input name="email_login" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div> -->
 
             </div>
             <div class="col-md-3">
@@ -227,7 +222,7 @@ school Admin | Student Admission
 
                     <select name="student_blood" value="{{data[0][11]}}" id="student_blood" class="form-select"
                         aria-label="Default select example">
-                        <option selected> Select your Blood Group Type </option>
+                        <option value=""  disabled selected hidden> Select your Blood Group Type </option>
                         <option value='A+' name="last_school_class">A RhD positive (A+)</option>
                         <option value='A-' name="last_school_class">A RhD negative (A-)</option>
                         <option value='B+' name="last_school_class">B RhD positive (B+)</option>
@@ -246,24 +241,25 @@ school Admin | Student Admission
 
         <!-- Elective subjects -->
         <div class="mb-3">
-            <label for="Elective_subject" class="form-label">Enter the Elective subjects</label>
-            <input name="Elective_subject" value="{{data[0][12]}}" type="text" class="form-control" id="Elective_subject"
-                aria-describedby="Elective_subject">
+            <label for="Elective_subject"  class="form-label">Enter the Elective subjects</label>
+            <input name="Elective_subject" placeholder="Math Physicas Chemistry Computer"  value="{{data[0][12]}}" type="text" class="form-control"
+                id="Elective_subject" aria-describedby="Elective_subject" maxlength="100" minlength="4">
         </div>
 
         <!-- Address of student  -->
         <div class="mb-3">
             <label for="student_address"  class="form-label">Enter student Home address</label>
-            <input name="student_address" value="{{data[0][13]}}" type="text" class="form-control" id="student_address"
-                aria-describedby="student_address">
+            <input name="student_address" value="{{data[0][13]}}"   placeholder="Mohalla Awaisia Town, Pindi Gheb - Attock Rd, Pindigheb, Attock, Punjab , Pakistan" type="text" class="form-control" id="student_address"
+                aria-describedby="student_address" maxlength="80" minlength="10" required>
         </div>
 
         <!-- Last school attended -->
         <div class="mb-3">
-            <label for="last_school" class="form-label">Enter the last school Attended by student</label>
-            <input name="last_school"value="{{data[0][14]}}" type="text" class="form-control" id="last_school" aria-describedby="last_school">
+            <label for="last_school"class="form-label">Enter the last school Attended by student</label>
+            <input name="last_school" value="{{data[0][14]}}"  placeholder="Iqra Education System Pindi Gheb"  type="text" class="form-control" id="last_school"
+                aria-describedby="last_school" maxlength="50" minlength="5" required>
         </div>
-        
+
 
         <!-- Focacl Persons -->
 
@@ -272,8 +268,8 @@ school Admin | Student Admission
 
                 <div class="mb-3">
                     <label for="focacl_person" class="form-label">Enter the name of Focacl Person</label>
-                    <input name="focacl_person" value="{{data[0][15]}}" type="text" class="form-control" id="focacl_person"
-                        aria-describedby="focacl_person">
+                    <input name="focacl_person" value="{{data[0][15]}}" type="text" class="form-control"
+                        id="focacl_person" aria-describedby="focacl_person" maxlength="35" minlength="3" required>
                 </div>
 
                 <!-- Focacl person number -->
@@ -281,27 +277,27 @@ school Admin | Student Admission
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="focacl_person_number" class="form-label">Enter Phone Number of Focacl person</label>
-                    <input name="focacl_person_number" value="{{data[0][16]}}" class="form-control" id="focacl_person_number"
-                        aria-describedby="focacl_person_number" type="text" maxlength="11"
+                    <input name="focacl_person_number" value="{{data[0][16]}}" class="form-control"
+                        id="focacl_person_number" aria-describedby="focacl_person_number" type="number" maxlength="11" minlength="10"
                         data-inputmask="'mask': '0300-000000-0'" placeholder="03XX-XXXXXX-X" required>
                 </div>
 
             </div>
         </div>
-        
+
         <div style="display: none;">
             <label for="student_email" class="form-label">This is student email</label>
             <input name="student_email" value="{{data[0][0]}}" type="text" class="form-control" id="student_email"
-            aria-describedby="student_email">        
+                aria-describedby="student_email">
         </div>
-    </div>
-        <br>
-        <input type="submit" class="btn btn-primary"></input>
+</div>
+<br>
+<input type="submit" class="btn btn-primary"></input>
 
-        <br>
-        <br><br>
-        <!-- <a href="{{ url_for('forget_password') }}">Forget Password</a> -->
-    </form>
+<br>
+<br><br>
+<!-- <a href="{{ url_for('forget_password') }}">Forget Password</a> -->
+</form>
 </div>
 <br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

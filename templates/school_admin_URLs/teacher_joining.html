@@ -34,9 +34,9 @@ school Admin | Teacher Joning
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-3">
-                    <label for="teacher_name" class="form-label">Enter Teacher Name (As per CNIC)</label>
-                    <input name="teacher_name" value="{{data[0][14]}}" type="text" class="form-control" id="teacher_name"
-                        aria-describedby="teacher_name">
+                    <label for="teacher_name"  class="form-label">Enter Teacher Name (As per CNIC)</label>
+                    <input name="teacher_name" placeholder="Abdul Baseer" value="{{data[0][14]}}" type="text" class="form-control" id="teacher_name"
+                        aria-describedby="teacher_name" maxlength="35" minlength="3" required>
                 </div>
             </div>
             <div class="col-md-6">
@@ -46,8 +46,8 @@ school Admin | Teacher Joning
                 <div class="mb-3">
                     <label for="cnic_number" class="form-label">Enter Teacher CNIC Number</label>
                     <input name="cnic_number" value="{{data[0][1]}}" class="form-control" id="cnic_number"
-                        aria-describedby="cnic_number" type="text" maxlength="13"
-                        data-inputmask="'mask': '99999-9999999-9'" placeholder="XXXXX-XXXXXXX-X">
+                        aria-describedby="cnic_number" type="text" maxlength="13" minlength="13"
+                        data-inputmask="'mask': '99999-9999999-9'" placeholder="XXXXX-XXXXXXX-X" required>
                 </div>
 
             </div>
@@ -61,7 +61,7 @@ school Admin | Teacher Joning
                 <div class="mb-3">
                     <label for="father_name" class="form-label">Enter the Father name</label>
                     <input name="father_name" value="{{data[0][2]}}" type="text" class="form-control" id="father_name"
-                        aria-describedby="father_name">
+                        aria-describedby="father_name"  maxlength="35" minlength="3" required>
                 </div>
             </div>
             <div class="col-md-6">
@@ -70,8 +70,8 @@ school Admin | Teacher Joning
                     <label for="father_cinc" class="form-label">Enter the Father CNIC Number (As per Student
                         B-Form)</label>
                     <input name="father_cinc" value="{{data[0][3]}}" type="text" class="form-control" id="father_cinc"
-                        aria-describedby="father_cinc" maxlength="13" data-inputmask="'mask': '99999-9999999-9'"
-                        placeholder="XXXXX-XXXXXXX-X">
+                        aria-describedby="father_cinc" maxlength="13" minlength="13" data-inputmask="'mask': '99999-9999999-9'"
+                        placeholder="XXXXX-XXXXXXX-X" required>
                 </div>
 
             </div>
@@ -86,8 +86,8 @@ school Admin | Teacher Joning
                     <!-- <input name="teacher_religion" type="email" class="form-control" id="teacher_religion" aria-describedby="teacher_religion"> -->
                     <div>
                         <select name="teacher_religion" value="{{data[0][4]}}" id="usertypes" class="form-select"
-                            aria-label="Default select example">
-                            <option selected> Select your Religion Type </option>
+                            aria-label="Default select example" required>
+                            <option value="" disabled selected hidden> Select your Religion Type </option>
                             <option value='Muslim' name="teacher_religion">Muslim</option>
                             <option value='Christian' name="">Christian</option>
                             <option value='Other' name="">Other</option>
@@ -104,8 +104,8 @@ school Admin | Teacher Joning
                     <!-- <input name="teacher_gender" type="email" class="form-control" id="teacher_gender" aria-describedby="teacher_gender"> -->
                     <div>
                         <select name="teacher_gender" value="{{data[0][5]}}" id="usertypes" class="form-select"
-                            aria-label="Default select example">
-                            <option selected> Select your Gender Type </option>
+                            aria-label="Default select example" required>
+                            <option value="" disabled selected hidden> Select your Gender Type </option>
                             <option value='Male' name="teacher_gender">Male</option>
                             <option value='Female' name="teacher_gender">Female</option>
                             <option value='Other' name="teacher_gender">Other</option>
@@ -124,8 +124,8 @@ school Admin | Teacher Joning
                     <label for="teaching_class" class="form-label">Select Teacher Class Leavel</label>
                     <!-- <input name="teaching_class" type="email" class="form-control" id="teaching_class" aria-describedby="teaching_class"> -->
                     <select name="teaching_class" value="" id="teaching_class" class="form-select"
-                        aria-label="Default select example">
-                        <option selected> Select your class Leavel </option>
+                        aria-label="Default select example" required>
+                        <option value="" disabled selected hidden> Select your class Leavel </option>
                         <option value='pg' name="teaching_class">Play Group</option>
                         <option value='perp' name="teaching_class">Class Prep</option>
                         <option value='kg' name="teaching_class">Class KG</option>
@@ -152,7 +152,7 @@ school Admin | Teacher Joning
                 <div class="mb-3">
                     <label for="teacher_dob" class="form-label">Enter the Teacher Date of Birth</label>
                     <input name="teacher_dob" value="{{data[0][7]}}" type="date" class="form-control" id="teacher_dob"
-                        aria-describedby="teacher_dob">
+                        aria-describedby="teacher_dob" required>
                 </div>
 
 
@@ -176,7 +176,7 @@ school Admin | Teacher Joning
                 <div class="mb-3">
                     <label for="whatsApp_number" class="form-label">Enter WhatsApp Number</label>
                     <input name="whatsApp_number" value="{{data[0][9]}}" class="form-control" id="whatsApp_number"
-                        aria-describedby="whatsApp_number" type="text" maxlength="11"
+                        aria-describedby="whatsApp_number" type="text" maxlength="11" minlength="10"
                         data-inputmask="'mask': '0300-000000-0'" placeholder="03XX-XXXXXX-X" required>
                 </div>
             </div>
@@ -188,8 +188,8 @@ school Admin | Teacher Joning
                     <!-- <input name="teacher_blood" type="email" class="form-control" id="teacher_blood" aria-describedby="teacher_blood"> -->
 
                     <select name="teacher_blood" value="{{data[0][11]}}" id="teacher_blood" class="form-select"
-                        aria-label="Default select example">
-                        <option selected> Select your Blood Group Type </option>
+                        aria-label="Default select example" required>
+                        <option value="" disabled selected hidden> Select your Blood Group Type </option>
                         <option value='A+' name="teacher_blood">A RhD positive (A+)</option>
                         <option value='A-' name="teacher_blood">A RhD negative (A-)</option>
                         <option value='B+' name="teacher_blood">B RhD positive (B+)</option>
@@ -208,8 +208,8 @@ school Admin | Teacher Joning
             <div class="col-md-3">
                 <div class="mb-3">
                     <label for="specilized_subject" class="form-label">Enter the Specilized Subjects of Teacher</label>
-                    <input name="specilized_subject" value="{{data[0][12]}}" type="text" class="form-control"
-                        id="specilized_subject" aria-describedby="specilized_subject">
+                    <input name="specilized_subject" placeholder="Math , Physicas" value="{{data[0][12]}}" type="text" class="form-control"
+                        id="specilized_subject" aria-describedby="specilized_subject" maxlength="50" , minlength="4" required>
                 </div>
             </div>
 
@@ -217,15 +217,15 @@ school Admin | Teacher Joning
         <!-- Address of teacher  -->
         <div class="mb-3">
             <label for="teacher_address" class="form-label">Enter Teacher Home address</label>
-            <input name="teacher_address" value="{{data[0][11]}}" type="text" class="form-control" id="teacher_address"
-                aria-describedby="teacher_address">
+            <input name="teacher_address"  placeholder="Mohalla Awaisia Town, Pindi Gheb - Attock Rd, Pindigheb, Attock, Punjab , Pakistan" value="{{data[0][11]}}" type="text" class="form-control" id="teacher_address"
+                aria-describedby="teacher_address" maxlength="80" minlength="10" required>
         </div>
 
         <!-- Last school attended -->
         <div class="mb-3">
             <label for="last_school" class="form-label">Enter the last school Serverd by Teacher</label>
-            <input name="last_school" value="{{data[0][13]}}" type="text" class="form-control" id="last_school"
-                aria-describedby="last_school">
+            <input name="last_school" placeholder="Iqra Education System Pindi Gheb"   value="{{data[0][13]}}" type="text" class="form-control" id="last_school"
+                aria-describedby="last_school" maxlength="50" minlength="5">
         </div>
 
         <div style="display: none;">

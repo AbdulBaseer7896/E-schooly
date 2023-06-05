@@ -26,7 +26,7 @@ class teacher_admin_model():
     
     def teacher_name_for_attendance(self , data):
         with self.engine.connect() as conn:            
-            query2 = text(f"SELECT cnic_name , name , teacher_id , cnic_number FROM teacher_information ;")
+            query2 = text(f"SELECT cnic_name , name , teacher_id , cnic_number FROM teacher_information ORDER BY teacher_id ASC;")
             teacher_name = conn.execute(query2).fetchall()
             if teacher_name:
                 print('These are teacher name ,' , teacher_name)
@@ -51,6 +51,12 @@ class teacher_admin_model():
         
     def send_notification_of_db(self , data , file_path):
         with self.engine.connect() as conn:
+            query1 = text(f"SELECT COUNT(*) FROM teacher_notification;")
+            total_rows = conn.execute(query1).fetchall()
+            print("This is toajf ajsdifjas " , total_rows)
+            if total_rows[0][0] > 10:
+                query2 = text(f"DELETE FROM teacher_notification WHERE notification_date = ( SELECT notification_date   FROM ( SELECT notification_date   FROM teacher_notification   ORDER BY notification_date ASC   LIMIT 1 ) AS subquery );")
+                total_rows = conn.execute(query2)
             print("The data is = " ,data['titles'])
             if data['titles'] != "":
                 query1 = text(f"INSERT INTO teacher_notification VALUES ('{data['titles']}' , '{data['date']}' , '{data['details']}' , '{file_path}' );")

@@ -32,16 +32,20 @@ class principal_models():
                 for i in range(1 , 9):
                     if data[f'class{i}'] != "free" and data[f'period{i}'] != "free":
                         print("The class = " , data[f'class{i}'] , "The period is = " , data[f'period{i}'])
-                        
-                        # query1 = text(f"INSERT INTO teacher_class_period (teacher_name, class_name, period_name) VALUES('{data['teacher_name']}', '{data[f'class{i}']}', ' data[f'period{i}');")
-
-                        query = text(f"INSERT INTO teacher_class_period (teacher_name, class_name, period_name) "
-                        f"VALUES ('{data['teacher_name']}', '{data[f'class{i}']}', '{data[f'period{i}']}') "
-                        f"ON DUPLICATE KEY UPDATE "
-                        f"teacher_name = '{data['teacher_name']}' , "
-                        f"class_name = '{data[f'class{i}']}', "
-                        f"period_name = '{data[f'period{i}']}'")
-                        user = conn.execute(query)
+                        query1 = text(f"Select * from teacher_class_period where teacher_name = '{data['teacher_name']}' AND class_name = '{data[f'class{i}']}' AND period_name = '{data[f'period{i}']}';")
+                        cheeK_if_already = conn.execute(query1).fetchall() 
+                        if cheeK_if_already:
+                            print("ITs alread present in data base")
+                        else:
+                            query2 = text(f"INSERT INTO teacher_class_period (teacher_name, class_name, period_name) VALUES('{data['teacher_name']}', '{data[f'class{i}']}', ' data[f'period{i}');")
+                            conn.execute(query2)
+                            # query = text(f"INSERT INTO teacher_class_period (teacher_name, class_name, period_name) "
+                            # f"VALUES ('{data['teacher_name']}', '{data[f'class{i}']}', '{data[f'period{i}']}') "
+                            # f"ON DUPLICATE KEY UPDATE "
+                            # f"teacher_name = '{data['teacher_name']}' , "
+                            # f"class_name = '{data[f'class{i}']}', "
+                            # f"period_name = '{data[f'period{i}']}'")
+                            # user = conn.execute(query)
             else:
                 print("Enter the name of Teacher")
                 return render_template('principal_URLs/teacher_periods.html')

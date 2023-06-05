@@ -67,32 +67,37 @@ def teacher_notification():
     elif request.method == "POST":
         notification = request.form.to_dict()
         notification_file = request.files['notification_document']
-        folder_name = 'Notifications'
-        file_path = obj.stored_notification_in_file_and_send_path_in_db(notification_file , folder_name)
-        if file_path:
-            # print("The student name = " , dataa['])
-            print("THis is image path as you see = " , file_path)
-            obj.send_notification_of_db(notification , file_path)
-            flash(('The Notification is Send to ALl Teacher Successfully !!! ' , 'teacher_notification'))
-            return render_template('teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)
+        if  notification_file.filename != '':
+            folder_name = 'Notifications'
+            file_path = obj.stored_notification_in_file_and_send_path_in_db(notification_file , folder_name)
+        else:
+            file_path = ''
+
+        print("THis is image path as you see = " , file_path)
+        obj.send_notification_of_db(notification , file_path)
+        flash(('The Notification is Send to ALl Teacher Successfully !!! ' , 'teacher_notification'))
+        return render_template('teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)
         
         
         
 
-@app.route('/Principal/delete_notification_admin_teacher', methods=["GET", "POST"])
+@app.route('/teacher_admin/delete_notification_admin_teacher', methods=["GET", "POST"])
 @login_required('teacher_admin')
 def delete_notification_admin_teacher():
+    data = request.args.get('data')
+    result = str(data) 
+    print("this is restul = " , data)
+    result_dict = eval(result)
     notification_data = obj.take_techer_admin_notification_for_db_for_delete()
-    
     if notification_data:
         print("This is notification_data =", notification_data)
         if request.method == 'GET':
-            return render_template('teacher_admin_URLs/delete_notification_admin_teacher.html', notification_data=notification_data)
+            return render_template('teacher_admin_URLs/delete_notification_admin_teacher.html', notification_data=notification_data , data = data)
         if request.method == 'POST':
             result = request.form.get('delete_notification')
             result_dict = str(result) 
             delete_notification = eval(result_dict)
             obj.delete_selected_notification_form_data(delete_notification)
             print("Now its endsss")
-            flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_principal'))
-            return render_template('teacher_admin_URLs/teacher_admin_dashboard.html')
+            flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_teacher_admin'))
+            return render_template('teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)
