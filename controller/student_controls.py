@@ -68,8 +68,11 @@ def student_notification():
     notification = obj.take_student_notification_data(result_dict)
     notification.reverse() 
     print("This is result as you see = " , notification)
-    if request.method == "GET":
-        return render_template('student_URLs/student_notification.html' , notification = notification , data = data)
+    if notification != []:
+        if request.method == "GET":
+            return render_template('student_URLs/student_notification.html' , notification = notification , data = data)
+    flash(("Your Teacher will not send you any Notification !!!" , 'no_notifiction_for_student'))
+    return render_template("student_URLs/student_dashboard.html" , data = data)
     
     
     
@@ -79,9 +82,14 @@ def student_notification():
 def student_result():
     data = request.args.get('data')
     result_dict = eval(data)
+    print("This ij jio  reutl id  = " , result_dict)
     result_data = obj.take_student_result_data(result_dict)
+    
     print("THis is very improtant now see it = = = = "  , result_data)
-
+    if result_data == []:
+            flash(("You class teacher will not upload you any result!!!" , 'no_resutl_for_student'))
+            return render_template("student_URLs/student_dashboard.html" , data = data)
+    
     grouped_data = {}  # Dictionary to group data by exam type and date
 
     for item in result_data:

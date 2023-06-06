@@ -37,8 +37,15 @@ class principal_models():
                         if cheeK_if_already:
                             print("ITs alread present in data base")
                         else:
-                            query2 = text(f"INSERT INTO teacher_class_period (teacher_name, class_name, period_name) VALUES('{data['teacher_name']}', '{data[f'class{i}']}', ' data[f'period{i}');")
-                            conn.execute(query2)
+                            query2 = text(f"Select teacher_name from teacher_class_period where  class_name = '{data[f'class{i}']}' AND period_name = '{data[f'period{i}']}';")
+                            cheeK_if_already_any_one_teach = conn.execute(query2).fetchall() 
+                            print("This is cheek if alredf sdfjsdf = " , cheeK_if_already_any_one_teach)
+                            if cheeK_if_already_any_one_teach:
+                                query3 = text(f"UPDATE teacher_class_period SET teacher_name = '{data['teacher_name']}'   WHERE teacher_name = '{cheeK_if_already_any_one_teach[0][0]}';")
+                                conn.execute(query3)
+                            else:
+                                query4 = text(f"INSERT INTO teacher_class_period (teacher_name, class_name, period_name) VALUES('{data['teacher_name']}', '{data[f'class{i}']}', '{data[f'period{i}']}');")
+                                conn.execute(query4)
                             # query = text(f"INSERT INTO teacher_class_period (teacher_name, class_name, period_name) "
                             # f"VALUES ('{data['teacher_name']}', '{data[f'class{i}']}', '{data[f'period{i}']}') "
                             # f"ON DUPLICATE KEY UPDATE "
@@ -60,9 +67,15 @@ class principal_models():
         
     def make_class_teacher(self , data):
         with self.engine.connect() as conn:
-            query1 = text(f"UPDATE teacher_information SET class = '{data['teacher_class']}' WHERE name = '{data['teacher_name']}' ")
+            query1 = text(f"select class from teacher_information where class = '{data['teacher_class']}';")
+            cheek = conn.execute(query1).fetchall()
+            if cheek:          
+                query2 = text(f"UPDATE teacher_information SET class = 'helper' WHERE class = '{data['teacher_class']}' ;" )  
+                conn.execute(query2)
+            query1 = text(f"UPDATE teacher_information SET class = '{data['teacher_class']}' WHERE name = '{data['teacher_name']}'; ")
             conn.execute(query1)
             print("The teacher class is updated")
+                
         
     def send_principal_notification_of_db(self , data , file_path):
         with self.engine.connect() as conn:
@@ -148,3 +161,12 @@ class principal_models():
             period_data = conn.execute(query1).fetchall() 
             print("This is very important data  = = = =  = " , period_data)
             return period_data
+        
+    def take_class_teacher_data_for_db(self):
+        print("This is class teacher")
+        with self.engine.connect() as conn:
+            query1 = text(f"SELECT  class , cnic_name , name  FROM  teacher_information ORDER BY class ASC;")
+            class_teacher_name = conn.execute(query1).fetchall() 
+            print("This is very important data  = = = =  = " , class_teacher_name)
+            return class_teacher_name
+        

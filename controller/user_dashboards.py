@@ -21,7 +21,7 @@ def login_required(role):
 def student_dashboard():
     data = request.args.get('data')
     # Functionality for student dashboard
-    flash(('Dear student to Welcome  Iqra-E-School !!! You Successfull Login !!!' , 'success'))
+    flash(('Dear student to Welcome  Iqra-E-School !!! You Successfull Login !!!' , 'student_login'))
     return render_template("student_URLs/student_dashboard.html", data = data)
 
 @app.route('/teacher/dashboard')

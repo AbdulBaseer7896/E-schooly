@@ -74,7 +74,12 @@ def teacher_joining_information():
         
         image_file = request.files['teacher_image']
         folder_name = 'jonning_teacher_images'
-        image_path = obj.stored_image_in_file_and_send_path_in_db(image_file , folder_name)
+        if image_file and image_file.filename:
+            print("Thisj ijfid if image _ file = = " , image_file)
+            image_path = obj.stored_image_in_file_and_send_path_in_db(image_file , folder_name)
+        else:
+            print("There is not image at alll ija ")
+            image_path = ""
         if image_path:
             # print("The student name = " , dataa['])
             print("THis is image path as you see = " , image_path)

@@ -17,8 +17,9 @@ Student | Notification
             <div class="col-md-12">
                 <div class="card mb-3">
                     {% for item in notification %}
+                        
                     <div class="card-body">
-                            
+                        
                         <div class="row">
                             <div class="col-sm-1">
                                 <h6 class="mb-0">Title</h6>
@@ -27,9 +28,9 @@ Student | Notification
                                 {{item[0]}}
                             </div>
                             <!-- </div>
-                            <hr>
+                                <hr>
                             <div class="row"> -->
-
+                                
                                 <div class="col-sm-2">
                                     <h6 class="mb-0">Notification Documber </h6>
                                 </div>
@@ -41,12 +42,12 @@ Student | Notification
                                     <a href="/static/{{item[4]}} " download>Download File</a>
                                     {% endif  %}
                                 </div>
-
-                            <div class="col-sm-2">
-                                <h6 class="mb-0">Date </h6>
-                            </div>
-                            <div class="col-sm-2 text-secondary">
-                                {{item[1]}}
+                                
+                                <div class="col-sm-2">
+                                    <h6 class="mb-0">Date </h6>
+                                </div>
+                                <div class="col-sm-2 text-secondary">
+                                    {{item[1]}}
                             </div>
                         </div>
                         <hr>
@@ -64,7 +65,7 @@ Student | Notification
                         <br>
                     </div>
                     {% endfor %}
-</div>
+                </div>
 
 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
 {% endblock mainbody %}

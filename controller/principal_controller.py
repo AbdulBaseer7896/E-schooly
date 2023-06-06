@@ -84,7 +84,7 @@ def teacher_period_data():
     teacher_period_data = obj.take_teacher_period_data_for_db()
     
     if teacher_period_data:
-        print("This is notification_data =", teacher_period_data)
+        print("This is period _data =", teacher_period_data)
         
         grouped_data = defaultdict(list)
         for class_data in teacher_period_data:
@@ -92,5 +92,19 @@ def teacher_period_data():
             grouped_data[class_name].append(class_data)
 
         teacher_period_data_grouped = list(grouped_data.values())
-    if request.method == 'GET':
+        if request.method == 'GET':
             return render_template('principal_URLs/teacher_period_data.html' , teacher_period_data_grouped = teacher_period_data_grouped)
+    flash(("You will not assigned any Period to any teacher !!!" , 'no_period_assigned_by_principal'))
+    return render_template('principal_URLs/principal_dashboard.html')
+
+
+
+
+        
+@app.route('/Principal/class_teacher_data', methods=["GET", "POST"])
+@login_required('principal')
+def class_teacher_data():
+    class_teachers = obj.take_class_teacher_data_for_db()
+    print("This is class teacher oaw jfij  " , class_teachers[0][0])
+    if request.method == 'GET':
+            return render_template('principal_URLs/class_teacher_data.html' , class_teachers = class_teachers )

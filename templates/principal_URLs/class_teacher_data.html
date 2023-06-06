@@ -1,0 +1,32 @@
+{% extends 'principal_URLs/principal_temp.html' %}
+
+{% block title %}
+Principal | Class Teacher
+{% endblock title %}
+
+{% block mainbody %}
+
+<h1>This is the principal teacher periods page</h1>
+
+
+  <table class="table table-bordered container">
+    <tbody>
+      <tr>
+        <th colspan="2" style="width: 20%;">Class</th>
+        <th colspan="2" style="width: 30%;">Teacher Name</th>
+        <th colspan="2" style="width: 50%;">Teacher Email</th>
+      </tr>
+      {% for teacher in class_teachers %}
+        <tr>
+          <td colspan="2" style="width: 20%;">{{ teacher[0] }}</td>
+          <td colspan="2" style="width: 30%;">{{ teacher[1] }}</td>
+          <td colspan="2" style="width: 50%;">{{ teacher[2] }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
+{% endblock mainbody %}

@@ -102,7 +102,7 @@ class school_admin_models():
                 print(user)
                 return user
             else:
-                return " "
+                return ""
                 # return render_template('school_admin_URLs/school_admin_dashboard.html' , data = user)
                 
                 

@@ -104,8 +104,12 @@ class student_model():
             
     def take_student_result_data(self , data):
         with self.engine.connect() as conn:
-            query1 = text(f"SELECT b_form_name, roll_number , student_email , result_type, subject, markes , total_marks , result_date  FROM result_student_subject_marks WHERE student_email = '{data[0][0]}' ORDER BY result_type, result_date DESC;")
-            result = conn.execute(query1).fetchall()
+            try:
+                query1 = text(f"SELECT b_form_name, roll_number , student_email , result_type, subject, markes , total_marks , result_date  FROM result_student_subject_marks WHERE student_email = '{data[0][0]}' ORDER BY result_type, result_date DESC;")
+                result = conn.execute(query1).fetchall()
+            except:
+                query1 = text(f"SELECT b_form_name, roll_number , student_email , result_type, subject, markes , total_marks , result_date  FROM result_student_subject_marks WHERE student_email = '{data['email_login']}' ORDER BY result_type, result_date DESC;")
+                result = conn.execute(query1).fetchall()
             return result
 
                 

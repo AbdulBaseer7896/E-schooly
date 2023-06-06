@@ -54,7 +54,7 @@ class teacher_admin_model():
             query1 = text(f"SELECT COUNT(*) FROM teacher_notification;")
             total_rows = conn.execute(query1).fetchall()
             print("This is toajf ajsdifjas " , total_rows)
-            if total_rows[0][0] > 10:
+            if total_rows[0][0] > 4:
                 query2 = text(f"DELETE FROM teacher_notification WHERE notification_date = ( SELECT notification_date   FROM ( SELECT notification_date   FROM teacher_notification   ORDER BY notification_date ASC   LIMIT 1 ) AS subquery );")
                 total_rows = conn.execute(query2)
             print("The data is = " ,data['titles'])
@@ -101,7 +101,7 @@ class teacher_admin_model():
             
             print("The dariy is delete for file")
             print(data[3])
-            if data[3] != None:
+            if data[3] != "":
                 os.remove(f"static/{data[3]}")
             return cheek
 
