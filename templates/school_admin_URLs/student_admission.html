@@ -10,7 +10,7 @@ school Admin | Student Admission
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 {% for message, category in messages %}
-{% if category == 'student_admission_done' %}
+{% if category == 'new_student_data' %}
 <div class="alert alert-success alert-dismissible fade show" role="alert">
     <h4 class="alert-heading">{{ message }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -46,8 +46,8 @@ school Admin | Student Admission
 <!-- Form B number of student -->
 <div class="mb-3">
     <label for="B_form_number" class="form-label">Enter Student B-Form Number</label>
-    <input name="B_form_number" value="{{data[0][1]}}" class="form-control" id="B_form_number"
-        aria-describedby="B_form_number" type="number" maxlength="13" minlength="13" placeholder="XXXXX-XXXXXXX-X" required>
+    <input name="B_form_number"  maxlength="13" minlength="13" value="{{data[0][1]}}" class="form-control" id="B_form_number"
+        aria-describedby="B_form_number" type="text" placeholder="XXXXX-XXXXXXX-X" required>
 </div>
 
 

@@ -167,6 +167,10 @@ class principal_models():
         with self.engine.connect() as conn:
             query1 = text(f"SELECT  class , cnic_name , name  FROM  teacher_information ORDER BY class ASC;")
             class_teacher_name = conn.execute(query1).fetchall() 
-            print("This is very important data  = = = =  = " , class_teacher_name)
-            return class_teacher_name
+            if class_teacher_name:
+                print("This is very important data  = = = =  = " , class_teacher_name)
+                return class_teacher_name
+            else:
+                print("Ther is not teacher in the data base")
+                return False
         

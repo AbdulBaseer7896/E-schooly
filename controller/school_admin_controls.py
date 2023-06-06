@@ -33,13 +33,17 @@ def student_admission():
         # image_name = dataa['student_image']
         image_file = request.files['student_image']
         folder_name = 'admission_student_images'
-        image_path = obj.stored_image_in_file_and_send_path_in_db(image_file , folder_name)
-        if image_path:
-            # print("The student name = " , dataa['])
-            print("THis is image path as you see = " , image_path)
-            obj.student_admission_data(dataa , image_path , student_id_for_updatae )
-            flash(('New Student Information Upload Successfully !!!' , 'student_admission_done'))
-            return render_template("school_admin_URLs/student_admission.html" ,  data = data )
+        if image_file and image_file.filename:
+            print("Thisj ijfid if image _ file = = " , image_file)
+            image_path = obj.stored_image_in_file_and_send_path_in_db(image_file , folder_name)
+        else:
+            print("There is not image at alll ija ")
+            image_path = ""
+        # print("The student name = " , dataa['])
+        print("THis is image path as you see = " , image_path)
+        obj.student_admission_data(dataa , image_path , student_id_for_updatae )
+        flash(('New Student Information Upload Successfully !!!' , 'student_admission_done'))
+        return render_template("school_admin_URLs/student_admission.html" ,  data = data )
 
 
 @app.route('/school_admin/update_admission_data' , methods=["GET", "POST"])

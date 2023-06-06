@@ -145,7 +145,7 @@ class teacher_model():
             return total
         else:
             print("NO notification is found")
-            return "no notification is found"
+            return False
         
     
         

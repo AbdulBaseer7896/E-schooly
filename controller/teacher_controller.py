@@ -129,11 +129,13 @@ def notification_for_teacher():
     data = request.args.get('data')
     if request.method == "GET":
         notification = obj.take_notification_details()
-        notification.reverse() 
-        print(notification)
-        return render_template("teacher_URLs/notification.html" , notification = notification , data = data )
-    
-    return render_template('teacher_URLs/notification.html' ,  data = data)
+        print("THiodsa iofjasd iojf  = ", notification)
+        if notification:
+            notification.reverse()
+            print(notification)
+            return render_template("teacher_URLs/notification.html" , notification = notification , data = data )
+    flash(("NO notification Will be recived at you ID !!!" , 'no_notification_for_teacher'))
+    return render_template('teacher_URLs/teacher_dashboard.html' ,  data = data)
 
 
 
@@ -150,7 +152,11 @@ def send_notification_to_student():
     if request.method == "GET":
         teacher_class = obj.take_teacher_class_form_db(result_dict)
         print("The teacher class os = " , teacher_class)
-        return render_template("teacher_URLs/send_notification_to_student.html" , data = result_dict , teacher_class = teacher_class)
+        if teacher_class[0][0] == 'Helper':
+            flash(("Sorry You are not a class teacer thats why you will not sent the notification to students " , 'not_a_class_teacher_of_send_notification'))
+            return render_template('teacher_URLs/teacher_dashboard.html' ,  data = data)
+        else:
+            return render_template("teacher_URLs/send_notification_to_student.html" , data = result_dict , teacher_class = teacher_class)
 
     elif request.method == "POST":
         data = request.form.to_dict()

@@ -30,13 +30,17 @@ def teacher_attandance():
     result = str(data) 
     print("this is restul = " , data)
     result_dict = eval(result)
-    if request.method == "GET":
-        teacher_name = obj.teacher_name_for_attendance(result_dict)
-        print("The is teacher name = " , teacher_name)
+    teacher_name = obj.teacher_name_for_attendance(result_dict)
+    print("The is teacher name = " , teacher_name)
+    if not teacher_name:
+            flash(("There is not teacher in the data base Contact with Admin!!!" , 'no_teacher_for_attandance'))
+            return render_template("teacher_admin_URLs/teacher_admin_dashboard.html" , data = result_dict )
+    else:    
+        if request.method == "GET":
+            return render_template("teacher_admin_URLs/teacher_attandance.html" , data = result_dict  , info = teacher_name)
 
-        return render_template("teacher_admin_URLs/teacher_attandance.html" , data = result_dict  , info = teacher_name)
     
-    elif request.method == "POST":
+    if request.method == "POST":
         data = request.form.to_dict()
         print("This is attandance " , data)
         result = []
@@ -93,11 +97,14 @@ def delete_notification_admin_teacher():
         print("This is notification_data =", notification_data)
         if request.method == 'GET':
             return render_template('teacher_admin_URLs/delete_notification_admin_teacher.html', notification_data=notification_data , data = data)
-        if request.method == 'POST':
-            result = request.form.get('delete_notification')
-            result_dict = str(result) 
-            delete_notification = eval(result_dict)
-            obj.delete_selected_notification_form_data(delete_notification)
-            print("Now its endsss")
-            flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_teacher_admin'))
-            return render_template('teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)
+    if request.method == 'POST':
+        result = request.form.get('delete_notification')
+        result_dict = str(result) 
+        delete_notification = eval(result_dict)
+        obj.delete_selected_notification_form_data(delete_notification)
+        print("Now its endsss")
+        flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_teacher_admin'))
+        return render_template('teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)
+    else:
+        flash(("You could not send any Massage to teacher !!! kindly send the massage !!!" , 'no_massage_to_delete_teacher_admin'))
+        return render_template('teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)

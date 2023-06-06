@@ -33,7 +33,7 @@ class teacher_admin_model():
                 return teacher_name
             else:
                 print("There are no Teacher")
-                return "No teacher found :"
+                return False
             
             
     def mark_teacher_attandance(self , data):

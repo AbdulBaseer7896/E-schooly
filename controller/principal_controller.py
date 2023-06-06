@@ -64,8 +64,8 @@ def send_principal_notification():
 def delete_nofitication_principal():
     notification_data = obj.take_principal_notification_for_db_for_delete()
     
+    print("This is notification_data =", notification_data)
     if notification_data:
-        print("This is notification_data =", notification_data)
         if request.method == 'GET':
             return render_template('principal_URLs/delete_nofitication_principal.html', notification_data=notification_data)
         if request.method == 'POST':
@@ -76,6 +76,9 @@ def delete_nofitication_principal():
             print("Now its endsss")
             flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_principal'))
             return render_template('principal_URLs/principal_dashboard.html')
+    else:
+        flash(("You will not send any notification !!! Kinldy send it !!!" , "no_notifitaion_to_deleate_for_principal"))
+        return render_template('principal_URLs/principal_dashboard.html')
         
         
 @app.route('/Principal/teacher_period_data', methods=["GET", "POST"])
@@ -105,6 +108,10 @@ def teacher_period_data():
 @login_required('principal')
 def class_teacher_data():
     class_teachers = obj.take_class_teacher_data_for_db()
-    print("This is class teacher oaw jfij  " , class_teachers[0][0])
+    # print("This is class teacher oaw jfij  " , class_teachers[0][0])
+    if not class_teachers:
+        flash(("You will not make any class teacher, Kinldy make the class teacer early !!!" , 'no_class_teacher'))
+        return render_template('principal_URLs/principal_dashboard.html')
+    
     if request.method == 'GET':
             return render_template('principal_URLs/class_teacher_data.html' , class_teachers = class_teachers )
