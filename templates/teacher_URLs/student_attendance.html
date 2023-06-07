@@ -24,6 +24,8 @@ Teacher | Take Attandance
 
 <h1>Kindly Take the Attandance</h1>
 
+{{data}}
+
 <div class="container">
     <div class="main-body">
         <div class="col-md-12 mb-3">
@@ -86,11 +88,20 @@ Teacher | Take Attandance
                                     aria-describedby="student_roll_number{{item[2]}}">
                                     <input name="student_class{{item[2]}}" value="{{item[3]}}" style="display: none;" type="text" class="form-control" id="student_class"
                                     aria-describedby="student_class{{item[2]}}">
+                                    
+
                                 </div>
                             </div>
                                     <br>
                                     <hr>
                                     {% endfor %}
+                                    <h1>{{data}}</h1>
+
+                                    <h1>{{data}}</h1>
+                                
+                                    <input style="display: none;" name="email_login" value="{{data}}" type="text" class="form-control" id="email_login"
+                                    aria-describedby="email_login">
+
                                         <input type="submit" class="btn btn-primary" value="Submit"></input>
                                         <br>
                                         <br>

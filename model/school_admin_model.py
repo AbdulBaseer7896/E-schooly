@@ -60,7 +60,7 @@ class school_admin_models():
                 print("The email = " , modified_email)
                 
 
-                query4 = text(f"INSERT INTO student_information VALUES ('{modified_email}', '{data['B_form_number']}', '{data['father_name']}', '{data['father_cinc']}', '{data['student_religion']}', '{data['student_gender']}', '{data['student_class']}', '{data['student_dob']}', '{image_path}', '{data['whatsApp_number']}', '{data['last_school_class']}', '{data['student_blood']}', '{data['Elective_subject']}', '{data['student_address']}', '{data['last_school']}', '{data['focacl_person']}', '{data['focacl_person_number']}' , '{roll_number_final +1}' , '{data['student_name']}' , '{registration_number_final +1}' , '0')")
+                query4 = text(f"INSERT INTO student_information VALUES ('{modified_email}', '{data['B_form_number']}', '{data['father_name']}', '{data['father_cinc']}', '{data['student_religion']}', '{data['student_gender']}', '{data['student_class']}', '{data['student_dob']}', '{image_path}', '{data['whatsApp_number']}', '{data['last_school_class']}', '{data['student_blood']}', '{data['Elective_subject']}', '{data['student_address']}', '{data['last_school']}', '{data['focacl_person']}', '{data['focacl_person_number']}' , '{int(roll_number_final +1)}' , '{data['student_name']}' , '{registration_number_final +1}' , '0')")
                 verify = conn.execute(query4)
 
                 print("The row is update")

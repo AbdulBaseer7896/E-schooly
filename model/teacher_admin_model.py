@@ -40,13 +40,13 @@ class teacher_admin_model():
         with self.engine.connect() as conn:
             for i in range(0 , len(data) ):
                 if data[i][3] == '1':
-                    query1 = text(f"UPDATE teacher_information SET teacher_attendance = teacher_attendance + '1'  where name = '{data[i][0]}';")
+                    query1 = text(f"UPDATE teacher_information SET teacher_attendance = (teacher_attendance + 1)  where name = '{data[i][0]}';")
                     conn.execute(query1)
                     
-            query2 = text(f"UPDATE total_attendance SET total_teacher_attendance = total_teacher_attendance + '1' where teacher = teacher")
+            query2 = text(f"UPDATE total_attendance SET total_teacher_attendance = (total_teacher_attendance + 1) where teacher = 'teacher';")
             conn.execute(query2)
             print("Its run")
-        print("the student attandace mark")
+            print("the student attandace mark")
         
         
     def send_notification_of_db(self , data , file_path):

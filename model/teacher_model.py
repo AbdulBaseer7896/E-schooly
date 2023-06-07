@@ -24,14 +24,20 @@ class teacher_model():
         except:
             print("not work")
     
-    def take_teacher_profile_data(self , student_marks):
+    def take_teacher_profile_data(self , data):
+        print("THis  jsodj iasj if88 80u09 0 = " , data)
         with self.engine.connect() as conn:
             try:
-                query1 = text(f"SELECT * FROM  teacher_information WHERE name = '{student_marks['email_login']}';")
-                result = conn.execute(query1).fetchall()
+                try:
+                    query1 = text(f"SELECT * FROM  teacher_information WHERE name = '{data[0][0]}';")
+                    result = conn.execute(query1).fetchall()
+                except:
+                    query1 = text(f"SELECT * FROM  teacher_information WHERE name = '{data['email_login']}';")
+                    result = conn.execute(query1).fetchall()               
             except:
-                query1 = text(f"SELECT * FROM  teacher_information WHERE name = '{student_marks[0][0]}';")
-                result = conn.execute(query1).fetchall()               
+                query1 = text(f"SELECT * FROM  teacher_information WHERE name = '{data['teacher_mail']}';")
+                result = conn.execute(query1).fetchall()
+                
             if result:
                 return result
             else:
@@ -79,6 +85,7 @@ class teacher_model():
             
             
     def class_student_name_for_attendance(self  , student_marks):
+        print("This isj ijawig j  = = " , student_marks)
         with self.engine.connect() as conn:
             try:
                 query2 = text(f"SELECT class FROM teacher_information where name = '{student_marks[0][0]}';")
@@ -98,6 +105,7 @@ class teacher_model():
                 flash(("There is no student in you class Kinldy contact with Admin !!!" , 'no_student_in_teacher_attandance'))
                 return False
             
+            
     def mark_student_attandance(self , student_marks):
         with self.engine.connect() as conn:
             for i in range(0 , len(student_marks) ):
@@ -115,7 +123,7 @@ class teacher_model():
                 conn.execute(query3)
                 print("Its run")
             else:
-                query4 =  text(f"INSERT INTO total_attendance(class, total_student_attendance) VALUES ('{student_marks[i][1]}' , '{student_marks[i][3]}');")
+                query4 =  text(f"INSERT INTO total_attendance(class, total_student_attendance) VALUES ('{student_marks[i][1]}' , '1');")
                 conn.execute(query4)
                 print("This is except is run")
         
@@ -274,13 +282,13 @@ class teacher_model():
                 query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{data['email_login']}' ORDER BY dairy_date DESC;")
                 dairy = conn.execute(query1).fetchall() 
                 print("This is the dairy of the student = " ,dairy)
-                return dairy
+                
             except:
-                query2 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{data[0]}' ORDER BY dairy_date DESC;")
+                query2 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{data[0][0]}' ORDER BY dairy_date DESC;")
                 dairy = conn.execute(query2).fetchall() 
                 print("This is the dairy of the student = " ,dairy)
                 print('Thisi sfjaisdjgi a= ' , data)
-                return dairy
+            return dairy
 
             
     def delete_dariy_for_db_which_teacher_select(self , data):

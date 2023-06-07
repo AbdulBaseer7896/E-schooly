@@ -41,18 +41,11 @@ class principal_models():
                             cheeK_if_already_any_one_teach = conn.execute(query2).fetchall() 
                             print("This is cheek if alredf sdfjsdf = " , cheeK_if_already_any_one_teach)
                             if cheeK_if_already_any_one_teach:
-                                query3 = text(f"UPDATE teacher_class_period SET teacher_name = '{data['teacher_name']}'   WHERE teacher_name = '{cheeK_if_already_any_one_teach[0][0]}';")
+                                query3 = text(f"UPDATE teacher_class_period SET teacher_name = '{data['teacher_name']}'   WHERE teacher_name = '{cheeK_if_already_any_one_teach[0][0]}' AND class_name = '{data[f'class{i}']}' AND period_name = '{data[f'period{i}']}';")
                                 conn.execute(query3)
                             else:
                                 query4 = text(f"INSERT INTO teacher_class_period (teacher_name, class_name, period_name) VALUES('{data['teacher_name']}', '{data[f'class{i}']}', '{data[f'period{i}']}');")
                                 conn.execute(query4)
-                            # query = text(f"INSERT INTO teacher_class_period (teacher_name, class_name, period_name) "
-                            # f"VALUES ('{data['teacher_name']}', '{data[f'class{i}']}', '{data[f'period{i}']}') "
-                            # f"ON DUPLICATE KEY UPDATE "
-                            # f"teacher_name = '{data['teacher_name']}' , "
-                            # f"class_name = '{data[f'class{i}']}', "
-                            # f"period_name = '{data[f'period{i}']}'")
-                            # user = conn.execute(query)
             else:
                 print("Enter the name of Teacher")
                 return render_template('principal_URLs/teacher_periods.html')

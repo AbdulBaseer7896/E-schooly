@@ -27,9 +27,10 @@ def login_required(role):
 def teacher_profile():
     # Functionality for teacher dashboard
     data = request.args.get('data')
-    result = str(data) 
     print("this is restul" , data)
+    result = str(data) 
     result_dict = eval(result)
+    print("The  isdjf ioisd fi jsj i === = = " , result_dict)
     # Parse the string representation of the dictionary back to a dictionary object
     if request.method == "GET":
         profile_data = obj.take_teacher_profile_data(result_dict)
@@ -59,7 +60,7 @@ def upload_dairy():
             print("this is 00 " , data)
             return render_template("teacher_URLs/upload_dairy_form.html" , data = data)
         else:
-            return render_template('teacher_URLs/teacher_dashboard.html')
+            return render_template('teacher_URLs/teacher_dashboard.html', data = data)
         
 
 
@@ -67,6 +68,7 @@ def upload_dairy():
 @app.route('/teacher/write_dairy' , methods=["GET", "POST"] )
 @login_required('teacher')
 def upload_dairy_form():
+    data = request.args.get('data')
     if request.method == "GET":
         return render_template('teacher_URLs/upload_dairy_form.html')
     elif  request.method == 'POST':
@@ -80,7 +82,7 @@ def upload_dairy_form():
             obj.send_dairy(data , image_path )
 
             flash(('Class Attandance will Upload Successfully !!!' , 'student_dairy_done'))
-            return render_template("teacher_URLs/teacher_dashboard.html")
+    return render_template("teacher_URLs/teacher_dashboard.html", data = data)
         # else:
         #     return render_template('teacher_URLs/teacher_dashboard.html')
         
@@ -91,22 +93,25 @@ def student_attendance():
     data = request.args.get('data')
     result = str(data) 
     result_dict = eval(result)
-    print("The data is == " , result_dict)
-    # print("The teacher name  = " , result_dict['email_login'])
+    print("The teacher name  = " , result_dict)
+    # print("The data is == " , result_dict['email_login'])
     if request.method == "GET":
         student_name = obj.class_student_name_for_attendance(result_dict)
         if student_name != False:
             flash(('Just Tick those Students Who are Absend in Class !!!' , 'student_attendance_warning'))
-            return render_template("teacher_URLs/student_attendance.html" , data = data  , info = student_name)
+            return render_template("teacher_URLs/student_attendance.html" , data = result_dict  , info = student_name)
         else:
             print("There is not student in you class")
             # flash(("There is not student in you class" , 'warning'))
             return render_template("teacher_URLs/teacher_dashboard.html" , data = data )
     
-    elif request.method == "POST":
-        data = request.args.get('data')
+    if request.method == "POST":
         attandance = request.form.to_dict()
         print("This is attandance " , attandance)
+        teacher_mail =  request.form.get('email_login')
+        print("This ij difoj asoijf8 udf08u w  = = " , teacher_mail)
+        
+        
         result = []
         for i in range(1, (len(attandance) // 3) + 1):
             tuple_attandance = []
@@ -117,9 +122,9 @@ def student_attendance():
         obj.mark_student_attandance(result)
         print("this is the final result = " , result)
         print(result[1][0])
-        print("This is data - " , data)
+        print("This is data - " , teacher_mail)
         flash(('The Attandance is Upload Successfully !!!' , 'sudent_attandance_done'))
-        return render_template("teacher_URLs/teacher_dashboard.html" , data = data)
+    return render_template("teacher_URLs/teacher_dashboard.html" , data = teacher_mail)
     
     
     
@@ -235,7 +240,7 @@ def delete_dairy():
         
         obj.delete_dariy_for_db_which_teacher_select(delete_dairy_information)
         
-        return render_template('teacher_URLs/teacher_dashboard.html',  data=delete_dairy_information)
+        return render_template('teacher_URLs/teacher_dashboard.html',  data=data)
         
 
     
@@ -267,6 +272,6 @@ def delete_notification_teacher():
         obj.delete_selected_notification_form_data(delete_notification)
         print("Now its endsss")
         flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_principal'))
-        return render_template('teacher_URLs/teacher_dashboard.html' ,  data = email)        
+        return render_template('teacher_URLs/teacher_dashboard.html' ,  data = data)        
         
         
