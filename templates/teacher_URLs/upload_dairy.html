@@ -11,9 +11,11 @@ Teacher | Upload Dairy
         <h1 style="text-align: center;">Kindly Select the Class and Period</h1>
         <br>
         <div>
+
+
             <label for="teacher_class" class="form-label">Select Your Class</label>
-            <select name="teacher_class" id="teacher_class" class="form-select" aria-label="Default select example">
-                <option selected disabled>Select your class type</option>
+            <select name="teacher_class" value =""  id="teacher_class" class="form-select"   aria-label="Default select example" required>
+                <option value=""  disabled selected hidden> Select your class type</option>
                 {% for item in data %}
                     <option value="{{ item[1] }}">{{ item[1] }}</option>
                 {% endfor %}
@@ -24,8 +26,8 @@ Teacher | Upload Dairy
 
         <div>
             <label for="teacher_period" class="form-label">Select Your Period</label>
-            <select name="teacher_period" id="teacher_period" class="form-select" aria-label="Default select example">
-                <option selected disabled>Select your period</option>
+            <select name="teacher_period" id="teacher_period" class="form-select" aria-label="Default select example" required>
+                <option value=""  disabled selected hidden>Select your period</option>
                 {% for item in data %}
                     <option value='{{ item[2] }}'>{{ item[2] }}</option>
                 {% endfor %}

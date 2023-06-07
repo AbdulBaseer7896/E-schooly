@@ -20,16 +20,21 @@ Teacher | Write Dairy
                 <div class="mb-3">
                     <label for="book_name" class="form-label">Enter the Book Name</label>
                     <input name="book_name" type="text" class="form-control" id="book_name"
-                        aria-describedby="book_name">
+                        aria-describedby="book_name" maxlength="50" minlength="5">
+
+
                 </div>
-            </div>
+                </div>
+            <!-- </div> -->
 
             <!-- chapter name -->
              <div class="col-md-4">
                 <div class="mb-3">
                     <label for="chapter_name" class="form-label">Enter the Chapter Name</label>
                     <input name="chapter_name" type="text" class="form-control" id="chapter_name"
-                        aria-describedby="chapter_name">
+                        aria-describedby="chapter_name" maxlength="35" minlength="3">
+
+
                 </div>
             </div>
 
@@ -38,12 +43,12 @@ Teacher | Write Dairy
                 <div class="mb-3">
                     <label for="book_page" class="form-label">Enter the Book Page NO</label>
                     <input name="book_page" type="text" class="form-control" id="book_page"
-                        aria-describedby="book_page">
+                        aria-describedby="book_page" maxlength="10" minlength="1">
                 </div>
             </div>
         </div>
 
-        <hr>
+        <!-- <hr> -->
 
         <div class="row">
 
@@ -52,7 +57,7 @@ Teacher | Write Dairy
                 <div class="mb-3">
                     <label for="dairy_date" class="form-label">Enter the dairy date</label>
                     <input name="dairy_date" type="date" class="form-control" id="dairy_date"
-                        aria-describedby="dairy_date">
+                        aria-describedby="dairy_date" required>
                 </div>
             </div>
 
@@ -86,7 +91,7 @@ Teacher | Write Dairy
                     <!-- <input name="book_name"  type="text" class="form-control" id="book_name"
                         aria-describedby="book_name" > -->
                     <textarea name="dairy_details" type="text" class="form-control" id="dairy_details"
-                        aria-describedby="dairy_details" rows="4" cols="50">Type some thing</textarea>
+                        aria-describedby="dairy_details" placeholder="Write Some Details of Dairy" rows="4" cols="50" required></textarea>
                 </div>
             </div>
         </div>

@@ -21,17 +21,19 @@ Teacher | Delete Dairy
     
     {% for item in dariy_data %}  
 
+    {% if item[6] != None %}
+        
     <div class="main-body">
         <div class="row gutters-sm">
             <h4 class="text-secondary mb-1">You Dairy [Date : {{item[6]}}]</h4>
-    
+            
             <div class="col-md-12">
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-2">
                                 <h6 class="mb-0">Teacher</h6>
-                                </div>
+                            </div>
                                 <div class="col-sm-2 text-secondary">
                                     {{item[0]}}
                                 </div>
@@ -95,49 +97,50 @@ Teacher | Delete Dairy
                                         </div>
                                         <div class="col-sm-2 text-secondary">
                                             <a href="">{{item[7]}}</a>
-                                </div>
-                                <!-- </div> -->
-                                <!-- <hr>
-                                    <div class="row"> -->
-                                        <div class="col-sm-2">
+                                        </div>
+                                        <!-- </div> -->
+                                        <!-- <hr>
+                                            <div class="row"> -->
+                                                <div class="col-sm-2">
                                             <h6 class="mb-0">Notes</h6>
                                         </div>
                                         <div class="col-sm-2 text-secondary">
-                                            {% if item[8] == None %}
+                                            {% if item[8] == None or item[8] == "" %}
                                             <a href="#" > No Download File Attached</a>
-                                            {% endif  %}
-                                            {% if item[8] != None %}
+                                            {% else %}
                                             <a href="/static/{{item[8]}}" download>Download File</a>
                                             {% endif  %}
                                         </div>
                                     </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <h6 class="mb-0">Dairy Details</h6>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <h6 class="mb-0">Dairy Details</h6>
+                                        </div>
+                                        <div class="col-sm-10 text-secondary">
+                                            {{item[9]}} 
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        
+                                        
+                                        <form action="{{ url_for('delete_dairy' ) }} " method="post">
+                                            <input type="hidden" name="delete_information"   value= "{{ item }}">
+                                            <button type="submit">Delete</button>
+                                        </form>
+                                        
+                                    </div>
                                 </div>
-                                <div class="col-sm-10 text-secondary">
-                                    {{item[9]}} 
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-
-
-                                <form action="{{ url_for('delete_dairy' ) }} " method="post">
-                                    <input type="hidden" name="delete_information" value= "{{ item }}">
-                                    <button type="submit">Delete</button>
-                                </form>
-
-                            </div>
-                        </div>
                     </div>
                 </div>
                 
                 
                 
+            </div>
         </div>
-    </div>
+
+        {% endif %}
         {% endfor %}
     </div>
     

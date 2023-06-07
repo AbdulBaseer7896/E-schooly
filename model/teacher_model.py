@@ -46,12 +46,16 @@ class teacher_model():
     def take_teacher_class_and_period_data(self , student_marks):
         with self.engine.connect() as conn:
             try:
-                query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{student_marks['email_login']}';")
-                result = conn.execute(query1).fetchall()
+                try:
+                    query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{student_marks['email_login']}';")
+                    result = conn.execute(query1).fetchall()
+                except:
+                    query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{student_marks[0][0]}';")
+                    result = conn.execute(query1).fetchall()  
+                    print("This is the result of teacher class period = " ,result)             
             except:
-                query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{student_marks[0][0]}';")
-                result = conn.execute(query1).fetchall()  
-                print("This is the result of teacher class period = " ,result)             
+                    query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{student_marks['teacher_mail']}';")
+                    result = conn.execute(query1).fetchall()
             if result:
                 return result
             else:
@@ -84,16 +88,19 @@ class teacher_model():
             
             
             
-    def class_student_name_for_attendance(self  , student_marks):
+    def class_student_name_for_attendance(self  , student_marks ):
         print("This isj ijawig j  = = " , student_marks)
         with self.engine.connect() as conn:
             try:
-                query2 = text(f"SELECT class FROM teacher_information where name = '{student_marks[0][0]}';")
-                class_name = conn.execute(query2).fetchall() 
+                try:
+                    query2 = text(f"SELECT class FROM teacher_information where name = '{student_marks[0][0]}';")
+                    class_name = conn.execute(query2).fetchall() 
+                except:
+                    query1 = text(f"SELECT class FROM teacher_information where name = '{student_marks['email_login']}';")
+                    class_name = conn.execute(query1).fetchall()
             except:
-                query1 = text(f"SELECT class FROM teacher_information where name = '{student_marks['email_login']}';")
-                class_name = conn.execute(query1).fetchall()
-                             
+                    query1 = text(f"SELECT class FROM teacher_information where name = '{student_marks['teacher_mail']}';")
+                    class_name = conn.execute(query1).fetchall()
             
             query3 = text(f"SELECT b_form_name , name , student_roll_number , class FROM student_information WHERE class = '{class_name[0][0]}'")
             student_name = conn.execute(query3).fetchall()
@@ -279,15 +286,20 @@ class teacher_model():
         with self.engine.connect() as conn:
             print("The data is === " , data)
             try:
-                query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{data['email_login']}' ORDER BY dairy_date DESC;")
-                dairy = conn.execute(query1).fetchall() 
-                print("This is the dairy of the student = " ,dairy)
+                try:
+                    query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{data['email_login']}' ORDER BY dairy_date DESC;")
+                    dairy = conn.execute(query1).fetchall() 
+                    print("This is the dairy of the student = " ,dairy)
                 
+                except:
+                    query2 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{data[0][0]}' ORDER BY dairy_date DESC;")
+                    dairy = conn.execute(query2).fetchall() 
+                    print("This is the dairy of the student = " ,dairy)
+                    print('Thisi sfjaisdjgi a= ' , data)
             except:
-                query2 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{data[0][0]}' ORDER BY dairy_date DESC;")
-                dairy = conn.execute(query2).fetchall() 
-                print("This is the dairy of the student = " ,dairy)
-                print('Thisi sfjaisdjgi a= ' , data)
+                    query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{data['teacher_mail']}' ORDER BY dairy_date DESC;")
+                    dairy = conn.execute(query1).fetchall() 
+                    print("This is the dairy of the student = " ,dairy)
             return dairy
 
             
@@ -298,7 +310,7 @@ class teacher_model():
             cheek = conn.execute(query1)
             print("The dariy is delete for file")
             print(data[8])
-            if data[8] != None:
+            if data[8] != "":
                 os.remove(f"static/{data[8]}")
             print("The file is remove for files")
             print("This is cheek" , cheek)
