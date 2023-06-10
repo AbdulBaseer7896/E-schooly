@@ -10,8 +10,6 @@ Teacher | Upload Result
 <h2>Upload the result of {{teacher_class[0][0]}}</h2>
 
 <br><br><br>
-
-
 <form action="{{ url_for('upload_result') }}" method="post">
 <div class="container">
     <div class="main-body">
@@ -117,11 +115,23 @@ Teacher | Upload Result
                                     <input name="b_form_name{{item[2]}}" value="{{item[1]}}" style="display: none;"
                                         type="text" class="form-control" id="b_form_name"
                                         aria-describedby="b_form_name{{item[2]}}">
+
+
+                                        <!-- THis is teacher id -->
+
+                                      
+
+                                        
                             </div>
                         </div>
                         <br>
                         <hr>
                         {% endfor %}
+
+                        <input name="email_login" value="{{data}}" style="display: none;"
+                        type="text" class="form-control" id="email_login"
+                        aria-describedby="email_login">
+
                         <input type="submit" class="btn btn-primary" value="Submit"></input>
                         <br>
                         <br>

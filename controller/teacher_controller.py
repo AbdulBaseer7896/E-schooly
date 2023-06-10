@@ -51,6 +51,7 @@ def upload_dairy():
         result = str(data) 
         result_dict = eval(result)
         result = obj.take_teacher_class_and_period_data(result_dict)
+        print("This is restul as you seee = " , result)
         return render_template("teacher_URLs/upload_dairy.html" , data = result)
     elif request.method == 'POST':
         data = request.form.to_dict()
@@ -193,6 +194,8 @@ def upload_result():
     if request.method == "GET":
         teacher_class = obj.take_teacher_class_form_db(result_dict)
         student_info = obj.take_class_student_id_form_db(teacher_class)
+        print("This is teacher ok = = = " , teacher_class)
+        print("This is student ok = = = " , student_info)
         class_subject = obj.take_class_subject_from_db(teacher_class)
         if student_info == None or class_subject == None or teacher_class == None:
             flash(("In you class not student exist OR you are not a class teacher of any class" , 'no_student_for_upload_result'))
@@ -211,17 +214,18 @@ def upload_result():
                 key = f'student_email{i}' if j == 1 else f'student_roll_number{i}' if j == 2 else f'marks_of_{i}' if j == 3 else f'b_form_name{i}' if j == 4 else f'student_class' if j == 5 else f'subject'
                 tuple_attandance.append(student_restult.get(key))
             student_marks.append(tuple_attandance)
-        
-        print("The resutlls sis sd = " ,student_marks)
 
         cheek = obj.send_student_marks_of_db(student_marks , result_type_data)
+        
+        teacher_id = request.form.get('email_login')
+
         if cheek:
+            print("This is data of data 000000 =  " , data)
             flash((f"The result of {student_restult['subject']} will Upload Successfully !!!! " , 'result_uploaded'))
-            return render_template('teacher_URLs/teacher_dashboard.html' , data = data )
-        
+            return render_template('teacher_URLs/teacher_dashboard.html' , data = teacher_id )
+
         flash((f"The result of {student_restult['subject']} will Not Upload  !!!! " , 'result_will_not_uploaded'))
-        
-        return render_template('teacher_URLs/teacher_dashboard.html' , data = data )
+        return render_template('teacher_URLs/teacher_dashboard.html' , data = teacher_id )
 
 
     
@@ -234,7 +238,12 @@ def delete_dairy():
     result_dict = eval(result)  # or use json.loads(result) for JSON parsing
     if request.method == "GET":
         dariy_data = obj.take_teacher_dariy_for_db_for_delete(result_dict)
-        return render_template('teacher_URLs/delete_dairy.html', dariy_data=dariy_data,  data=data)
+        print("This is dariy data == = " , dariy_data[0][6])
+        if dariy_data[0][6] != None:
+            return render_template('teacher_URLs/delete_dairy.html', dariy_data=dariy_data,  data=data)
+        else:
+            flash((f"You will not appload any dairy !!!! " , 'teacher_not_appload_dairy'))
+            return render_template('teacher_URLs/teacher_dashboard.html' , data = data )
     if request.method == "POST":        
         result = request.form.get('delete_information')
         result_dict = str(result) 

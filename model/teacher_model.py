@@ -47,14 +47,14 @@ class teacher_model():
         with self.engine.connect() as conn:
             try:
                 try:
-                    query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{student_marks['email_login']}';")
+                    query1 = text(f"SELECT DISTINCT * FROM  teacher_class_period WHERE teacher_name = '{student_marks['email_login']}';")
                     result = conn.execute(query1).fetchall()
                 except:
-                    query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{student_marks[0][0]}';")
+                    query1 = text(f"SELECT DISTINCT * FROM  teacher_class_period WHERE teacher_name = '{student_marks[0][0]}';")
                     result = conn.execute(query1).fetchall()  
                     print("This is the result of teacher class period = " ,result)             
             except:
-                    query1 = text(f"SELECT * FROM  teacher_class_period WHERE teacher_name = '{student_marks['teacher_mail']}';")
+                    query1 = text(f"SELECT DISTINCT * FROM  teacher_class_period WHERE teacher_name = '{student_marks['teacher_mail']}';")
                     result = conn.execute(query1).fetchall()
             if result:
                 return result
