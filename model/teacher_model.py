@@ -329,7 +329,7 @@ class teacher_model():
                 class_name = conn.execute(query1).fetchall()            
                 print("The class name = ," , class_name[0][0])
                 
-            query1 = text(f"SELECT * FROM student_notification where class_name = 'Class {class_name[0][0]}' ORDER BY notification_date DESC;")
+            query1 = text(f"SELECT * FROM student_notification where class_name = '{class_name[0][0]}' ORDER BY notification_date DESC;")
             notification = conn.execute(query1).fetchall() 
             print("This is student notification of class = = " , notification)
             if notification:
@@ -364,6 +364,7 @@ class teacher_model():
             
             print("The dariy is delete for file")
             print(data[4])
-            if data[4] != None:
+            if data[4] == None or data[4] == "":
+                return cheek  
+            else:
                 os.remove(f"static/{data[4]}")
-            return cheek

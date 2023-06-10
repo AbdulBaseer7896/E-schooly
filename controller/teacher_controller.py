@@ -267,16 +267,20 @@ def delete_notification_teacher():
             flash(("You will Not send any Notification To you class !!!" , 'no_notification_send_by_teacher_to_student'))
             return render_template('teacher_URLs/teacher_dashboard.html' ,  data = data)   
         else:
-            return render_template('teacher_URLs/delete_notification_teacher.html', notification_data=notification_data , data = data)
-    if request.method == 'POST':
+            return render_template('teacher_URLs/delete_notification_teacher.html', notification_data=notification_data , data = result_dict)
+    elif request.method == 'POST':
         result = request.form.get('delete_notification')
-        email = request.form.to_dict()
-        result_dict = str(result) 
-        delete_notification = eval(result_dict)
-        print("Teh delete not sdf  = = = = =ee3=  = " , delete_notification)
+        result_dict_chang = str(result) 
+        delete_notification = eval(result_dict_chang)
+
         obj.delete_selected_notification_form_data(delete_notification)
-        print("Now its endsss")
+
+        # email = request.form.get('email_login')
+        email = request.form.to_dict()
+        change = str(email) 
+        teacher_email = eval(change)
+        print("This teachetj a = = " , teacher_email)
     flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_teacher'))
-    return render_template('teacher_URLs/teacher_dashboard.html' ,  data = data)        
+    return render_template('teacher_URLs/teacher_dashboard.html' ,  data = teacher_email)        
         
         
