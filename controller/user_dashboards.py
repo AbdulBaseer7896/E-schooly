@@ -60,3 +60,4 @@ def school_admin_dashboard():
 @login_required('staff')
 def staff_dashboard():
     return 'welcom , staff'
+
