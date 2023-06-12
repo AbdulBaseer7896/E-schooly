@@ -166,7 +166,6 @@ a:focus {
 
 .custom_nav-container {
   z-index: 99999;
-  padding: 15px 0;
 }
 
 .custom_nav-container .navbar-toggler {
@@ -176,6 +175,9 @@ a:focus {
 .custom_nav-container .navbar-toggler .navbar-toggler-icon {
   background-image: url(/static/images/public_images/menu.png);
   background-size: 40px;
+  padding: 21px 21px;
+  background-color:  #003366;
+  
 }
 
 /*end header section*/
