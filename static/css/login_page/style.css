@@ -81,6 +81,17 @@ textarea {
   z-index:9;
 }
 
+
+.form-04-main{
+  width:1200px;
+  display:block;
+  margin:20px auto;
+  padding:25px 30px 25px;
+  background:rgba(255, 255, 255, 0.79);
+  border-radius:6px;
+  z-index:9;
+}
+
 .logo{
   display:block;
   margin:20px auto;
@@ -204,6 +215,10 @@ textarea {
 
 @media screen and (max-width: 600px) {
   .form-03-main{
+    width: 100%;
+  }
+
+  .form-04-main{
     width: 100%;
   }
 }

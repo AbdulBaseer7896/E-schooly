@@ -53,9 +53,10 @@ def teacher_attandance():
         print("this is result === " , result)
         obj.mark_teacher_attandance(result)
         print("this is the final result = " , result)
+        teacher_information = request.form.get("teacher_information")
         print(result[1][0])
         flash(('Teacher Attendance Upload Successfully !!!' , 'teacher_attandance'))
-        return render_template("teacher_admin_URLs/teacher_admin_dashboard.html" , data = result_dict )
+        return render_template("teacher_admin_URLs/teacher_admin_dashboard.html" , data = teacher_information )
 
 
 
