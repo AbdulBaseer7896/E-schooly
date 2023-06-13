@@ -1,72 +1,78 @@
+
+
+
+
+
 {% extends 'teacher_admin_URLs/teacher_admin_temp.html' %}
 
 
 {% block title %}
-Teacher Admin | Notifications
+Teacher Admin | Notification
 {% endblock title %}
 
 {% block mainbody %}
 
-<div class=" container big-font">
-    <form action="{{ url_for('teacher_notification') }}" method="post" enctype="multipart/form-data">
-        <br>
-        <h1 style="text-align: center;">Send Notifications to teachers</h1>
-        <br>
 
 
-        <!-- titles -->
-        <div class="row">
-            <div class="col-md-4">
-                <div class="mb-3">
-                    <label for="titles" class="form-label">Title of Notification</label>
-                    <input name="titles" value="" type="text" class="form-control" id="titles"
-                        aria-describedby="titles">
-                </div>
+<section class="form-02-main">
+    <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="_lk_de">
+          <div class="form-03-main">
+            <div class="logo">
+              <img src="/static/images/public_images/user.png">
             </div>
 
 
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label  class="form-label">Notification Document</label>
-                        <input name="notification_document" class="form-control" type="file">
+            <div class="form-group">
+                <form action="{{ url_for('teacher_notification') }}" method="post" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                      <!-- <input type="email" name="email_login" class="form-control _ge_de_ol" type="text" placeholder="Enter Email" required="" aria-required="true"> -->
+                      <label for="details" class="form-label">Notification Title</label>
+                      <input name="titles" value="" type="text" class="form-control _ge_de_ol" id="titles" placeholder="Title of Notification"
+                      aria-describedby="titles">
                     </div>
-                </div>
+          
+                    <div class="form-group">
+                      <!-- <input type="password" name="password_login" class="form-control _ge_de_ol" type="text" placeholder="Enter Password" required="" aria-required="true"> -->
+                      <label for="date" class="form-label">Date</label>
+                      <input name="date" value="" class="form-control  _ge_de_ol" id="date"
+                          aria-describedby="date" type="date">
+                    </div>
+          
+                    <div class="form-group">
+                      <!-- <input type="password" name="password_login" class="form-control _ge_de_ol" type="text" placeholder="Enter Password" required="" aria-required="true"> -->
+                      <label  class="form-label">Notification Document</label>
+                      <input name="notification_document" class="form-control  _ge_de_ol" placeholder="Notification Document" type="file">
+                    </div>
+          
+          
+                    <div class="form-group">
+                      <!-- <input type="password" name="password" class="form-control _ge_de_ol" type="text" placeholder="Enter Password" required="" aria-required="true"> -->
+                      <label for="details" class="form-label">Write the details of Notification</label>
+                      <!-- <input name="details"  type="text" class="form-control" id="details"
+                          aria-describedby="details" > -->
+                      <textarea name="details" type="text" class="form-control  _ge_de_ol" id="details"
+                          aria-describedby="details" placeholder="Type some thing" rows="4" cols="50"></textarea>
+          
+                    </div>
+          
+          
+                    <div class="form-group">
+                        <button type="submit" class="_btn_04">Submit</button>
+                    </div>
+                </form>
 
-
-                <!-- Form B number of teacher -->
-                <div class="col-md-4">
-                    <label for="date" class="form-label">Date</label>
-                    <input name="date" value="" class="form-control" id="date"
-                        aria-describedby="date" type="date">
-                </div>
-
+          </div>
         </div>
-
-
-        <!-- Father name of teacher -->
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="mb-3">
-                    <label for="details" class="form-label">Write the details of Notification</label>
-                    <!-- <input name="details"  type="text" class="form-control" id="details"
-                        aria-describedby="details" > -->
-                    <textarea name="details" type="text" class="form-control" id="details"
-                        aria-describedby="details" rows="4" cols="50">Type some thing</textarea>
-                </div>
-            </div>
-        </div>
-        
-        <br>
-        <input type="submit" class="btn btn-primary"></input>
-        
+      </div>
     </div>
-<br>
-<br><br>
-<!-- <a href="{{ url_for('forget_password') }}">Forget Password</a> -->
-</form>
+  </div>
+</section>
 </div>
-<br>
-
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+crossorigin="anonymous"></script>
 {% endblock mainbody %}
