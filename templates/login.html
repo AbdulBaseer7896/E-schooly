@@ -1,64 +1,140 @@
-{% extends 'publi_temp.html' %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="static/css/login_page/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/login_page/font-awesome.min.css" rel="stylesheet">
+    <link href="static/css/login_page/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-{% block title %}
-IQRA EDUCATION SYSTEM | Log In
-{% endblock title %}
+    <title>
+        IQRA EDUCATION SYSTEM | Log In
+    </title>
+  </head>
+  <body>
 
-{% block mainbody %}
+
+      <!-- header section strats -->
+      <header class="header_section">
+        <div class="container">
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand" href="index.html">
+              <img src="/static/images/public_images/logo.png" alt="">
+              <span>
+                IQRA
+              </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+  
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+                <ul class="navbar-nav  ">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('hello_world') }}"> Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item ">
+                    <a class="nav-link" href="{{ url_for('hello_world') }}"> About </a>
+                  </li>
+  
+                  <li class="nav-item ">
+                    <a class="nav-link" href="{{ url_for('hello_world') }}"> Teacher </a>
+                  </li>
+  
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('hello_world') }}"> vehicle </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('login') }}">Log IN</a>
+                  </li>
+  
+                  <li class="nav-item">
+                    <a class="nav-link" href="#contact_section">Contact Us</a>
+                  </li>
+  
+                </ul>
+                <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                  <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+                </form>
+              </div>
+          </nav>
+        </div>
+      </header>
 
 
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for message, category in messages %}
-            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                <h4 class="alert-heading">{{ message }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </h4>
+
+
+    <section class="form-02-main">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="_lk_de">
+              <div class="form-03-main">
+                <div class="logo">
+                  <img src="static/images/public_images/user.png">
+                </div>
+
+                <form action="{{ url_for('login') }}" method="post">
+
+                <div class="form-group">
+                  <input type="email" name="email_login" class="form-control _ge_de_ol" type="text" placeholder="Enter Email" required="" aria-required="true">
+                </div>
+
+                <div class="form-group">
+                  <input type="password" name="password_login" class="form-control _ge_de_ol" type="text" placeholder="Enter Password" required="" aria-required="true">
+                </div>
+
+                <div class="form-group">
+                  <!-- <input type="password" name="password" class="form-control _ge_de_ol" type="text" placeholder="Enter Password" required="" aria-required="true"> -->
+                  <select name="login-val" id="usertypes" class="form-control _ge_de_ol form-select"  aria-label="Default select example">
+                    <option selected> Select you User Type </option>
+                    <option value='student' name="login-val">Student</option>
+                    <option value='teacher' name="login-val">Teacher</option>
+                    <option value='principal' name="login-val">Principal</option>
+                    <option value='school_admin' name="login-val">School Admin</option>
+                    <option value='teacher_admin' name="login-val">Teacher Admin</option>
+                </select>
+                </div>
+
+                <div class="checkbox form-group">
+                  <div class="form-check">
+                    <a href="#">Change Password</a>
+                  </div>
+                  <a href="#">Forgot Password</a>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="_btn_04">Login</button>
+                </div>
+            </form>
+
+                <div class="form-group nm_lk"><p>Find Iqra on</p></div>
+
+                <div class="form-group pt-0">
+                  <div class="_social_04">
+                    <ol>
+                      <li><i class="fa fa-facebook"></i></li>
+                      <li><i class="fa fa-twitter"></i></li>
+                      <li><i class="fa fa-google-plus"></i></li>
+                      <li><i class="fa fa-instagram"></i></li>
+                      <li><i class="fa fa-linkedin"></i></li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
             </div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
-
-
-
-<div class=" container big-font">
-    <form action="{{ url_for('login') }}" method="post">
-        <br>
-        <h1 style="text-align: center;">Kindly Log In</h1>
-        <br>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input name="email_login" type="email" class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
         </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input name="password_login" type="password" class="form-control" id="exampleInputPassword1">
-        </div>
-
-        <div>
-            <select name="login-val" id="usertypes" class="form-select" aria-label="Default select example">
-                <option selected> Select you User Type </option>
-                <option value='student' name="login-val">Student</option>
-                <option value='teacher' name="login-val">Teacher</option>
-                <option value='school_admin' name="login-val">School Admin</option>
-                <option value='principal' name="login-val">Principal</option>
-                <option value='teacher_admin' name="login-val">Teacher Admin</option>
-                <option value=6 name="login-val">Staff</option>
-            </select>
-        </div>
-        <br>
-        <input type="submit" class="btn btn-primary"></input>
-
-        <br>
-        <br><br>
-        <a href="{{ url_for('forget_password') }}">Forget Password</a>
-    </form>
-</div>
-<br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-{% endblock mainbody %}
+      </div>
+    </section>
+  </body>
+</html>
