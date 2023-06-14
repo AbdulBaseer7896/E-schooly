@@ -1,61 +1,103 @@
+
+
+
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-        {% endblock title %}</title>
-        <link rel="stylesheet" href="..static/css/style-1.css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style-1-school-admin-student-adminssion.css') }}">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    
+            <link href="/static/css/login_page/bootstrap.min.css" rel="stylesheet">
+            <link href="/static/css/login_page/font-awesome.min.css" rel="stylesheet">
+            <link href="/static/css/login_page/style.css" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+                    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+
+                <link rel="stylesheet" href="..static/css/style-1.css">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+                integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        
-<!-- This answer is not useful
-Please try this code, -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
-</head>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">School Admin Dashboard</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="{{ url_for('hello_world') }}">Home</a>
-                        <a class="nav-link active" aria-current="page" href="{{ url_for('seach_student_result') }}">Result</a>
-                        <a class="nav-link" href="{{ url_for('student_admission') }}">Student Admission</a>
-                        <a class="nav-link" href="{{ url_for('teacher_joining_information') }}">Teacher Joining</a>
+            <title>{% block title %}
+
+                {% endblock title %}</title>
+
+        </head>
+        <body>
+
+
+      <!-- header section strats -->
+      <header class="header_section">
+        <div class="container">
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand" href="index.html">
+              <img src="/static/images/public_images/logo.png" alt="">
+              <span>
+                IQRA
+              </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+  
+            <div class="collapse  navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                      <li class="nav-item active">
+                        <a class="nav-link" href="{{ url_for('hello_world') }}">Home<span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('seach_student_result') }}">Result</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_admission') }}">Admission</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('teacher_joining_information') }}">Teacher</a>
+                      </li>
+                      <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('update_admission_data') }}">Update Admission</a>
-                        <a class="nav-link" href="{{ url_for('update_teacher_data') }}">Update Teacher data</a>
-                        <a class="nav-link" href="#">Short Attendance</a>
-                        <a class="nav-link" href="{{ url_for('logout') }}">Log out</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <br><br><br>
-    {% block mainbody %}
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('update_teacher_data') }}">Update Teacher</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Attendance</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}">Log Out</a>
+                      </li>
+                    </ul>
+                  </div>
+                <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                  <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+                </form>
+              </div>
+          </nav>
+        </div>
+      </header>
 
-    {% endblock mainbody %}
 
 
+      {% block mainbody %}
 
-</div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
-</body>
+      {% endblock mainbody %}
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+crossorigin="anonymous"></script>
+
+
+  </body>
 </html>

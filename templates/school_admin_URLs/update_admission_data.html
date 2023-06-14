@@ -6,38 +6,62 @@ School Admin | Updata Student Data
 {% endblock title %}
 
 {% block mainbody %}
-<div class=" container big-font" >
-    <form action="{{ url_for('update_admission_data') }}" method="post">
-        <br>
-        <h1 style="text-align: center;">Search The Student By</h1>
-        <br>
-        <div class="mb-3">
-            <label for="email_search" class="form-label">Email address</label>
-            <input name="email_search" type="email" class="form-control" id="email_search" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        <div class="mb-3">
-            <label for="b_from_search" class="form-label">B-Form-Number</label>
-            <!-- <input name="b_from_search" type="text" class="form-control" id="b_from_search"> -->
-            <input name="b_from_search" type="text" class="form-control" id="b_from_search"
-            aria-describedby="b_from_search" maxlength="13" data-inputmask="'mask': '99999-9999999-9'"
-            placeholder="XXXXX-XXXXXXX-X" >
-        </div>
 
-        <div class="mb-3">
-            <label for="student_registration_number" class="form-label">Student Registration Number</label>
-            <!-- <input name="Father CNIC Number" type="text" class="form-control" id="Father CNIC Number"> -->
-            <input name="student_registration_number" type="text" class="form-control" id="student_registration_number">
+<section class="form-02-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="_lk_de">
+                    <div class="form-03-main">
+                        <div class="logo">
+                            <img src="/static/images/public_images/user.png">
+                        </div>
 
+                        <h1 class="text-center">Update Admission</h1>
+                        <div class="form-group">
+                            <form action="{{ url_for('update_admission_data') }}" method="post"
+                                enctype="multipart/form-data">
+
+                                <div class="form-group">
+                                    <!-- <input type="email" name="email_login" class="form-control _ge_de_ol" type="text" placeholder="Enter Email" required="" aria-required="true"> -->
+                                    <label for="email_search" class="form-label ">Email address</label>
+                                    <input name="email_search" value="" type="text" class="form-control _ge_de_ol"
+                                        id="email_search" placeholder="adbulbaseer-3-444-8iqra.edu"
+                                        aria-describedby="email_search">
+                                </div>
+
+                                <div class="form-group">
+                                    <!-- <input type="password" name="password_login" class="form-control _ge_de_ol" type="text" placeholder="Enter Password" required="" aria-required="true"> -->
+                                    <label for="b_from_search" class="form-label">B From Number</label>
+                                    <input name="b_from_search" value="" class="form-control  _ge_de_ol"
+                                        id="b_from_search" aria-describedby="b_from_search" type="text" maxlength="13"
+                                        data-inputmask="'mask': '99999-9999999-9'" placeholder="XXXXX-XXXXXXX-X">
+                                </div>
+
+                                <div class="form-group">
+                                    <!-- <input type="password" name="password_login" class="form-control _ge_de_ol" type="text" placeholder="Enter Password" required="" aria-required="true"> -->
+                                    <label class="form-label">Student Registration Number</label>
+                                    <input name="student_registration_number" class="form-control  _ge_de_ol"
+                                        placeholder="XXXX" type="number">
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <button type="submit" class="_btn_04">Submit</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <br>
-        <input type="submit" class="btn btn-primary"></input>
+</section>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
 
-        <br>
-        <br><br>
-        <!-- <a href="{{ url_for('forget_password') }}">Forget Password</a> -->
-    </form>
-    </div>
-    <br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 {% endblock mainbody %}
