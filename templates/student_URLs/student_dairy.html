@@ -10,28 +10,28 @@ Student | Dairy
 
 <div class="container">
 
-{% for item in dairy %}
+    {% for item in dairy %}
 
 
 
-{% if item[6] != None  %}
-    
+    {% if item[6] != None %}
 
-<div class="main-body">
-    <div class="row gutters-sm">
-        <h4 class="text-secondary mb-1">You Dairy [Date : {{item[6]}}]</h4>
 
-        <div class="col-md-12">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <h6 class="mb-0">Teacher</h6>
+    <div class="main-body">
+        <div class="row gutters-sm">
+            <h4 class="text-secondary mb-1">You Dairy [Date : {{item[6]}}]</h4>
+
+            <div class="col-md-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <h6 class="mb-0">Teacher</h6>
                             </div>
                             <div class="col-sm-2 text-secondary">
                                 {{item[0]}}
                             </div>
-                            
+
                             <div class="col-sm-2">
                                 <h6 class="mb-0">Class</h6>
                             </div>
@@ -40,10 +40,10 @@ Student | Dairy
                             </div>
                             <!-- <hr> -->
                             <!-- <div class="row"> -->
-                                <div class="col-sm-2">
-                                    <h6 class="mb-0">Subject</h6>
-                                </div>
-                                <div class="col-sm-2 text-secondary">
+                            <div class="col-sm-2">
+                                <h6 class="mb-0">Subject</h6>
+                            </div>
+                            <div class="col-sm-2 text-secondary">
                                 {{item[2]}}
                             </div>
                             <!-- </div> -->
@@ -59,19 +59,19 @@ Student | Dairy
                             <!-- </div>
                                 <hr>
                                 <div class="row"> -->
-                                    <div class="col-sm-2">
-                                        <h6 class="mb-0">Chapter Name</h6>
-                                    </div>
-                                    <div class="col-sm-2 text-secondary">
-                                        {{item[4]}}
-                                    </div>
-                                    <!-- </div>
+                            <div class="col-sm-2">
+                                <h6 class="mb-0">Chapter Name</h6>
+                            </div>
+                            <div class="col-sm-2 text-secondary">
+                                {{item[4]}}
+                            </div>
+                            <!-- </div>
                                         <hr>
                                         <div class="row"> -->
-                                            <div class="col-sm-2">
-                                                <h6 class="mb-0">Book Page #</h6>
-                                            </div>
-                                            <div class="col-sm-2 text-secondary">
+                            <div class="col-sm-2">
+                                <h6 class="mb-0">Book Page #</h6>
+                            </div>
+                            <div class="col-sm-2 text-secondary">
                                 {{item[5]}}
                             </div>
                         </div>
@@ -86,46 +86,46 @@ Student | Dairy
                             <!-- </div>
                                 <hr>
                                 <div class="row"> -->
-                                    <div class="col-sm-2">
-                                        <h6 class="mb-0">Video Link</h6>
-                                    </div>
-                                    <div class="col-sm-2 text-secondary">
-                                        <a href="">{{item[7]}}</a>
-                                    </div>
-                                    <!-- </div> -->
+                            <div class="col-sm-2">
+                                <h6 class="mb-0">Video Link</h6>
+                            </div>
+                            <div class="col-sm-2 text-secondary">
+                                <a href="">{{item[7]}}</a>
+                            </div>
+                            <!-- </div> -->
                             <!-- <hr>
                                 <div class="row"> -->
-                                    <div class="col-sm-2">
-                                        <h6 class="mb-0">Notes</h6>
-                                    </div>
-                                    <div class="col-sm-2 text-secondary">
-                                        {% if item[8] == None %}
-                                        <a href="#" > No Download File Attached</a>
-                                        {% endif  %}
-                                        {% if item[8] != None %}
-                                        <a href="/static/{{item[8]}}" download>Download File</a>
-                                        {% endif  %}
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <h6 class="mb-0">Dairy Details</h6>
-                                    </div>
+                            <div class="col-sm-2">
+                                <h6 class="mb-0">Notes</h6>
+                            </div>
+                            <div class="col-sm-2 text-secondary">
+                                {% if item[8] == None %}
+                                <a href="#"> No Download File Attached</a>
+                                {% endif %}
+                                {% if item[8] != None %}
+                                <a href="/static/{{item[8]}}" download>Download File</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <h6 class="mb-0">Dairy Details</h6>
+                            </div>
                             <div class="col-sm-10 text-secondary">
-                                {{item[9]}} 
+                                {{item[9]}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            
 
-            
-            
-            
-            
+
+
+
+
+
+
         </div>
     </div>
     {% endif %}
@@ -133,6 +133,160 @@ Student | Dairy
 </div>
 
 
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati
-    velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="form-02-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="_lk_de">
+
+                    <div class="form-04-main">
+                        <div class="logo">
+                            <img src="/static/images/public_images/user.png">
+                        </div>
+                        <h1 class="text-center">Dairy</h1>
+
+                        <div class="form-group">
+                            <!-- <input type="email" name="email_login" class="form-control _ge_de_ol" type="text" placeholder="Enter Email" required="" aria-required="true"> -->
+                            <!-- <div class="col-md-12">
+                                                <div class="card mb-3"> -->
+                            <div class="card-body">
+                                {% for item in dairy %}
+                                
+                                <div class="row">
+                                    <div class="col-12 col-sm-4">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <h6 class="mb-0 text-secondary">Teacher</h6>
+                                                <h5>{{ item[0] }}</h5>
+                                            </div>
+                                            <div class="col-3">
+                                                <h6 class="mb-0 text-secondary">Class</h6>
+                                                <h5>{{ item[1] }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-3">
+                                        <div class="row">
+                                            <div class="col-6 col-sm-6">
+                                                <h6 class="mb-0 text-secondary">Subject</h6>
+                                                <h5>{{ item[2] }}</h5>
+                                            </div>
+                                            <div class="col-6 col-sm-6">
+                                                <h6 class="mb-0 text-secondary">Book Name</h6>
+                                                <h5>{{ item[3] }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    
+                                    <div class="col-12 col-sm-4">
+                                        <div class="row">
+                                            <div class="col-7 col-sm-6">
+                                                <h6 class="mb-0 text-secondary">Chapter Name</h6>
+                                                <h5>{{ item[4] }}</h5>
+                                            </div>
+                                            <div class="col-5 col-sm-6">
+                                                <h6 class="mb-0 text-secondary">Book Page</h6>
+                                                <h5>{{ item[5] }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-12 col-sm-4">
+                                        <div class="row">
+                                            <div class="col-9 col-sm-6">
+                                                <h6 class="mb-0 text-secondary">Date</h6>
+                                                <h5>{{ item[6] }}</h5>
+
+                                            </div>
+                                            <div class="col-3 col-sm-6">
+                                                <h6 class="mb-0 text-secondary">Notes</h6>
+                                                <!-- <div class="col-sm-6 text-secondary"> -->
+                                                <p>
+                                                    {% if item[4] == None or item[4] == "" %}
+                                                    <a href="#"> No_File</a>
+                                                    {% endif %}
+                                                    {% if item[4] != None and item[4] != "" %}
+                                                    <a href="/static/{{item[3]}} " download>Download</a>
+                                                    {% endif %}
+                                                </p>
+                                                <!-- </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+ 
+
+                                    <div class="col-12 col-sm-2">
+                                        <br class="d-sm-none">
+                                        <div class="row">
+                                            <!-- < class="col-sm-2 text-secondary"> -->
+                                            <h6 class="mb-0 text-secondary">Video Link</h6>
+
+                                            <h6 class="col-sm-10 ">
+                                                {{item[7]}}
+                                            </h6>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-12 ">
+                                        <br>
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-9">
+                                                <h6 class="mb-0 text-secondary">Dairy Details</h6>
+                                                <h5 class="border border-primary border-2 text-cente">{{ item[8] }}</h5>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                    <br>
+                                    <br>
+                                    <hr>
+                                    <hr>
+                                </div>
+
+                                {% endfor %}
+                                <input name="teacher_information" value="{{data}}" style="display: none;" type="text"
+                                    class="form-control" id="teacher_information"
+                                    aria-describedby="teacher_information">
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</section>
 {% endblock mainbody %}
