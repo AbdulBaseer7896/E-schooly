@@ -5,60 +5,73 @@ Teacher | Upload Dairy
 {% endblock title %}
 
 {% block mainbody %}
-<div class="container big-font">
-    <form action="{{ url_for('upload_dairy') }}" method="post">
-        <br>
-        <h1 style="text-align: center;">Kindly Select the Class and Period</h1>
-        <br>
-        <div>
-            <label for="teacher_class" class="form-label">Select Your Class</label>
-            <select name="teacher_class" value="" id="teacher_class" class="form-select" aria-label="Default select example" required>
-                <option value="" disabled selected hidden> Select your class type</option>
-                {% set selected_classes = [] %}
-                {% for item in data %}
-                    {% if item[1] not in selected_classes %}
-                        <option value="{{ item[1] }}">{{ item[1] }}</option>
-                        {% set _ = selected_classes.append(item[1]) %}
-                    {% endif %}
-                {% endfor %}
-            </select>
+
+<section class="form-02-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="_lk_de">
+                    <div class="form-03-main">
+                        <div class="logo">
+                            <img src="/static/images/public_images/user.png">
+                        </div>
+
+
+                        <h1 class="text-center">Class and Period</h1>
+                        <br>
+
+                        <div class="form-group">
+                            <form action="{{ url_for('upload_dairy') }}" method="post">
+
+                                <div>
+                                    <label for="teacher_class" class="form-label">Select Your Class</label>
+                                    <select name="teacher_class" value="" id="teacher_class" class="form-select"
+                                        aria-label="Default select example" required>
+                                        <option value="" disabled selected hidden> Select your class type</option>
+                                        {% set selected_classes = [] %}
+                                        {% for item in data %}
+                                        {% if item[1] not in selected_classes %}
+                                        <option value="{{ item[1] }}">{{ item[1] }}</option>
+                                        {% set _ = selected_classes.append(item[1]) %}
+                                        {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <br><br>
+
+                                <div>
+                                    <label for="teacher_period" class="form-label">Select Your Period</label>
+                                    <select name="teacher_period" id="teacher_period" class="form-select"
+                                        aria-label="Default select example" required>
+                                        <option value="" disabled selected hidden>Select your period</option>
+                                        {% set selected_periods = [] %}
+                                        {% for item in data %}
+                                        {% if item[2] not in selected_periods %}
+                                        <option value="{{ item[2] }}">{{ item[2] }}</option>
+                                        {% set _ = selected_periods.append(item[2]) %}
+                                        {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div style="display: none;">
+                                    {% for item in data %}
+                                    <input name='teacher_mail' value="{{ item[0] }}" type="text" class="form-control"
+                                        id="teacher_mail" aria-describedby="student_class">
+                                    {% endfor %}
+                                </div>
+
+                                <br><br>
+                                <button type="submit" class="_btn_04">Submit</button>
+                            </form>
+                            <br>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <br><br>
-
-        <div>
-            <label for="teacher_period" class="form-label">Select Your Period</label>
-            <select name="teacher_period" id="teacher_period" class="form-select" aria-label="Default select example" required>
-                <option value="" disabled selected hidden>Select your period</option>
-                {% set selected_periods = [] %}
-                {% for item in data %}
-                    {% if item[2] not in selected_periods %}
-                        <option value="{{ item[2] }}">{{ item[2] }}</option>
-                        {% set _ = selected_periods.append(item[2]) %}
-                    {% endif %}
-                {% endfor %}
-            </select>
-        </div>
-
-        <div style="display: none;">
-            {% for item in data %}
-                <input name='teacher_mail' value="{{ item[0] }}" type="text" class="form-control" id="teacher_mail" aria-describedby="student_class">
-            {% endfor %}
-        </div>
-
-        <br>
-        <input type="submit" class="btn btn-primary"></input>
-    </form>
-    <br>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
-</div>
+</section>
 {% endblock mainbody %}
-
-{% block extra_scripts %}
-<!-- Additional scripts specific to teacher_dairy.html can be added here -->
-{% endblock %}
-
-
-
-
-

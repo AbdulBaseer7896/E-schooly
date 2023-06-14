@@ -26,38 +26,74 @@ School Admin | Result
     }
 </style>
 
-<h1>This is hello hi and nice</h1>
-<div class="container">
 
-    {% for key, rows in grouped_data.items() %}
-        <h2>Exam Type: {{ key[0] }}</h2>
-        <h3>Exam Date: {{ key[1] }}</h3>
-        
-        <table>
-            <tr>
-                <th>Subject</th>
-                <th>Total Marks</th>
-                <th>Obtain Marks</th>
-            </tr>
-            
-            {% for row in rows %}
-                <tr>
-                    <td>{{ row[4] }}</td>
-                    <td>{{ row[6] }}</td>
-                    <td>{{ row[5] }}</td>
-                </tr>
+<section class="form-02-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="_lk_de">
+                    <div class="form-04-main">
+                        <div class="logo">
+                            <img src="/static/images/public_images/user.png">
+                        </div>
 
-            {% endfor %}
-            
-            <tr class="total-row">
-                <td>Total</td>
-                <td>{{ key[2] }}</td>  {# Display the total marks for the exam #}
-                <td>{{ key[3] }}</td>  {# Display the obtained marks for the exam #}
-            </tr>
+                        <h1 class="text-center">Student Result</h1>
+                        <br>
+                        <h3 class="text-center">Name: {{result_data[0][0]}}</h3>
+                        <h3 class="text-center">Roll Number: {{result_data[0][1]}}</h3>
 
-        </table>
-    {% endfor %}
-    
-</div>
+                        {% for key, rows in grouped_data.items() %}
 
+                        <div class="row">
+                            <div class="col-6 col-md-6 text-center">
+                                <h6 class="mb-0 text-secondary">Exam Name</h6>
+                                <h5>{{ key[0] }}</h5>
+                            </div>
+
+                            <div class="col-6 col-md-6 text-center">
+                                <h6 class="mb-0 text-secondary">Exam Date</h6>
+                                <h5>{{ key[1] }}</h5>
+                                <br>
+                            </div>
+
+                        </div>
+
+                        <table>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Total Marks</th>
+                                <th>Obtain Marks</th>
+                            </tr>
+
+                            {% for row in rows %}
+                            <tr>
+                                <td>{{ row[4] }}</td>
+                                <td>{{ row[6] }}</td>
+                                <td>
+                                    <h5>{{ row[5] }}</h5>
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+
+                            <tr class="total-row">
+                                <td>Total</td>
+                                <td>{{ key[2] }}</td> {# Display the total marks for the exam #}
+                                <td>
+                                    <h5>{{ key[3] }}</h5>
+                                </td> {# Display the obtained marks for the exam #}
+                            </tr>
+
+                        </table>
+                        <br><br>
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
 {% endblock mainbody %}

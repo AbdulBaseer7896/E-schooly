@@ -141,7 +141,7 @@ class principal_models():
             
             print("The dariy is delete for file")
             print(data[4])
-            if data[4] != None:
+            if data[4] != "":
                 os.remove(f"static/{data[4]}")
             return cheek
         
@@ -166,4 +166,33 @@ class principal_models():
             else:
                 print("Ther is not teacher in the data base")
                 return False
+        
+        
+
+    def search_student_admission_data_for_principal(self, data):
+        print("The is search student admission data")
+        with self.engine.connect() as conn:
+            try:
+                query = text(f"SELECT * FROM student_information WHERE name = '{data['email_search']}' OR form_b = '{data['b_from_search']}' OR student_registration_number = '{data['student_registration_number']}';")
+                user = conn.execute(query).fetchall()
+            except:
+                query = text(f"SELECT * FROM student_information WHERE name = '{data[0]}' OR form_b = '{data[1]}' OR student_registration_number = '{data[2]}';")
+                user = conn.execute(query).fetchall()
+            if user:
+                print("the data in user is = ")
+                print(user)
+                return user
+            else:
+                return ""
+                # return render_template('school_admin_URLs/school_admin_dashboard.html' , data = user)
+                
+                
+
+    def take_student_result_data_for_principal(self , data):
+        print("This is sj foiajsgoi jsogj aosjgo ja   = = = = " , data)
+        with self.engine.connect() as conn:
+            query1 = text(f"SELECT b_form_name, roll_number , student_email , result_type, subject, markes , total_marks , result_date  FROM result_student_subject_marks WHERE student_email = '{data}' ORDER BY result_type, result_date DESC;")
+            result = conn.execute(query1).fetchall()
+            return result
+
         

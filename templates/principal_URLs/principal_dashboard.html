@@ -7,12 +7,17 @@ Principal | HOME
 
 {% block mainbody %}
 
+<section class="form-02-main">
+    <br>
+    
+    <div class="container">
+
 {% with messages = get_flashed_messages() %}
     {% if messages %}
         {% for message, category in messages %}
             {% if category == 'principal_periods' %}
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">{{ message }}
+                    <h4 class="alert-heading text-center">{{ message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -20,7 +25,7 @@ Principal | HOME
                 </div>
             {% elif category == 'principal_notification' %}
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">{{ message }}
+                    <h4 class="alert-heading text-center">{{ message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -28,7 +33,7 @@ Principal | HOME
                 </div>
             {% elif category == 'principal_login' %}
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">{{ message }}
+                    <h4 class="alert-heading text-center">{{ message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -36,7 +41,7 @@ Principal | HOME
                 </div>
             {% elif category == 'delete_notification_principal' %}
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">{{ message }}
+                    <h4 class="alert-heading text-center">{{ message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -44,7 +49,7 @@ Principal | HOME
                 </div>
             {% elif category == 'no_period_assigned_by_principal' %}
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">{{ message }}
+                    <h4 class="alert-heading text-center">{{ message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -52,7 +57,7 @@ Principal | HOME
                 </div>
             {% elif category == 'no_class_teacher' %}
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">{{ message }}
+                    <h4 class="alert-heading text-center">{{ message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -60,7 +65,7 @@ Principal | HOME
                 </div>
             {% elif category == 'no_notifitaion_to_deleate_for_principal' %}
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">{{ message }}
+                    <h4 class="alert-heading text-center">{{ message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -72,6 +77,9 @@ Principal | HOME
 {% endwith %}
 
 
-<h1> This is principal home or Dashboard</h1>
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>    
+</div>
+</section>
+
 {% endblock mainbody %}

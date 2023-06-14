@@ -9,80 +9,97 @@ Principal | Send Notification
 
 
 
-<div class=" container big-font">
-    <form action="{{ url_for('send_principal_notification') }}" method="post"  enctype="multipart/form-data">
-        <br>
-        <h1 style="text-align: center;">Send Notifications to teachers</h1>
-        <br>
 
-
-        <!-- titles -->
-        <div class="row">
-            <div class="col-md-3">
-                <div class="mb-3">
-                    <label for="titles" class="form-label">Title of Notification</label>
-                    <input name="titles" placeholder="Tomorrow school will be closed"  type="text" class="form-control" id="titles"
-                        aria-describedby="titles" maxlength="70" minlength="5" required>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="mb-3">
-                    <label for="target_audience" class="form-label">Select Target Audience</label>
-                    <select name="target_audience" value="" id="target_audience" class="form-select"
-                        aria-label="Default select example" required>
-                        <option value='' disabled selected hidden >Select the Audience</option>
-                        <option value='both' name="both" > Teacher/Student Both </option>
-                        <option value='teacher' name="teacher">Teacher</option>
-                        <option value='student' name="student">Students</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="mb-3">
-                    <label  class="form-label">Notification Document</label>
-                    <input name="notification_document" type="file" class="form-control" >
-
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <!-- Date -->
-                <div class="mb-3">
-                    <label for="date" class="form-label">Date</label>
-                    <input name="date" value="" class="form-control" id="date"
-                        aria-describedby="date" type="date" required>
-                </div>
-
-            </div>
-        </div>
-
-
-        <!-- Father name of teacher -->
-
+<section class="form-02-main">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="mb-3">
-                    <label for="details" class="form-label">Write the details of Notification</label>
-                    <!-- <input name="details"  type="text" class="form-control" id="details"
+                <div class="_lk_de">
+                    <div class="form-03-main">
+                        <div class="logo">
+                            <img src="/static/images/public_images/user.png">
+                        </div>
+
+                        <h1 class="text-center">Send Notification</h1>
+                        <br><br>
+                        <div class=" container big-font">
+                            <form action="{{ url_for('send_principal_notification') }}" method="post"
+                                enctype="multipart/form-data">
+                                <!-- titles -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="titles" class="form-label">Title of Notification</label>
+                                            <input name="titles" placeholder="Tomorrow school will be closed"
+                                                type="text" class="form-control" id="titles" aria-describedby="titles"
+                                                maxlength="70" minlength="5" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="target_audience" class="form-label">Select Target
+                                                Audience</label>
+                                            <select name="target_audience" value="" id="target_audience"
+                                                class="form-select" aria-label="Default select example" required>
+                                                <option value='' disabled selected hidden>Select the Audience</option>
+                                                <option value='both' name="both"> Teacher/Student Both </option>
+                                                <option value='teacher' name="teacher">Teacher</option>
+                                                <option value='student' name="student">Students</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Notification Document</label>
+                                            <input name="notification_document" type="file" class="form-control">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12-">
+                                        <!-- Date -->
+                                        <div class="mb-3">
+                                            <label for="date" class="form-label">Date</label>
+                                            <input name="date" value="" class="form-control" id="date"
+                                                aria-describedby="date" type="date" required>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <!-- Father name of teacher -->
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="details" class="form-label">Write the details of
+                                                Notification</label>
+                                            <!-- <input name="details"  type="text" class="form-control" id="details"
                         aria-describedby="details" > -->
-                    <textarea name="details" type="text"  placeholder="Type some details thing about Notification" class="form-control" id="details"
-                        aria-describedby="details" rows="4" cols="50" required></textarea>
+                                            <textarea name="details" type="text"
+                                                placeholder="Type some details thing about Notification"
+                                                class="form-control" id="details" aria-describedby="details" rows="4"
+                                                cols="50" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br>
+                                <button type="submit" class="_btn_04">Submit</button>
+
+                        </div>
+                        <br>
+                        <br><br>
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <br>
-        <input type="submit" class="btn btn-primary"></input>
-        
     </div>
-<br>
-<br><br>
-<!-- <a href="{{ url_for('forget_password') }}">Forget Password</a> -->
-</form>
-</div>
-<br>
+</section>
 
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
 {% endblock mainbody %}

@@ -7,12 +7,18 @@ Teacher | HOME
 
 {% block mainbody %}
 
+
+<section class="form-02-main">
+    <br>
+    
+    <div class="container">
+
 {% with messages = get_flashed_messages() %}
     {% if messages %}
         {% for message, category in messages %}
             {% if category == 'student_dairy_done' %}
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">{{ message }}
+                    <h4 class="alert-heading text-center">{{ message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -20,7 +26,7 @@ Teacher | HOME
                 </div>
             {% elif category == 'sudent_attandance_done' %}
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">{{ message }}
+                    <h4 class="alert-heading text-center">{{ message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -28,7 +34,7 @@ Teacher | HOME
                 </div>
             {% elif category == 'class_student_notification_done' %}
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">{{ message }}
+                    <h4 class="alert-heading text-center">{{ message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -36,7 +42,7 @@ Teacher | HOME
                 </div>
                 {% elif category == 'result_uploaded' %}
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <h4 class="alert-heading">{{ message }}
+                        <h4 class="alert-heading text-center">{{ message }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -44,7 +50,7 @@ Teacher | HOME
                     </div>
                 {% elif category == 'result_will_not_uploaded' %}
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <h4 class="alert-heading">{{ message }}
+                        <h4 class="alert-heading text-center">{{ message }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -52,7 +58,7 @@ Teacher | HOME
                     </div>
             {% elif category == 'teacher_login' %}
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">{{ message }}
+                    <h4 class="alert-heading text-center">{{ message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -60,7 +66,7 @@ Teacher | HOME
                 </div>
             {% elif category == 'delete_student_dariy' %}
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <h4 class="alert-heading">{{ message }}
+                <h4 class="alert-heading text-center">{{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -68,7 +74,7 @@ Teacher | HOME
             </div>
             {% elif category == 'no_student_in_teacher_attandance' %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <h4 class="alert-heading">{{ message }}
+                <h4 class="alert-heading text-center">{{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button> 
@@ -76,7 +82,7 @@ Teacher | HOME
             </div>
             {% elif category == 'no_notification_send_by_teacher_to_student' %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <h4 class="alert-heading">{{ message }}
+                <h4 class="alert-heading text-center">{{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button> 
@@ -84,7 +90,7 @@ Teacher | HOME
             </div>
             {% elif category == 'no_student_for_upload_result' %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <h4 class="alert-heading">{{ message }}
+                <h4 class="alert-heading text-center">{{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button> 
@@ -92,7 +98,7 @@ Teacher | HOME
             </div>
             {% elif category == 'delete_notification_principal' %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <h4 class="alert-heading">{{ message }}
+                <h4 class="alert-heading text-center">{{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button> 
@@ -100,7 +106,7 @@ Teacher | HOME
             </div>
             {% elif category == 'delete_notification_teacher' %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <h4 class="alert-heading">{{ message }}
+                <h4 class="alert-heading text-center">{{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button> 
@@ -108,7 +114,7 @@ Teacher | HOME
             </div>
             {% elif category == 'no_notification_for_teacher' %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <h4 class="alert-heading">{{ message }}
+                <h4 class="alert-heading text-center">{{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button> 
@@ -116,7 +122,7 @@ Teacher | HOME
             </div>
             {% elif category == 'not_a_class_teacher_of_send_notification' %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <h4 class="alert-heading">{{ message }}
+                <h4 class="alert-heading text-center">{{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button> 
@@ -124,7 +130,7 @@ Teacher | HOME
             </div>
             {% elif category == 'teacher_delete_dairy' %}
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <h4 class="alert-heading">{{ message }}
+                <h4 class="alert-heading text-center">{{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button> 
@@ -132,7 +138,7 @@ Teacher | HOME
             </div>
             {% elif category == 'teacher_not_appload_dairy' %}
             <div class="alert alert-dark alert-dismissible fade show" role="alert">
-                <h4 class="alert-heading">{{ message }}
+                <h4 class="alert-heading text-center">{{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button> 
@@ -143,7 +149,10 @@ Teacher | HOME
     {% endif %}
 {% endwith %}
 
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>    
+</div>
+</section>
 
-<h1> This is Teacher home or Dashboard</h1>
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
+</div>
 {% endblock mainbody %}

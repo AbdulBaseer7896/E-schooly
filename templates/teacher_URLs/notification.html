@@ -7,62 +7,81 @@ Teacher | Notification
 
 {% block mainbody %}
 
-<h1> This is Teacher Notification page</h1>
-
-
-
-<div class="container">
-    <div class="main-body">
-        <div class="row gutters-sm">
-
+<section class="form-02-main">
+    <div class="container">
+        <div class="row">
             <div class="col-md-12">
-                <div class="card mb-3">
-                    {% for item in notification %}
-                    <div class="card-body">
+                <div class="_lk_de">
 
-                            
-                        <div class="row">
-                            <div class="col-sm-1">
-                                <h6 class="mb-0">Title</h6>
-                            </div>
-                            <div class="col-sm-2 text-secondary">
-                                {{item[0]}}
-                            </div>
+                    <div class="form-04-main">
+                        <div class="logo">
+                            <img src="/static/images/public_images/user.png">
+                        </div>
+                        <h1 class="text-center">Notifications For Teacher</h1>
+                        <br><br>
 
-                            <div class="col-sm-2">
-                                <h6 class="mb-0">Notification Documber </h6>
-                            </div>
-                            <div class="col-sm-2 text-secondary">
-                                {% if item[3] == None %}
-                                <a href="#" > No Download File Attached</a>
-                                {% endif  %}
-                                {% if item[3] != None %}
-                                <a href="/static/{{item[3]}} " download>Download File</a>
-                                {% endif  %}
-                            </div>
+                        <div class="form-group">
+                            <!-- <input type="email" name="email_login" class="form-control _ge_de_ol" type="text" placeholder="Enter Email" required="" aria-required="true"> -->
+                            <!-- <div class="col-md-12">
+                                                <div class="card mb-3"> -->
+                            <div class="card-body">
+                                {% for item in notification %}
+                                <div class="row">
+                                    <div class="col-12 col-sm-5">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <h6 class="mb-0 text-secondary">Title</h6>
+                                                <h6>{{ item[0] }}</h6>
+                                            </div>
+                                            <div class="col-5">
+                                                <h6 class="mb-0 text-secondary">Date</h6>
+                                                <h5>{{ item[1] }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <div class="col-sm-2">
-                                <h6 class="mb-0">Date </h6>
-                            </div>
-                            <div class="col-sm-2 text-secondary">
-                                {{item[1]}}
+                                    <div class="col-12 col-sm-2">
+                                        <h6 class="mb-0 text-secondary">Document</h6>
+                                        <div class="col-sm-4 text-secondary">
+                                            {% if item[3] == None or item[3] == "" %}
+                                            <a href="#"> No_File</a>
+                                            {% endif %}
+                                            {% if item[3] != None and item[3] != "" %}
+                                            <a href="/static/{{item[3]}} " download>Download</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-sm-5">
+                                        <br class="d-sm-none">
+                                        <div class="row">
+                                            <div class="col-sm-2 text-secondary">
+                                                <h6 class="mb-0">Details</h6>
+                                            </div>
+                                            <h6 class="col-sm-10 ">
+                                                {{item[2]}}
+                                            </h6>
+                                        </div>
+                                    </div>
+
+
+                                    <br>
+                                    <hr>
+                                </div>
+                                {% endfor %}
+                                <input name="teacher_information" value="{{data}}" style="display: none;" type="text"
+                                    class="form-control" id="teacher_information"
+                                    aria-describedby="teacher_information">
+
+                                </form>
+
                             </div>
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <h6 class="mb-0">Details</h6>
-                            </div>
-                            <div class="col-sm-4 text-secondary">
-                                {{item[2]}}
-                            </div>
-                        </div>
-                        <br>
-                        <hr>
-                        <hr>
-                        <br>
                     </div>
-                    {% endfor %}
-</div>
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
+                </div>
+            </div>
+</section>
+
+
+
 {% endblock mainbody %}

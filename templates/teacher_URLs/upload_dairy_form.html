@@ -7,13 +7,22 @@ Teacher | Write Dairy
 
 {% block mainbody %}
 
-<div class=" container big-font">
+
+<section class="form-02-main">
+    <div class="container">
+<div class="row">
+    <div class="col-md-12">
+        <div class="_lk_de">
+            <div class="form-04-main">
+                <div class="logo">
+                    <img src="/static/images/public_images/user.png">
+                </div>
+
+
+                <h1 class="text-center">Fill Dairy For {{data['teacher_class']}} Subject {{data['teacher_period']}}</h1>
+                <br><br>
+
     <form action="{{ url_for('upload_dairy_form') }}" method="post"  enctype="multipart/form-data">
-        <br>
-        <h1 style="text-align: center;">Write a Dairy for {{data['teacher_class']}} subject {{data['teacher_period']}}</h1>
-        <br>
-
-
         <!-- Bood name -->
         <div class="row">
             <div class="col-md-4">
@@ -107,15 +116,18 @@ Teacher | Write Dairy
         <input style="display: none;" name="teacher_mail" value="{{data['teacher_mail']}}" type="text" class="form-control" id="teacher_mail"
         aria-describedby="teacher_mail">
         
-        <input type="submit" class="btn btn-primary"></input>
+        <button type="submit" class="_btn_04">Submit</button>
 
         <br>
         <br><br>
         
     </form>
+
 </div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati
-    velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
 {% endblock mainbody %}

@@ -6,120 +6,120 @@ Teacher | Take Attandance
 {% endblock title %}
 
 {% block mainbody %}
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
+
+
+<section class="form-02-main">
+    <div class="container">
+        <br>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
         {% for message, category in messages %}
-            {% if category == 'student_attendance_warning' %}
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">{{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </h4>
-                </div>
-            {% endif %} 
+        {% if category == 'student_attendance_warning' %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading text-center">{{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </h4>
+        </div>
+        {% endif %}
         {% endfor %}
-    {% endif %}
-{% endwith %}
-
-<h1>Kindly Take the Attandance</h1>
+        {% endif %}
+        {% endwith %}
 
 
-<div class="container">
-    <div class="main-body">
-        <div class="col-md-12 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex flex-column align-items-center text-center">
-                        <h4 class="text-secondary mb-1">Teacher Profile</h4>
-                        <br><br>
-                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle"
-                            width="150">
-                        <div class="mt-3">
-                            <h4>hi</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="_lk_de">
+                    <div class="form-04-main">
+                        <div class="logo">
+                            <img src="/static/images/public_images/user.png">
+                        </div>
 
+                        <h1 class="text-center">Class Attandance</h1>
+
+                        <div class="form-group">
+                            <!-- <input type="email" name="email_login" class="form-control _ge_de_ol" type="text" placeholder="Enter Email" required="" aria-required="true"> -->
+                            <!-- <div class="col-md-12">
+                        <div class="card mb-3"> -->
+                            <div class="card-body">
+                                {% for item in info %}
+
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <h6 class="mb-0 text-secondary">Name</h6>
+                                                <h6>{{ item[0] }}</h6>
+                                            </div>
+                                            <div class="col-6">
+                                                <h6 class="mb-0 text-secondary">Roll #</h6>
+                                                <h5>{{ item[2] }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <h6 class="mb-0 text-secondary">Email</h6>
+                                        <h6>{{ item[1] }}</h6>
+                                    </div>
+                                    <div class="col-12">
+                                        <form action="{{ url_for('student_attendance') }}" method="POST">
+                                            <div class="form-group">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <label for="checkbox{{ item[2] }}" class="mr-2">He is
+                                                            Absent</label>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <input value="1" name="cheek{{item[2]}}" type="checkbox"
+                                                            id="checkbox{{ item[2] }}" style="transform: scale(2.1);"
+                                                            onclick="updateValue(this)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input name="student_email{{item[2]}}" value="{{item[1]}}"
+                                            style="display: none;" type="text" class="form-control"
+                                            id="student_email" aria-describedby="student_email{{item[2]}}">
+                                        <input name="student_roll_number{{item[2]}}" value="{{item[2]}}"
+                                            style="display: none;" type="text" class="form-control"
+                                            id="student_roll_number"
+                                            aria-describedby="student_roll_number{{item[2]}}">
+                                        <input name="student_class{{item[2]}}" value="{{item[3]}}"
+                                            style="display: none;" type="text" class="form-control"
+                                            id="student_class" aria-describedby="student_class{{item[2]}}">
+                                    </div>
+                                </div>
+                                <hr>
+                                {% endfor %}
+                                </div>
+                                
+                                
+                                <input style="display: none;" name="email_login" value="{{data}}" type="text"
+                                class="form-control" id="email_login" aria-describedby="email_login">
+                                
+                                <div class="form-group">
+                                    <button type="submit" class="_btn_04">Submit</button>
+                                </div>
+                                </form>
+                                <!-- abdulbaseerqazi-23-1234-9@iqra.edu -->
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+</section>
 
-        <div class="row gutters-sm">
 
-            <div class="col-md-12">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        {% for item in info %}
-                            
-                        <div class="row">
-                            <div class="col-sm-1">
-                                <h6 class="mb-0">Student Name</h6>
-                            </div>
-                            <div class="col-sm-2 text-secondary">
-                                {{item[0]}}
-                            </div>
-
-                            <div class="col-sm-1">
-                                <h6 class="mb-0">Roll #</h6>
-                            </div>
-                            <div class="col-sm-1 text-secondary">
-                                {{item[2]}}
-                            </div>
-                            
-                            <div class="col-sm-1">
-                                <h6 class="mb-0">Email</h6>
-                            </div>
-                            <div class="col-sm-3 text-secondary">
-                                {{item[1]}}
-                                <!-- abdulbaseerqazi-23-1234-9@iqra.edu -->
-                            </div>
-
-                            <div class="col-sm-3 text-secondary">
-                                <form action="{{ url_for('student_attendance') }}" method="post">
-                                    <label for="checkbox{{item[2]}}">He is Absent &nbsp; &nbsp;</label>
-                                    <input value='1' name="cheek{{item[2]}}" type="checkbox" id="checkbox{{item[2]}}" style="transform: scale(1.5);" onclick="updateValue(this)">
-
-                                    <!-- not display but we used email and roll number and class to stored the attandace in database -->
-
-                                    <input name="student_email{{item[2]}}" value="{{item[1]}}" style="display: none;" type="text" class="form-control" id="student_email"
-                                    aria-describedby="student_email{{item[2]}}">
-                                    <input name="student_roll_number{{item[2]}}" value="{{item[2]}}" style="display: none;" type="text" class="form-control" id="student_roll_number"
-                                    aria-describedby="student_roll_number{{item[2]}}">
-                                    <input name="student_class{{item[2]}}" value="{{item[3]}}" style="display: none;" type="text" class="form-control" id="student_class"
-                                    aria-describedby="student_class{{item[2]}}">
-                                    
-
-                                </div>
-                            </div>
-                                    <br>
-                                    <hr>
-                                    {% endfor %}
-                                
-                                    <input style="display: none;" name="email_login" value="{{data}}" type="text" class="form-control" id="email_login"
-                                    aria-describedby="email_login">
-
-                                        <input type="submit" class="btn btn-primary" value="Submit"></input>
-                                        <br>
-                                        <br>
-                                        <br><br>
-
-                                  </form>
-                                <!-- abdulbaseerqazi-23-1234-9@iqra.edu -->
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    function updateValue(checkbox) {
-      var value = checkbox.checked ? 1 : 0;
-      console.log(value);
-    }
-</script>
-
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto cupiditate corporis perferendis minus eum obcaecati
-    velit veritatis, aliquam iste vel est earum consequuntur odio tenetur dolore. Sapiente vitae voluptate omnis.</p>
 {% endblock mainbody %}
+
+
+
+
+
+
+
+
+
+
+
