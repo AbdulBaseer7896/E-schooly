@@ -189,5 +189,17 @@ def forget_password_by_admin():
     
     
 
+
+@app.route('/principal/check_student_attandance', methods=["GET", "POST"])
+@login_required('school_admin')
+def check_student_attandance():
+    if request.method == "GET":
+        attendance = obj.take_student_attandance_for_db()
+        total_attendance = obj.take_total_number_of_working_days_of_student()
+        
+        return render_template('school_admin_URLs/student_attandance.html', attendance=attendance, total_attendance=total_attendance)
+
+
+
 # [('daimraza-3-3-10@iqra.edu', '3710471513456', 'Abdula Khan', '3701471623456', 'Muslim', 'Male', 'Class 10', datetime.date(2023, 5, 24), '', '34567892345', 'Class 9', 'A-', 'Math , science , Data science , Data Base', 'Abc home pindi ghen, Attock ,pakistan', 'Iqra education school pindi ghed , Attock', 'Abdula Khan', '34567823456', '3', 'Daim Raza', '3', 0)]
 # [('M Hamza', '1', 'mhamza-1-4-9@iqra.edu', 'Final Exam', 'Math', 50, 100, datetime.date(2023, 5, 19)), ('M Hamza', '1', 'mhamza-1-4-9@iqra.edu', 'Final Exam', 'Urdu Book', 30, 100, datetime.date(2023, 5, 19)), ('M Hamza', '1', 'mhamza-1-4-9@iqra.edu', 'Mid Exam', 'English Book', 80, 100, datetime.date(2023, 5, 19))]

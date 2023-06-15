@@ -198,3 +198,14 @@ def forget_password_by_principal():
         else:
             flash(("That user could not exit !!! Recheck the User-type And Search Information !!!" , 'no_user_found_for_forget_password_principal'))
             return render_template("principal_URLs/forget_password_by_principal.html" , data = data)
+        
+        
+@app.route('/principal/check_teacher_attandance', methods=["GET", "POST"])
+@login_required('principal')
+def check_teacher_attandance():
+    if request.method == "GET":
+        attendance = obj.take_teacher_attandance_for_db()
+        total_attendance = obj.take_total_number_of_working_days_of_teacher()
+        
+        return render_template('principal_URLs/teacher_attandance.html', attendance=attendance, total_attendance=total_attendance)
+

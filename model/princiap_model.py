@@ -234,3 +234,20 @@ class principal_models():
             query = text(f"SELECT * FROM user_login_table WHERE user_name = '{data[0][0]}';")
             user = conn.execute(query).fetchall()
             return user
+        
+        
+    def take_teacher_attandance_for_db(self):
+        with self.engine.connect() as conn:
+            query = text(f"SELECT cnic_name , name , whatapp_number , teacher_id , teacher_attendance  FROM teacher_information ORDER BY teacher_attendance DESC;")
+            user = conn.execute(query).fetchall()
+            return user
+        
+    
+    def take_total_number_of_working_days_of_teacher(self):
+        with self.engine.connect() as conn:
+            query = text(f"SELECT total_teacher_attendance  FROM total_attendance;")
+            user = conn.execute(query).fetchall()
+            return user
+        
+        
+    

@@ -115,6 +115,7 @@ class teacher_model():
             
     def mark_student_attandance(self , student_marks):
         with self.engine.connect() as conn:
+            print("THis is class data id i  = = =  = 444 = = " , student_marks)
             for i in range(0 , len(student_marks) ):
                 if student_marks[i][3] == '1':
                     query1 = text(f"UPDATE student_information SET student_attendance = student_attendance + '1'  where name = '{student_marks[i][0]}';")
@@ -126,7 +127,8 @@ class teacher_model():
             print("This is cheek = " , check)
                     
             if check:
-                query3 = text(f"UPDATE total_attendance SET total_student_attendance = total_student_attendance + '1'  where class = '{student_marks[i][1]}';")
+                print("Thisi makrj  fkdasjf kojasdo fjoid  = =   =  =" , student_marks[0][1])
+                query3 = text(f"UPDATE total_attendance SET total_student_attendance = total_student_attendance + '1'  where class = '{student_marks[0][1]}';")
                 conn.execute(query3)
                 print("Its run")
             else:
