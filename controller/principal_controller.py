@@ -177,3 +177,24 @@ def seach_student_result_principal():
         return render_template('principal_URLs/dispaly_student_result_to_principal.html', result_data=marks_result, data=data, grouped_data=updated_grouped_data, combined_data=combined_data)
 
     
+    
+    
+    
+@app.route('/principal/forget_password_by_principal' , methods=["GET", "POST"])
+@login_required('principal')
+def forget_password_by_principal():
+    if request.method == "GET":
+        flash(("Do Not Share User Personal Information to Any Body !!! Except User Parents !!!" , 'forget_password_warrning_principal'))
+        return render_template('principal_URLs/forget_password_by_principal.html')
+    elif request.method == 'POST':
+        data = request.form.to_dict()
+        print("This is data = = " , data)
+        result = obj.search_user_data_for_forger_password_by_principal(data)
+        print("The result is si si =  = " , result)
+        if result:
+                password_data = obj.search_user_passwrod_by_principal(result)
+                print("This is password data is = == = " , password_data)
+                return render_template('principal_URLs/display_password_principal.html' , data = data , password_data = password_data , result = result)
+        else:
+            flash(("That user could not exit !!! Recheck the User-type And Search Information !!!" , 'no_user_found_for_forget_password_principal'))
+            return render_template("principal_URLs/forget_password_by_principal.html" , data = data)

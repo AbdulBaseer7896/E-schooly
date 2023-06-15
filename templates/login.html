@@ -30,10 +30,10 @@
       <header class="header_section">
         <div class="container">
           <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{ url_for('hello_world') }}">
               <img src="/static/images/public_images/logo.png" alt="">
               <span>
-                IQRA
+                IQRA | Login
               </span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -86,13 +86,31 @@
       {% with messages = get_flashed_messages() %}
       {% if messages %}
           {% for message, category in messages %}
-              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                  <h4 class="alert-heading text-center">{{ message }}
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                      </button>
-                  </h4>
-              </div>
+              {% if category == 'login_fail' %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading text-center">{{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h4>
+                </div>
+              {% elif category == 'login_page_display' %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading text-center">{{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h4>
+                </div>
+            {% elif category == 'forget_password' %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading text-center">{{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h4>
+                </div>
+                {% endif %}
           {% endfor %}
       {% endif %}
   {% endwith %}
@@ -129,9 +147,9 @@
 
                 <div class="checkbox form-group">
                   <div class="form-check">
-                    <a href="#">Change Password</a>
+                    <a href="{{ url_for('changed_password') }}">Change Password</a>
                   </div>
-                  <a href="#">Forgot Password</a>
+                  <a href="{{ url_for('forget_password') }}">Forgot Password</a>
                 </div>
 
                 <div class="form-group">
@@ -142,8 +160,8 @@
                 <div class="form-group nm_lk"><p>Find Iqra on</p></div>
 
                 <div class="form-group pt-0">
-                  <div class="_social_04">
-                    <ol>
+                  <div class="_social_04 d-flex justify-content-center">
+                    <ol class="list-unstyled d-flex align-items-center">
                       <li><i class="fa fa-facebook"></i></li>
                       <li><i class="fa fa-twitter"></i></li>
                       <li><i class="fa fa-google-plus"></i></li>
@@ -152,6 +170,7 @@
                     </ol>
                   </div>
                 </div>
+                
               </div>
             </div>
           </div>

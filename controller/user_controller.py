@@ -42,7 +42,7 @@ class User:
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
-        flash(('This login page is just for School Student and School Staff. IF you are outsider then Kindly do not try to login !!!!', 'warning'))
+        flash(('This login page is just for School Student and School Staff. IF you are outsider then Kindly do not try to login !!!!', 'login_page_display'))
         return render_template("login.html")
     
     elif request.method == 'POST':
@@ -74,29 +74,43 @@ def login():
                 return redirect(url_for('staff_dashboard'))
         else:
             print("NO match")
-            flash(('Wrong email or password. Please try again.', 'danger'))
+            flash(('Wrong email or password. Please try again.', 'login_fail'))
             return render_template("login.html")
     return render_template('login.html')
+
+
+@app.route("/changed_password", methods=["GET", "POST"])
+def changed_password():
+        if request.method == "GET":
+        # if the request is a GET request, render the login form
+        # flash("Welcome to the website!", "success")
+            return render_template("changed_user_password.html")
+        elif request.method == 'POST':
+            data = request.form.to_dict()
+            print("The data is = data  = = =" , data)
+            
+            if obj.changed_password_for_db(data):
+                flash(("Your Password Update Successfully !!! ", "changed_password_pass"))
+                return render_template('login.html')
+            else:
+                print("You email or user type is wrong")
+                flash(("Some Thing Going Wrong !!! Cheek You Email , Password and User type Again !!!" , "changed_password_fail"))
+                return render_template('changed_user_password.html')        
+
+
 
 
 @app.route("/forget_password", methods=["GET", "POST"])
 def forget_password():
         if request.method == "GET":
         # if the request is a GET request, render the login form
-        # flash("Welcome to the website!", "success")
-            return render_template("Forget_password.html")
-        elif request.method == 'POST':
-            username = request.form['email_login']
-            password = request.form['password_login']
-            user_type = request.form['login-val']
-            data = request.form.to_dict()
-            
-            if obj.forget_password(data):
-                return render_template('login.html')
-            else:
-                print("You email or user type is wrong")
-                return render_template('forget_password.html')        
-        return render_template('login.html')
+            flash(("Contact with School Admin For Forget Password !!! Thanks !!!", "forger_password"))
+            return render_template("forget_password.html")
+
+
+
+
+
 
 # # create a dashboard route and view function for student
 @login_manager.user_loader
@@ -114,10 +128,6 @@ def logout():
 
 
 
-# @app.route("/logout")
-# def logout():
-#     session.clear()
-#     return redirect(url_for("login"))
 
 
 

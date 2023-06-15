@@ -168,5 +168,26 @@ def seach_student_result():
 
     
     
+@app.route('/school_admin/forget_password' , methods=["GET", "POST"])
+@login_required('school_admin')
+def forget_password_by_admin():
+    if request.method == "GET":
+        flash(("Do Not Share User Personal Information to Any Body !!! Except User Parents !!!" , 'forget_password_warrning'))
+        return render_template('school_admin_URLs/forget_password_by_admin.html')
+    elif request.method == 'POST':
+        data = request.form.to_dict()
+        print("This is data = = " , data)
+        result = obj.search_user_data_for_forger_password(data)
+        print("The result is si si =  = " , result)
+        if result:
+                password_data = obj.search_user_passwrod(result)
+                print("This is password data is = == = " , password_data)
+                return render_template('school_admin_URLs/display_password.html' , data = data , password_data = password_data , result = result)
+        else:
+            flash(("That user could not exit !!! Recheck the User-type And Search Information !!!" , 'no_user_found_for_forget_password'))
+            return render_template("school_admin_URLs/forget_password_by_admin.html" , data = data)
+    
+    
+
 # [('daimraza-3-3-10@iqra.edu', '3710471513456', 'Abdula Khan', '3701471623456', 'Muslim', 'Male', 'Class 10', datetime.date(2023, 5, 24), '', '34567892345', 'Class 9', 'A-', 'Math , science , Data science , Data Base', 'Abc home pindi ghen, Attock ,pakistan', 'Iqra education school pindi ghed , Attock', 'Abdula Khan', '34567823456', '3', 'Daim Raza', '3', 0)]
 # [('M Hamza', '1', 'mhamza-1-4-9@iqra.edu', 'Final Exam', 'Math', 50, 100, datetime.date(2023, 5, 19)), ('M Hamza', '1', 'mhamza-1-4-9@iqra.edu', 'Final Exam', 'Urdu Book', 30, 100, datetime.date(2023, 5, 19)), ('M Hamza', '1', 'mhamza-1-4-9@iqra.edu', 'Mid Exam', 'English Book', 80, 100, datetime.date(2023, 5, 19))]

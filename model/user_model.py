@@ -49,4 +49,19 @@ class user_model():
             return False
         
 
+
+    def changed_password_for_db(self , data):
+        print("THis si also a data =  = = " , data)
+        print("THis si also a data =  = = " , data['email_login'])
+        with self.engine.connect() as conn:
+            query = text(f"SELECT * FROM user_login_table WHERE user_name = '{data['email_login']}' AND password = '{data['old_password_login']}'  AND user_type = '{data['login-val']}';")
+            user = conn.execute(query).fetchall()
+            if user:
+                query1 = text(f"UPDATE user_login_table SET password = '{data['new_password_login']}' WHERE user_name ='{data['email_login']}'  AND user_type = '{data['login-val']}';")
+                user = conn.execute(query1)
+                return True
+            else:
+                print(data['login-val'])
+                return False
+        
         

@@ -195,4 +195,42 @@ class principal_models():
             result = conn.execute(query1).fetchall()
             return result
 
-        
+
+    def search_user_data_for_forger_password_by_principal(self , data):
+        print("The is search  teacher data" , data)
+        with self.engine.connect() as conn:
+            if data['login-val'] == 'student':
+                print("This is student")
+                query = text(f"SELECT * FROM student_information WHERE name = '{data['email_search']}' OR form_b = '{data['b_from_search']}' OR student_registration_number = '{data['search_registration_number']}';")
+                user = conn.execute(query).fetchall()
+            elif data['login-val'] == 'teacher':
+                print("This is teacher")
+                query = text(f"SELECT * FROM teacher_information WHERE name = '{data['email_search']}' OR cnic_number = '{data['b_from_search']}' OR teacher_id = '{data['search_registration_number']}';")
+                user = conn.execute(query).fetchall()
+            elif data['login-val'] == 'teacher_admin':
+                print("This is teacher admin")
+                query = text(f"SELECT * FROM user_login_table WHERE user_name = '{data['email_search']}' OR user_type = 'teacher_admin';")
+                user = conn.execute(query).fetchall()
+                
+            elif data['login-val'] == 'school_admin':
+                print("This is principal")
+                query = text(f"SELECT * FROM user_login_table WHERE user_name = '{data['email_search']}' OR user_type = 'school_admin';")
+                user = conn.execute(query).fetchall()
+            else:
+                return False
+            
+            if user:
+                print("the data in user is = ")
+                print(user)
+                return user
+            else:
+                return False
+            
+            
+    def search_user_passwrod_by_principal(self , data):
+        print("The data = d = = 99999 = " , data)
+        print("The data = d = = 99999 = " , data[0][0])
+        with self.engine.connect() as conn:
+            query = text(f"SELECT * FROM user_login_table WHERE user_name = '{data[0][0]}';")
+            user = conn.execute(query).fetchall()
+            return user
