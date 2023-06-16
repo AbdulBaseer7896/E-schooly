@@ -30,13 +30,48 @@
                 {% endblock title %}</title>
 
         </head>
+
+        <style>
+          body {
+            padding-top: 66px; /* Adjust this value to match the height of your navbar */
+          }
+        
+          .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+      
+            background-color: white;
+          }
+        
+          .navbar-brand {
+            display: flex;
+            align-items: center;
+          }
+        
+          .navbar-brand img {
+            height: 35px;
+            width: 35px;
+            margin-right: 10px;
+          }
+        
+          .navbar-nav {
+            margin-left: auto;
+          }
+        
+          .navbar-nav .nav-link {
+            padding: 0.5rem 1rem;
+          }
+        </style>
         <body>
 
 
       <!-- header section strats -->
       <header class="header_section">
-        <div class="container">
-          <nav class="navbar navbar-expand-lg custom_nav-container ">
+        <nav class="navbar navbar-expand-lg custom_nav">
+          <div class="container">
             <a class="navbar-brand" href="index.html">
               <img src="/static/images/public_images/logo.png" alt="">
               <span>

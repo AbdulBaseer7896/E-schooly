@@ -52,7 +52,7 @@ textarea {
   outline: none; 
 }
 
-.form-02-main{
+/* .form-02-main{
   background:url(/static/images/public_images/bg-01.jpg);
   background-size:cover;
   background-repeat:no-repeat;
@@ -60,7 +60,60 @@ textarea {
   position:relative;
   z-index:2;
   overflow:hidden;
+} */
+.form-02-main {
+  /* background: url(/static/images/public_images/bg-01.jpg); */
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+  background-position: top;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
 }
+
+
+.login_page {
+  background-image: url(/static/images/public_images/login.jpg);
+}
+
+
+.forget_page {
+  background-image: url(/static/images/public_images/forget_password.jpg);
+}
+
+.changed_password_page {
+  background-image: url(/static/images/public_images/changed_passwrod.jpg);
+}
+
+.t-admin-page {
+  background-image: url(/static/images/public_images/t_admin.jpg);
+}
+
+
+.s-admin-page {
+  background-image: url(/static/images/public_images/s_admin.jpg);
+}
+
+
+
+
+.teacher-page {
+  background-image: url(/static/images/public_images/teacher_page.jpg);
+}
+
+
+
+.principal-page {
+  background-image: url(/static/images/public_images/principal_page.jpg);
+}
+
+
+
+.student-page
+{
+  background-image: url(/static/images/public_images/student_page.jpg);
+}
+
 
 ._lk_de{
   
@@ -76,7 +129,7 @@ textarea {
   display:block;
   margin:20px auto;
   padding:25px 50px 25px;
-  background:rgba(255,255,255,0.6);
+  background:rgba(255, 255, 255, 0.794);
   border-radius:6px;
   z-index:9;
 }
