@@ -41,6 +41,23 @@
   
     <link rel="stylesheet" href="/static/css/css-circular-prog-bar.css">
   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('.navbar-toggler').on('click', function() {
+        $('.navbar-collapse').collapse('toggle');
+      });
+  
+      $(document).click(function(event) {
+        var target = $(event.target);
+        if (!target.closest('.navbar').length && !target.hasClass('navbar-toggler')) {
+          $('.navbar-collapse').collapse('hide');
+        }
+      });
+    });
+  </script>
   
   </head>
 

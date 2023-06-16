@@ -78,40 +78,40 @@ textarea {
 
 
 .forget_page {
-  background-image: url(/static/images/public_images/forget_password.jpg);
+  background-image: url(/static/images/public_images/bg-01.jpg);
 }
 
 .changed_password_page {
-  background-image: url(/static/images/public_images/changed_passwrod.jpg);
+  background-image: url(/static/images/public_images/bg-01.jpg);
 }
 
 .t-admin-page {
-  background-image: url(/static/images/public_images/t_admin.jpg);
+  background-image: url(/static/images/public_images/bg-01.jpg);
 }
 
 
 .s-admin-page {
-  background-image: url(/static/images/public_images/s_admin.jpg);
+  background-image: url(/static/images/public_images/bg-01.jpg);
 }
 
 
 
 
 .teacher-page {
-  background-image: url(/static/images/public_images/teacher_page.jpg);
+  background-image: url(/static/images/public_images/bg-01.jpg);
 }
 
 
 
 .principal-page {
-  background-image: url(/static/images/public_images/principal_page.jpg);
+  background-image: url(/static/images/public_images/bg-01.jpg);
 }
 
 
 
 .student-page
 {
-  background-image: url(/static/images/public_images/student_page.jpg);
+  background-image: url(/static/images/public_images/bg-01.jpg);
 }
 
 
