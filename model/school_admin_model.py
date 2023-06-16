@@ -26,14 +26,40 @@ class school_admin_models():
     def student_admission_data(self, data , image_path , student_id):
         print("This is data ", student_id)
         with self.engine.connect() as conn:
-                query_delete_email = text(f"DELETE FROM user_login_table WHERE user_name = '{student_id}' And user_type = 'student';")
-                conn.execute(query_delete_email)
-                
                 print("Teh aij fsidj ai dfk  as k " , data['student_name'])
                 print(data)
                 query1 = text(f"DELETE FROM student_information WHERE name = '{data['student_email']}';")
                 conn.execute(query1)
                 print("The row is deleate")
+                
+                
+                see_b_form = text(f"select form_b , student_registration_number FROM student_information WHERE form_b = '{data['B_form_number']}';")
+                cheek = conn.execute(see_b_form).fetchall()
+                print("This is very import and  999999999 student  = =  =" , cheek)
+                my_list = cheek
+                if cheek:
+                    my_list[0] = list(my_list[0])
+                    my_list[0].insert(2, 'student')
+                    my_list[0] = tuple(my_list[0])
+                    print(my_list)
+                    return my_list
+                                
+                see_b_form = text(f"select cnic_number , teacher_id FROM teacher_information WHERE cnic_number = '{data['B_form_number']}';")
+                cheek = conn.execute(see_b_form).fetchall()
+                print("This is very import and  999999999 teacher = =  =" , cheek)
+                my_list = cheek
+                if cheek:
+                    my_list[0] = list(my_list[0])
+                    my_list[0].insert(2, 'teacher')
+                    my_list[0] = tuple(my_list[0])
+                    print(my_list)
+                    return my_list
+            
+        
+                query_delete_email = text(f"DELETE FROM user_login_table WHERE user_name = '{student_id}' And user_type = 'student';")
+                conn.execute(query_delete_email)
+                
+
                 
                 query2 = text(f"SELECT  MAX(CAST(student_roll_number AS UNSIGNED))From student_information WHERE class = '{data['student_class']}';")
                 roll_number_max = conn.execute(query2).fetchall()
@@ -68,9 +94,8 @@ class school_admin_models():
                     print("username and password is insert in login table")
                     query5 = text(f"INSERT INTO user_login_table VALUES ('{modified_email}', '123', 'student');")
                     conn.execute(query5)
-                
-                flash(("New student data is add successfully!!!" , 'new_student_data'))
-                return render_template('school_admin_URLs/school_admin_dashboard.html')
+            
+                return True
 
 
     def stored_image_in_file_and_send_path_in_db(self , file , folder_name):
@@ -108,16 +133,43 @@ class school_admin_models():
                 # return render_template('school_admin_URLs/school_admin_dashboard.html' , data = user)
                 
                 
-    def teacher_joining_information(self , data , image_path , teacher_id):
+    def teacher_joining_information_to_db(self , data , image_path , teacher_id):
+        print(f"This is i iasdgon osj435r45       444444444 = = " , {data['cnic_number']})
         with self.engine.connect() as conn:
-            query_delete_email = text(f"DELETE FROM user_login_table WHERE user_name = '{teacher_id}' And user_type = 'teacher';")
-            conn.execute(query_delete_email)
             
             print("the data = " , teacher_id)
             print("This is data sk asdi ja = = = " , data)
             query2 = text(f"DELETE FROM teacher_information WHERE name = '{teacher_id}';")
             verify = conn.execute(query2)
             print("The row is deleate")
+            
+            
+            
+            see_cnic = text(f"select form_b , student_registration_number FROM student_information WHERE form_b = '{data['cnic_number']}';")
+            cheek = conn.execute(see_cnic).fetchall()
+            print("This is very import and  999999999 student  = =  =" , cheek)
+            my_list = cheek
+            if cheek:
+                my_list[0] = list(my_list[0])
+                my_list[0].insert(2, 'student')
+                my_list[0] = tuple(my_list[0])
+                print(my_list)
+                return my_list
+                            
+            see_b_form = text(f"select cnic_number , teacher_id FROM teacher_information WHERE cnic_number = '{data['cnic_number']}';")
+            cheek = conn.execute(see_b_form).fetchall()
+            print("This is very import and  999999999 teacher = =  =" , cheek)
+            my_list = cheek
+            if cheek:
+                my_list[0] = list(my_list[0])
+                my_list[0].insert(2, 'teacher')
+                my_list[0] = tuple(my_list[0])
+                print(my_list)
+                return my_list
+            query_delete_email = text(f"DELETE FROM user_login_table WHERE user_name = '{teacher_id}' And user_type = 'teacher';")
+            conn.execute(query_delete_email)
+            
+          
             
             
             query1 = text(f"SELECT  MAX(CAST(teacher_id AS UNSIGNED)) From teacher_information")

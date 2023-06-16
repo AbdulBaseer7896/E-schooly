@@ -8,6 +8,23 @@ School Admin | Updata Teacher Data
 {% block mainbody %}
     <section class="form-02-main s-admin-page">
         <div class="container">
+<br>
+
+            {% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for message, category in messages %}
+        {% if category == 'search_teacher_cnic' %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading text-center">{{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </h4>
+            </div>
+        {% endif %} 
+    {% endfor %}
+{% endif %}
+{% endwith %}
             <div class="row">
                 <div class="col-md-12">
                     <div class="_lk_de">

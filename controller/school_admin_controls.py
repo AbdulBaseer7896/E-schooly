@@ -41,9 +41,18 @@ def student_admission():
             image_path = ""
         # print("The student name = " , dataa['])
         print("THis is image path as you see = " , image_path)
-        obj.student_admission_data(dataa , image_path , student_id_for_updatae )
-        flash(('New Student Information Upload Successfully !!!' , 'student_admission_done'))
-        return render_template("school_admin_URLs/student_admission.html" ,  data = data )
+        cheek = obj.student_admission_data(dataa , image_path , student_id_for_updatae )
+        try:
+            if cheek[0][2] == 'student':
+                flash((f"Search The CNIC NUMBER BY Enter The Student Registration Number = [ {cheek[0][1]} ] !!! " , "search_student_cnic"))
+                return  render_template("school_admin_URLs/update_admission_data.html")
+            if cheek[0][2] == 'teacher':
+                flash((f"Search The CNIC NUMBER BY Enter The Teacher ID Number = [ {cheek[0][1]} ] !!! " , "search_teacher_cnic"))
+                return  render_template("school_admin_URLs/update_teacher_data.html")
+        except:
+            if  cheek:
+                flash(('New Student Information Upload Successfully !!!' , 'student_admission_done'))
+                return render_template("school_admin_URLs/student_admission.html" ,  data = data )
 
 
 @app.route('/school_admin/update_admission_data' , methods=["GET", "POST"])
@@ -87,11 +96,21 @@ def teacher_joining_information():
         if image_path:
             # print("The student name = " , dataa['])
             print("THis is image path as you see = " , image_path)
-            obj.teacher_joining_information(dataa ,image_path , teacher_id_for_update)
-        flash(('New Teacher Information Upload Successfully !!!' , 'teacher_information_upload'))
-        return render_template("school_admin_URLs/teacher_joining.html" ,  data = data)
+        cheek = obj.teacher_joining_information_to_db(dataa ,image_path , teacher_id_for_update)
+        
+        try:
+            if cheek[0][2] == 'student':
+                flash((f"Search The CNIC NUMBER BY Enter The Student Registration Number = [ {cheek[0][1]} ] !!! " , "search_student_cnic"))
+                return  render_template("school_admin_URLs/update_admission_data.html")
+            if cheek[0][2] == 'teacher':
+                flash((f"Search The CNIC NUMBER BY Enter The Teacher ID Number = [ {cheek[0][1]} ] !!! " , "search_teacher_cnic"))
+                return  render_template("school_admin_URLs/update_teacher_data.html")
+        except:
+            if  cheek:
+                flash(('New Teacher Information Upload Successfully !!!' , 'teacher_information_upload'))
+                return render_template("school_admin_URLs/teacher_joining.html" ,  data = data )
 
-
+     
 
 
 @app.route('/school_admin/update_teacher_data' , methods=["GET", "POST"])
