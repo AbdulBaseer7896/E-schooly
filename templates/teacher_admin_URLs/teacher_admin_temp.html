@@ -15,35 +15,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
-    <script>
-      $(document).ready(function() {
-        var navbarShown = false;
-    
-        $('.navbar-toggler').on('click', function() {
-          if (!navbarShown) {
-            $('.navbar-collapse').addClass('show');
-            navbarShown = true;
-          } else {
-            $('.navbar-collapse').removeClass('show');
-            navbarShown = false;
-          }
-        });
-    
-        $('.navbar-nav .nav-link').on('click', function() {
-          $('.navbar-collapse').removeClass('show');
-          navbarShown = false;
-        });
-    
-        $(document).click(function(event) {
-          var target = $(event.target);
-          if (!target.closest('.navbar').length && !target.hasClass('navbar-toggler')) {
-            $('.navbar-collapse').removeClass('show');
-            navbarShown = false;
-          }
-        });
-      });
-    </script>
-    
     <style>
       body {
         padding-top: 66px; /* Adjust this value to match the height of your navbar */
@@ -79,6 +50,39 @@
     </style>
 
     <title>{% block title %}{% endblock title %}</title>
+
+    <script>
+      $(document).ready(function() {
+        var navbarShown = false;
+
+        $('.navbar-toggler').on('click', function() {
+          if (!navbarShown) {
+            $('.navbar-collapse').addClass('show');
+            navbarShown = true;
+          } else {
+            $('.navbar-collapse').removeClass('show');
+            navbarShown = false;
+          }
+        });
+
+        $('.navbar-nav .nav-link').on('click', function() {
+          $('.navbar-collapse').removeClass('show');
+          navbarShown = false;
+        });
+
+        $(document).click(function(event) {
+          var target = $(event.target);
+          if (!target.closest('.navbar').length && !target.hasClass('navbar-toggler')) {
+            $('.navbar-collapse').removeClass('show');
+            navbarShown = false;
+          }
+        });
+
+        $('.close').on('click', function() {
+          $(this).closest('.alert').remove();
+        });
+      });
+    </script>
   </head>
   
   <body>
