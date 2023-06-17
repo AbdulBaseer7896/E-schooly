@@ -251,3 +251,26 @@ class principal_models():
         
         
     
+    def stored_school_images_and_send_path_in_db(self , file, folder_name):
+        if file is not None:
+            new_filename = str(datetime.now().timestamp()).replace(".", "")  # Generating unique name for the file
+            # Spliting ORIGINAL filename to seperate extenstion
+            split_filename = file.filename.split(".")
+            # Canlculating last index of the list got by splitting the filname
+            ext_pos = len(split_filename)-1
+            # Using last index to get the file extension
+            ext = split_filename[ext_pos]
+            img_db_path = str(f"images/school_images/{folder_name}/{new_filename}.{ext}")
+            print("The type of path  = ", type(img_db_path))
+            file.save(f"static/images/school_images/{folder_name}/{new_filename}.{ext}")
+            print("File uploaded successfully")
+            return img_db_path
+
+
+    def stored_school_image_path_to_db(self , data , image_path):
+        print("THe dat is == = =" , data)
+        print(image_path)
+        with self.engine.connect() as conn:
+            query = text(f"INSERT INTO school_event_images (image_category, target_area, image_file, posting_date) VALUES ('{data['image_category']}', '{data['target_area']}', '{image_path}', '{data['posting_date']}');")
+            conn.execute(query)
+            return True

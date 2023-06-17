@@ -209,3 +209,33 @@ def check_teacher_attandance():
         
         return render_template('principal_URLs/teacher_attandance.html', attendance=attendance, total_attendance=total_attendance)
 
+
+
+@app.route('/principal/upload_image_by_principal', methods=["GET", "POST"])
+@login_required('principal')
+def upload_image_by_principal():
+    if request.method == "GET":
+        return render_template('principal_URLs/upload_photos.html')
+    elif request.method == 'POST':
+        data = request.form.to_dict()
+        image_file = request.files['image_file']
+        folder_name = data['target_area']
+        print("This is folder name = = " , folder_name)
+        if image_file and image_file.filename:
+            print("Thisj ijfid if image _ file = = " , image_file)
+            image_path = obj.stored_school_images_and_send_path_in_db(image_file , folder_name)
+        else:
+            print("There is not image at alll ija ")
+            image_path = ""
+
+        if image_path:
+            # print("The student name = " , dataa['])
+            print("THis is image path as you see = " , image_path) 
+            print("This is data = = " , data)
+            obj.stored_school_image_path_to_db(data , image_path)
+            flash(("New Image Upload Successfully!!! " , "image_upload_done"))
+            return render_template('principal_URLs/principal_dashboard.html')
+    
+        
+    
+

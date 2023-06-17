@@ -1,0 +1,93 @@
+{% extends 'principal_URLs/principal_temp.html' %}
+
+
+{% block title %}
+Principal | Photos
+{% endblock title %}
+
+{% block mainbody %}
+
+
+
+
+<section class="form-02-main principal-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="_lk_de">
+                    <div class="form-03-main">
+                        <div class="logo">
+                            <img src="/static/images/public_images/user.png">
+                        </div>
+
+                        <h1 class="text-center">Upload Photos</h1>
+                        <br><br>
+                        <div class=" container big-font">
+                            <form action="{{ url_for('upload_image_by_principal') }}" method="post"
+                                enctype="multipart/form-data">
+                                <!-- titles -->
+
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="image_category" class="form-label">Select Image category</label>
+                                            <select name="image_category" value="" id="image_category"
+                                                class="form-select" aria-label="Default select example" required>
+                                                <option value='' disabled selected hidden>Select the Audience</option>
+                                                <option value='sport' > Sport </option>
+                                                <option value='event'> Event </option>
+                                                <option value='party'> Party </option>
+                                                <option value='other'> other </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="target_area" class="form-label">Where You like to Post</label>
+                                            <select name="target_area" value="" id="target_area"
+                                                class="form-select" aria-label="Default select example" required>
+                                                <option value='' disabled selected hidden>Select Posting Page</option>
+                                                <option value='Iqra_gallery' name="both">Iqra Image gallery</option>
+                                                <option value='Iqra_posts' name="teacher">Iqra Posters</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Notification Document</label>
+                                            <input name="image_file" type="file" class="form-control">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12-">
+                                        <!-- Date -->
+                                        <div class="mb-3">
+                                            <label for="posting_date" class="form-label">Date</label>
+                                            <input name="posting_date" value="" class="form-control" id="posting_date"
+                                                aria-describedby="posting_date" type="date" required>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+
+                                <br>
+                                <button type="submit" class="_btn_04">Submit</button>
+
+                        </div>
+                        <br>
+                        <br><br>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock mainbody %}
