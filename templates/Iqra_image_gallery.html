@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link href="static/css/login_page/bootstrap.min.css" rel="stylesheet">
-  <link href="static/css/login_page/font-awesome.min.css" rel="stylesheet">
-  <link href="static/css/login_page/style.css" rel="stylesheet">
+  <link href="/static/css/login_page/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/css/login_page/font-awesome.min.css" rel="stylesheet">
+  <link href="/static/css/login_page/style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -45,6 +45,7 @@
   <style>
     body {
       padding-top: 66px; /* Adjust this value to match the height of your navbar */
+
     }
   
     .navbar {
@@ -93,7 +94,7 @@
           <a class="navbar-brand" href="{{ url_for('hello_world') }}">
             <img src="/static/images/public_images/logo.png" alt="">
             <span>
-              IQRA | Login
+              IQRA | Gallery
             </span>
           </a>
   
@@ -119,6 +120,9 @@
                 <a class="nav-link" href="{{ url_for('hello_world') }}">Vehicle</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('Iqra_image_gallery') }}"> Gallery </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('login') }}">Log In</a>
               </li>
               <li class="nav-item">
@@ -134,9 +138,9 @@
   <!-- Rest of your HTML code -->
 
 
-  <section class="form-02-main login_page">
+  <section class=" form-02-main image_gallary ">
     <br>
-    <div class="container">
+    <div class="container form-04-main">
       {% with messages = get_flashed_messages() %}
       {% if messages %}
       {% for message, category in messages %}
@@ -168,21 +172,30 @@
       {% endfor %}
       {% endif %}
       {% endwith %}
-      <div class="row">
-        <div class="col-md-12">
-          <div class="_lk_de">
-            <div class="form-03-main">
-      
-<h1>This is gallery</h1>
+<!-- Section-->
+<br><br>
+<h1 class="text-center display-4"><b><b><b>SCHOOL GALLERY</b></b></b></h1>
 
-
-              </div>
+<section class="py-5">
+    <div class="px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for img in images %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <img class="card-img-top fix_image" src="/static/{{ img[2] }}" alt="Image" onerror="this.onerror=null; this.src='/static/placeholder.jpg'; this.parentNode.parentNode.remove();" />
+                </div>
             </div>
-          </div>
+            {% endfor %}
         </div>
-      </div>
     </div>
-  </section>
+</section>
+
+<style>
+    .card-img-top {
+        object-fit: cover;
+        height: 100%;
+    }
+</style>
 
   
 </body>

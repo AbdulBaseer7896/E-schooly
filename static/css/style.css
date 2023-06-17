@@ -262,11 +262,11 @@ a:focus {
 }
 
 .vehicle_section .carousel-control-prev-icon {
-  background-image: url(/static/images/public_imagesprev.png);
+  background-image: url(/static/images/public_images/prev.png);
 }
 
 .vehicle_section .carousel-control-next-icon {
-  background-image: url(/static/images/public_imagesnext.png);
+  background-image: url(/static/images/public_images/next.png);
 }
 
 
@@ -275,7 +275,7 @@ a:focus {
 
 /* client section */
 .client_section {
-  background-image: url(/static/images/public_imagesshape-1.png);
+  background-image: url(/static/images/public_images/shape-1.png);
   background-repeat: no-repeat;
 
   background-position: right;
@@ -320,7 +320,7 @@ a:focus {
 
 /* contact section */
 .contact_section {
-  background-image: url(/static/images/public_imagesshape-2.png);
+  background-image: url(/static/images/public_images/shape-2.png);
   background-repeat: no-repeat;
   background-size: 14%;
   background-position: left center;

@@ -1,0 +1,71 @@
+{% extends 'principal_URLs/principal_temp.html' %}
+
+
+{% block title %}
+Principal | Delete Images
+{% endblock title %}
+
+{% block mainbody %}
+
+<section class="form-02-main image_gallary">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="_lk_de">
+                    <div class="form-04-main">
+                        <h1 class="text-center display-4"><b><b><b>SCHOOL GALLERY</b></b></b></h1>
+                        
+                        <section class="py-5">
+                            <div class="px-4 px-lg-5 mt-5">
+                                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                                    {% for img in posts %}
+                                    <div class="col mb-5">
+                                        <div class="card h-100">
+                                            <img class="card-img-top fix_image" src="/static/{{ img[2] }}" alt="Image" onerror="this.onerror=null; this.src='/static/placeholder.jpg'; this.parentNode.parentNode.remove();" />
+                                            <div class="col-12 justify-content-center"> 
+                                                <br>
+                                                <a href="{{ url_for('delete_image_from_db' , path = img[2]) }}" type="submit" class="_btn_04">Delete</a>
+                                              </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </section>
+
+
+
+                        <section class="py-5">
+                            <div class="px-4 px-lg-5 mt-5">
+                                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                                    {% for img in gallery %}
+                                    <div class="col mb-5">
+                                        
+                                        <div class="card h-100">
+                                            <img class="card-img-top fix_image" src="/static/{{ img[2] }}" alt="Image" onerror="this.onerror=null; this.src='/static/placeholder.jpg'; this.parentNode.parentNode.remove();" /> 
+                                            <div class="col-12 justify-content-center"> 
+                                                <br>
+                                                <a href="{{ url_for('delete_image_from_db' , path = img[2]) }}" type="submit" class="_btn_04">Delete</a>
+                                              </div>
+                                        </div>
+                                       
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <style>
+                            .card-img-top {
+                                object-fit: cover;
+                                height: 100%;
+                            }
+                        </style>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</section>
+{% endblock mainbody %}

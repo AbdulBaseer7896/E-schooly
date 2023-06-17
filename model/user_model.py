@@ -64,4 +64,12 @@ class user_model():
                 print(data['login-val'])
                 return False
         
-        
+    
+    def get_gallery_images_form_db(self):
+        with self.engine.connect() as conn:
+            query = text(f"SELECT * FROM school_event_images WHERE target_area = 'Iqra_gallery' ORDER BY image_category;")
+            user = conn.execute(query).fetchall()
+            if user:
+                return user
+            else:
+                return False

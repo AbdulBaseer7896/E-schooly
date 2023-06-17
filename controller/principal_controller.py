@@ -239,3 +239,27 @@ def upload_image_by_principal():
         
     
 
+
+@app.route('/principal/delete_images' , methods=["GET", "POST"])
+@login_required('principal')
+def delete_images():
+    if request.method == "GET":
+        gallery = obj.get_gallery_images_for_principal_form_db()
+        print("This is gallery = = " , gallery)
+        posts = obj.get_post_images_for_principal_form_db()
+        print("This is posts  = = " , posts)
+        # flash("Welcome to the website!", "success")
+        return render_template("principal_URLs/delete_images.html" , gallery = gallery , posts = posts)
+    
+    
+
+
+
+@app.route('/delete_products_from_woman' ,methods=["GET", "POST" , "DELETE"]  )
+@login_required('principal')
+def delete_image_from_db():
+    path = request.args.get('path')
+    obj.delete_image_form_db_and_file(path)
+    print("This is path as you see now ok = = == " , path)
+    flash(("You will Delete the image Successfully!!! " , "delete_image_done"))
+    return render_template('principal_URLs/principal_dashboard.html')

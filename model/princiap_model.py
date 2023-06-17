@@ -274,3 +274,36 @@ class principal_models():
             query = text(f"INSERT INTO school_event_images (image_category, target_area, image_file, posting_date) VALUES ('{data['image_category']}', '{data['target_area']}', '{image_path}', '{data['posting_date']}');")
             conn.execute(query)
             return True
+        
+    
+    
+    def get_gallery_images_for_principal_form_db(self):
+        with self.engine.connect() as conn:
+            query = text(f"SELECT * FROM school_event_images WHERE target_area = 'Iqra_gallery' ORDER BY image_category;")
+            user = conn.execute(query).fetchall()
+            if user:
+                return user
+            else:
+                return False
+            
+            
+    def get_post_images_for_principal_form_db(self):
+        with self.engine.connect() as conn:
+            query = text(f"SELECT * FROM school_event_images WHERE target_area = 'Iqra_posts' ORDER BY image_category;")
+            user = conn.execute(query).fetchall()
+            print("Tisi osdj fpijds pifjpisa fio = = = = " , user)
+            if user:
+                return user
+            else:
+                return False
+            
+    def delete_image_form_db_and_file(self , data):
+        
+        with self.engine.connect() as conn:
+            query = text(f"DELETE FROM school_event_images WHERE image_file = '{data}';")
+            conn.execute(query)
+            
+        print("The dariy is delete for file")
+        print(data[3])
+        if data != "":
+            os.remove(f"static/{data}")
