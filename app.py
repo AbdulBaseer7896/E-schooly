@@ -1,11 +1,13 @@
 from flask import Flask , render_template , request
-
+from model.user_model import user_model
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
+obj = user_model()
 
 @app.route("/")
 def hello_world():
-    return render_template('index.html')
+    cheek = obj.get_iqra_posts_form_db()
+    return render_template('index.html' , posts = cheek)
 
 from controller import *
 

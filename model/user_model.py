@@ -73,3 +73,14 @@ class user_model():
                 return user
             else:
                 return False
+            
+            
+    def get_iqra_posts_form_db(self):
+        with self.engine.connect() as conn:
+            query = text(f"SELECT * FROM school_event_images WHERE target_area = 'Iqra_posts' ORDER BY image_category;")
+            user = conn.execute(query).fetchall()
+            print("Tisi osdj fpijds pifjpisa fio = = = = " , user)
+            if user:
+                return user
+            else:
+                return False
