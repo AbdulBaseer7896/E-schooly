@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="en">
 
-
-
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
@@ -17,12 +15,12 @@
 
     {% endblock title %}</title>
 
-    <style>
-      .carousel-image {
-          max-height: 100%;
-          width: auto;
-          margin: 0 auto;
-      }
+  <style>
+    .carousel-image {
+      max-height: 100%;
+      width: auto;
+      margin: 0 auto;
+    }
   </style>
   <link rel="stylesheet" href="..static/css/style-1.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -45,9 +43,6 @@
   <!-- responsive style -->
   <link href="/static/css/responsive.css" rel="stylesheet" />
 
-
-
-
   <link rel="stylesheet" href="/static/css/css-circular-prog-bar.css">
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -56,13 +51,13 @@
   <script>
     $(document).ready(function () {
       $('.navbar-toggler').on('click', function () {
-        $('.navbar-collapse').collapse('toggle');
+        $('.navbar-collapse').toggleClass('show');
       });
 
       $(document).click(function (event) {
         var target = $(event.target);
         if (!target.closest('.navbar').length && !target.hasClass('navbar-toggler')) {
-          $('.navbar-collapse').collapse('hide');
+          $('.navbar-collapse').removeClass('show');
         }
       });
     });
@@ -82,7 +77,6 @@
     left: 0;
     right: 0;
     z-index: 100;
-
     background-color: white;
   }
 
@@ -105,6 +99,34 @@
     padding: 0.5rem 1rem;
   }
 
+  /* Add this media query for mobile screens */
+  @media (max-width: 767.98px) {
+    .navbar-collapse {
+      position: fixed;
+      top: 0;
+      left: -250px; /* Adjust this value to set the initial position of the menu */
+      width: 250px;
+      height: 100%;
+      background-color: white;
+      transition: left 0.3s ease-in-out;
+    }
+
+    .navbar-collapse.show {
+      left: 0; /* Display the menu by moving it to the left */
+    }
+
+    .navbar-nav {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .navbar-nav .nav-item {
+      width: 100%;
+    }
+  }
 </style>
 
 <body>
@@ -127,21 +149,21 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
-                <ul class="navbar-nav  ">
+                <ul class="navbar-nav">
                   <li class="nav-item active">
                     <a class="nav-link" href="{{ url_for('hello_world') }}"> Home <span
                         class="sr-only">(current)</span></a>
                   </li>
-                  <li class="nav-item ">
+                  <li class="nav-item">
                     <a class="nav-link" href="#about_section"> About </a>
                   </li>
 
-                  <li class="nav-item ">
+                  <li class="nav-item">
                     <a class="nav-link" href="#teacher_section"> Teacher </a>
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link" href="#vehicle_section"> vehicle </a>
+                    <a class="nav-link" href="#vehicle_section"> Posts </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('Iqra_image_gallery') }}"> Gallery </a>
@@ -162,12 +184,8 @@
               </div>
             </div>
         </nav>
-    </div>
+      </div>
     </header>
-
-
-
-
 
     {% block mainbody %}
 
@@ -180,11 +198,10 @@
   <!-- footer section -->
   <section class="container-fluid footer_section">
     <p>
-      Copyright &copy; 2019 All Rights Reserved By
+      &copy; 2019 All Rights Reserved By
       <a href="https://html.design/">Free Html Templates</a>
     </p>
   </section>
-
 
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -213,7 +230,8 @@
     }
   </script>
   <!-- google map js -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eaHt9Dh5H57Zh0xVTqxVdBFCvFMqFjQ&callback=initMap">
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
   </script>
 </body>
 
