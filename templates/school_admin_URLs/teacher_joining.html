@@ -88,9 +88,7 @@ school Admin | Teacher Joning
                                     <div class="col-md-6">
                                         <!-- CNIC numebr of father -->
                                         <div class="mb-3">
-                                            <label for="father_cinc" class="form-label">Enter the Father CNIC Number (As
-                                                per Student
-                                                B-Form)</label>
+                                            <label for="father_cinc" class="form-label">Enter the Father CNIC Number</label>
                                             <input name="father_cinc" value="{{data[0][3]}}" type="text"
                                                 class="form-control" id="father_cinc" aria-describedby="father_cinc"
                                                 maxlength="13" minlength="13" data-inputmask="'mask': '99999-9999999-9'"
@@ -113,8 +111,8 @@ school Admin | Teacher Joning
                                                     class="form-select" aria-label="Default select example" required>
                                                     <option value="" disabled selected hidden> Select your Religion Type
                                                     </option>
-                                                    <option value='Muslim' name="teacher_religion">Muslim</option>
-                                                    <option value='Christian' name="">Christian</option>
+                                                    <option value='Muslim' name="teacher_religion">Islam</option>
+                                                    <option value='Christian' name="">Christianity</option>
                                                     <option value='Other' name="">Other</option>
                                                 </select>
                                             </div>
@@ -149,11 +147,11 @@ school Admin | Teacher Joning
                                         <!-- CLass Of student -->
                                         <div class="mb-3">
                                             <label for="teaching_class" class="form-label">Select Teacher Class
-                                                Leavel</label>
+                                                Level</label>
                                             <!-- <input name="teaching_class" type="email" class="form-control" id="teaching_class" aria-describedby="teaching_class"> -->
                                             <select name="teaching_class" value="Helper" id="teaching_class"
                                                 class="form-select" aria-label="Default select example" required>
-                                                <option value="" disabled selected hidden> Select your class Leavel
+                                                <option value="" disabled selected hidden> Select your class Level
                                                 </option>
                                                 <option value='Helper' name="teaching_class">Play Group</option>
                                                 <option value='Helper' name="teaching_class">Class Prep</option>
@@ -243,7 +241,7 @@ school Admin | Teacher Joning
                                     <!-- specilized subjects -->
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="specilized_subject" class="form-label">Specilized
+                                            <label for="specilized_subject" class="form-label">Specialized
                                                 Subjects of Teacher</label>
                                             <input name="specilized_subject" placeholder="Math , Physicas"
                                                 value="{{data[0][12]}}" type="text" class="form-control"

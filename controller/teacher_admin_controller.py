@@ -80,7 +80,7 @@ def teacher_notification():
 
         print("THis is image path as you see = " , file_path)
         obj.send_notification_of_db(notification , file_path)
-        flash(('The Notification is Send to ALl Teacher Successfully !!! ' , 'teacher_notification'))
+        flash(('The Notification is Send to All Teacher Successfully !!! ' , 'teacher_notification'))
         return render_template('teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)
         
         
@@ -104,7 +104,7 @@ def delete_notification_admin_teacher():
         delete_notification = eval(result_dict)
         obj.delete_selected_notification_form_data(delete_notification)
         print("Now its endsss")
-        flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_teacher_admin'))
+        flash(("You Deleted the Message Successfully !!!" , 'delete_notification_teacher_admin'))
         return render_template('teacher_admin_URLs/teacher_admin_dashboard.html' , data = data)
     else:
         flash(("You could not send any Massage to teacher !!! kindly send the massage !!!" , 'no_massage_to_delete_teacher_admin'))

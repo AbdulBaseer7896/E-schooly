@@ -75,7 +75,7 @@ def delete_nofitication_principal():
             delete_notification = eval(result_dict)
             obj.delete_selected_notification_form_data(delete_notification)
             print("Now its endsss")
-            flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_principal'))
+            flash(("You Deleted the Message Successfully !!!" , 'delete_notification_principal'))
             return render_template('principal_URLs/principal_dashboard.html')
     else:
         flash(("You will not send any notification !!! Kinldy send it !!!" , "no_notifitaion_to_deleate_for_principal"))
@@ -233,7 +233,7 @@ def upload_image_by_principal():
             print("THis is image path as you see = " , image_path) 
             print("This is data = = " , data)
             obj.stored_school_image_path_to_db(data , image_path)
-            flash(("New Image Upload Successfully!!! " , "image_upload_done"))
+            flash(("New Image Uploaded Successfully!!! " , "image_upload_done"))
             return render_template('principal_URLs/principal_dashboard.html')
     
         

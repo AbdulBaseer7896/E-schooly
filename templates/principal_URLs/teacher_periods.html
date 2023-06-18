@@ -37,7 +37,7 @@ Principal | Teacher-Periods
 
                                                 <select name="teacher_name" value="" id="teacher_name"
                                                     class="form-select" aria-label="Default select example" required>
-                                                    <option value='' disabled selected hidden> Select your class Type
+                                                    <option value='' disabled selected hidden> Select your Teacher Name
                                                     </option>
                                                     {% for i in data %}
                                                     <option value='{{i[0]}}' name="teacher_name">{{i[1]}}&nbsp; &nbsp;
@@ -45,9 +45,10 @@ Principal | Teacher-Periods
                                                     {% endfor %}
                                                 </select>
                                                 <hr>
+                                                <label for="teacher_name" class="form-label">Select Teacher Class</label>
                                                 <select name="teacher_class" value="" id="teacher_class"
                                                     class="form-select" aria-label="Default select example">
-                                                    <option value='Helper' name="teacher_class"> Select your class Type
+                                                    <option value='Helper' name="teacher_class"> Select Teacher class
                                                     </option>
                                                     <option value='pg' name="class1">Play Group</option>
                                                     <option value='perp' name="class1">Class Prep</option>

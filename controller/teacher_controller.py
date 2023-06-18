@@ -85,7 +85,7 @@ def upload_dairy_form():
         print("THis is image path as you see = " , image_path)
         obj.send_dairy(data , image_path )
 
-        flash(('Class Attandance will Upload Successfully !!!' , 'student_dairy_done'))
+        flash(('Class Dairy is Uploaded Successfully !!!' , 'student_dairy_done'))
     return render_template("teacher_URLs/teacher_dashboard.html", data = data)
         # else:
         #     return render_template('teacher_URLs/teacher_dashboard.html')
@@ -102,7 +102,7 @@ def student_attendance():
     if request.method == "GET":
         student_name = obj.class_student_name_for_attendance(result_dict)
         if student_name != False:
-            flash(('Just Tick those Students Who are Absend in Class !!!' , 'student_attendance_warning'))
+            flash(('Just Tick those Students Who are Absent in Class !!!' , 'student_attendance_warning'))
             return render_template("teacher_URLs/student_attendance.html" , data = result_dict  , info = student_name)
         else:
             print("There is not student in you class")
@@ -127,7 +127,7 @@ def student_attendance():
         print("this is the final result = " , result)
         print(result[1][0])
         print("This is data - " , teacher_mail)
-        flash(('The Attandance is Upload Successfully !!!' , 'sudent_attandance_done'))
+        flash(('The Attendance is Uploaded Successfully !!!' , 'sudent_attandance_done'))
     return render_template("teacher_URLs/teacher_dashboard.html" , data = teacher_mail)
     
     
@@ -165,7 +165,7 @@ def send_notification_to_student():
             flash(("Sorry You are not a class teacer thats why you will not sent the notification to students " , 'not_a_class_teacher_of_send_notification'))
             return render_template('teacher_URLs/teacher_dashboard.html' ,  data = data)
         else:
-            return render_template("teacher_URLs/send_notification_to_student.html" , data = result_dict , teacher_class = teacher_class)
+            return render_template("teacher_URLs/send_notification_to_student.html" , data = data , teacher_class = teacher_class)
 
     elif request.method == "POST":
         data = request.form.to_dict()
@@ -219,18 +219,18 @@ def upload_result():
                     tuple_attandance.append(value)
             if len(tuple_attandance) == 6:  # Only append the tuple if all values are not None
                 student_marks.append(tuple_attandance)
-    
+
         print("Toidsj oijsfoi joia soifj osid777777777777777 =", student_marks)
-    
+
         cheek = obj.send_student_marks_of_db(student_marks, result_type_data)
-    
+
         teacher_id = request.form.get('email_login')
-    
+
         if cheek:
             print("This is data of data 000000 =", data)
-            flash((f"The result of {student_restult['subject']} will Upload Successfully!!!! ", 'result_uploaded'))
+            flash((f"The result of {student_restult['subject']} is Uploaded Successfully!!!! ", 'result_uploaded'))
             return render_template('teacher_URLs/teacher_dashboard.html', data=teacher_id)
-    
+
         flash((f"The result of {student_restult['subject']} will Not Upload!!!! ", 'result_will_not_uploaded'))
         return render_template('teacher_URLs/teacher_dashboard.html', data=teacher_id)
 # ...
@@ -264,7 +264,7 @@ def delete_dairy():
         print("Ths oijfs odjf o = = = " , data)
         
         obj.delete_dariy_for_db_which_teacher_select(delete_dairy_information)
-        flash(("You will delete the Dairy Successfully !!!" , 'teacher_delete_dairy'))
+        flash(("You deleted the Dairy Successfully !!!" , 'teacher_delete_dairy'))
 
     return render_template('teacher_URLs/teacher_dashboard.html',  data=data)
         
@@ -302,7 +302,7 @@ def delete_notification_teacher():
         # change = str(email) 
         # teacher_email = eval(change)
         print("This teachetj a = = " , email)
-    flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_teacher'))
+    flash(("You Deleted the Message Successfully !!!" , 'delete_notification_teacher'))
     return render_template('teacher_URLs/teacher_dashboard.html' ,  data = email)        
         
         

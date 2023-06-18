@@ -44,10 +44,10 @@ def student_admission():
         cheek = obj.student_admission_data(dataa , image_path , student_id_for_updatae )
         try:
             if cheek[0][2] == 'student':
-                flash((f"Search The CNIC NUMBER BY Enter The Student Registration Number = [ {cheek[0][1]} ] !!! " , "search_student_cnic"))
+                flash((f"The B-Form Number You Entered Is Already Exist !!! So Visit The  Student Registration Number = [ {cheek[0][1]} ] !!! " , "search_student_cnic"))
                 return  render_template("school_admin_URLs/update_admission_data.html")
             if cheek[0][2] == 'teacher':
-                flash((f"Search The CNIC NUMBER BY Enter The Teacher ID Number = [ {cheek[0][1]} ] !!! " , "search_teacher_cnic"))
+                flash((f"The CNIC Number You Entered Is Already Exist !!! So Visit The Teacher ID Number = [ {cheek[0][1]} ] !!! " , "search_teacher_cnic"))
                 return  render_template("school_admin_URLs/update_teacher_data.html")
         except:
             if  cheek:
@@ -100,10 +100,10 @@ def teacher_joining_information():
         
         try:
             if cheek[0][2] == 'student':
-                flash((f"Search The CNIC NUMBER BY Enter The Student Registration Number = [ {cheek[0][1]} ] !!! " , "search_student_cnic"))
+                flash((f"The B-Form Number You Entered Is Already Exist !!! So Visit The  Student Registration Number = [ {cheek[0][1]} ] !!! " , "search_student_cnic"))
                 return  render_template("school_admin_URLs/update_admission_data.html")
             if cheek[0][2] == 'teacher':
-                flash((f"Search The CNIC NUMBER BY Enter The Teacher ID Number = [ {cheek[0][1]} ] !!! " , "search_teacher_cnic"))
+                flash((f"The CNIC Number You Entered Is Already Exist !!! So Visit The Teacher ID Number = [ {cheek[0][1]} ] !!! " , "search_teacher_cnic"))
                 return  render_template("school_admin_URLs/update_teacher_data.html")
         except:
             if  cheek:
