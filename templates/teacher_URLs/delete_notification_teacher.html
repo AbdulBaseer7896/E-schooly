@@ -68,6 +68,9 @@ Teacher | Delete Notification
                                                         <div class="col-12 col-sm-2">
                                                             <br class="d-sm-none">
                                                             <form action="{{ url_for('delete_notification_teacher' ) }} " method="post">
+
+                                                                <input type="hidden" name="email_login" value="{{ data }}">
+                                                                <input type="hidden" name="teacher_mail" value="{{ data }}">
                                                                 <input type="hidden" name="delete_notification" value="{{ item }}">
                                                                 <div class="col-12">
                                                                     <button type="submit" class="_btn_04">Delete</button>

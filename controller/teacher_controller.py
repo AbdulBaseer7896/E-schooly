@@ -177,6 +177,7 @@ def send_notification_to_student():
             file_path = ''
             # print("The student name = " , dataa['])
         print("THis is image path as you see = " , file_path)
+        print("This is data as you see 88888888 = ", data)
         obj.send_student_notification_to_db(data , file_path)
         flash(('The Notification is send to All Student successfully !!!' ,'class_student_notification_done'))
         return render_template('teacher_URLs/teacher_dashboard.html' ,data = data)
@@ -202,30 +203,38 @@ def upload_result():
             return render_template('teacher_URLs/teacher_dashboard.html' , data = data )
         else:
             return render_template('teacher_URLs/upload_result.html' , data = data ,class_subject= class_subject ,  teacher_class = teacher_class , student_info = student_info)
+# ...
     elif request.method == "POST":
         student_restult = request.form.to_dict()
-        result_type_data = (student_restult['restul_type'] , student_restult['date'], student_restult['subject_total_marks'])
-        print("The type of result is = " , result_type_data)
-        print("The data is = " , student_restult)
+        result_type_data = (student_restult['restul_type'], student_restult['date'], student_restult['subject_total_marks'])
+        print("The type of result is =", result_type_data)
+        print("The data is =", student_restult)
         student_marks = []
-        for i in range(1, (len(student_restult) // 5) + 1):
+        for i in range(1, (len(student_restult) // 5)):
             tuple_attandance = []
             for j in range(1, 7):
                 key = f'student_email{i}' if j == 1 else f'student_roll_number{i}' if j == 2 else f'marks_of_{i}' if j == 3 else f'b_form_name{i}' if j == 4 else f'student_class' if j == 5 else f'subject'
-                tuple_attandance.append(student_restult.get(key))
-            student_marks.append(tuple_attandance)
-
-        cheek = obj.send_student_marks_of_db(student_marks , result_type_data)
-        
+                value = student_restult.get(key)
+                if value is not None:
+                    tuple_attandance.append(value)
+            if len(tuple_attandance) == 6:  # Only append the tuple if all values are not None
+                student_marks.append(tuple_attandance)
+    
+        print("Toidsj oijsfoi joia soifj osid777777777777777 =", student_marks)
+    
+        cheek = obj.send_student_marks_of_db(student_marks, result_type_data)
+    
         teacher_id = request.form.get('email_login')
-
+    
         if cheek:
-            print("This is data of data 000000 =  " , data)
-            flash((f"The result of {student_restult['subject']} will Upload Successfully !!!! " , 'result_uploaded'))
-            return render_template('teacher_URLs/teacher_dashboard.html' , data = teacher_id )
+            print("This is data of data 000000 =", data)
+            flash((f"The result of {student_restult['subject']} will Upload Successfully!!!! ", 'result_uploaded'))
+            return render_template('teacher_URLs/teacher_dashboard.html', data=teacher_id)
+    
+        flash((f"The result of {student_restult['subject']} will Not Upload!!!! ", 'result_will_not_uploaded'))
+        return render_template('teacher_URLs/teacher_dashboard.html', data=teacher_id)
+# ...
 
-        flash((f"The result of {student_restult['subject']} will Not Upload  !!!! " , 'result_will_not_uploaded'))
-        return render_template('teacher_URLs/teacher_dashboard.html' , data = teacher_id )
 
 
     
@@ -245,11 +254,14 @@ def delete_dairy():
             flash((f"You will not appload any dairy !!!! " , 'teacher_not_appload_dairy'))
             return render_template('teacher_URLs/teacher_dashboard.html' , data = data )
     if request.method == "POST":        
+        data = request.form.to_dict()
         result = request.form.get('delete_information')
         result_dict = str(result) 
         delete_dairy_information = eval(result_dict)
+        print("The data is = = = " , data)
 
-        data = {f'teacher_mail': f'{delete_dairy_information[0]}'}
+        data = {f'teacher_mail': f'{delete_dairy_information[0]}' , 'email_login' : f'{delete_dairy_information[0]}'}
+        print("Ths oijfs odjf o = = = " , data)
         
         obj.delete_dariy_for_db_which_teacher_select(delete_dairy_information)
         flash(("You will delete the Dairy Successfully !!!" , 'teacher_delete_dairy'))
@@ -285,11 +297,12 @@ def delete_notification_teacher():
         obj.delete_selected_notification_form_data(delete_notification)
 
         # email = request.form.get('email_login')
-        email = request.form.to_dict()
-        change = str(email) 
-        teacher_email = eval(change)
-        print("This teachetj a = = " , teacher_email)
+        # email = request.form.to_dict()
+        email = request.form.get('email_login')
+        # change = str(email) 
+        # teacher_email = eval(change)
+        print("This teachetj a = = " , email)
     flash(("You will Delete the Massage Successfully !!!" , 'delete_notification_teacher'))
-    return render_template('teacher_URLs/teacher_dashboard.html' ,  data = teacher_email)        
+    return render_template('teacher_URLs/teacher_dashboard.html' ,  data = email)        
         
         

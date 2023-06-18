@@ -253,8 +253,10 @@ class teacher_model():
             try:
                 if {result_type_data[0]} == "" and {result_type_data[2]} == "" and {result_type_data[1]} == "" and {student_marks[i][5]} == "":
                     print("You will not fill the result_type or subject or date or total marks")
+                    
                 else:
                     for i in range(0 , len(student_marks)):
+                        if student_marks[0] != None and student_marks[1] != None:
                             query1 = text(f"INSERT INTO result_student_subject_marks (b_form_name, student_email, roll_number, markes, subject, class , result_type ,total_marks ,result_date) VALUES ('{student_marks[i][3]}', '{student_marks[i][0]}', '{student_marks[i][1]}', {student_marks[i][2]} , '{student_marks[i][5]}' , '{student_marks[i][4]}' , '{result_type_data[0]}' , '{result_type_data[2]}' ,'{result_type_data[1]}');")
                             conn.execute(query1)
                     print("Result and subject student_marks insert in student_marksbase")
