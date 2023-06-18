@@ -64,9 +64,9 @@ school Admin | Student Admission
                                         <div class="mb-3">
                                             <label for="B_form_number" class="form-label">Enter Student B-Form
                                                 Number</label>
-                                            <input name="B_form_number" maxlength="13" minlength="13"
-                                                value="{{data[0][1]}}" class="form-control" id="B_form_number"
-                                                aria-describedby="B_form_number" type="text"
+                                            <input name="B_form_number" value="{{data[0][3]}}" type="number"
+                                            class="form-control" id="B_form_number" aria-describedby="B_form_number"
+                                                maxlength="13" minlength="13" data-inputmask="'mask': '99999-9999999-9'"
                                                 placeholder="XXXXX-XXXXXXX-X" required>
                                         </div>
 
