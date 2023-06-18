@@ -170,6 +170,7 @@ def send_notification_to_student():
     elif request.method == "POST":
         data = request.form.to_dict()
         notification_file = request.files['notification_document']
+        print("Thisi s notificaiton file = = = = " , notification_file)
         if  notification_file.filename != '':
             folder_name = 'Notifications'
             file_path = obj.stored_dariy_in_file_and_send_path_in_db(notification_file , folder_name)
@@ -179,6 +180,10 @@ def send_notification_to_student():
         print("THis is image path as you see = " , file_path)
         print("This is data as you see 88888888 = ", data)
         obj.send_student_notification_to_db(data , file_path)
+        teacher_mail = eval(data['teacher_mail'])['email_login']
+        data = {f'teacher_mail': f'{teacher_mail}' , 'email_login' : f'{teacher_mail}'}
+        print("Ths oijfs odjf o = = = " , data)
+        
         flash(('The Notification is send to All Student successfully !!!' ,'class_student_notification_done'))
         return render_template('teacher_URLs/teacher_dashboard.html' ,data = data)
     # return render_template('teacher_URLs/send_notification_to_student.html')
