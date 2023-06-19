@@ -138,6 +138,10 @@ def seach_student_result_principal():
         marks_result = obj.take_student_result_data_for_principal(student_name)
         print("this is resoijsf iaisgj  = =  + , ", marks_result)
         
+        if marks_result == []:
+            flash(("No result found for that Registration Number" , 'no_result_found'))
+            return render_template("principal_URLs/principal_dashboard.html" )
+        
         grouped_data = {}  # Dictionary to group data by exam type and date
 
         for item in marks_result:
