@@ -19,7 +19,7 @@ Teacher | Send Notification
               <img src="/static/images/public_images/user.png">
             </div>
 
-            <h1 class="text-center">Student Notification</h1>
+            <h1 class="text-center">Student Notification to {{teacher_class[0][0]}}</h1>
             <br><br>
             <div class="form-group">
                 <form action="{{ url_for('send_notification_to_student') }}" method="post" enctype="multipart/form-data">
