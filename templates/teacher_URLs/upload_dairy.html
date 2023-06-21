@@ -5,6 +5,27 @@ Teacher | Upload Dairy
 {% endblock title %}
 
 {% block mainbody %}
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th,
+    td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: lightgray;
+    }
+
+    .total-row {
+        font-weight: bold;
+    }
+</style>
 
 <section class="form-02-main teacher-page">
     <div class="container">
@@ -24,6 +45,7 @@ Teacher | Upload Dairy
                             <form action="{{ url_for('upload_dairy') }}" method="post">
 
                                 <div>
+
                                     <label for="teacher_class" class="form-label">Select Your Class</label>
                                     <select name="teacher_class" value="" id="teacher_class" class="form-select"
                                         aria-label="Default select example" required>
@@ -69,6 +91,23 @@ Teacher | Upload Dairy
 
 
                         </div>
+        
+                        </h1>
+                        <hr><hr>
+                        <table>
+                            <tr>
+                                <th>Class</th>
+                                <th>Period Name</th>
+                            </tr>
+
+                            {% for row in data %}
+                            <tr>
+                                <td>{{row[1]}}</td>
+                                <td>{{row[2]}}</td>
+
+                            </tr>
+                            {% endfor %}
+                        </table>
                     </div>
                 </div>
             </div>

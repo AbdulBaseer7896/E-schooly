@@ -292,7 +292,7 @@ class school_admin_models():
         
     def take_student_attandance_for_db(self):
         with self.engine.connect() as conn:
-            query = text(f"SELECT b_form_name ,class , whatapp_number , student_registration_number , student_attendance  FROM student_information ORDER BY student_attendance DESC;")
+            query = text(f"SELECT b_form_name ,class , whatapp_number , student_registration_number , student_attendance  FROM student_information  ORDER BY student_attendance DESC;")
             user = conn.execute(query).fetchall()
             return user
         

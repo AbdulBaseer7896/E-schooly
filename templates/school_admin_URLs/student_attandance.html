@@ -56,38 +56,40 @@ School Admin | Student Attendance
                             </tr>
 
                             {% for row in attendance %}
-                            {% if ((( total_attendance[1][0] - row[4]) / total_attendance[1][0]) * 100) < 97  %}
-                                
-                            
+                            {% if ((( total_attendance[1][0] - row[4]) / total_attendance[1][0]) * 100) < 90 %}
+                            <!-- <h1>{{(((total_attendance[1][0] - row[4]) / total_attendance[1][0]) * 100)}}</h1> -->
+
+
                             <tr>
                                 <td>{{ row[0] }}</td>
                                 <td>{{ row[3] }}</td>
                                 <td>{{ row[2] }}</td>
                                 <td>{{ row[1] }}</td>
-                                {% if row[4] == 0 %}
+                                <!-- {% if row[4] == 0 %} -->
 
-                                <td>{{ 100 }} % {{row[4]}}</td>
+                                <!-- <td>{{ 100 }} %</td> -->
 
-                                {% endif %}
+                                <!-- {% endif %} -->
 
                                 {% if row[4] != 0 %}
 
-                                        {% for class in total_attendance %}
+                                {% for class in total_attendance %}
 
-                                        {% if class[1] == row[1] %}
-                                                <td>{{ '{:.1f}'.format((( class[0] - row[4]) / class[0]) * 100) }} %</td>
-                                            {% endif %}
-                                            {% endfor %}
-                                            
-                                            
-                                            {% endif %}
+                                {% if class[1] == row[1] %}
+                                <!-- <td>{{ '{:.1f}'.format((( class[0] - row[4]) / class[0]) * 100) }} %</td> -->
+                                <td>{{'{:.1f}'.format(((total_attendance[1][0] - row[4]) / total_attendance[1][0]) * 100)}} %</td>
+                                {% endif %}
+                                {% endfor %}
+
+
+                                {% endif %}
                             </tr>
                             {% endif %}
                             {% endfor %}
-                            
+
                         </table>
-                        
-                        
+
+
                     </div>
                 </div>
             </div>

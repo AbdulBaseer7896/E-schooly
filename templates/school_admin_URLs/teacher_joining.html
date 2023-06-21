@@ -64,10 +64,10 @@ school Admin | Teacher Joning
                                         <div class="mb-3">
                                             <label for="cnic_number" class="form-label">Enter Teacher CNIC
                                                 Number</label>
-                                            <input name="cnic_number" value="{{data[0][1]}}" class="form-control"
-                                                id="cnic_number" aria-describedby="cnic_number" type="text"
-                                                maxlength="13" minlength="13" data-inputmask="'mask': '99999-9999999-9'"
-                                                placeholder="XXXXX-XXXXXXX-X" required>
+                                            <input name="cnic_number" value="{{data[0][1]}}" 
+                                            class="form-control" type="text"
+                                            pattern="^[0-9]{5}[0-9]{7}[0-9]{1}$"
+                                            title="Type CNIC Like 1234512345671" placeholder="XXXXX-XXXXXXX-X"+ trequired required>
                                         </div>
 
                                     </div>
@@ -89,10 +89,10 @@ school Admin | Teacher Joning
                                         <!-- CNIC numebr of father -->
                                         <div class="mb-3">
                                             <label for="father_cinc" class="form-label">Enter the Father CNIC Number</label>
-                                            <input name="father_cinc" value="{{data[0][3]}}" type="text"
-                                                class="form-control" id="father_cinc" aria-describedby="father_cinc"
-                                                maxlength="13" minlength="13" data-inputmask="'mask': '99999-9999999-9'"
-                                                placeholder="XXXXX-XXXXXXX-X" required>
+                                            <input name="father_cinc" value="{{data[0][3]}}"
+                                            class="form-control" type="text"
+                                            pattern="^[0-9]{5}[0-9]{7}[0-9]{1}$"
+                                            title="Type CNIC Like 1234512345671" placeholder="XXXXX-XXXXXXX-X"+ trequired required>
                                         </div>
 
                                     </div>
@@ -206,10 +206,10 @@ school Admin | Teacher Joning
                                         <div class="mb-3">
                                             <label for="whatsApp_number" class="form-label">Enter WhatsApp
                                                 Number</label>
-                                            <input name="whatsApp_number" value="{{data[0][9]}}" class="form-control"
-                                                id="whatsApp_number" aria-describedby="whatsApp_number" type="text"
-                                                maxlength="11" minlength="10" data-inputmask="'mask': '0300-000000-0'"
-                                                placeholder="03XX-XXXXXX-X" required>
+                                            <input name="whatsApp_number" value="{{data[0][9]}}" 
+                                            class="form-control"  class="form-control" type="text"
+                                                pattern="^[0-9]{5}[0-9]{5}[0-9]{1}$"
+                                                title="Type CNIC Like 03245123422" placeholder="03XX-XXXXXX-X"+ trequired required>
                                         </div>
                                     </div>
 
