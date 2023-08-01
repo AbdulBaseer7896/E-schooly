@@ -169,6 +169,7 @@ def send_notification_to_student():
 
     elif request.method == "POST":
         data = request.form.to_dict()
+        print("THis 888888  = " , data)
         notification_file = request.files['notification_document']
         print("Thisi s notificaiton file = = = = " , notification_file)
         if  notification_file.filename != '':
@@ -180,9 +181,15 @@ def send_notification_to_student():
         print("THis is image path as you see = " , file_path)
         print("This is data as you see 88888888 = ", data)
         obj.send_student_notification_to_db(data , file_path)
-        teacher_mail = eval(data['teacher_mail'])['email_login']
-        data = {f'teacher_mail': f'{teacher_mail}' , 'email_login' : f'{teacher_mail}'}
+        # teacher_mail = eval(data['teacher_mail']['email_login'])
+        
         print("Ths oijfs odjf o = = = " , data)
+        email_login_data = data.get('email_login', '')  # Get the data from 'email_login' key
+        email_list = eval(email_login_data)  # Convert the string representation back to a Python list
+        if email_list:
+            first_email = email_list[0][0]
+            print("The first email is =", first_email)
+        data = {f'teacher_mail': f'{first_email}' , 'email_login' : f'{first_email}'}
         
         flash(('The Notification is send to All Student successfully !!!' ,'class_student_notification_done'))
         return render_template('teacher_URLs/teacher_dashboard.html' ,data = data)
@@ -248,30 +255,37 @@ def upload_result():
 def delete_dairy():
     data = request.args.get('data')
     print("This jsad iafj sid888 9" , data)
+    
     result = str(data) 
     result_dict = eval(result)  # or use json.loads(result) for JSON parsing
+    # print("This is import == = = " , result_dict[0][0])
+    # mali_info = {f'teacher_mail': f'{result_dict[0][0]}' , 'email_login' : f'{result_dict[0][0]}'}
+    # print("Ths oijfs odjf o = = = " , mali_info)
     if request.method == "GET":
         dariy_data = obj.take_teacher_dariy_for_db_for_delete(result_dict)
         print("This is dariy data == = " , dariy_data[0][6])
         if dariy_data[0][6] != None:
-            return render_template('teacher_URLs/delete_dairy.html', dariy_data=dariy_data,  data=data)
+            return render_template('teacher_URLs/delete_dairy.html', dariy_data=dariy_data,  data=result_dict)
         else:
             flash((f"You will not appload any dairy !!!! " , 'teacher_not_appload_dairy'))
-            return render_template('teacher_URLs/teacher_dashboard.html' , data = data )
+            return render_template('teacher_URLs/teacher_dashboard.html' , data = result_dict)
     if request.method == "POST":        
         data = request.form.to_dict()
         result = request.form.get('delete_information')
+        
         result_dict = str(result) 
         delete_dairy_information = eval(result_dict)
-        print("The data is = = = " , data)
+        # print("The data is = = = " , data)
 
-        data = {f'teacher_mail': f'{delete_dairy_information[0]}' , 'email_login' : f'{delete_dairy_information[0]}'}
-        print("Ths oijfs odjf o = = = " , data)
         
         obj.delete_dariy_for_db_which_teacher_select(delete_dairy_information)
-        flash(("You deleted the Dairy Successfully !!!" , 'teacher_delete_dairy'))
+        print("this email =- - - " , delete_dairy_information[0])
+        data = {f'teacher_mail': f'{delete_dairy_information[0]}' , 'email_login' : f'{delete_dairy_information[0]}'}
 
-    return render_template('teacher_URLs/teacher_dashboard.html',  data=data)
+        print("This is an importa type of data = " , data)
+        
+        flash(("You deleted the Dairy Successfully !!!" , 'teacher_delete_dairy'))
+        return render_template('teacher_URLs/teacher_dashboard.html',  data=data)
         
 
     
@@ -307,7 +321,7 @@ def delete_notification_teacher():
         # change = str(email) 
         # teacher_email = eval(change)
         print("This teachetj a = = " , email)
-    flash(("You Deleted the Message Successfully !!!" , 'delete_notification_teacher'))
+    flash(("You Deleted the Notification Successfully !!!" , 'delete_notification_teacher'))
     return render_template('teacher_URLs/teacher_dashboard.html' ,  data = email)        
         
         

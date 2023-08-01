@@ -12,10 +12,10 @@ def hello_world():
 
 from controller import *
 
-# @app.errorhandler(OperationalError)
-# def handle_operational_error(error):
-#     app.logger.error(f"OperationalError: {str(error)}")
-#     return render_template('error.html', message="An error occurred while processing your request."), 500
+@app.errorhandler(OperationalError)
+def handle_operational_error(error):
+    app.logger.error(f"OperationalError: {str(error)}")
+    return render_template('error.html', message="An error occurred while processing your request."), 500
 
 
 if __name__ == '__main__':

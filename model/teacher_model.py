@@ -45,6 +45,7 @@ class teacher_model():
             
     def take_teacher_class_and_period_data(self , student_marks):
         with self.engine.connect() as conn:
+            print("The is ok = = = " , student_marks)
             try:
                 try:
                     query1 = text(f"SELECT DISTINCT * FROM  teacher_class_period WHERE teacher_name = '{student_marks['email_login']}';")
