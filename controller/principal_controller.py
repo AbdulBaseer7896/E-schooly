@@ -33,6 +33,7 @@ def teacher_periods():
         print("This is teacher name = " , dataa['teacher_name'])
         print("The data is equal to " , dataa)
         obj.stored_teacher_period_data(dataa)
+        
         obj.make_class_teacher(dataa)
         flash(('Periods are Assigned to Teacher  Successfully !!!' , 'principal_periods'))
         return render_template('principal_URLs/principal_dashboard.html' , data = name)

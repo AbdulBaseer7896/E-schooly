@@ -60,14 +60,17 @@ class principal_models():
         
     def make_class_teacher(self , data):
         with self.engine.connect() as conn:
-            query1 = text(f"select class from teacher_information where class = '{data['teacher_class']}';")
-            cheek = conn.execute(query1).fetchall()
-            if cheek:          
-                query2 = text(f"UPDATE teacher_information SET class = 'helper' WHERE class = '{data['teacher_class']}' ;" )  
-                conn.execute(query2)
-            query1 = text(f"UPDATE teacher_information SET class = '{data['teacher_class']}' WHERE name = '{data['teacher_name']}'; ")
-            conn.execute(query1)
-            print("The teacher class is updated")
+            print("This is data = " , data)
+            print("This is the idifj s = =  =" , data['teacher_class'])
+            if data['teacher_class'] != "Helper":
+                query1 = text(f"select class from teacher_information where class = '{data['teacher_class']}';")
+                cheek = conn.execute(query1).fetchall()
+                if cheek:          
+                    query2 = text(f"UPDATE teacher_information SET class = 'helper' WHERE class = '{data['teacher_class']}' ;" )  
+                    conn.execute(query2)
+                query1 = text(f"UPDATE teacher_information SET class = '{data['teacher_class']}' WHERE name = '{data['teacher_name']}'; ")
+                conn.execute(query1)
+                print("The teacher class is updated")
                 
         
     def send_principal_notification_of_db(self , data , file_path):

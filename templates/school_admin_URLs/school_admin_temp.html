@@ -61,18 +61,28 @@
   </style>
   <script>
     $(document).ready(function() {
+      var navbarShown = false;
+
       $('.navbar-toggler').on('click', function() {
-        $('.navbar-collapse').toggleClass('show');
+        if (!navbarShown) {
+          $('.navbar-collapse').addClass('show');
+          navbarShown = true;
+        } else {
+          $('.navbar-collapse').removeClass('show');
+          navbarShown = false;
+        }
       });
-  
+
       $('.navbar-nav .nav-link').on('click', function() {
         $('.navbar-collapse').removeClass('show');
+        navbarShown = false;
       });
-  
+
       $(document).click(function(event) {
         var target = $(event.target);
         if (!target.closest('.navbar').length && !target.hasClass('navbar-toggler')) {
           $('.navbar-collapse').removeClass('show');
+          navbarShown = false;
         }
       });
 
