@@ -21,12 +21,13 @@ Student | Dairy
 
                         <div class="form-group">
                             <div class="card-body">
+                                <!-- <h1>{{dairy}}</h1> -->
                                 {% for item in dairy %}
                                 {% if item[6] != None %}
                                 <div class="row">
                                     <div class="col-6 col-md-4">
                                         <h6 class="mb-0 text-secondary">Teacher</h6>
-                                        <h5>{{ item[0] }}</h5>
+                                        <h5>{{ item[0].split('-')[0] }}</h5>
                                     </div>
 
                                     <div class="col-6 col-md-4">

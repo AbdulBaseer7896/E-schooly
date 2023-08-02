@@ -60,7 +60,7 @@ class teacher_model():
             if result:
                 return result
             else:
-                return render_template('login.html')
+                return []
             
             
     def cross_cheed_class_period(self , student_marks ):

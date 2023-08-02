@@ -107,38 +107,35 @@ Teacher | Upload Result
                                                         <div class="card-body">
                                                             {% for item in student_info %}
 
+
+
                                                             <div class="row">
-                                                                <div class="col-sm-1 ">
-                                                                    <h6 class="mb-0">Name</h6>
+                                                                <div class="col-12 col-sm-6">
+                                                                    <div class="row">
+                                                                        <div class="col-7">
+                                                                            <h6 class="mb-0 text-secondary">Name</h6>
+                                                                            <h6>{{ item[1] }}</h6>
+                                                                        </div>
+                                                                        <div class="col-5">
+                                                                            <h6 class="mb-0 text-secondary">Roll NO</h6>
+                                                                            <h5>{{ item[2] }}</h5>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <h6 class="col-sm-2">
-                                                                    {{item[1]}}
-                                                                </h6>
-
-                                                                <div class="col-sm-1">
-                                                                    <h6 class="mb-0">Roll #</h6>
+                                                                <div class="col-12 col-sm-6">
+                                                                    <h6 class="mb-0 text-secondary">Email</h6>
+                                                                    <h6>{{ item[0] }} <br></h6>
                                                                 </div>
-                                                                <h6 class="col-sm-1">
-                                                                    {{item[2]}}
-                                                                </h6>
-
-                                                                <div class="col-sm-1">
-                                                                    <h6 class="mb-0">Email</h6>
-                                                                </div>
-                                                                <h6 class="col-sm-3">
-                                                                    {{item[0]}}
-                                                                    <!-- abdulbaseerqazi-23-1234-9@iqra.edu -->
-                                                                </h6>
-
-                                                                <div class="col-sm-3">
+                                                                
+                                                                
+                                                                <div class="col-12 col-sm-6">
                                                                     <label for="marks_of_{{item[2]}}">Enter Marks of
-                                                                        Student</label>
+                                                                        Student <br></label>
+                                                                        
                                                                     <input name="marks_of_{{item[2]}}" type="number"
                                                                         class="form-control" id="marks_of_{{item[2]}}"
                                                                         aria-describedby="marks_of_{{item[2]}}">
-                                                                    <!-- not display but we used email and roll number and class to stored the attandace in database -->
-
-                                                                    <input name="student_email{{item[2]}}"
+                                                                        <input name="student_email{{item[2]}}"
                                                                         value="{{item[0]}}" style="display: none;"
                                                                         type="text" class="form-control"
                                                                         id="student_email"
@@ -154,12 +151,7 @@ Teacher | Upload Result
                                                                         id="b_form_name"
                                                                         aria-describedby="b_form_name{{item[2]}}">
 
-
-                                                                    <!-- THis is teacher id -->
-
-
-
-
+                                                                </div>
                                                                 </div>
                                                             </div>
                                                             <br>
